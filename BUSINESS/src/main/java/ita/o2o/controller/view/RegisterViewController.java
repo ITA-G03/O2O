@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 15-08-23
  */
 @Controller
-@RequestMapping("/login")
-public class LoginViewController extends BaseController {
+@RequestMapping("/register")
+public class RegisterViewController extends BaseController{
 
     @RequestMapping("")
     public String loginView(){
-        return "login";
+        return "register";
     }
 }

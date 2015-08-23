@@ -3,7 +3,7 @@ function initListeners(){
 }
 
 function login(){
-    var username=$("#username").val();
+    var tel=$("#tel").val();
     var password=$("#password").val();
     $("#loginSpinner").attr("class","").show();
     $("#loginResponseMessage").hide();
@@ -12,7 +12,7 @@ function login(){
         method:'post',
         cache:false,
         data:{
-            username:username,
+            tel:tel,
             password:password
         },
         dataType:'json',
