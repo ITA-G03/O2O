@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringModelInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+        >
+
+       <context:component-scan base-package="ita.o2o.controller,ita.o2o.service"/>
+       <context:annotation-config/>
+       <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+
+       <!-- Spring 配置管理DataSource -->
+       <!-- 本机配置根据自己情况修改 -->
+       <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+              <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+              <property name="url" value="jdbc:mysql://localhost:3306/O2O?characterEncoding=UTF-8"/>
+              <property name="username" value="root"/>
+              <property name="password" value="cuichengjie"/>
+              <property name="maxActive" value="300"/>
+       </bean>
+
+
+       <!-- 设置html js css jpg png等资源访问性-->
+       <mvc:annotation-driven/>
+       <mvc:resources mapping="/css/**" location="/css/"/>
+       <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+       <mvc:resources mapping="/js/**" location="/js/"/>
+       <mvc:resources mapping="/images/**" location="/images/"/>
+
+
+       <!-- 定义FreeMarker html视图解析器,实现优雅的Controller返回视图方式 -->
+       <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+              <property name="prefix" value="/"/>
+              <property name="suffix" value=".html"/>
+              <property name="order" value="10"/>
+              <property name="contentType" value="text/html;charset=UTF-8"/>
+       </bean>
+       <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+              <property name="templateLoaderPath" value="/"/>
+              <property name="defaultEncoding" value="UTF-8"/>
+       </bean>
+
+</beans>

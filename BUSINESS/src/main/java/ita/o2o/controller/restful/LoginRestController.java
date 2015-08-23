@@ -1,4 +1,4 @@
-package ita.o2o.controller;
+package ita.o2o.controller.restful;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 15-08-23
  */
 @Controller
-@RequestMapping("")
-public class BaseController {
-
+@RequestMapping
+public class LoginRestController {
 }
