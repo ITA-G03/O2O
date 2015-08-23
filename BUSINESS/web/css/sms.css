@@ -1,0 +1,28 @@
+.form-center {
+    max-width: 500px;
+    margin-top: 50px;
+}
+
+.col-operation{
+    width:150px
+}
+
+.image-preview {
+    max-width: 500px;
+    width: 500px;
+}
+
+.image-small{
+    max-height: 50px;
+    height: 50px;
+}
+
+.image-reg-preview{
+    max-width: 450px;
+    width: 450px;
+}
+
+.form-modal-center {
+    max-width: 530px;
+    margin-top: 50px;
+}
