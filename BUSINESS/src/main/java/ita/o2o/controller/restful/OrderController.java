@@ -16,7 +16,7 @@ import java.util.*;
 public class OrderController {
 
     /**
-     * 获取指定用户的OrderList , for amdin
+     * 获取指定用户的OrderList , for admin
      * @param userId
      * @return
      */

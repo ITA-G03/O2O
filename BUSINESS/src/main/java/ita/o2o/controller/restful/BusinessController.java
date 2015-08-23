@@ -6,9 +6,7 @@ import ita.o2o.entity.extra.Status;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * Created by WhiteSaber on 15/8/23.
- */
+
 public class BusinessController {
 
     /**
@@ -21,7 +19,7 @@ public class BusinessController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/Business/apply")
+    @RequestMapping(method = RequestMethod.POST, value = "/business/apply")
     public Business applyForBussniess(@RequestBody Business business,
                                       @RequestParam(value = "card_photo") MultipartFile card_photoFile,
                                       @RequestParam(value = "license") MultipartFile licenseFile,
@@ -37,21 +35,21 @@ public class BusinessController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/Business/change")
-    public Business changeBussinessInfo(@RequestBody Business business) {
+    @RequestMapping(method = RequestMethod.POST, value = "/business/change")
+    public Business changeBusinessInfo(@RequestBody Business business) {
         return business;
     }
 
     /**
      * 获得对应商家的信息
      *
-     * @param bussinessId
+     * @param businessId
      * @return
      */
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/Business/{bussinessId}")
-    public Business getBussniessInfo(@PathVariable Integer bussinessId) {
-        System.out.printf(bussinessId.toString());
+    @RequestMapping(method = RequestMethod.GET, value = "/Business/{businessId}")
+    public Business getBusinessInfo(@PathVariable Integer businessId) {
+        System.out.printf(businessId.toString());
         Business business = new Business();
         business.setBusinessId(1);
         business.setRealName("奥尔良煎饼");
@@ -65,14 +63,14 @@ public class BusinessController {
     /**
      * 审核商家的申请
      *
-     * @param bussinessId,stausId
+     * @param businessId,statusId
      * @return Business
      */
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/Business/audit/{bussinessId}")
-    public Business auditBussniessApply(@PathVariable Integer bussinessId, @RequestParam(value = "status") Integer statusId) {
+    @RequestMapping(method = RequestMethod.POST, value = "/Business/audit/{businessId}")
+    public Business auditBusinessApply(@PathVariable Integer businessId, @RequestParam(value = "status") Integer statusId) {
         Business business = new Business();
-        business.setBusinessId(bussinessId);
+        business.setBusinessId(businessId);
         business.setRealName("奥尔良煎饼");
         Status status1 = new Status();
         status1.setStatusId(statusId);
