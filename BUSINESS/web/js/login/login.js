@@ -19,7 +19,7 @@ function login(){
         success:function(response){
             $("#loginSpinner").hide();
             if(response.status=="success"){
-                location.href="index";
+                location.href="/home";
             }
             else{
                 $("#loginResponseMessage").attr("class","text-danger").text(response.body.reason).show();
