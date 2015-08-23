@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <form action="login" method="post" class="center-block well form-center">
+            <div class="center-block well form-center">
                 <h1 class="text-center">User Login</h1>
 
                 <div class="form-group">
@@ -25,19 +25,23 @@
                     <input id="password" type="password" name="password" class="form-control" required/>
                 </div>
                 <br/>
-                <button id="loginButton" type="submit" class="btn btn-block btn-primary">
+                <button id="loginButton" type="button" class="btn btn-block btn-primary">
                     Login<i id="loginSpinner" class="fa fa-spinner fa-pulse hidden"></i>
                 </button>
                 <br/>
                 <p id="loginResponseMessage" class="hidden">Login Failed~!</p>
                 <br/>
-            </form>
+                <div class="text-right">
+                    <a href="/register" class="btn btn-link">Register</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript" src="/js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/login/login.js"></script>
 </body>
 
 </html>

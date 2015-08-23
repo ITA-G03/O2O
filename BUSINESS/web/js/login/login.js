@@ -8,7 +8,7 @@ function login(){
     $("#loginSpinner").attr("class","").show();
     $("#loginResponseMessage").hide();
     $.ajax({
-        url:'user/login',
+        url:'/action/login',
         method:'post',
         cache:false,
         data:{

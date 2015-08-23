@@ -1,9 +1,12 @@
 package ita.o2o.entity.location;
 
+import javax.persistence.Entity;
+
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
+
 public class Location {
     private int locationId;
     private City city;

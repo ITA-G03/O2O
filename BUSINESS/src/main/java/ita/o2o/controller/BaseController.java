@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 15-08-23
  */
 @Controller
-@RequestMapping("")
+@RequestMapping("/")
 public class BaseController {
 
 }

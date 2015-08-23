@@ -1,9 +1,15 @@
 package ita.o2o.entity.location;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
+
 public class City {
     private int cityId;
     private String cityName;

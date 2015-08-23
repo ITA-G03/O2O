@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringModelInspection -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -11,7 +12,12 @@
         http://www.springframework.org/schema/context/spring-context.xsd"
         >
 
-    <context:component-scan base-package="ita.o2o.controller,ita.o2o.service"/>
+    <context:component-scan base-package="
+              ita.o2o.controller,
+              ita.o2o.controller.action,
+              ita.o2o.controller.view,
+              ita.o2o.controller.restful,
+              ita.o2o.service"/>
     <context:annotation-config/>
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
@@ -20,7 +26,7 @@
     <!-- 本机配置根据自己情况修改 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/BMS?characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/O2O?characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
         <property name="password" value="cuichengjie"/>
         <property name="maxActive" value="300"/>
@@ -47,4 +53,6 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
+    <!-- 配置自动注解的JSONMapper 专供返回数据类型 -->
+    <bean id="jsonMapper" class="ita.o2o.util.mapper.JSONMapper"/>
 </beans>

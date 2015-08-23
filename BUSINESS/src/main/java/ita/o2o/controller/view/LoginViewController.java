@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/login")
-public class LoginViewController extends BaseController{
+public class LoginViewController extends BaseController {
 
     @RequestMapping("")
     public String loginView(){
