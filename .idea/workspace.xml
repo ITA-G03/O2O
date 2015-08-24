@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e830c55-c7b2-40f1-ae34-a576a6b07535" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/Status.java" afterPath="$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/Status.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/Tag.java" afterPath="$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/Tag.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/WorkStatus.java" afterPath="$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/WorkStatus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -192,8 +189,8 @@
           <file leaf-file-name="City.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/location/City.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.30536914">
-                  <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="15" selection-end-column="44" />
+                <state vertical-scroll-proportion="0.35234898">
+                  <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
                   <folding />
                 </state>
               </provider>
@@ -1236,7 +1233,7 @@
       <created>1440376713850</created>
       <option name="number" value="Default" />
       <updated>1440376713850</updated>
-      <workItem from="1440376714431" duration="11385000" />
+      <workItem from="1440376714431" duration="12060000" />
     </task>
     <task id="LOCAL-00001" summary="Add admin basic source code.">
       <created>1440383320056</created>
@@ -1268,11 +1265,17 @@
       <option name="project" value="LOCAL" />
       <updated>1440388398146</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add eclipse classpath.">
+      <created>1440388666355</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1440388666355</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11385000" />
+    <option name="totallyTimeSpent" value="12060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1695,18 +1698,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/location/City.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30536914">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="15" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/extra/Status.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44630873">
           <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/COMMON/src/main/java/ita/o2o/entity/location/City.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35234898">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
           <folding />
         </state>
       </provider>
