@@ -2,25 +2,61 @@ package ita.o2o.entity.base;
 
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.extra.Tag;
+import ita.o2o.entity.extra.WorkStatus;
 import ita.o2o.entity.location.Location;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
+@Entity
+@Table(name="BUSINESS")
 public class Business {
-    private int businessId;
-    private String realName;
-    private Status status;
-    private User owner;
-    private Set<Tag> tags;
-    private Location location;
-    private int idCardId;
-    private int licenseId;
-    private int logoId;
 
+    @Id
+    @SequenceGenerator(sequenceName="SEQ_BUSINESS",name="businessSequence",allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="businessSequence")
+    @Column(name="BUSINESS_ID",nullable = false)
+    private int businessId;
+
+    @Basic
+    @Column(name="REALNAME")
+    private String realName;
+
+    @OneToOne
+    @JoinColumn(name = "STATUS_ID")
+    private Status status;
+
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
+    private User owner;
+
+    @OneToMany
+    private Set<BusinessTag> businessTags;
+
+    @OneToOne
+    @JoinColumn(name="WORK_STATUS_ID")
+    private WorkStatus workStatus;
+
+
+    @OneToOne
+    @JoinColumn(name = "LOCATION_ID")
+    private Location location;
+
+    @Basic
+    @Column(name="IDCARD_ID")
+    private int idCardId;
+
+    @Basic
+    @Column(name = "LICENSE_ID")
+    private int licenseId;
+
+    @Basic
+    @Column(name = "LOGO_ID")
+    private int logoId;
 
     public int getBusinessId() {
         return businessId;
@@ -54,12 +90,20 @@ public class Business {
         this.owner = owner;
     }
 
-    public Set<Tag> getTags() {
-        return tags;
+    public Set<BusinessTag> getBusinessTags() {
+        return businessTags;
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+    public void setBusinessTags(Set<BusinessTag> businessTags) {
+        this.businessTags = businessTags;
+    }
+
+    public WorkStatus getWorkStatus() {
+        return workStatus;
+    }
+
+    public void setWorkStatus(WorkStatus workStatus) {
+        this.workStatus = workStatus;
     }
 
     public Location getLocation() {

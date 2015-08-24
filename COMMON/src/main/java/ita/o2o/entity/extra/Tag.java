@@ -1,6 +1,9 @@
 package ita.o2o.entity.extra;
 
+import ita.o2o.entity.base.BusinessTag;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author Aquariuslt
@@ -20,6 +23,11 @@ public class Tag {
     @Column(name="TAG_NAME")
     private String tagName;
 
+    @OneToMany
+    private Set<BusinessTag> businessTags;
+
+
+
     public int getTagId() {
         return tagId;
     }
@@ -34,5 +42,13 @@ public class Tag {
 
     public void setTagName(String tagName) {
         this.tagName = tagName;
+    }
+
+    public Set<BusinessTag> getBusinessTags() {
+        return businessTags;
+    }
+
+    public void setBusinessTags(Set<BusinessTag> businessTags) {
+        this.businessTags = businessTags;
     }
 }

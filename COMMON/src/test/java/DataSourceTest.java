@@ -1,3 +1,7 @@
+import ita.o2o.entity.extra.FoodType;
+import ita.o2o.entity.extra.Role;
+import ita.o2o.entity.extra.Status;
+import ita.o2o.entity.extra.WorkStatus;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
@@ -20,6 +24,7 @@ public class DataSourceTest {
 
     @BeforeClass
     public static void init() {
+        System.out.println("Init");
         factory = Persistence.createEntityManagerFactory("o2oPersistenceUnit");
 
     }
@@ -31,9 +36,12 @@ public class DataSourceTest {
     }
 
 
-
+    /*
+    * 根据Entity 建表测试
+    *
+    * */
     @Test
-    public void testFactory ()throws Exception{
+    public void testLocation ()throws Exception{
         System.out.println("Hi~~");
         City city=new City();
         city.setCityName("ZhuHai");
@@ -44,57 +52,60 @@ public class DataSourceTest {
         location.setCity(city);
         location.setDetail("South Software Park");
 
-
-        Location duplicateLocation=new Location();
-        duplicateLocation.setArea(area);
-        duplicateLocation.setCity(city);
-        duplicateLocation.setDetail("South Software Park2");
-
-
         manager.getTransaction().begin();
         manager.persist(location);
         manager.getTransaction().commit();
         System.out.println("Bye~~");
     }
-/*
-    @Test
-    public void testPersist() throws Exception {
 
-        User u = new User();
-        u.setUname("john");
-        u.setSex(true);
-        u.getTels().add("abc");
-        Addr addr1 = new Addr();
-        Addr addr2 = new Addr();
-        addr1.setCity("bj");
-        addr2.setCity("zh");
-        addr1.setU(u);
-        addr2.setU(u);
+    @Test
+    public void testWorkStatus(){
+        System.out.println("Test WorkStatus");
+        WorkStatus workStatus=new WorkStatus();
+        workStatus.setWorkStatusName("OffLine");
 
         manager.getTransaction().begin();
-        manager.persist(addr1);
-
+        manager.persist(workStatus);
         manager.getTransaction().commit();
-        System.out.println(u.getId());
+        System.out.println("End");
     }
 
     @Test
-    public void testFind() throws Exception {
+    public void testRole(){
+        System.out.println("Test Role");
+        Role role=new Role();
+        role.setRoleName("Admin");
 
-        //User u=manager.find(User.class, primaryKey)
+        manager.getTransaction().begin();
+        manager.persist(role);
+        manager.getTransaction().commit();
+        System.out.println("End");
     }
 
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        //LocalContainerEntityManagerFactoryBean bean=(LocalContainerEntityManagerFactoryBean)context.getBean("entityManagerFactory");
-        User u = new User();
-        u.setSex(true);
-        u.setUname("john");
+    @Test
+    public void testStatus(){
+        System.out.println("Test Status");
+        Status status=new Status();
+        status.setStatusName("Accept");
 
-//		UserDao ud=(UserDao)context.getBean("userDaoImpl");
-//		ud.addUser(u);
-        UserManager um = (UserManager) context.getBean("um");
-        um.regist(u);
+        manager.getTransaction().begin();
+        manager.persist(status);
+        manager.getTransaction().commit();
+        System.out.println("End");
     }
-    */
+
+    @Test
+    public void testFoodType(){
+        System.out.println("Test FoodType");
+        FoodType foodType=new FoodType();
+        foodType.setFoodTypeName("Drink");
+
+        manager.getTransaction().begin();
+        manager.persist(foodType);
+        manager.getTransaction().commit();
+        System.out.println("End");
+    }
+
+
+
 }

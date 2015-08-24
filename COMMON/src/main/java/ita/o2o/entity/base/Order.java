@@ -2,22 +2,58 @@ package ita.o2o.entity.base;
 
 import ita.o2o.entity.extra.Status;
 
-import java.util.Date;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
+
+@Entity
+@Table(name="O2O_ORDER")
 public class Order {
+
+    @Id
+    @SequenceGenerator(sequenceName="SEQ_ORDER",name="orderSequence",allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="orderSequence")
+    @Column(name="ORDER_ID",nullable = false)
     private int orderId;
+
+    @OneToOne
+    @JoinColumn(name="USER_ID")
     private User customer;
+
+
+    @OneToOne
+    @JoinColumn(name="BUSINESSS_ID")
     private Business business;
+
+
+    @OneToMany
+    @JoinColumn
     private List<OrderItem> orderItemList;
+
+
+    @OneToOne
+    @JoinColumn(name="STATUS_ID")
     private Status status;
+
+
+
+    @Basic
+    @Column(name="COMMENTS")
     private String comments;
+
+
+    @Basic
+    @Column(name="ACCEPT_TIME")
     private String acceptTime;
+
+    @Basic
+    @Column(name="FINISH_TIME")
     private String finishTime;
+
 
     public int getOrderId() {
         return orderId;

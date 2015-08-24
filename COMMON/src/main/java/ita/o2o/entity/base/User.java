@@ -3,16 +3,41 @@ package ita.o2o.entity.base;
 import ita.o2o.entity.extra.Role;
 import ita.o2o.entity.location.Location;
 
+import javax.persistence.*;
+
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
+@Entity
+@Table(name="O2O_USER")//因为USER 不能作为一个数据表
 public class User {
+
+    @Id
+    @SequenceGenerator(sequenceName="SEQ_O2O_USER",name="o2oUserSequence",allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="o2oUserSequence")
+    @Column(name="USER_ID",nullable = false)
     private int userId;
+
+    @Basic
+    @Column(name="NICKNAME")
     private String nickName;
+
+    @Basic
+    @Column(name = "TEL",nullable = false)
     private String tel;
+
+    @Basic
+    @Column(name= "ENCRYPTED_PASSWORD",nullable = false)
     private String encryptedPassword;//加密后的密码
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="LOCATION_ID")
     private Location location;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="ROLE_ID")
     private Role role;
 
 
