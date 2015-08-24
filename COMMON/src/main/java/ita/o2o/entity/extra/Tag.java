@@ -1,11 +1,23 @@
 package ita.o2o.entity.extra;
 
+import javax.persistence.*;
+
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
+@Entity
+@Table(name="TAG")
 public class Tag {
+
+    @Id
+    @SequenceGenerator(sequenceName="SEQ_TAG",name="tagSequence",allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="tagSequence")
+    @Column(name="TAG_ID",nullable = false)
     private int tagId;
+
+    @Basic
+    @Column(name="TAG_NAME")
     private String tagName;
 
     public int getTagId() {
