@@ -13,7 +13,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="o2oPersistenceUnit" value="93ad742d-26c3-4544-97c5-9ce38924e1d8" />
+        </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/../COMMON/src/main/META-INF/META-INF/persistence.xml" />
       </configuration>
     </facet>
