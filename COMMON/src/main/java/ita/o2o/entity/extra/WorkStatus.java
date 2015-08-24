@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name="WORK_STATUS")
 public class WorkStatus {
     @Id
-    @SequenceGenerator(sequenceName="SEQ_CITY",name="workStatusSequence",allocationSize = 1)
+    @SequenceGenerator(sequenceName="SEQ_WORK_STATUS",name="workStatusSequence",allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="workStatusSequence")
     @Column(name="WORK_STATUS_ID",nullable = false)
     private int workStatusId;

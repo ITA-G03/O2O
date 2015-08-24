@@ -13,11 +13,11 @@ public class Tag {
     @Id
     @SequenceGenerator(sequenceName="SEQ_TAG",name="tagSequence",allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="tagSequence")
-    @Column(name="CITY_ID",nullable = false)
+    @Column(name="TAG_ID",nullable = false)
     private int tagId;
 
     @Basic
-    @Column(name="")
+    @Column(name="TAG_NAME")
     private String tagName;
 
     public int getTagId() {
