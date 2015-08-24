@@ -34,8 +34,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="ADMIN" target="1.5" />
-      <module name="BUSINESS" target="1.5" />
+      <module name="ADMIN" target="1.8" />
+      <module name="BUSINESS" target="1.8" />
       <module name="COMMON" target="1.6" />
     </bytecodeTargetLevel>
   </component>
