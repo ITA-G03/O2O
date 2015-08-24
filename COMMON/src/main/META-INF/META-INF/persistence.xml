@@ -3,7 +3,6 @@
 
     <persistence-unit name="o2oPersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>ita.o2o.entity.location.City</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521"/>

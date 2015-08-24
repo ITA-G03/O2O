@@ -23,7 +23,7 @@ public class Location {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="CITY_NAME")
+    @JoinColumn(name="AREA_ID")
     private Area area;
 
 

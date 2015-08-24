@@ -40,10 +40,19 @@ public class DataSourceTest {
         Area area=new Area();
         area.setAreaName("TongGa");
         Location location=new Location();
+        location.setArea(area);
+        location.setCity(city);
+        location.setDetail("South Software Park");
+
+
+        Location duplicateLocation=new Location();
+        duplicateLocation.setArea(area);
+        duplicateLocation.setCity(city);
+        duplicateLocation.setDetail("South Software Park2");
 
 
         manager.getTransaction().begin();
-        manager.persist(city);
+        manager.persist(location);
         manager.getTransaction().commit();
         System.out.println("Bye~~");
     }

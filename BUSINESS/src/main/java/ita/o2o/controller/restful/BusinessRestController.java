@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-public class BusinessController {
+public class BusinessRestController {
 
     /**
      * 用户提交申请成为商家
