@@ -1,6 +1,12 @@
 <script type="application/javascript">
-	$(function(){
-		console.log("complete...");
+	$(function () {
+		console.log("complete...");//only once
+		$('#myModal').on('show.bs.modal', function () {
+			console.log("while show...");//each time
+		})
+		$('#myModal').on('shown.bs.modal', function () {
+			console.log("shown...");//each time
+		})
 	});
 </script>
 <div class="modal-header">
