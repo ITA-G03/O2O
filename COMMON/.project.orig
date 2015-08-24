@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>COMMON</name>
+<<<<<<< HEAD
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+=======
+	<comment/>
+	<projects/>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments/>
+>>>>>>> 9005606e8da00f82da19c2b4756fb0c92dcf7e32
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+<<<<<<< HEAD
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+=======
+>>>>>>> 9005606e8da00f82da19c2b4756fb0c92dcf7e32
+	</natures>
+</projectDescription>
