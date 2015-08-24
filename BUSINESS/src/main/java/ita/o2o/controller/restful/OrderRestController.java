@@ -13,7 +13,7 @@ import java.util.*;
  * Created by WhiteSaber on 15/8/23.
  */
 @RestController
-public class OrderController {
+public class OrderRestController {
 
     /**
      * 获取指定用户的OrderList , for admin
