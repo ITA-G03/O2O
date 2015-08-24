@@ -1,8 +1,9 @@
 package ita.o2o.controller.view;
 
-import ita.o2o.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ita.o2o.controller.BaseController;
 
 /**
  * @author Aquariuslt

@@ -16,17 +16,8 @@ public class Order {
     private List<OrderItem> orderItemList;
     private Status status;
     private String comments;
-    private Date accept_time;//订单的接受时间
     private String acceptTime;
     private String finishTime;
-
-    public Date getAccept_time() {
-        return accept_time;
-    }
-
-    public void setAccept_time(Date accept_time) {
-        this.accept_time = accept_time;
-    }
 
     public int getOrderId() {
         return orderId;
