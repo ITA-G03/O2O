@@ -46,6 +46,7 @@
       <list>
         <option value="$PROJECT_DIR$/COMMON/pom.xml" />
         <option value="$PROJECT_DIR$/BUSINESS/pom.xml" />
+        <option value="$PROJECT_DIR$/ADMIN/pom.xml" />
       </list>
     </option>
   </component>

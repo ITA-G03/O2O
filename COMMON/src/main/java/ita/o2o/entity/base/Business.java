@@ -21,6 +21,7 @@ public class Business {
     private int licenseId;
     private int logoId;
 
+
     public int getBusinessId() {
         return businessId;
     }
