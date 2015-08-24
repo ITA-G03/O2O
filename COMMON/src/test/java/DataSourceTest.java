@@ -39,7 +39,7 @@ public class DataSourceTest {
         city.setCityName("ZhuHai");
         Area area=new Area();
         area.setAreaName("TongGa");
-        Location location=new Location()
+        Location location=new Location();
 
 
         manager.getTransaction().begin();
