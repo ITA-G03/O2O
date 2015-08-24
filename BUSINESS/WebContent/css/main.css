@@ -1,0 +1,315 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Microsoft YaHei', '宋体', 'Tahoma', 'Helvetica', 'Arial', sans-serif;
+}
+body {
+    padding-top: 30px;
+    background-color: #F5F5F5;
+}
+a,
+a:visited {
+    color: #898989;
+    text-decoration: none;
+}
+a:hover,
+a:active,
+a:focus {
+    color: #ff0039;
+}
+a.highlight,
+a.highlight:visited {
+    color: #ff0039;
+    text-decoration: none;
+}
+a.highlight:hover,
+a.highlight:active,
+a.highlight:focus {
+    color: #ff0039;
+    text-decoration: underline;
+}
+.navbar-default.nav-main {
+    background-color: rgba(254, 77, 61, 1);
+    border-color: transparent;
+    min-height: 30px;
+    height: 30px;
+}
+.navbar-default.nav-main .navbar-nav>li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.navbar-default.nav-index {
+    background-color: rgba(254, 77, 61, 0.6);
+    border-color: transparent;
+}
+.navbar-default.nav-main .navbar-nav > li > a:hover,
+.navbar-default.nav-main .navbar-nav > li > a:focus {
+    background-color: transparent;
+}
+.navbar-default.nav-index .navbar-nav > li > a:hover,
+.navbar-default.nav-index .navbar-nav > li > a:focus {
+    background-color: rgba(254, 77, 61, 0.6);
+}
+.clear {
+    clear: both;
+}
+.icon-lg {
+    font-size: 2em;
+}
+.color-white {
+    color: #fff;
+}
+.vertical-line {
+    font-size: 18px;
+    color: #dcdcdc;
+    margin: 0 15px;
+}
+.container {
+    width: 1170px;
+}
+.container.container-main {
+    margin: 10px auto 20px;
+    background: #fff;
+    padding-bottom: 50px;
+}
+.change-location-bg {
+    background: url(../images/bg.jpg) no-repeat #F4F4F4;
+    background-size: cover;
+}
+form .input-group {
+    width: 100%;
+}
+form .input-group-addon {
+    width: 100px;
+}
+form.change-location-form {
+    margin: 250px auto 0;
+    width: 880px;
+}
+form.change-location-form .city {
+    float: left;
+    width: 150px;
+}
+form.change-location-form .area {
+    float: left;
+    width: 530px;
+    margin-left: 10px;
+}
+form.change-location-form .history {
+    float: left;
+    width: 170px;
+    margin-left: 10px;
+}
+form.register-form {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 50px 30px;
+    width: 600px;
+    margin: 100px auto 0;
+}
+.header {
+    height: 80px;
+    line-height: 80px;
+    background: #fff;
+    border-bottom: 1px solid #dddddd;
+}
+.header .logo {
+    height: 50px;
+    margin-top: 15px;
+    float: left;
+}
+.header a {
+    font-size: 1.2em;
+}
+.header .search {
+    float: right;
+    height: 30px;
+}
+.header input {
+    margin-top: 19px;
+}
+.main-carousel {
+    height: 350px;
+    overflow: hidden;
+}
+.res-container {
+    margin: 0 auto;
+}
+.res-box {
+    padding: 25px;
+    line-height: 30px;
+    -webkit-transition: all linear 0.3s;
+    -moz-transition: all linear 0.3s;
+    -o-transition: all linear 0.3s;
+    transition: all linear 0.3s;
+}
+.res-box.ng-hide-add,
+.res-box.ng-hide-remove {}
+.res-box.ng-hide-add.ng-hide-add-active,
+.res-box.ng-hide-remove {
+    opacity: 0;
+}
+.res-box.ng-hide-add,
+.res-box.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+}
+.res-box .thumbnail img {
+    width: 100%;
+    height: 170px;
+}
+.star {
+    color: #e3e3e3;
+}
+.star.active {
+    color: #FDB53E;
+}
+.res-box:hover {
+    background: #eee;
+}
+.res-info {
+    background: #fff;
+    padding: 15px;
+    margin-top: 10px;
+    border: 1px solid #dddddd;
+}
+.res-info .res-logo {
+    width: 170px;
+    height: 130px;
+    float: left;
+}
+.res-info .res-logo img {
+    width: 100%;
+    height: 100%;
+}
+.res-info .res-detail {
+    float: left;
+    margin-left: 20px;
+}
+.res-info .res-data {
+    float: right;
+}
+.res-info .res-data .res-data-box {
+    float: left;
+    text-align: center;
+    margin: 0 15px;
+}
+.res-info .res-data .res-data-seperator {
+    margin: 0 15px;
+    width: 0px;
+    border: 1px solid #ddd;
+    height: 60px;
+    float: left;
+    margin-top: 30px;
+}
+.res-main {
+    margin-top: 10px;
+}
+.tab-inner {
+    padding-top: 10px;
+    background: #fff;
+    border: 1px solid #dddddd;
+    border-top: none;
+    padding-bottom: 30px;
+}
+.table-food {
+    margin: 20px auto;
+}
+.table-food td {
+    padding: 30px 20px!important;
+}
+.table-food td.table-food-price {
+    width: 150px;
+    text-align: right;
+}
+.table-food td.table-food-action {
+    width: 50px;
+}
+.comment-box {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    border-bottom: 1px dashed #eee;
+}
+.cart {
+    width: 360px;
+    position: fixed;
+    bottom: 0;
+}
+.orders {
+    padding: 0 10px 50px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.orders .order-box {
+    word-wrap: break-word;
+    line-height: 30px;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+.orders .order-box .order-name {
+    float: left;
+    width: 120px;
+}
+.orders .order-box .order-num {
+    float: left;
+    width: 100px;
+    margin-left: 20px;
+}
+.orders .order-box .order-price {
+    float: right;
+    margin-left: 20px;
+    width: 30px;
+}
+.pay {
+    margin-top: 20px;
+}
+.pay .total {
+    font-weight: bold;
+    font-size: 30px;
+    position: relative;
+    color: rgb(254, 77, 61);
+}
+.order-paper {
+    padding: 30px 15px;
+    background: #fff;
+}
+.order-paper-footer {
+    background: url(../img/order-bot-bg1.png) no-repeat;
+    background-size: 100% 20px;
+    height: 20px;
+}
+.my-order-box {
+    margin: 10px auto 30px;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+}
+.my-order-box .res-logo {
+    width: 110px;
+    height: 80px;
+    float: left;
+}
+.my-order-box .res-logo img {
+    width: 100%;
+    height: 100%;
+}
+.my-order-box .order-detail {
+    float: left;
+    margin-left: 20px;
+}
+.my-order-box .order-detail-right {
+    float: left;
+    margin-left: 100px;
+    padding-top: 26px;
+}

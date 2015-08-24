@@ -1,31 +1,57 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="">
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <title>外卖</title>
+    <link rel="stylesheet" type="text/css" href="bower/bootstrap-3.3.5-dist/css/cosmo.css">
+    <link rel="stylesheet" type="text/css" href="bower/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="bower/angular/angular.js"></script>
+    <script src="bower/angular-animate/angular-animate.js"></script>
+    <script src="bower/angular-ui-bootstrap/uibootstrap.js"></script>
+    <script src="js/customer/common.js"></script>
 </head>
 
-<body>
+<body class="change-location-bg" ng-app="o2o">
+    <nav class="navbar navbar-default navbar-fixed-top nav-index">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">G03外卖网</a>
+
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="register.html">注册</a>
+                    </li>
+                    <li><a href="login.html">登录</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <form action="index.html" method="post" class="center-block well" style="max-width: 500px; margin-top: 50px">
-                    <h1 class="text-center">Seller Login</h1>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control" required />
+                <form class="register-form">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user icon-lg"></i></span>
+                        <input type="text" class="form-control input-lg" placeholder="输入手机号码">
                     </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="psw" class="form-control" required />
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock icon-lg"></i></span>
+                        <input type="text" class="form-control input-lg" placeholder="输入登录密码">
                     </div>
-                    <br />
-                    <button type="submit" class="btn btn-block btn-primary">Login</button>
-                    <br />
-                    <div class="text-right">
-                        <a href="register.html" class="btn btn-link">Register!</a>
+                    <button type="button" class="btn btn-lg btn-block btn-danger">登录</button>
+                    <div class="mt10 color-white">
+                        还没有账号？<a href="register.html" class="highlight">免费注册</a>
                     </div>
                 </form>
             </div>
