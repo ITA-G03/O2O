@@ -1,5 +1,9 @@
+import ita.o2o.entity.location.Area;
+import ita.o2o.entity.location.City;
+import ita.o2o.entity.location.Location;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +20,7 @@ public class DataSourceTest {
 
     @BeforeClass
     public static void init() {
-        factory = Persistence.createEntityManagerFactory("qs");
+        factory = Persistence.createEntityManagerFactory("o2oPersistenceUnit");
 
     }
 
@@ -24,6 +28,24 @@ public class DataSourceTest {
     public void start() {
         manager = factory.createEntityManager();
 
+    }
+
+
+
+    @Test
+    public void testFactory ()throws Exception{
+        System.out.println("Hi~~");
+        City city=new City();
+        city.setCityName("ZhuHai");
+        Area area=new Area();
+        area.setAreaName("TongGa");
+        Location location=new Location()
+
+
+        manager.getTransaction().begin();
+        manager.persist(city);
+        manager.getTransaction().commit();
+        System.out.println("Bye~~");
     }
 /*
     @Test

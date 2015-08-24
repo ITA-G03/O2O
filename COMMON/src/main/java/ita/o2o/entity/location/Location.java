@@ -1,16 +1,34 @@
 package ita.o2o.entity.location;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * @author Aquariuslt
  * @version 15-08-22
  */
-
+@Entity
+@Table(name="LOCATION")
 public class Location {
+
+    @Id
+    @SequenceGenerator(sequenceName="SEQ_LOCATION",name="locationSequence",allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="locationSequence")
+    @Column(name="LOCATION_ID",nullable = false)
     private int locationId;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="CITY_ID")
     private City city;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="CITY_NAME")
     private Area area;
+
+
+    @Basic
+    @Column(name="DETAIL",nullable = false)
     private String detail;
 
 

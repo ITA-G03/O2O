@@ -52,6 +52,7 @@
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-commons-annotations:3.0.0.ga" />
           <element id="library" level="project" name="Maven: org.hibernate:ejb3-persistence:1.0.1.GA" />
           <element id="library" level="project" name="Maven: javassist:javassist:3.4.GA" />
+          <element id="library" level="project" name="ojdbc6-11.2.0.1.0" />
         </element>
       </element>
       <element id="artifact" artifact-name="Common" />
