@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SMS - side dishes</title>
+    <title>SMS - main course</title>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <style>
         nav.navbar i {
@@ -26,7 +26,7 @@
             </div>
             <div class="collapse navbar-collapse" id="main-nav">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Food <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="mainCourse.html"><i class="glyphicon glyphicon-cutlery"></i>Main course</a></li>
@@ -36,13 +36,13 @@
                             <li><a href="newFood.html"><i class="glyphicon glyphicon-plus"></i>New</a></li>
                         </ul>
                     </li>
-                    <li><a href="package.html">Package</a></li>
+                    <li class="active"><a href="package.html">Package</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="../login.html"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+                            <li><a href="login.html"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -54,59 +54,57 @@
             <div class="col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active">Side dishes</li>
+                    <li class="active">Package</li>
                 </ol>
+                <div>
+                    <a href="newPackage.html" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i>&emsp;New</a>
+                </div>
+                <br/>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Picture</th>
                             <th>Status</th>
                             <th style="width:150px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{foodId}</td>
-                            <td>{foodName}</td>
-                            <td>{foodPrice}</td>
-                            <td>{foodPicture}</td>
-                            <td>{foodStatus}</td>
-                            <td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
+                            <td>{packageId}</td>
+                            <td>{packageName}</td>
+                            <td>{packagePrice}</td>
+                            <td>{packageStatus}</td>
+                            <td><a href="updatePackage.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
                         </tr>
                         <tr>
-                            <td>{foodId}</td>
-                            <td>{foodName}</td>
-                            <td>{foodPrice}</td>
-                            <td>{foodPicture}</td>
-                            <td>{foodStatus}</td>
-                            <td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
+                            <td>{packageId}</td>
+                            <td>{packageName}</td>
+                            <td>{packagePrice}</td>
+                            <td>{packageStatus}</td>
+                            <td><a href="updatePackage.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
                         </tr>
                         <tr>
-                            <td>{foodId}</td>
-                            <td>{foodName}</td>
-                            <td>{foodPrice}</td>
-                            <td>{foodPicture}</td>
-                            <td>{foodStatus}</td>
-                            <td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
+                            <td>{packageId}</td>
+                            <td>{packageName}</td>
+                            <td>{packagePrice}</td>
+                            <td>{packageStatus}</td>
+                            <td><a href="updatePackage.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
                         </tr>
                         <tr>
-                            <td>{foodId}</td>
-                            <td>{foodName}</td>
-                            <td>{foodPrice}</td>
-                            <td>{foodPicture}</td>
-                            <td>{foodStatus}</td>
-                            <td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
+                            <td>{packageId}</td>
+                            <td>{packageName}</td>
+                            <td>{packagePrice}</td>
+                            <td>{packageStatus}</td>
+                            <td><a href="updatePackage.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
                         </tr>
                         <tr>
-                            <td>{foodId}</td>
-                            <td>{foodName}</td>
-                            <td>{foodPrice}</td>
-                            <td>{foodPicture}</td>
-                            <td>{foodStatus}</td>
-                            <td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
+                            <td>{packageId}</td>
+                            <td>{packageName}</td>
+                            <td>{packagePrice}</td>
+                            <td>{packageStatus}</td>
+                            <td><a href="updatePackage.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>
                         </tr>
                     </tbody>
                 </table>
