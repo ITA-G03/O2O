@@ -2,162 +2,188 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>SMS - main course</title>
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<style>
-		nav.navbar i {
-			width: 30px;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <title>SMS - main course</title>
+    <!-- DataTables CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/js/datatables/css/jquery.dataTables.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="/js/datatables/js/jquery.dataTables.js"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#table_id').dataTable({
+                "ajax": "/business/list",
+                "columns": [
+                    {"data": "businessId"},
+                    {"data": "realName"},
+                    {"data": "status"},
+                    {"data": "status"},
+                    {"data": "status"},
+                    {"data": "status","orderable": false}
+                ]
+            });
+        });
+    </script>
+    <style>
+        nav.navbar i {
+            width: 30px;
+        }
+    </style>
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-static-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html">ADMIN</a>
-			</div>
-			<div class="collapse navbar-collapse" id="main-nav">
-				<ul class="nav navbar-nav">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Food <span
-								class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="mainCourse.html"><i class="glyphicon glyphicon-cutlery"></i>Main course</a></li>
-							<li><a href="sideDishes.html"><i class="glyphicon glyphicon-leaf"></i>Side dishes</a></li>
-							<li><a href="drink.html"><i class="glyphicon glyphicon-glass"></i>Drink</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="newFood.html"><i class="glyphicon glyphicon-plus"></i>New</a></li>
-						</ul>
-					</li>
-					<!-- 订单管理-->
-					<li>
-						<a href="order" role="button">Order</a>
-					</li>
-					<li><a href="package.html">Package</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="../login.html"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<ol class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li class="active">Main course</li>
-				</ol>
-				<div class="col-xs-2">
-					<ul class="nav nav-pills nav-stacked">
-						<li role="presentation" class="active"><a href="#"><i class="glyphicon glyphicon-fire"></i>&emsp;New Order</a></li>
-						<li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Order history</a></li>
-				<!--		<li role="presentation"><a href="#"><i class="glyphicon glyphicon-fire"></i>&emsp;Meal Sets</a></li>
-						<li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Main Meals</a></li>
-						<li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Side Order</a></li>-->
-					</ul>
-				</div>
-				<div class="col-xs-10">
-					<table class="table table-hover row">
-						<thead>
-							<tr class="row">
-								<th class="col-xs-1">Id</th>
-								<th class="col-xs-2">Name</th>
-								<th class="col-xs-1">Price</th>
-								<th class="col-xs-3">Picture</th>
-								<th class="col-xs-1">Status</th>
-								<th class="col-xs-4" style="width:150px">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="row">
-								<td class="col-xs-1">{foodId}</td>
-								<td class="col-xs-2">{foodName}</td>
-								<td class="col-xs-1">{foodPrice}</td>
-								<td class="col-xs-3">{foodPicture}</td>
-								<td class="col-xs-1">{foodStatus}</td>
-								<!--							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>-->
-								<td class="col-xs-4">
-									<button type="button" class="btn btn-primary">Primary</button>
-									<button type="button" class="btn btn-warning">Warning</button>
-								</td>
-							</tr>
-							<tr class="row">
-								<td class="col-xs-1">{foodId}</td>
-								<td class="col-xs-2">{foodName}</td>
-								<td class="col-xs-1">{foodPrice}</td>
-								<td class="col-xs-3">{foodPicture}</td>
-								<td class="col-xs-1">{foodStatus}</td>
-								<!--							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>-->
-								<td class="col-xs-4">
-									<button type="button" class="btn btn-primary">Primary</button>
-									<button type="button" class="btn btn-warning">Warning</button>
-								</td>
-							</tr>
-							<tr class="row">
-								<td class="col-xs-1">{foodId}</td>
-								<td class="col-xs-2">{foodName}</td>
-								<td class="col-xs-1">{foodPrice}</td>
-								<td class="col-xs-3">{foodPicture}</td>
-								<td class="col-xs-1">{foodStatus}</td>
-								<!--							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>-->
-								<td class="col-xs-4">
-									<button type="button" class="btn btn-primary">Primary</button>
-									<button type="button" class="btn btn-warning">Warning</button>
-								</td>
-							</tr>
-							<tr class="row">
-								<td class="col-xs-1">{foodId}</td>
-								<td class="col-xs-2">{foodName}</td>
-								<td class="col-xs-1">{foodPrice}</td>
-								<td class="col-xs-3">{foodPicture}</td>
-								<td class="col-xs-1">{foodStatus}</td>
-								<!--							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>-->
-								<td class="col-xs-4">
-									<button type="button" class="btn btn-primary">Primary</button>
-									<button type="button" class="btn btn-warning">Warning</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">ADMIN</a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Food <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mainCourse.html"><i class="glyphicon glyphicon-cutlery"></i>Main course</a></li>
+                        <li><a href="sideDishes.html"><i class="glyphicon glyphicon-leaf"></i>Side dishes</a></li>
+                        <li><a href="drink.html"><i class="glyphicon glyphicon-glass"></i>Drink</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="newFood.html"><i class="glyphicon glyphicon-plus"></i>New</a></li>
+                    </ul>
+                </li>
+                <!-- 订单管理-->
+                <li>
+                    <a href="order" role="button">Order</a>
+                </li>
+                <li><a href="package.html">Package</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../login.html"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Main course</li>
+            </ol>
+            <div class="col-xs-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li role="presentation" class="active"><a href="#"><i class="glyphicon glyphicon-fire"></i>&emsp;New
+                        Order</a></li>
+                    <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Order
+                        history</a></li>
+                    <!--		<li role="presentation"><a href="#"><i class="glyphicon glyphicon-fire"></i>&emsp;Meal Sets</a></li>
+                            <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Main Meals</a></li>
+                            <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Side Order</a></li>-->
+                </ul>
+            </div>
+            <div class="col-xs-10">
+                <table id="table_id" class="display">
+                    <thead>
+                    <tr class="row">
+                        <th class="col-xs-1">Id</th>
+                        <th class="col-xs-2">Name</th>
+                        <th class="col-xs-1">Price</th>
+                        <th class="col-xs-3">Picture</th>
+                        <th class="col-xs-1">Status</th>
+                        <th class="col-xs-4" style="width:150px">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr class="row">
+                        <td class="col-xs-1">{foodId}</td>
+                        <td class="col-xs-2">{foodName}</td>
+                        <td class="col-xs-1">{foodPrice}</td>
+                        <td class="col-xs-3">{foodPicture}</td>
+                        <td class="col-xs-1">{foodStatus}</td>
+                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
+                        <td class="col-xs-4">
+                            <button type="button" class="btn btn-primary">Primary</button>
+                            <button type="button" class="btn btn-warning">Warning</button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-xs-1">{foodId}</td>
+                        <td class="col-xs-2">{foodName}</td>
+                        <td class="col-xs-1">{foodPrice}</td>
+                        <td class="col-xs-3">{foodPicture}</td>
+                        <td class="col-xs-1">{foodStatus}</td>
+                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
+                        <td class="col-xs-4">
+                            <button type="button" class="btn btn-primary">Primary</button>
+                            <button type="button" class="btn btn-warning">Warning</button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-xs-1">{foodId}</td>
+                        <td class="col-xs-2">{foodName}</td>
+                        <td class="col-xs-1">{foodPrice}</td>
+                        <td class="col-xs-3">{foodPicture}</td>
+                        <td class="col-xs-1">{foodStatus}</td>
+                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
+                        <td class="col-xs-4">
+                            <button type="button" class="btn btn-primary">Primary</button>
+                            <button type="button" class="btn btn-warning">Warning</button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-xs-1">{foodId}</td>
+                        <td class="col-xs-2">{foodName}</td>
+                        <td class="col-xs-1">{foodPrice}</td>
+                        <td class="col-xs-3">{foodPicture}</td>
+                        <td class="col-xs-1">{foodStatus}</td>
+                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
+                        <td class="col-xs-4">
+                            <button type="button" class="btn btn-primary">Primary</button>
+                            <button type="button" class="btn btn-warning">Warning</button>
+                        </td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
 
-				<nav class="text-right">
-					<ul class="pagination">
-						<li>
-							<a href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li>
-							<a href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</div>
-	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-	<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+            <nav class="text-right">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
 </body>
 
 </html>
