@@ -24,4 +24,10 @@ public class BusinessViewController {
     public String changeInfoPage() {
         return "business-change-info";
     }
+
+    @RequestMapping("/register")
+    public String registerPage() {
+        return "business-register";
+    }
+
 }

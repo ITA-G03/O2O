@@ -1,86 +1,122 @@
+<!--for test-->
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- ???Bootstrap???????????? -->
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- jQuery??????bootstrap.min.js ???? -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- ??? Bootstrap ?? JavaScript ?? -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/js/ajaxform/jquery.form.min.js"></script>
 <!--part of change info ,be fethed by jQuery-->
 <script type="application/javascript">
-	$(function () {
-		console.log("complete...");//only once
-		$('#myModal').on('show.bs.modal', function () {
-			console.log("while show...");//each time
-		})
-		$('#myModal').on('shown.bs.modal', function () {
-			console.log("shown...");//each time
-		})
-	});
-</script>
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4 class="modal-title">Business info</h4>
-</div>
-<div class="modal-body">
-	<!-- Location -->
-	<div class="form-group">
-		<!--signboard -->
-		<div class="form-group">
-			<label>Sign Board</label>
-			<input type="text" name="signboard" class="form-control" required />
-		</div>
-		<!--logo-->
-		<label>logo</label>
-		<div class="row center-block">
-			<div class="center-block">
-				<a href="#" class="thumbnail">
-					<img class="center-block img-responsive" src="/images/img.png" />
-				</a>
-			</div>
-		</div>
-		<!--license-->
-		<label>license</label>
-		<div class="row center-block">
-			<div class="center-block">
-				<a href="#" class="thumbnail">
-					<img class="center-block img-responsive" src="/images/img.png" />
-				</a>
-			</div>
-		</div>
-		<!--tags-->
+    $(document).ready(function () {
+        console.log("complete...");//only once
+        $('#myModal').on('show.bs.modal', function () {
+            console.log("while show...");//each time
+        })
+        $('#myModal').on('shown.bs.modal', function () {
+            console.log("shown...");//each time
+            getBusinessInfo();
+        })
 
-		<!--comments-->
-		<label>comments</label>
-		<textarea class="form-control" rows="3"></textarea>
-		</br>
-		<label>Location</label>
-		<br>
-		<div class="btn-group">
-			<!--City-->
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				City <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li><a href="#">Action</a></li>
-				<li><a href="#">Another action</a></li>
-				<li><a href="#">Something else here</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-			</ul>
-		</div>
-		<div class="btn-group">
-			<!--Area-->
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Area <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li><a href="#">Action</a></li>
-				<li><a href="#">Another action</a></li>
-				<li><a href="#">Something else here</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">Separated link</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Location Detail</label>
-		<input type="text" name="name" class="form-control" required />
-	</div>
+        var getBusinessInfo = function () {
+            $.getJSON("/business/setting/profile", function (json) {
+                console.log(json);
+                console.log(json.toString());
+                $("input[name='signboard']").val(json.realName);
+                //$(img[name='logo'])
+                //$(img[name='license'])
+                $("input[name='detail']").val(json.location.detail);
+
+            });
+        };
+        //for test
+        getBusinessInfo();
+
+        // ?options??ajaxForm
+        $('#profile').ajaxForm(function () {
+            alert('Thanks for your comment!');
+        })
+    });
+</script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Business info</h4>
 </div>
-<div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	<button type="button" class="btn btn-primary">Save changes</button>
-</div>
+<form id="profile" class="register-form" action="/business/change" method="post" enctype="multipart/form-data">
+
+    <div class="modal-body">
+        <!-- Location -->
+        <div class="form-group">
+            <!--signboard -->
+            <div class="form-group">
+                <label>Sign Board</label>
+                <input type="text" name="signboard" class="form-control" required/>
+            </div>
+
+            <!--logo-->
+            <label>logo</label>
+
+            <div class="row center-block">
+                <div class="center-block">
+                    <a href="#" class="thumbnail">
+                        <img name="logo" class="center-block img-responsive" src="/images/img.png"/>
+                    </a>
+                </div>
+            </div>
+
+            <!--license-->
+            <label>license</label>
+
+            <div class="row center-block">
+                <div class="center-block">
+                    <a href="#" class="thumbnail">
+                        <img name="license" class="center-block img-responsive" src="/images/img.png"/>
+                    </a>
+                </div>
+            </div>
+            <!--tags-->
+
+            <!--comments-->
+            <label>comments</label>
+            <textarea class="form-control" rows="3"></textarea>
+            </br>
+            <!--Location-->
+            <label>Location</label>
+            <br>
+            <!--City-->
+            <div class="btn-group">
+                <select class="form-control" name="City">
+                    <option>Action</option>
+                    <option>Another action</option>
+                    <option>Something else here</option>
+                </select>
+            </div>
+            <!--Area-->
+            <div class="btn-group">
+
+                <select class="form-control" name="Area">
+                    <option>Action</option>
+                    <option>Another action</option>
+                    <option>Something else here</option>
+                </select>
+            </div>
+            <br><br>
+            <!--Location Detail-->
+            <label>Location Detail</label>
+            <input type="text" name="detail" class="form-control" required/>
+            <!--<button type="submit" hidden></button>-->
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="save" type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
