@@ -129,16 +129,16 @@ public class RestaurantRestController {
 
 	public List<CommentDto> initComment(){
 		List<CommentDto> cds = new ArrayList<CommentDto>();
-		CommentDto cd = new CommentDto(1,4,"实在找不到比这更好吃的店铺了。。。","2015-08-24");
+		CommentDto cd = new CommentDto(1,4,"老板为什么Jason的牛肉拉面没有牛肉","2015-08-24");
 		CommentDto cd1 = new CommentDto(1,4,"老板为什么我的鸡米花套餐少了鸡米花","2015-08-24");
-		CommentDto cd2 = new CommentDto(1,4,"实在找不到比这更好吃的店铺了。。。","2015-08-24");
+		CommentDto cd2 = new CommentDto(1,4,"老板为什么Jason的牛肉拉面没有牛肉","2015-08-24");
 		CommentDto cd3 = new CommentDto(1,4,"老板为什么我的鸡米花套餐少了鸡米花","2015-08-24");
 		CommentDto cd4 = new CommentDto(1,4,"实在找不到比这更好吃的店铺了。。。","2015-08-24");
 		CommentDto cd5 = new CommentDto(1,4,"老板为什么我的鸡米花套餐少了鸡米花","2015-08-24");
 		CommentDto cd6 = new CommentDto(1,4,"实在找不到比这更好吃的店铺了。。。","2015-08-24");
 		CommentDto cd7 = new CommentDto(1,4,"老板为什么我的鸡米花套餐少了鸡米花","2015-08-24");
 		CommentDto cd8 = new CommentDto(1,4,"实在找不到比这更好吃的店铺了。。。","2015-08-24");
-		CommentDto cd9 = new CommentDto(1,4,"老板为什么我的鸡米花套餐少了鸡米花","2015-08-24");
+		CommentDto cd9 = new CommentDto(1,4,"老板为什么Jason的牛肉拉面没有牛肉","2015-08-24");
 		cds.add(cd);
 		cds.add(cd1);
 		cds.add(cd2);

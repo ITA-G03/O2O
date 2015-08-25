@@ -17,6 +17,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     @PersistenceContext(unitName = "o2oPersistenceUnit")
     private EntityManager manager;
 
+    public EntityManager getManager() {
+        return manager;
+    }
 
     @Override
     public T getById(Class<T> c, int id) {
