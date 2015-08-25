@@ -1,59 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress SpringModelInspection -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<context:component-scan base-package="ita.o2o.controller,ita.o2o.controller.action,ita.o2o.controller.view,ita.o2o.controller.restful,ita.o2o.service" />
-	<context:annotation-config />
-	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-
-
-	<!-- Spring 配置管理DataSource -->
-	<!-- 本机配置根据自己情况修改 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/O2O?characterEncoding=UTF-8" />
-		<property name="username" value="root" />
-		<property name="password" value="cuichengjie" />
-		<property name="maxActive" value="300" />
-	</bean>
-
-
-	<!-- 设置html js css jpg png等资源访问性 -->
-	<mvc:annotation-driven />
-	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/fonts/**" location="/fonts/" />
-	<mvc:resources mapping="/js/**" location="/js/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:resources mapping="/bower/**" location="/bower/" />
+    <context:component-scan
+            base-package="ita.o2o.controller,
+            ita.o2o.controller.action,
+            ita.o2o.controller.view,
+            ita.o2o.controller.restful,
+            ita.o2o.service,
+            ita.o2o.dao,
+            ita.o2o.dao.impl
+            "
+            />
+    <context:annotation-config/>
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
 
-	<!-- 定义FreeMarker html视图解析器,实现优雅的Controller返回视图方式 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="prefix" value="/" />
-		<property name="suffix" value=".html" />
-		<property name="order" value="10" />
-		<property name="contentType" value="text/html;charset=UTF-8" />
-	</bean>
-	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
 
-	<!-- 配置自动注解的JSONMapper 专供返回数据类型 -->
-	<bean id="jsonMapper" class="ita.o2o.util.mapper.JSONMapper" />
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+        <property name="url" value="jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521:xe"></property>
+        <property name="password" value="123"></property>
+        <property name="username" value="JASONCUI"></property>
+    </bean>
 
-	<!--fileupload-->
-	<bean id="multipartResolver"
-		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- one of the properties available; the maximum file size in bytes -->
-		<property name="maxUploadSize" value="100000"/>
 
-	</bean>
+
+    <!-- 配置 JPA Hibernate 事务-->
+    <!-- JPA实体管理工厂的配置 -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
+        <property name="packagesToScan" value="po"/>
+        <!--待扫描的实体类包，不再需要persistence.xml了-->
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.connection.url" >jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521</prop>
+                <prop key="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</prop>
+                <prop key="hibernate.connection.username" >JASONCUI</prop>
+                <prop key="hibernate.connection.password" >123</prop>
+                <prop key="hibernate.archive.autodetection">class</prop>
+                <prop key="hibernate.dialect" >org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+            </props>
+        </property>
+    </bean>
+
+    <!--指定实现JPA的适配器-->
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/>
+    </bean>
+
+    <!-- Jpa 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <!-- Spring Data Jpa配置 -->
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+   
+
+
+
+    <!-- 设置html js css jpg png等资源访问性 -->
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/bower/**" location="/bower/"/>
+
+
+    <!-- 定义FreeMarker html视图解析器,实现优雅的Controller返回视图方式 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".html"/>
+        <property name="order" value="10"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+    </bean>
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!-- 配置自动注解的JSONMapper 专供返回数据类型 -->
+    <bean id="jsonMapper" class="ita.o2o.util.mapper.JSONMapper"/>
+
+    <!--fileupload-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="100000"/>
+
+    </bean>
+
+
 </beans>

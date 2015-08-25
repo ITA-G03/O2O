@@ -8,11 +8,11 @@ import java.util.List;
  * @version 2015-08-25
  */
 public interface BaseDao<T> {
-    T getById(Class<T> c,int id);//暂时没法化简到 T getById(int id);
-    T getByName(String name);
-    List<T> getAll();
+    <T>T getById(Class<T> c,int id);//暂时没法化简到 T getById(int id);
+    <T>T getByName(String name);
+    <T>List<T> getAll();
 
-    boolean create(T t);
-    boolean delete(T t);
-    boolean update(T t);
+    <T> boolean create(T t);
+    <T> boolean delete(T t);
+    <T> boolean update(T t);
 }

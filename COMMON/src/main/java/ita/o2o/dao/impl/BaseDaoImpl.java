@@ -1,52 +1,37 @@
 package ita.o2o.dao.impl;
 
 import ita.o2o.dao.BaseDao;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 /**
  * @author Jason Cui
  * @version 2015-08-25
  */
-@Component("baseDao")
-public class BaseDaoImpl<T> implements BaseDao<T> {
+@Repository
+public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
-    @PersistenceContext(unitName = "o2oPersistenceUnit")
-    private EntityManager manager;
+    @PersistenceContext
+    EntityManager manager;
 
 
     @Override
-    public T getById(Class<T> c, int id) {
+    public <T> T getById(Class<T> c, int id) {
+        return manager.find(c,id);
+    }
+
+    @Override
+    public <T> T getByName(String name) {
+        return null;
+    }
+
+
+    @Override
+    public <T> boolean update(T t) {
         try{
-            return manager.find(c,id);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-
-    @Override
-    public T getByName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<T> getAll() {
-        return null;
-    }
-
-
-    //增删改部分
-    @Override
-    public boolean create(T t) {
-        try{
-            manager.persist(t);
+            manager.merge(t);
             return true;
         }
         catch (Exception e){
@@ -56,7 +41,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     }
 
     @Override
-    public boolean delete(T t) {
+    public <T> boolean delete(T t) {
         try{
             manager.remove(t);
             return true;
@@ -68,9 +53,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     }
 
     @Override
-    public boolean update(T t) {
+    public <T> boolean create(T t) {
         try{
-            manager.merge(t);
+            manager.persist(t);
             return true;
         }
         catch (Exception e){
