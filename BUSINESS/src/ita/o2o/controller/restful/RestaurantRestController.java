@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping(value="rest/restaurant")
+@RequestMapping(value="rest/restaurant",produces = "application/json; charset=utf-8")
 public class RestaurantRestController {
 
 	@Autowired
@@ -24,15 +24,15 @@ public class RestaurantRestController {
 	public List<BusinessDto> init(){
         System.out.println();
         List<BusinessDto> bs = new ArrayList<BusinessDto>();
-		BusinessDto b = new BusinessDto(1,"images/res.jpg","炸Tomcat",4.3,43,20,"30");
-		BusinessDto b1 = new BusinessDto(1,"images/res1.jpg","Tomcat汉堡",4.3,43,20,"30");
-		BusinessDto b2 = new BusinessDto(1,"images/res2.jpg","Tomcat肉",4.3,43,20,"30");
-		BusinessDto b3 = new BusinessDto(1,"images/res3.jpg","沙县Tomcat",4.3,43,20,"30");
-		BusinessDto b4 = new BusinessDto(1,"images/res4.jpg","Tomcat煲",4.3,43,20,"30");
-		BusinessDto b5 = new BusinessDto(1,"images/res.jpg","炸Tomcat",4.3,43,20,"30");
-		BusinessDto b6 = new BusinessDto(1,"images/res1.jpg","Tomcat汉堡",4.3,43,20,"30");
-		BusinessDto b7 = new BusinessDto(1,"images/res2.jpg","Tomcat肉",4.3,43,20,"30");
-		BusinessDto b8 = new BusinessDto(1,"images/res3.jpg","沙县Tomcat",4.3,43,20,"30");
+		BusinessDto b = new BusinessDto(1,"images/res.jpg","炸Tomcat",0.7,21,20,"30");
+		BusinessDto b1 = new BusinessDto(1,"images/res1.jpg","Tomcat汉堡",1,33,20,"30");
+		BusinessDto b2 = new BusinessDto(1,"images/res2.jpg","Tomcat肉",2,43,20,"30");
+		BusinessDto b3 = new BusinessDto(1,"images/res3.jpg","沙县Tomcat",3,11,20,"30");
+		BusinessDto b4 = new BusinessDto(1,"images/res4.jpg","Tomcat煲",4.3,0,20,"30");
+		BusinessDto b5 = new BusinessDto(1,"images/res.jpg","炸Tomcat",5,43,1,"30");
+		BusinessDto b6 = new BusinessDto(1,"images/res1.jpg","Tomcat汉堡",3,10,20,"30");
+		BusinessDto b7 = new BusinessDto(1,"images/res2.jpg","Tomcat肉",2.3,43,20,"30");
+		BusinessDto b8 = new BusinessDto(1,"images/res3.jpg","沙县Tomcat",4,9,20,"30");
 		BusinessDto b9 = new BusinessDto(1,"images/res4.jpg","Tomcat煲",4.3,43,20,"30");
 		bs.add(b);
 		bs.add(b1);
@@ -46,7 +46,7 @@ public class RestaurantRestController {
 		bs.add(b9);
 		return bs;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String showRestaurantList(){

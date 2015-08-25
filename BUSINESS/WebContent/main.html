@@ -4,113 +4,121 @@
 <head>
     <meta charset="UTF-8">
     <title>外卖</title>
-    <link rel="stylesheet" type="text/css" href="bower/bootstrap-3.3.5-dist/css/cosmo.css">
-    <link rel="stylesheet" type="text/css" href="bower/font-awesome-4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="bower/angular/angular.js"></script>
-    <script src="bower/angular-animate/angular-animate.js"></script>
-    <script src="bower/angular-ui-bootstrap/uibootstrap.js"></script>
-    <script src="js/customer/common.js"></script>
-    <script src="js/customer/mainController.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower/bootstrap-3.3.5-dist/css/cosmo.css">
+    <link rel="stylesheet" type="text/css" href="/bower/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/bower/angular/angular.js"></script>
+    <script src="/bower/angular-animate/angular-animate.js"></script>
+    <script src="/bower/angular-ui-bootstrap/uibootstrap.js"></script>
+    <script src="/js/customer/common.js"></script>
+    <script src="/js/customer/mainController.js"></script>
 </head>
 
 <body ng-app="o2o" ng-controller="pageCtrl">
-    <nav class="navbar navbar-default navbar-fixed-top nav-main">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="main-nav">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="register.html">注册</a>
-                    </li>
-                    <li><a href="login.html">登录</a>
-                </ul>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top nav-main">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li><a href="/index"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register">注册</a>
+                </li>
+                <li><a href="/login">登录</a>
+            </ul>
         </div>
-    </nav>
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-3">
-                    <a href="main.html"><img src="images/tomcat.png" class="logo">
-                    </a>
-                </div>
-                <div class="col-xs-3">
-                    <a href="main.html">首页</a><span class="vertical-line">&#124;</span>
-                    <a href="mine.html">我的外卖</a><span class="vertical-line">&#124;</span>
-                    <a href="#">热门美食</a>
-                </div>
-                <div class="col-xs-5 col-xs-offset-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchArea">
+    </div>
+</nav>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="/main"><img src="images/tomcat.png" class="logo">
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="/main">首页</a><span class="vertical-line">&#124;</span>
+                <a href="/mine">我的外卖</a><span class="vertical-line">&#124;</span>
+                <a href="#">热门美食</a>
+            </div>
+            <div class="col-xs-5 col-xs-offset-1">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchArea">
                         <span class="input-group-btn">
                             <button class="btn btn-danger" type="button" id="searchBtn">搜索</button>
                         </span>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container container-main">
-        <div class="row">
-            <div ng-controller="carouselCtrl">
-                <carousel interval="interval" class="main-carousel">
-                    <slide ng-repeat="slide in slides" active="slide.active">
-                        <a href="{{slide.href}}">
-                            <img ng-src="{{slide.img}}">
+</div>
+<div class="container container-main">
+    <div class="row">
+        <div ng-controller="carouselCtrl">
+            <carousel interval="interval" class="main-carousel">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                    <a href="{{slide.href}}">
+                        <img ng-src="{{slide.img}}">
+                    </a>
+                </slide>
+            </carousel>
+        </div>
+        <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group" ng-repeat="type in resTypes">
+                <button class="btn btn-danger btn-lg" ng-class="{true: 'active', false: ''}[type==selectedResType]"
+                        ng-click="changeResType(type)">{{type}}
+                </button>
+            </div>
+        </div>
+        <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['default'==selectedSortType]"
+                        ng-click="changeSortType('default')">默认排序
+                </button>
+            </div>
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['sales'==selectedSortType]"
+                        ng-click="changeSortType('sales')">销量&emsp;<i class="fa fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['rating'==selectedSortType]"
+                        ng-click="changeSortType('rating')">评价&emsp;<i class="fa fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="btn-group" role="group">
+                <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['speed'==selectedSortType]"
+                        ng-click="changeSortType('speed')">送餐速度&emsp;<i class="fa fa-chevron-up"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="res-container">
+                    <div class="res-box col-xs-3" ng-repeat="r in res" ng-show="r.show">
+                        <a href="/restaurant" class="thumbnail">
+                            <img ng-src="{{r.img}}">
                         </a>
-                    </slide>
-                </carousel>
-            </div>
-            <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group" role="group" ng-repeat="type in resTypes">
-                    <button class="btn btn-danger btn-lg" ng-class="{true: 'active', false: ''}[type==selectedResType]" ng-click="changeResType(type)">{{type}}</button>
-                </div>
-            </div>
-            <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group" role="group">
-                    <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['default'==selectedSortType]" ng-click="changeSortType('default')">默认排序</button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['sales'==selectedSortType]" ng-click="changeSortType('sales')">销量&emsp;<i class="fa fa-chevron-down"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['rating'==selectedSortType]" ng-click="changeSortType('rating')">评价&emsp;<i class="fa fa-chevron-down"></i>
-                    </button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button class="btn btn-warning" ng-class="{true: 'active', false: ''}['speed'==selectedSortType]" ng-click="changeSortType('speed')">送餐速度&emsp;<i class="fa fa-chevron-up"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="res-container">
-                        <div class="res-box col-xs-3" ng-repeat="r in res" ng-show="r.show">
-                            <a href="restaurant.html" class="thumbnail">
-                                <img ng-src="{{r.img}}">
-                            </a>
-                            <h3><a href="restaurant.html">{{r.name}}</a></h3>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=1]"></i>
-                                    <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=2]"></i>
-                                    <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=3]"></i>
-                                    <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=4]"></i>
-                                    <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=5]"></i>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    月售{{r.sales}}单
-                                </div>
+
+                        <h3><a href="/restaurant">{{r.name}}</a></h3>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=1]"></i>
+                                <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=2]"></i>
+                                <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=3]"></i>
+                                <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=4]"></i>
+                                <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=5]"></i>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-6">起送: ￥{{r.price}}</div>
-                                <div class="col-xs-6 text-right">
-                                    <i class="fa fa-clock-o"></i>&nbsp;{{r.time}}分钟
-                                </div>
+                            <div class="col-xs-6 text-right">
+                                月售{{r.sales}}单
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">起送: ￥{{r.price}}</div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-clock-o"></i>&nbsp;{{r.time}}分钟
                             </div>
                         </div>
                     </div>
@@ -118,6 +126,7 @@
             </div>
         </div>
     </div>
+</div>
 
 </body>
 
