@@ -10,29 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ita.o2o.controller.BaseController;
 import ita.o2o.entity.base.Food;
 
 
 
 @Controller
-public class FoodController {
+public class FoodController extends BaseController{
 	 
-	
-	
-	//添加一个食品
-	@ResponseBody
-	@RequestMapping(value="/business/create",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
-	public String addFood(Model model) {
-		Food food = new Food();
-		model.addAttribute("food", food);
-		
-		
-		return "success";	
-	}
-	
+
 	//列出所有的食品
 	@ResponseBody
-	@RequestMapping(value="/business{businessId}/food/list",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
+	@RequestMapping(value="/business/{businessId}/food/list",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
 	public List<Food> getFoods(@PathVariable int businessId,Model model) {
 		List<Food> foods = null;
 		
