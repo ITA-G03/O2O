@@ -5,16 +5,21 @@ import ita.o2o.dto.BusinessDto;
 import java.util.ArrayList;
 import java.util.List;
 
+import ita.o2o.util.mapper.JSONMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+@Controller
 @RequestMapping(value="rest/restaurant")
 public class RestaurantRestController {
+
+	@Autowired
+	JSONMapper jsonMapper;
 
 	public List<BusinessDto> init(){
 		List<BusinessDto> bs = new ArrayList<BusinessDto>();
@@ -43,9 +48,8 @@ public class RestaurantRestController {
 	
 	@ResponseBody
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public List<BusinessDto> showRestaurantList(){
-		System.out.println(this.init().toString());
-		return this.init();
+	public String showRestaurantList(){
+		return jsonMapper.writeObjectAsString(init());
 	}
 	
 	@ResponseBody

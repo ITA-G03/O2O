@@ -1,10 +1,10 @@
-app.controller('pageCtrl', function ($scope,$http) {
+app.controller('pageCtrl', function ($scope, $http) {
     $scope.resTypes = ['全部', '中餐', '西餐', '快餐', '饮料'];
     $scope.selectedResType = '全部';
     $scope.changeResType = function (type) {
         $scope.selectedResType = type;
         for (var i = 0; i < $scope.res.length; i++) {
-            if (type == '全部') {
+            if (type == '全部' || !$scope.res[i].tags) {
                 $scope.res[i].show = true;
             } else {
                 $scope.res[i].show = $scope.res[i].tags.contains(type);
@@ -33,10 +33,10 @@ app.controller('pageCtrl', function ($scope,$http) {
             });
         }
     };
-    
-    $http.get('/rest/restaurant/list').success(function(data){ 
-    	console.info(data);
-    	$scope.res = data;
+
+    $http.get('/rest/restaurant/list').success(function (data) {
+        console.info(data);
+        $scope.res = data;
         $scope.changeResType($scope.selectedResType);
     });
 })
