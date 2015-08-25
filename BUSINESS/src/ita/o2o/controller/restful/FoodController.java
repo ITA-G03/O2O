@@ -16,13 +16,14 @@ import ita.o2o.entity.base.Food;
 
 @Controller
 public class FoodController {
-	
+	 
 	
 	
 	//添加一个食品
 	@ResponseBody
-	@RequestMapping(value="/business{businessId}/create",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
-	public String addFood(@PathVariable int businessId,Food food,Model model) {
+	@RequestMapping(value="/business/create",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
+	public String addFood(Model model) {
+		Food food = new Food();
 		model.addAttribute("food", food);
 		
 		

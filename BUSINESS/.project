@@ -3,6 +3,7 @@
 	<name>BUSINESS</name>
 	<comment></comment>
 	<projects>
+		<project>COMMON</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
