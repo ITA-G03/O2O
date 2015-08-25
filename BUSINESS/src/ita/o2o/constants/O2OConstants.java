@@ -10,5 +10,6 @@ public class O2OConstants {
     public static final String SUCCESS="success";
     public static final String FAILURE="failure";
 
+    //状态
 
 }

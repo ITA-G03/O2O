@@ -16,17 +16,65 @@
 
     <script type="application/javascript">
         $(document).ready(function () {
-            $('#table_id').dataTable({
-                "ajax": "/business/list",
+            /*$('#table_id').dataTable({
+             "ajax": "/business/list",
+             "columns": [
+             {"data": "businessId"},
+             {"data": "realName"},
+             {"data": "status"},
+             {"data": "status"},
+             {"data": "status"},
+             {"data": "status","orderable": false}
+             ]
+             });*/
+            var table = $('#table_id').DataTable({
+                "bSortClasses": false,
+                "ajax": "/order/new-order",
                 "columns": [
-                    {"data": "businessId"},
-                    {"data": "realName"},
-                    {"data": "status"},
-                    {"data": "status"},
-                    {"data": "status"},
-                    {"data": "status","orderable": false}
+                    {
+                        "data": "orderId"
+                    },
+                    {
+                        "data": "comments",
+                    },
+                    {
+                        "data": "orderItemList", render: function (data, type, row, meta) {
+                        var price = 0;
+                        if (null == data) {
+                            return null;
+                        }
+                        $.each(data, function (i, n) {
+                            price += n["count"];
+                        });
+                        return '' + price;
+                    }
+                    },
+                    {
+                        "data": "comments"
+                    },
+                    {
+                        "data": "comments"
+                    },
+                    {
+                        "data": "comments",
+                        "orderable": false,
+                        render: function () {
+                            var action = '<button style="margin-right: 10px" type="button" class="btn btn-primary">Accept</button>' +
+                                    '<button type="button" class="btn btn-warning">Reject</button>';
+                            return action;
+                        }
+                    }
                 ]
             });
+
+            $("#history").on("click", function () {
+                table.ajax.url("/order/history-order").load();
+            });
+
+            $("#new").on("click", function () {
+                table.ajax.url("/order/new-order").load();
+            });
+
         });
     </script>
     <style>
@@ -79,107 +127,46 @@
     </div>
 </nav>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12">
+    <div>
+        <div class="row">
             <ol class="breadcrumb">
                 <li><a href="index.html">Home</a></li>
                 <li class="active">Main course</li>
             </ol>
             <div class="col-xs-2">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="active"><a href="#"><i class="glyphicon glyphicon-fire"></i>&emsp;New
-                        Order</a></li>
-                    <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Order
-                        history</a></li>
-                    <!--		<li role="presentation"><a href="#"><i class="glyphicon glyphicon-fire"></i>&emsp;Meal Sets</a></li>
-                            <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Main Meals</a></li>
-                            <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Side Order</a></li>-->
+                    <li role="presentation" class="active"><a href="#" id="new" ><i class="glyphicon glyphicon-fire"></i>&emsp;New
+                        Order</a>
+                    </li>
+                    <li role="presentation"><a href="#" id="history"><i  class="glyphicon glyphicon-cutlery"></i>&emsp;Order
+                        history</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-xs-10">
                 <table id="table_id" class="display">
                     <thead>
-                    <tr class="row">
-                        <th class="col-xs-1">Id</th>
-                        <th class="col-xs-2">Name</th>
-                        <th class="col-xs-1">Price</th>
-                        <th class="col-xs-3">Picture</th>
-                        <th class="col-xs-1">Status</th>
-                        <th class="col-xs-4" style="width:150px">Action</th>
+                    <tr>
+                        <th>OrderId</th>
+                        <th>Customer</th>
+                        <th>Price</th>
+                        <th>Picture</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <!--<tr class="row">
-                        <td class="col-xs-1">{foodId}</td>
-                        <td class="col-xs-2">{foodName}</td>
-                        <td class="col-xs-1">{foodPrice}</td>
-                        <td class="col-xs-3">{foodPicture}</td>
-                        <td class="col-xs-1">{foodStatus}</td>
-                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
-                        <td class="col-xs-4">
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            <button type="button" class="btn btn-warning">Warning</button>
-                        </td>
+                    <tfoot>
+                    <tr>
+                        <th>OrderId</th>
+                        <th>Customer</th>
+                        <th>Price</th>
+                        <th>Picture</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
-                    <tr class="row">
-                        <td class="col-xs-1">{foodId}</td>
-                        <td class="col-xs-2">{foodName}</td>
-                        <td class="col-xs-1">{foodPrice}</td>
-                        <td class="col-xs-3">{foodPicture}</td>
-                        <td class="col-xs-1">{foodStatus}</td>
-                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
-                        <td class="col-xs-4">
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            <button type="button" class="btn btn-warning">Warning</button>
-                        </td>
-                    </tr>
-                    <tr class="row">
-                        <td class="col-xs-1">{foodId}</td>
-                        <td class="col-xs-2">{foodName}</td>
-                        <td class="col-xs-1">{foodPrice}</td>
-                        <td class="col-xs-3">{foodPicture}</td>
-                        <td class="col-xs-1">{foodStatus}</td>
-                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
-                        <td class="col-xs-4">
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            <button type="button" class="btn btn-warning">Warning</button>
-                        </td>
-                    </tr>
-                    <tr class="row">
-                        <td class="col-xs-1">{foodId}</td>
-                        <td class="col-xs-2">{foodName}</td>
-                        <td class="col-xs-1">{foodPrice}</td>
-                        <td class="col-xs-3">{foodPicture}</td>
-                        <td class="col-xs-1">{foodStatus}</td>
-                        &lt;!&ndash;							<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>&ndash;&gt;
-                        <td class="col-xs-4">
-                            <button type="button" class="btn btn-primary">Primary</button>
-                            <button type="button" class="btn btn-warning">Warning</button>
-                        </td>
-                    </tr>-->
-                    </tbody>
+                    </tfoot>
                 </table>
             </div>
-
-            <nav class="text-right">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>

@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "/business")
+@RequestMapping(value = "/business",produces = "application/json;charset=utf-8")
 public class BusinessRestController {
     @Autowired
     JSONMapper jsonMapper;
