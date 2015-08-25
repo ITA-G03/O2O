@@ -4,72 +4,76 @@
 <head>
     <meta charset="UTF-8">
     <title>外卖</title>
-    <link rel="stylesheet" type="text/css" href="bower/bootstrap-3.3.5-dist/css/cosmo.css">
-    <link rel="stylesheet" type="text/css" href="bower/font-awesome-4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="bower/angular/angular.js"></script>
-    <script src="bower/angular-animate/angular-animate.js"></script>
-    <script src="bower/angular-ui-bootstrap/uibootstrap.js"></script>
-    <script src="js/customer/common.js"></script>
-    <script src="js/customer/indexController.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower/bootstrap-3.3.5-dist/css/cosmo.css">
+    <link rel="stylesheet" type="text/css" href="/bower/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/bower/angular/angular.js"></script>
+    <script src="/bower/angular-animate/angular-animate.js"></script>
+    <script src="/bower/angular-ui-bootstrap/uibootstrap.js"></script>
+    <script src="/js/customer/common.js"></script>
+    <script src="/js/customer/indexController.js"></script>
 </head>
 
 <body class="change-location-bg" ng-app="o2o">
-    <nav class="navbar navbar-default navbar-fixed-top nav-index">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">G03外卖网</a>
-
-            </div>
-            <div class="collapse navbar-collapse" id="main-nav">
-                <ul class="nav navbar-nav"></ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="register.html">注册</a>
-                    </li>
-                    <li><a href="login.html">登录</a>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-default navbar-fixed-top nav-index">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <form class="change-location-form" ng-controller="locationCtrl">
-                    <select class="form-control input-lg city" ng-model="searchCity">
-                        <option ng-repeat="city in cities">{{city}}</option>
-                    </select>
-                    <div class="input-group area">
-                        <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" ng-model="searchArea">
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger btn-lg" type="button" id="searchBtn" ng-click="search()">搜索</button>
-                        </span>
-                    </div>
-                    <select class="form-control input-lg history">
-                        <option>历史地址</option>
-                    </select>
-                    <div class="clear"></div>
-                </form>
-            </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index">G03外卖网</a>
+
+        </div>
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register">注册</a>
+                </li>
+                <li><a href="/login">登录</a>
+            </ul>
         </div>
     </div>
-    <script type="text/ng-template" id="mustFill.html">
-        <div class="modal-header">
-            <h3 class="modal-title">必填</h3>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <form class="change-location-form" ng-controller="locationCtrl">
+                <select class="form-control input-lg city" ng-model="searchCity">
+                    <option ng-repeat="city in cities">{{city}}</option>
+                </select>
+
+                <div class="input-group area">
+                    <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" ng-model="searchArea">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger btn-lg" type="button" id="searchBtn" ng-click="search()">搜索
+                            </button>
+                        </span>
+                </div>
+                <select class="form-control input-lg history">
+                    <option>历史地址</option>
+                </select>
+
+                <div class="clear"></div>
+            </form>
         </div>
-        <div class="modal-body">
-            <h3><i class="fa fa-times fa-spin text-warning"></i>&emsp;请输入你的送餐地址</h3>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="cancel()">好的</button>
-        </div>
-    </script>
+    </div>
+</div>
+<script type="text/ng-template" id="mustFill.html">
+    <div class="modal-header">
+        <h3 class="modal-title">必填</h3>
+    </div>
+    <div class="modal-body">
+        <h3><i class="fa fa-times fa-spin text-warning"></i>&emsp;请输入你的送餐地址</h3>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="cancel()">好的</button>
+    </div>
+</script>
 </body>
 
 </html>

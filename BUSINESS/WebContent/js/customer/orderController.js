@@ -1,6 +1,6 @@
 app.controller('pageCtrl', function ($scope) {
     $scope.pay = function () {
-        location.href = 'success.html';
+        location.href = '/success';
     }
 
     $scope.orders = [

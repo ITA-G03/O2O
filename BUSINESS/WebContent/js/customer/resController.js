@@ -12,7 +12,7 @@ app.controller('pageCtrl', function ($scope, $http) {
     }
 
     $scope.order = function () {
-        location.href = 'order.html';
+        location.href = '/order';
     }
 
     $http.get('/rest/restaurant/1/detail').success(function (data) {

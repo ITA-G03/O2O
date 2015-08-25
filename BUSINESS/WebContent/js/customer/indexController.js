@@ -1,14 +1,15 @@
 app.controller('locationCtrl', function ($scope, $modal) {
     $scope.cities = ['珠海', '广州', '深圳'];
+    $scope.searchCity = $scope.cities[0];
 
     $scope.search = function () {
         if (!$scope.searchArea) {
-            var modalInstance = $modal.open({
+            $modal.open({
                 templateUrl: 'mustFill.html',
                 controller: 'ModalInstanceCtrl'
             });
         } else {
-            location.href = 'main.html';
+            location.href = '/main';
         }
     }
 })
