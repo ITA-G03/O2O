@@ -10,8 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/business")
 public class BusinessViewController {
 
-    @RequestMapping("/Index")
-    public String homeView() {
-        return "businessIndex";
+    @RequestMapping("/index")
+    public String indexPage() {
+        return "business-index";
+    }
+
+    @RequestMapping("/order")
+    public String orderPage() {
+        return "business-order";
+    }
+
+    @RequestMapping("/change-info")
+    public String changeInfoPage() {
+        return "business-change-info";
     }
 }
