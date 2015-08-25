@@ -22,7 +22,8 @@ public class RestaurantRestController {
 	JSONMapper jsonMapper;
 
 	public List<BusinessDto> init(){
-		List<BusinessDto> bs = new ArrayList<BusinessDto>();
+        System.out.println();
+        List<BusinessDto> bs = new ArrayList<BusinessDto>();
 		BusinessDto b = new BusinessDto(1,"images/res.jpg","炸Tomcat",4.3,43,20,"30");
 		BusinessDto b1 = new BusinessDto(1,"images/res1.jpg","Tomcat汉堡",4.3,43,20,"30");
 		BusinessDto b2 = new BusinessDto(1,"images/res2.jpg","Tomcat肉",4.3,43,20,"30");
