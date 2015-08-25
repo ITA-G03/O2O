@@ -13,6 +13,8 @@
 	<context:annotation-config />
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
+    <!-- 配置自动注解的JSONMapper 专供返回数据类型 -->
+    <bean id="jsonMapper" class="ita.o2o.util.mapper.JSONMapper" />
 
 	<!-- Spring 配置管理DataSource -->
 	<!-- 本机配置根据自己情况修改 -->
@@ -46,6 +48,5 @@
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 
-	<!-- 配置自动注解的JSONMapper 专供返回数据类型 -->
-	<bean id="jsonMapper" class="ita.o2o.util.mapper.JSONMapper" />
+
 </beans>

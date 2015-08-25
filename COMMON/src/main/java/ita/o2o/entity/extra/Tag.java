@@ -3,7 +3,7 @@ package ita.o2o.entity.extra;
 import ita.o2o.entity.base.BusinessTag;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Aquariuslt
@@ -24,8 +24,7 @@ public class Tag {
     private String tagName;
 
     @OneToMany
-    private Set<BusinessTag> businessTags;
-
+    private List<BusinessTag> businessTags;
 
 
     public int getTagId() {
@@ -44,11 +43,11 @@ public class Tag {
         this.tagName = tagName;
     }
 
-    public Set<BusinessTag> getBusinessTags() {
+    public List<BusinessTag> getBusinessTags() {
         return businessTags;
     }
 
-    public void setBusinessTags(Set<BusinessTag> businessTags) {
+    public void setBusinessTags(List<BusinessTag> businessTags) {
         this.businessTags = businessTags;
     }
 }

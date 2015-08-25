@@ -1,12 +1,11 @@
 package ita.o2o.entity.base;
 
 import ita.o2o.entity.extra.Status;
-import ita.o2o.entity.extra.Tag;
 import ita.o2o.entity.extra.WorkStatus;
 import ita.o2o.entity.location.Location;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Aquariuslt
@@ -35,7 +34,7 @@ public class Business {
     private User owner;
 
     @OneToMany
-    private Set<BusinessTag> businessTags;
+    private List<BusinessTag> businessTags;
 
     @OneToOne
     @JoinColumn(name="WORK_STATUS_ID")
@@ -57,6 +56,10 @@ public class Business {
     @Basic
     @Column(name = "LOGO_ID")
     private int logoId;
+
+    @Basic
+    @Column(name="INTRODUCTION",nullable = true)
+    private String introduction;
 
     public int getBusinessId() {
         return businessId;
@@ -90,11 +93,11 @@ public class Business {
         this.owner = owner;
     }
 
-    public Set<BusinessTag> getBusinessTags() {
+    public List<BusinessTag> getBusinessTags() {
         return businessTags;
     }
 
-    public void setBusinessTags(Set<BusinessTag> businessTags) {
+    public void setBusinessTags(List<BusinessTag> businessTags) {
         this.businessTags = businessTags;
     }
 
@@ -136,5 +139,13 @@ public class Business {
 
     public void setLogoId(int logoId) {
         this.logoId = logoId;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }
