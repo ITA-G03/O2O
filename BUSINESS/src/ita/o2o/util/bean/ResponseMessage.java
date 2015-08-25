@@ -1,6 +1,7 @@
 package ita.o2o.util.bean;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Aquariuslt
@@ -8,15 +9,15 @@ import java.util.HashMap;
  */
 public class ResponseMessage {
     private String status;
-    private HashMap<String,String> body;
+    private Map<String, String> body;
 
-    public ResponseMessage(String status, HashMap<String, String> body) {
+    public ResponseMessage(String status, Map<String, String> body) {
         this.status = status;
         this.body = body;
     }
 
     public ResponseMessage() {
-        body=new HashMap<>();
+        body = new HashMap<>();
     }
 
     public String getStatus() {
@@ -27,11 +28,11 @@ public class ResponseMessage {
         this.status = status;
     }
 
-    public HashMap<String, String> getBody() {
+    public Map<String, String> getBody() {
         return body;
     }
 
-    public void setBody(HashMap<String, String> body) {
+    public void setBody(Map<String, String> body) {
         this.body = body;
     }
 }

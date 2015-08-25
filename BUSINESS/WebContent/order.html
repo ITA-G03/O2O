@@ -4,98 +4,98 @@
 <head>
     <meta charset="UTF-8">
     <title>外卖</title>
-    <link rel="stylesheet" type="text/css" href="bower/bootstrap-3.3.5-dist/css/cosmo.css">
-    <link rel="stylesheet" type="text/css" href="bower/font-awesome-4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="bower/angular/angular.js"></script>
-    <script src="bower/angular-animate/angular-animate.js"></script>
-    <script src="bower/angular-ui-bootstrap/uibootstrap.js"></script>
-    <script src="js/customer/common.js"></script>
-    <script src="js/customer/orderController.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower/bootstrap-3.3.5-dist/css/cosmo.css">
+    <link rel="stylesheet" type="text/css" href="/bower/font-awesome-4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/bower/angular/angular.js"></script>
+    <script src="/bower/angular-animate/angular-animate.js"></script>
+    <script src="/bower/angular-ui-bootstrap/uibootstrap.js"></script>
+    <script src="/js/customer/common.js"></script>
+    <script src="/js/customer/orderController.js"></script>
 </head>
 
 <body ng-app="o2o" ng-controller="pageCtrl">
-    <nav class="navbar navbar-default navbar-fixed-top nav-main">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="main-nav">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="register.html">注册</a>
-                    </li>
-                    <li><a href="login.html">登录</a>
-                </ul>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top nav-main">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li><a href="/index"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register">注册</a>
+                </li>
+                <li><a href="/login">登录</a>
+            </ul>
         </div>
-    </nav>
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-3">
-                    <a href="main.html"><img src="images/tomcat.png" class="logo">
-                    </a>
-                </div>
-                <div class="col-xs-3">
-                    <a href="main.html">首页</a><span class="vertical-line">&#124;</span>
-                    <a href="mine.html">我的外卖</a><span class="vertical-line">&#124;</span>
-                    <a href="#">热门美食</a>
-                </div>
-                <div class="col-xs-5 col-xs-offset-1">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchArea">
+    </div>
+</nav>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="/main"><img src="images/tomcat.png" class="logo">
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="/main">首页</a><span class="vertical-line">&#124;</span>
+                <a href="/mine">我的外卖</a><span class="vertical-line">&#124;</span>
+                <a href="#">热门美食</a>
+            </div>
+            <div class="col-xs-5 col-xs-offset-1">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchArea">
                         <span class="input-group-btn">
                             <button class="btn btn-danger" type="button" id="searchBtn">搜索</button>
                         </span>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <ol class="breadcrumb">
-                    <li><a href="restaurant.html">炸Tomcat</a>
-                    </li>
-                    <li class="active">确认购买</li>
-                </ol>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="restaurant.html">炸Tomcat</a>
+                </li>
+                <li class="active">确认购买</li>
+            </ol>
+        </div>
+        <div class="col-xs-4">
+            <div class="order-paper">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>菜品</th>
+                        <th class="text-right">价格/份数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="o in orders">
+                        <td>{{o.name}}</td>
+                        <td class="text-right">￥{{o.price}}{{o.num>1?' * '+o.num:''}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="col-xs-4">
-                <div class="order-paper">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>菜品</th>
-                                <th class="text-right">价格/份数</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="o in orders">
-                                <td>{{o.name}}</td>
-                                <td class="text-right">￥{{o.price}}{{o.num>1?' * '+o.num:''}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="order-paper-footer"></div>
+        </div>
+        <div class="col-xs-8">
+            <form class="order-form">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-map-marker icon-lg"></i></span>
+                    <input type="text" class="form-control input-lg" placeholder="输入送餐地址">
                 </div>
-                <div class="order-paper-footer"></div>
-            </div>
-            <div class="col-xs-8">
-                <form class="order-form">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-map-marker icon-lg"></i></span>
-                        <input type="text" class="form-control input-lg" placeholder="输入送餐地址">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-comment icon-lg"></i></span>
-                        <input type="text" class="form-control input-lg" placeholder="输入留言">
-                    </div>
-                    <button type="button" class="btn btn-lg btn-block btn-danger" ng-click="pay()">支付￥127.0</button>
-                </form>
-            </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-comment icon-lg"></i></span>
+                    <input type="text" class="form-control input-lg" placeholder="输入留言">
+                </div>
+                <button type="button" class="btn btn-lg btn-block btn-danger" ng-click="pay()">支付￥127.0</button>
+            </form>
         </div>
     </div>
+</div>
 </body>
 
 </html>
