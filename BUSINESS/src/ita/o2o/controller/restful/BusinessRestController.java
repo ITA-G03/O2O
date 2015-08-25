@@ -3,10 +3,12 @@ package ita.o2o.controller.restful;
 
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.extra.Status;
+import ita.o2o.util.bean.ResponseMessage;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
+@Controller
 public class BusinessRestController {
 
     /**
@@ -47,7 +49,7 @@ public class BusinessRestController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/Business/{businessId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/business/{businessId}")
     public Business getBusinessInfo(@PathVariable Integer businessId) {
         System.out.printf(businessId.toString());
         Business business = new Business();
@@ -67,7 +69,7 @@ public class BusinessRestController {
      * @return Business
      */
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/Business/audit/{businessId}")
+    @RequestMapping(method = RequestMethod.POST, value = "/business/audit/{businessId}")
     public Business auditBusinessApply(@PathVariable Integer businessId, @RequestParam(value = "status") Integer statusId) {
         Business business = new Business();
         business.setBusinessId(businessId);
