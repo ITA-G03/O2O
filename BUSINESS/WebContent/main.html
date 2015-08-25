@@ -20,12 +20,12 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="main-nav">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
+                    <li><a href="/index"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="register.html">注册</a>
+                    <li><a href="/register">注册</a>
                     </li>
-                    <li><a href="login.html">登录</a>
+                    <li><a href="/login">登录</a>
                 </ul>
             </div>
         </div>
@@ -34,12 +34,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-3">
-                    <a href="main.html"><img src="images/tomcat.png" class="logo">
+                    <a href="/main"><img src="images/tomcat.png" class="logo">
                     </a>
                 </div>
                 <div class="col-xs-3">
-                    <a href="main.html">首页</a><span class="vertical-line">&#124;</span>
-                    <a href="mine.html">我的外卖</a><span class="vertical-line">&#124;</span>
+                    <a href="/main">首页</a><span class="vertical-line">&#124;</span>
+                    <a href="/mine">我的外卖</a><span class="vertical-line">&#124;</span>
                     <a href="#">热门美食</a>
                 </div>
                 <div class="col-xs-5 col-xs-offset-1">
@@ -90,10 +90,10 @@
                 <div class="row">
                     <div class="res-container">
                         <div class="res-box col-xs-3" ng-repeat="r in res" ng-show="r.show">
-                            <a href="restaurant.html" class="thumbnail">
+                            <a href="/restaurant" class="thumbnail">
                                 <img ng-src="{{r.img}}">
                             </a>
-                            <h3><a href="restaurant.html">{{r.name}}</a></h3>
+                            <h3><a href="/restaurant">{{r.name}}</a></h3>
                             <div class="row">
                                 <div class="col-xs-6">
                                     <i class="fa fa-star star" ng-class="{true:'active',false:''}[r.rating>=1]"></i>
