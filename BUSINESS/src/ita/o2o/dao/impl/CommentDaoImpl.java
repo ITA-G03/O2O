@@ -20,8 +20,5 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment>{
         return query.getResultList();
     }
 
-    @Override
-    public <T> T getById(int id) {
-        return null;
-    }
+
 }

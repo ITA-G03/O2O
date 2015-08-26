@@ -42,7 +42,7 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public Area getById(int id) {
-        return null;
+        return areaDao.getById(id);
     }
 
     @Override

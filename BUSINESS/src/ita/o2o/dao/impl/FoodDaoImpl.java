@@ -28,8 +28,5 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
         return (BusinessDto)query.getSingleResult();
     }
 
-    @Override
-    public <T> T getById(int id) {
-        return null;
-    }
+
 }

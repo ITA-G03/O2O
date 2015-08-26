@@ -3,9 +3,12 @@ package ita.o2o.controller.action;
 import ita.o2o.controller.BaseController;
 import ita.o2o.entity.location.Area;
 import ita.o2o.service.impl.AreaServiceImpl;
+import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Jason Cui
@@ -17,6 +20,9 @@ public class AreaActionController extends BaseController{
     @Autowired
     AreaServiceImpl areaService;
 
+    @Autowired
+    JSONMapper jsonMapper;
+
     @RequestMapping("/create")
     public void createAreaAction(){
 
@@ -26,5 +32,13 @@ public class AreaActionController extends BaseController{
         areaService.createArea(area);
         System.out.println("End");
 
+    }
+
+
+    @RequestMapping("/view/{areaId}")
+    @ResponseBody
+    public String getAreaInfo(@PathVariable("areaId") String areaId){
+        Area area=areaService.getById(Integer.valueOf(areaId));
+        return jsonMapper.writeObjectAsString(area);
     }
 }

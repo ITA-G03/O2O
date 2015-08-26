@@ -1,6 +1,7 @@
 package ita.o2o.dao.impl;
 
 import ita.o2o.dao.BaseDao;
+import ita.o2o.util.EntityUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,24 +16,27 @@ import java.util.List;
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 
-    private Class<T> rootType;
+    private Class<T> rootType = (Class<T>) EntityUtils.getEntityClass(this.getClass());
 
     @PersistenceContext
     private EntityManager manager;
 
+    public BaseDaoImpl() {
+    }
 
     public BaseDaoImpl(Class<T> rootType) {
+        System.out.println("Setting rootType:"+rootType.getName());
         this.rootType = rootType;
     }
 
     @Override
     public <T> T getById(Class<T> c, int id) {
-        return manager.find(c,id);
+        return manager.find(c, id);
     }
 
     @Override
-    public <T1> T1 getById(int id) {
-        return null;
+    public T getById(int id) {
+        return manager.find(rootType,id);
     }
 
     @Override
@@ -47,11 +51,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public <T> boolean update(T t) {
-        try{
+        try {
             manager.merge(t);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -59,11 +62,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public <T> boolean delete(T t) {
-        try{
+        try {
             manager.remove(t);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -71,12 +73,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public <T> boolean create(T t) {
-        try{
+        try {
             System.out.println("Prepare to Create!");
             manager.persist(t);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

@@ -13,10 +13,10 @@ import java.util.List;
 public class AreaDaoImpl extends BaseDaoImpl<Area>{
 
 
-    @Override
-    public <T> T getById(int id) {
-        return null;
+    public AreaDaoImpl() {
+        super(Area.class);
     }
+
 
     @Override
     public <T> List<T> getAll() {

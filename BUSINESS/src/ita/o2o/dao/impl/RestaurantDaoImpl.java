@@ -32,9 +32,6 @@ public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
         return query.getResultList();
     }
 
-    @Override
-    public <T> T getById(int id) {
-        return null;
-    }
+
 }
 
