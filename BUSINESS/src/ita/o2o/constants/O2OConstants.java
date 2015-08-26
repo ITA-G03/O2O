@@ -15,6 +15,23 @@ public class O2OConstants {
     public static final int BUSINESS_STATUS_REJECT = 3;
     public static final int BUSINESS_STATUS_HOT = 4;
 
+    //角色
+    public static final int ROLE_ADMINISTRATOR=1;
+    public static final int ROLE_BUSINESS=2;
+    public static final int ROLE_CUSTOMER=3;
+
+
+    //各种状态
+    public static final int STATUS_APPROVING=1;
+    public static final int STATUS_DELETED=2;
+    public static final int STATUS_REJECTED=3;
+    public static final int STATUS_ACCEPTED=4;
+    public static final int STATUS_HOT=5;
+
+
+    //商家状态
+    public static final int WORK_STATUS_WORKING=1;
+    public static final int WORK_STATUS_CLOSE=2;
 
 
 

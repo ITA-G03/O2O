@@ -32,11 +32,11 @@ public class User {
     private String encryptedPassword;//加密后的密码
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="LOCATION_ID")
     private Location location;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="ROLE_ID")
     private Role role;
 
