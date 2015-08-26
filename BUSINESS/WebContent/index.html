@@ -23,7 +23,8 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <form class="change-location-form" ng-controller="locationCtrl" method="post" action="/action/location/search">
+            <form class="change-location-form" ng-controller="locationCtrl" method="post"
+                  action="/action/location/search">
                 <select class="form-control input-lg city" required name="cityId">
                     <option ng-repeat="c in cities" value="{{c.cityId}}">{{c.cityName}}</option>
                 </select>
@@ -35,8 +36,9 @@
                             </button>
                         </span>
                 </div>
-                <select class="form-control input-lg history">
-                    <option>历史地址</option>
+                <select class="form-control input-lg history" ng-model="historyIndex" ng-change="searchFromHistory()">
+                    <option value="" disabled selected>历史地址</option>
+                    <option ng-repeat="h in history" value="{{$index}}">{{h.city.cityName}}-{{h.area.areaName}}</option>
                 </select>
 
                 <div class="clear"></div>

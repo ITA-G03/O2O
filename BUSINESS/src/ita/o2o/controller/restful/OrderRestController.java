@@ -1,10 +1,16 @@
 package ita.o2o.controller.restful;
 
 import ita.o2o.constants.O2OConstants;
-import ita.o2o.entity.base.Food;
-import ita.o2o.entity.base.Order;
-import ita.o2o.entity.base.OrderItem;
+import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
+import ita.o2o.entity.location.Area;
+import ita.o2o.entity.location.City;
+import ita.o2o.entity.location.Location;
+import ita.o2o.service.BusinessService;
+import ita.o2o.service.OrderService;
+import ita.o2o.service.impl.OrderServiceImpl;
+//import ita.o2o.service.impl.RoleServiceImpl;
+import ita.o2o.service.impl.RoleServiceImpl;
 import ita.o2o.util.bean.ResponseMessage;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +31,59 @@ public class OrderRestController {
     @Autowired
     JSONMapper jsonMapper;
 
+    @Autowired
+    OrderServiceImpl orderService;
+
+    @Autowired
+    RoleServiceImpl roleService;
+
+
+    public void GenTestData() {
+        Order o1 = new Order();
+//        o1.setOrderId(1);
+        o1.setComments("给钱上楼");
+//        o1.setAcceptTime("");
+//        status
+//        Status status = new Status();
+//        status.setStatusId(1);
+//        status.setStatusName("waiting");
+//        o1.setStatus(status);
+//        o1.setComments("只吃妹子做的");
+//        //Business
+//        Business business = new Business();
+//        business.setRealName("赵日天");
+//        //Location
+//        Location location = new Location();
+//        location.setDetail("武松岗");
+//        //city
+//        City city = new City();
+//        city.setCityName("青岛没啤酒");
+//        location.setCity(city);
+//        //Area
+//        Area area = new Area();
+//        area.setAreaName("桂林有米粉");
+//        location.setArea(area);
+//        business.setLocation(location);
+        //user
+        User user = new User();
+//        user.setLocation(location);
+        user.setNickName("天天");
+        user.setTel("820488");
+        user.setRole(roleService.getById(O2OConstants.ROLE_BUSINESS));
+        System.out.println(user.getRole().getRoleId());
+        System.out.println(user.getRole().getRoleName());
+//        business.setOwner(user);
+        orderService.createOrser(o1);
+        System.out.println("create finish..");
+    }
 
     @ResponseBody
     @RequestMapping(value = "/new-order")
     public String getNewOrderList() {
+        //test!!!!!!!!!!!!!!!!!!!!!!!!
+//        GenTestData();
+
+
         List<Order> orderList = new LinkedList<>();
         Order o1 = new Order();
         o1.setOrderId(1);
@@ -66,6 +121,7 @@ public class OrderRestController {
         return jsonMapper.writeObjectAsDataString(orderList);
     }
 
+
     @ResponseBody
     @RequestMapping(value = "/history-order")
     public String getHistoryOrderList() {
@@ -102,6 +158,7 @@ public class OrderRestController {
 
         orderList.add(o1);
         orderList.add(o2);
+
         return jsonMapper.writeObjectAsDataString(orderList);
     }
 
