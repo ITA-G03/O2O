@@ -11,7 +11,7 @@ public class BusinessDto {
 	
 	private int id;
 	
-	private String img;
+	private int logoId;
 	
 	private String name;
 	
@@ -20,7 +20,7 @@ public class BusinessDto {
 	private double sales;
 	
 	//起送
-	private double price;
+	private String price;
 	
 	private String time;
 	
@@ -28,14 +28,19 @@ public class BusinessDto {
 	
 	public BusinessDto(){}
 	
-	public BusinessDto(int id, String img, String name, double rating, double sales, double price, String time){
+	public BusinessDto(int id, int logoId, String name, double rating, double sales, String price, String time){
 		this.id = id;
-		this.img = img;
+		this.logoId = logoId;
 		this.name = name;
 		this.rating = rating;
 		this.sales = sales;
 		this.time = time;
 		this.price = price;
+	}
+
+	public BusinessDto(double rating, double sales){
+		this.rating = rating;
+		this.sales = sales;
 	}
 
 	public int getId() {
@@ -46,12 +51,12 @@ public class BusinessDto {
 		this.id = id;
 	}
 
-	public String getImg() {
-		return img;
+	public int getLogoId() {
+		return logoId;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setLogoId(int logoId) {
+		this.logoId = logoId;
 	}
 
 	public String getName() {
@@ -94,11 +99,11 @@ public class BusinessDto {
 		this.foodList = foodList;
 	}
 
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	

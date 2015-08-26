@@ -33,7 +33,9 @@ public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
 
     @Override
     public List<Business> getAll() {
-        return null;
+        String hql = "FROM Business";
+        Query query = this.getManager().createQuery(hql);
+        return query.getResultList();
     }
 
     @Override
