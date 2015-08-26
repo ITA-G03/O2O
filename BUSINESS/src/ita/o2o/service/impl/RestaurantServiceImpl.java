@@ -9,6 +9,7 @@ import ita.o2o.dao.impl.FoodDaoImpl;
 import ita.o2o.dao.impl.RestaurantDaoImpl;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.dto.CommentDto;
+import ita.o2o.dto.FoodDto;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.Comment;
 import ita.o2o.entity.base.Food;
@@ -38,22 +39,28 @@ public class RestaurantServiceImpl implements RestaurantService {
 			businessDto.setName(b.getRealName());
 			businessDto.setLogoId(b.getLogoId());
 			businessDto.setPrice(b.getSendPrice());
-			businessDto.setTime(O2OConstants.BUSINESS_SEND_PRICE);
+			businessDto.setTime(O2OConstants.BUSINESS_DELIVERY_TIME);
 			businessDtos.add(businessDto);
 		}
 		return businessDtos;
 	}
 
 	@Override
-	public List<Business> getRestaurantListByName(String storeName) {
+	public List<BusinessDto> getRestaurantListByName(String storeName) {
 		List<Business> bs = restaurantDao.autoCompleteByName(storeName);
-		return bs;
+		List<BusinessDto> businessDtos = new ArrayList<>();
+		for(Business b : bs){
+			BusinessDto businessDto = new BusinessDto();
+			businessDto.setId(b.getBusinessId());
+			businessDto.setName(b.getRealName());
+			businessDtos.add(businessDto);
+		}
+		return businessDtos;
 	}
 
 	@Override
 	public List<Business> getHotRestaurantList() {
-		List<Business> bs = restaurantDao.getHotRestaurantList(O2OConstants.BUSINESS_STATUS_HOT);
-		return bs;
+		return restaurantDao.getHotRestaurantList(O2OConstants.BUSINESS_STATUS_HOT);
 	}
 
 	@Override
@@ -65,9 +72,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 			Business business = foods.get(0).getOwner();
 			businessDto.setId(businessId);
 			businessDto.setName(business.getRealName());
-//			businessDto.setPrice();
-//			businessDto.setTime();
-//			businessDto.setImg(business.getLogoId());
+			businessDto.setPrice(business.getSendPrice());
+			businessDto.setTime(O2OConstants.BUSINESS_DELIVERY_TIME);
+			businessDto.setLogoId(business.getLogoId());
+			businessDto.setFoodList(foodListConvert(foods));
 		}
 		return businessDto;
 	}
@@ -80,9 +88,24 @@ public class RestaurantServiceImpl implements RestaurantService {
 			CommentDto commentDto = new CommentDto();
 			commentDto.setBody(c.getCommentContent());
 			commentDto.setDate(c.getCommentTime());
-//			commentDto.setRating(c.get);
+//			commentDto.setRating(bu);
 			commentDtos.add(commentDto);
 		}
 		return commentDtos;
+	}
+
+	public List<FoodDto> foodListConvert(List<Food> foods){
+		List<FoodDto> foodDtos = new ArrayList<>();
+		for(Food food : foods){
+			FoodDto foodDto = new FoodDto();
+			foodDto.setId(food.getFoodId());
+			foodDto.setName(food.getFoodName());
+			foodDto.setFoodPictureId(food.getFoodPictureId());
+			foodDto.setPrice(food.getPrice());
+			foodDto.setSales(food.getSalesVolume());
+//			foodDto.setTag(food.get);
+			foodDtos.add(foodDto);
+		}
+		return foodDtos;
 	}
 }

@@ -1,7 +1,11 @@
-app.controller('pageCtrl', function ($scope) {
+app.controller('pageCtrl', function ($scope, $http) {
     $scope.pay = function () {
         location.href = '/success';
     }
+
+    $http.get('/order/cart/session').success(function (data) {
+        console.info(data);
+    });
 
     $scope.orders = [
         {

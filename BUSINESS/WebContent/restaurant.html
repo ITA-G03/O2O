@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/base.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <script src="/bower/angular/angular.js"></script>
+    <script src="/bower/jquery/jquery-1.11.3.js"></script>
     <script src="/bower/angular-animate/angular-animate.js"></script>
     <script src="/bower/angular-cookies/angular-cookies.js"></script>
     <script src="/bower/angular-ui-bootstrap/uibootstrap.js"></script>
@@ -19,27 +20,27 @@
 <body ng-app="o2o" ng-controller="pageCtrl">
 <div ng-include="'/parts/main/nav'"></div>
 <div class="container">
-    <div class="row res-info">
+    <div class="row res-info" ng-model="detail">
         <div class="col-xs-12">
             <div class="res-logo">
-                <img src="images/res.jpg">
+                <img src="">{{detail.logoId}}
             </div>
             <div class="res-detail">
-                <h3>炸Tomcat</h3>
+                <h3>{{detail.name}}</h3>
 
-                <p class="text-muted">珠海市唐家湾镇伊妹儿网吧旁</p>
+                <p class="text-muted">{{detail.addr}}</p>
 
-                <p class="text-muted">0元起送</p>
+                <p class="text-muted">{{detail.price}}</p>
             </div>
             <div class="res-data">
                 <div class="res-data-box">
-                    <h1>4.2</h1>
+                    <h1>{{detail.rating}}</h1>
 
                     <p class="text-muted">商家评分</p>
                 </div>
                 <div class="res-data-seperator"></div>
                 <div class="res-data-box">
-                    <h1>44</h1>
+                    <h1>{{detail.time}}</h1>
 
                     <p class="text-muted">平均送餐时间</p>
                 </div>
@@ -128,6 +129,16 @@
             </div>
             <div class="panel panel-danger cart">
                 <div class="panel-heading">购物车</div>
+                <div>
+                <table>
+                <tr>
+                    <th width="30px"></th>
+                    <th width="138px">菜名：</th>
+                    <th width="138px">数量：</th>
+                    <th>单价：</th>
+                </tr>
+                </table>
+                    </div>
                 <div class="panel-body">
                     <div class="orders">
                         <div class="order-box" ng-repeat="c in cart">
@@ -150,7 +161,7 @@
                     </div>
                     <div class="pay">
                         <span class="total">￥{{getCartValue()}}</span>
-                        <button class="btn btn-success pull-right" ng-click="order()">去下单</button>
+                        <button class="btn btn-success pull-right" id="orderBtn" ng-click="order()">去下单</button>
                         <div class="clear"></div>
                     </div>
                 </div>
