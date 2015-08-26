@@ -29,6 +29,7 @@ public class LoginActionController extends BaseController {
     @ResponseBody
     public String loginAction(@RequestParam String tel, @RequestParam String password, HttpSession session) {
         ResponseMessage responseMessage = new ResponseMessage();
+        System.out.println(password);
         if (tel.equals("13333333333") && password.equals("123")) {
             responseMessage.setStatus(O2OConstants.SUCCESS);
             User user = new User();

@@ -33,7 +33,7 @@ public class RegisterActionController {
     public String registerAction(@RequestParam String tel, @RequestParam String password, @RequestParam String confirm, HttpSession session) {
         ResponseMessage responseMessage = new ResponseMessage();
         if (password.equals(confirm)) {
-            
+
             User user = new User();
             user.setTel(tel);
             user.setEncryptedPassword(password);

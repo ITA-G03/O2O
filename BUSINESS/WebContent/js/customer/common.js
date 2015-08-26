@@ -52,7 +52,14 @@ app.controller('userCtrl', function ($scope, $http, $cookieStore) {
             if (!locations) {
                 locations = [];
             }
-            if (!locations.contains(data)) {
+            var found = false;
+            for (var i = 0; i < locations.length; i++) {
+                if (locations[i].city.cityId == data.city.cityId && locations[i].area.areaName == data.area.areaName) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 locations.push(data);
             }
             $cookieStore.put('locations', locations);
