@@ -25,6 +25,8 @@ public class AreaActionController extends BaseController{
     @Autowired
     JSONMapper jsonMapper;
 
+    /*下面的功能全部是缩写,不要学*/
+
     @RequestMapping("/create")
     public void createAreaAction(){
 

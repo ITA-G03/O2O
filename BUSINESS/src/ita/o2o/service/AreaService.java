@@ -9,7 +9,7 @@ import java.util.List;
  * @version 2015-08-25
  */
 public interface AreaService {
-    boolean createArea(Area area);
+    int createArea(Area area);
     boolean deleteArea(Area area);
     boolean updateArea(Area area);
 

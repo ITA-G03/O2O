@@ -22,8 +22,8 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     @Transactional
-    public boolean createArea(Area area) {
-        boolean createFlag= areaDao.create(area);
+    public int createArea(Area area) {
+        int createFlag= areaDao.create(area);
         System.out.println("Service Create Flag:"+createFlag);
         System.out.println("Id:"+area.getAreaId());
         System.out.println("Name:"+area.getAreaName());
