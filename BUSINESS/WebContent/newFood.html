@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>SMS - new food</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        nav.navbar i {
+            width: 30px;
+        }
+
+    </style>
+     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../js/food/getFoodType.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../business/index">SMS</a>
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li >
+                    <a href="../food/addfood" role="button">Food </a>
+                   
+                </li>
+                <!-- <li><a href="package.html">Package</a></li>-->
+                <!-- 订单管理-->
+                <li>
+                    <a href="order" role="button">Order</a>
+                </li>
+                
+                <li>
+                
+               
+  					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Type <span
+								class="caret"></span></a>
+								<ul class="dropdown-menu">
+                            <li id="foodType"><button type="button" name="addFood"class="btn btn-success btn-xs" data-toggle='modal' data-target='#myModal'>New</button>&nbsp&nbsp
+                            <button data-toggle='modal' data-target='#myModal2' type="button" name="delete" class="btn btn-danger btn-xs">Delete</button></li>
+                        </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="change-info" data-toggle="modal" data-target="#myModal"><i
+                                class="glyphicon glyphicon-info-sign"></i>&emsp;Change Info</a></li>
+                        <li><a href="login.html"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">New food</li>
+                </ol>
+
+                <form action="../action/food/create" method="post" class="center-block" style="max-width: 500px" enctype="multipart/form-data">
+                    <h1 class="page-header">New food</h1>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" name="price" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="form-control" name="type" id="type" required>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Picture</label>
+                        <input type="file" name="picture" class="form-control" required />
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-block btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Food Type</h4>
+      </div>
+      <div class="modal-body">
+    
+     <h1 class="page-header">Add Food Type</h1>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" name="type" class="form-control"  required />
+                    </div>
+                    <br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" name="save" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+       <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete Food Type</h4>
+      </div>
+      <div class="modal-body">
+    
+     <h1 class="page-header">Delete Food Type</h1>
+                    <div class="form-group">
+                      
+                      <table id="t">
+						<td>Main<button type="button">delete</button></td>
+
+					</table>
+   
+                      
+                    <br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+        
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

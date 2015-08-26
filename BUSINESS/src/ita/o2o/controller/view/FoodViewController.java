@@ -18,7 +18,6 @@ public class FoodViewController  extends BaseController{
 	@RequestMapping("home")
 	public String homeView() {
 		
-		return "index";
+		return "business-index";
 	}
-
 }
