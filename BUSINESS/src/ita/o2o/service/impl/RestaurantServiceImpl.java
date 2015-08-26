@@ -29,7 +29,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public List<BusinessDto> getRestaurantList() {
-		System.out.print("restaurantList");
+		System.out.println("restaurantList");
 		List<Business> bs = restaurantDao.getAll();
 		List<BusinessDto> businessDtos = new ArrayList<>();
 		for(Business b : bs){

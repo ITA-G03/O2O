@@ -25,7 +25,7 @@ public class BusinessRestController {
     JSONMapper jsonMapper;
 
 
-    private static Logger logger = Logger.getLogger(BusinessRestController.class);
+    //private static Logger logger = Logger.getLogger(BusinessRestController.class);
 
     /**
      * 改变对应商家的信息
@@ -37,9 +37,9 @@ public class BusinessRestController {
     @RequestMapping(method = RequestMethod.POST, value = "/change")
     public void changeBusinessInfo(@RequestParam("signboard") String name, @RequestParam("license") MultipartFile file
     ) {
-        logger.info("filesize: " + file.getSize());
+        /*logger.info("filesize: " + file.getSize());
         logger.info("OriginalFilename: " + file.getOriginalFilename());
-        logger.info("Name:" + file.getName());
+        logger.info("Name:" + file.getName());*/
 //        System.out.println(business);
         return;
     }

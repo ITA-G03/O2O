@@ -4,6 +4,7 @@
 
 $(function(){
     $('form.register-form').ajaxForm(function(data){
+        console.log(data)
         if (data.status == 'success') {
             window.location.href = '/index';
         } else {

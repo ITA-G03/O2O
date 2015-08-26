@@ -39,3 +39,10 @@ var param = function (obj) {
 };
 
 var app = angular.module('o2o', ['ui.bootstrap', 'ngAnimate']);
+
+app.controller('userCtrl', function ($scope, $http) {
+    $http.get('/rest/user/info').success(function (data) {
+        $scope.user = data;
+    })
+
+})

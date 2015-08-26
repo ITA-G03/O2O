@@ -30,28 +30,28 @@ public class RestaurantRestController {
 	@ResponseBody
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String showRestaurantList(){
-		restaurantService.getRestaurantList();
+		//restaurantService.getRestaurantList();
 		return jsonMapper.writeObjectAsString(init());
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/list/{storeName}", method = RequestMethod.PUT)
 	public List<BusinessDto> searchRestaurant(@PathVariable String storeName){
-		restaurantService.getRestaurantListByName(storeName);
+		//restaurantService.getRestaurantListByName(storeName);
 		return null;
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/list/hot", method = RequestMethod.GET)
 	public List<BusinessDto> showHotRestaurant(){
-		restaurantService.getHotRestaurantList();
+		//restaurantService.getHotRestaurantList();
 		return null;
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/{businessId}/detail", method = RequestMethod.GET)
 	public String showDetail(@PathVariable int businessId){
-		restaurantService.getRestaurantDetail(businessId);
+		//restaurantService.getRestaurantDetail(businessId);
 		BusinessDto b = new BusinessDto(1,"img/res.jpg","炸Tomcat",4.3,43,20,"30");
 		b.setFoodList(initFood());
 		return jsonMapper.writeObjectAsString(b);
@@ -60,12 +60,11 @@ public class RestaurantRestController {
 	@ResponseBody
 	@RequestMapping(value="/{businessId}/list/comment", method = RequestMethod.GET)
 	public String showComment(@PathVariable int businessId){
-		restaurantService.getRestaurantComment(businessId);
+		//restaurantService.getRestaurantComment(businessId);
 		return jsonMapper.writeObjectAsString(initComment());
 	}
 
 	public List<BusinessDto> init(){
-		System.out.println();
 		List<BusinessDto> bs = new ArrayList<BusinessDto>();
 		BusinessDto b = new BusinessDto(1,"images/res.jpg","炸Tomcat",0.7,21,20,"30");
 		BusinessDto b1 = new BusinessDto(1,"images/res1.jpg","Tomcat汉堡",1,33,20,"30");
