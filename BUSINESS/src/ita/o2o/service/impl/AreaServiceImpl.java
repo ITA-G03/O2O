@@ -14,16 +14,16 @@ import java.util.List;
  * @version 2015-08-25
  */
 
-@Service
+@Service("areaService")
 public class AreaServiceImpl implements AreaService {
 
     @Autowired
-    AreaDaoImpl areadaoImpl;
+    AreaDaoImpl areaDao;
 
     @Override
     @Transactional
     public boolean createArea(Area area) {
-        boolean createFlag=areadaoImpl.create(area);
+        boolean createFlag= areaDao.create(area);
         System.out.println("Service Create Flag:"+createFlag);
         System.out.println("Id:"+area.getAreaId());
         System.out.println("Name:"+area.getAreaName());
@@ -48,6 +48,6 @@ public class AreaServiceImpl implements AreaService {
     @Override
     @Transactional
     public List<Area> findAll() {
-        return areadaoImpl.getAll();
+        return areaDao.getAll();
     }
 }

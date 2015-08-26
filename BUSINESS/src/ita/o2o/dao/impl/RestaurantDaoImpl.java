@@ -1,6 +1,5 @@
 package ita.o2o.dao.impl;
 
-import ita.o2o.dao.BaseDao;
 import ita.o2o.entity.base.Business;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +12,10 @@ import java.util.List;
 
 @Component("restaurantDao")
 public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
+
+
+
+
 
     public List<Business> getHotRestaurantList(int businessStatusId){
         String hql = "FROM Business B WHERE B.businessId =:statusId";
@@ -27,6 +30,11 @@ public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
         Query query = this.getManager().createQuery(hql);
         query.setParameter("name", name);
         return query.getResultList();
+    }
+
+    @Override
+    public <T> T getById(int id) {
+        return null;
     }
 }
 

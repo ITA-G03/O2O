@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/area")
 public class AreaActionController extends BaseController{
     @Autowired
-    AreaServiceImpl areaServiceImpl;
+    AreaServiceImpl areaService;
 
     @RequestMapping("/create")
     public void createAreaAction(){
+
         Area area=new Area();
         area.setAreaName("Bye Bye");
 
-        areaServiceImpl.createArea(area);
+        areaService.createArea(area);
         System.out.println("End");
 
     }

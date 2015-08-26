@@ -5,19 +5,24 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * @author Jason Cui
  * @version 2015-08-25
  */
-@Repository
+@Repository("baseDao")
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
-    @PersistenceContext
-    EntityManager manager;
 
-    public EntityManager getManager() {
-        return manager;
+    private Class<T> rootType;
+
+    @PersistenceContext
+    private EntityManager manager;
+
+
+    public BaseDaoImpl(Class<T> rootType) {
+        this.rootType = rootType;
     }
 
     @Override
@@ -26,10 +31,19 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     }
 
     @Override
+    public <T1> T1 getById(int id) {
+        return null;
+    }
+
+    @Override
     public <T> T getByName(String name) {
         return null;
     }
 
+    @Override
+    public <T1> List<T1> getAll() {
+        return null;
+    }
 
     @Override
     public <T> boolean update(T t) {
@@ -58,6 +72,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     @Override
     public <T> boolean create(T t) {
         try{
+            System.out.println("Prepare to Create!");
             manager.persist(t);
             return true;
         }
@@ -65,5 +80,13 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public EntityManager getManager() {
+        return manager;
+    }
+
+    public void setManager(EntityManager manager) {
+        this.manager = manager;
     }
 }

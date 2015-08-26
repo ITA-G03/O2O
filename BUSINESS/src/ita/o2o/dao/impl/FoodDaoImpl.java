@@ -27,4 +27,9 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
         query.setParameter(1, businessId);
         return (BusinessDto)query.getSingleResult();
     }
+
+    @Override
+    public <T> T getById(int id) {
+        return null;
+    }
 }

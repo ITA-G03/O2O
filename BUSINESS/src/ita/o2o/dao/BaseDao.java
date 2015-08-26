@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface BaseDao<T> {
     <T>T getById(Class<T> c,int id);//暂时没法化简到 T getById(int id);
+    <T>T getById(int id);
     <T>T getByName(String name);
     <T>List<T> getAll();
 
