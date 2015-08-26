@@ -30,8 +30,7 @@ public class RestaurantRestController {
 	@ResponseBody
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String showRestaurantList(){
-		//restaurantService.getRestaurantList();
-		return jsonMapper.writeObjectAsString(init());
+		return jsonMapper.writeObjectAsString(restaurantService.getRestaurantList());
 	}
 	
 	@ResponseBody
@@ -52,9 +51,10 @@ public class RestaurantRestController {
 	@RequestMapping(value="/{businessId}/detail", method = RequestMethod.GET)
 	public String showDetail(@PathVariable int businessId){
 		//restaurantService.getRestaurantDetail(businessId);
-		BusinessDto b = new BusinessDto(1,"img/res.jpg","炸Tomcat",4.3,43,20,"30");
-		b.setFoodList(initFood());
-		return jsonMapper.writeObjectAsString(b);
+//		BusinessDto b = new BusinessDto(1,"img/res.jpg","炸Tomcat",4.3,43,20,"30");
+//		b.setFoodList(initFood());
+//		return jsonMapper.writeObjectAsString(b);
+		return null;
 	}
 
 	@ResponseBody
@@ -64,30 +64,7 @@ public class RestaurantRestController {
 		return jsonMapper.writeObjectAsString(initComment());
 	}
 
-	public List<BusinessDto> init(){
-		List<BusinessDto> bs = new ArrayList<BusinessDto>();
-		BusinessDto b = new BusinessDto(1,"images/res.jpg","炸Tomcat",0.7,21,20,"30");
-		BusinessDto b1 = new BusinessDto(2,"images/res1.jpg","Tomcat汉堡",1,33,20,"30");
-		BusinessDto b2 = new BusinessDto(3,"images/res2.jpg","Tomcat肉",2,43,20,"30");
-		BusinessDto b3 = new BusinessDto(4,"images/res3.jpg","沙县Tomcat",3,11,20,"30");
-		BusinessDto b4 = new BusinessDto(5,"images/res4.jpg","Tomcat煲",4.3,0,20,"30");
-		BusinessDto b5 = new BusinessDto(6,"images/res.jpg","炸Tomcat",5,43,1,"30");
-		BusinessDto b6 = new BusinessDto(7,"images/res1.jpg","Tomcat汉堡",3,10,20,"30");
-		BusinessDto b7 = new BusinessDto(8,"images/res2.jpg","Tomcat肉",2.3,43,20,"30");
-		BusinessDto b8 = new BusinessDto(9,"images/res3.jpg","沙县Tomcat",4,9,20,"30");
-		BusinessDto b9 = new BusinessDto(10,"images/res4.jpg","Tomcat煲",4.3,43,20,"30");
-		bs.add(b);
-		bs.add(b1);
-		bs.add(b2);
-		bs.add(b3);
-		bs.add(b4);
-		bs.add(b5);
-		bs.add(b6);
-		bs.add(b7);
-		bs.add(b8);
-		bs.add(b9);
-		return bs;
-	}
+
 
 	public List<FoodDto> initFood(){
 		List<FoodDto> foods = new ArrayList<FoodDto>();

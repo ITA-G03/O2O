@@ -61,6 +61,10 @@ public class Business {
     @Column(name="INTRODUCTION",nullable = true)
     private String introduction;
 
+    @Basic
+    @Column(name="SEND_PRICE")
+    private String sendPrice;
+
     public int getBusinessId() {
         return businessId;
     }
@@ -147,5 +151,13 @@ public class Business {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getSendPrice() {
+        return sendPrice;
+    }
+
+    public void setSendPrice(String sendPrice) {
+        this.sendPrice = sendPrice;
     }
 }
