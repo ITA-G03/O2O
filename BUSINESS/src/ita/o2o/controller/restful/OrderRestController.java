@@ -5,11 +5,8 @@ import ita.o2o.dto.BusinessDto;
 import ita.o2o.dto.FoodDto;
 import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
-import ita.o2o.entity.location.Area;
-import ita.o2o.entity.location.City;
-import ita.o2o.entity.location.Location;
 import ita.o2o.service.BusinessService;
-import ita.o2o.service.OrderService;
+import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.OrderServiceImpl;
 //import ita.o2o.service.impl.RoleServiceImpl;
 import ita.o2o.service.impl.RoleServiceImpl;
@@ -39,6 +36,9 @@ public class OrderRestController {
 
     @Autowired
     RoleServiceImpl roleService;
+
+    @Autowired
+    BusinessServiceImpl businessService;
 
 
     public void GenTestData() {
@@ -76,8 +76,16 @@ public class OrderRestController {
         System.out.println(user.getRole().getRoleId());
         System.out.println(user.getRole().getRoleName());
 //        business.setOwner(user);
-        orderService.createOrser(o1);
+        orderService.createOrder(o1);
         System.out.println("create finish..");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/testOrderList")
+    public String testOrderList() {
+        Business business = businessService.getById(22);
+        List<Order> orderList = orderService.getCurrentUserOrderList(business);
+        return jsonMapper.writeObjectAsDataString(orderList);
     }
 
     @ResponseBody

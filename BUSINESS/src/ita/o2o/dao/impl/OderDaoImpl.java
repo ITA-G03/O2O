@@ -1,6 +1,7 @@
 package ita.o2o.dao.impl;
 
 import ita.o2o.constants.O2OConstants;
+import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.Order;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,10 @@ public class OderDaoImpl extends BaseDaoImpl<Order> {
         Root<Order> root = criteriaBuilderQuery.from(Order.class);
         List<Order> resultList = this.getManager().createQuery(criteriaBuilderQuery).getResultList();
         return resultList;
+    }
+
+    public List<Order> getById(Business business) {
+        return null;
     }
 
     @Override
