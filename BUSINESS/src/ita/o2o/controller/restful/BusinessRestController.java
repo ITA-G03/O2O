@@ -24,9 +24,6 @@ public class BusinessRestController {
     @Autowired
     JSONMapper jsonMapper;
 
-
-    //private static Logger logger = Logger.getLogger(BusinessRestController.class);
-
     /**
      * 改变对应商家的信息
      *
