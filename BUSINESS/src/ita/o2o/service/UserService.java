@@ -5,4 +5,6 @@ package ita.o2o.service;
  * @version 15-08-23
  */
 public interface UserService {
+
+    int login(String tel,String encryptedPassword);
 }

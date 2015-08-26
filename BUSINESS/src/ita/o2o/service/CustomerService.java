@@ -9,5 +9,4 @@ import ita.o2o.entity.base.User;
 public interface CustomerService {
 
     int registerCustomer(User user);
-
 }
