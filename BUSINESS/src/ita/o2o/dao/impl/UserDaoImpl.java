@@ -53,4 +53,6 @@ public class UserDaoImpl extends BaseDaoImpl<User>{
         criteriaQuery.select(root).where(predicate);
         return this.getManager().createQuery(criteriaQuery).getResultList().get(0);
     }
+
+
 }

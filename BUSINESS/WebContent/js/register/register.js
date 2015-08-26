@@ -73,7 +73,7 @@ function validateLicense(){
 function uploadIdCard(){
     $("#validateIdCardMessage").text("").hide();
     $.ajaxFileUpload({
-        url:'image/upload',
+        url:'/image/upload',
         secureuri: false,
         fileElementId: 'idCard',
         dataType: 'JSON',
@@ -83,7 +83,7 @@ function uploadIdCard(){
             console.log(data.status);
             console.log(data.body.imageId);
             $("#idCardId").val(data.body.imageId);
-            $("#idCardImage").attr("src","image/view/"+data.body.imageId).removeClass("hidden").show();
+            $("#idCardImage").attr("src","/image/view/"+data.body.imageId).removeClass("hidden").show();
             $("#idCard").change(uploadIdCard);
         },
         error:function(data){
@@ -98,7 +98,7 @@ function uploadIdCard(){
 function uploadLicense(){
     $("#validateLicenseMessage").text("").hide();
     $.ajaxFileUpload({
-        url:'image/upload',
+        url:'/image/upload',
         secureuri: false,
         fileElementId: 'license',
         dataType: 'JSON',
@@ -108,7 +108,7 @@ function uploadLicense(){
             console.log(data.status);
             console.log(data.body.imageId);
             $("#licenseId").val(data.body.imageId);
-            $("#licenseImage").attr("src","image/view/"+data.body.imageId).removeClass("hidden").show();
+            $("#licenseImage").attr("src","/image/view/"+data.body.imageId).removeClass("hidden").show();
             $("#license").change(uploadIdCard);
         },
         error:function(data){

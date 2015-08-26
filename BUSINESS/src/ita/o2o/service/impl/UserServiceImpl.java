@@ -18,15 +18,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public User findByTel(String tel) {
+        return userDao.findByTel(tel);
+    }
+
+    @Override
     public int login(String tel, String encryptedPassword) {
         User user=userDao.findByTel(tel);
         if(user==null){
             return O2OConstants.LOGIN_USER_NOT_EXIST;
         }
-        else if(user!=null&&!user.getEncryptedPassword().equals(encryptedPassword)){
-
+        else if(!user.getEncryptedPassword().equals(encryptedPassword)){
+            return O2OConstants.LOGIN_PASSWORD_WRONG;
         }
-
-        return O2OConstants.LOGIN_SUCCESS;
+        else if(user.getEncryptedPassword().equals(encryptedPassword)){
+            System.out.println("Login Success~");
+            return O2OConstants.LOGIN_SUCCESS;
+        }
+        return O2OConstants.LOGIN_USER_NOT_EXIST;
     }
 }
