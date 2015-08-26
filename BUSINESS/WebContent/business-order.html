@@ -4,15 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>SMS - main course</title>
+
+    <!--bootstarp-->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <!-- DataTables CSS -->
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/js/datatables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.jqueryui.css">
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap.css">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/js/bower/jquery-1.11.3.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="/js/bower/bootstrap.js"></script>
 
     <!-- DataTables -->
-    <script type="text/javascript" charset="utf8" src="/js/datatables/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/bower/jquery.dataTables.js"></script>
 
     <script type="application/javascript">
         $(document).ready(function () {
@@ -59,20 +64,128 @@
                         "data": "comments",
                         "orderable": false,
                         render: function () {
-                            var action = '<button style="margin-right: 10px" type="button" class="btn btn-primary">Accept</button>' +
-                                    '<button type="button" class="btn btn-warning">Reject</button>';
+                            var action = '<button  style="margin-right: 10px" type="button" data-loading-text="Loading..." class="btn btn-primary accept" autocomplete="off">Accept</button>' +
+                                    '<button type="button" class="btn btn-warning reject ">Reject</button>';
                             return action;
                         }
                     }
                 ]
             });
 
+            //swap to history
             $("#history").on("click", function () {
                 table.ajax.url("/order/history-order").load();
+                table.columns(5).visible(false);
             });
-
+            //swap to new order
             $("#new").on("click", function () {
                 table.ajax.url("/order/new-order").load();
+                table.columns(5).visible(true);
+            });
+
+            //tr
+            $('#table_id>tbody').delegate('>tr', 'mouseover', function () {
+                var trElement = $(this);
+//                trElement.attr("data-container", "body");
+                trElement.addClass('table');
+                trElement.attr("data-trigger", "focus");
+                trElement.attr("data-toggle", "popover");
+                trElement.attr("data-title", "Detail");
+                trElement.attr("data-placement", "left");
+                trElement.attr('data-html', 'true');
+
+                //detail
+                var rowdata = table.row($(this).parents('tr')[0]).data();
+                var orderitem = rowdata.orderItemList;
+                var context = '<table class="row">' +
+                                '<thead>' +
+                                '<tr>' +
+                                '<th>FoodName</th>' +
+                                '<th>Count</th>' +
+                                '</tr>' +
+                                '</thead>' +
+                                '<tbody>' + ''
+                        ;
+                $.each(orderitem, function (i, n) {
+                    var food = n.food;
+                    context += '<tr><th>' + food.foodName + '</th><th>' + n.count + '</th></tr>';
+                });
+                context += '</tbody></table>';
+                trElement.attr("data-content", "" + context);
+
+
+                //init popover
+                $('[data-toggle="popover"]').popover();
+                //show
+                trElement.popover('show');
+                console.log('...tr');
+            });
+
+            $('#table_id').delegate('tbody tr', 'mouseleave', function () {
+                var trElement = $(this);
+                trElement.popover('hide');
+            });
+
+            //accept
+            $('#table_id').delegate('button.accept', 'click', function () {
+                //loading
+                var $btn = $(this).button('loading');
+                //row - data
+                var rowdata = table.row($(this).parents('tr')[0]).data();
+                //hide
+                var rejectBtn = $(this).next();
+                rejectBtn.hide();
+                console.log(rowdata);
+                $.post(
+                        '/order/accept',
+                        {orderId: rowdata.orderId},
+                        function (data) {
+                            setTimeout(function () {
+                                $btn.button('reset');
+                            }, 2000);
+                            console.log(data);
+                            if (null == data) {
+                                $(this).next().show()
+                            }
+                            else if (data.status == "success") {
+                                table.row($($btn).parents('tr')).remove()
+                                        .draw();
+                            } else if (data.status == "failure") {
+                                alert(data.body);
+                                rejectBtn.show();
+                            }
+                        },
+                        "json"
+                );
+            });
+            //reject
+            $('#table_id').delegate('button.reject', 'click', function () {
+                var rowdata = table.row($(this).parents('tr')[0]).data();
+                var $btn = $(this).button('loading');
+                //hide
+                var rejectBtn = $(this).prev();
+                console.log(rowdata);
+                $.post(
+                        '/order/reject',
+                        {orderId: rowdata.orderId},
+                        function (data) {
+                            setTimeout(function () {
+                                $btn.button('reset');
+                            }, 2000);
+                            console.log(data);
+                            if (null == data) {
+                                $(this).next().show()
+                            }
+                            else if (data.status == "success") {
+                                table.row($($btn).parents('tr')).remove()
+                                        .draw();
+                            } else if (data.status == "failure") {
+                                alert(data.body);
+                                rejectBtn.show();
+                            }
+                        },
+                        "json"
+                );
             });
 
         });
@@ -135,10 +248,10 @@
             </ol>
             <div class="col-xs-2">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="active"><a href="#" id="new" ><i class="glyphicon glyphicon-fire"></i>&emsp;New
+                    <li role="presentation" class="active"><a href="#" id="new"><i class="glyphicon glyphicon-fire"></i>&emsp;New
                         Order</a>
                     </li>
-                    <li role="presentation"><a href="#" id="history"><i  class="glyphicon glyphicon-cutlery"></i>&emsp;Order
+                    <li role="presentation"><a href="#" id="history"><i class="glyphicon glyphicon-cutlery"></i>&emsp;Order
                         history</a>
                     </li>
                 </ul>
@@ -152,7 +265,7 @@
                         <th>Price</th>
                         <th>Picture</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th id="action">Action</th>
                     </tr>
                     </thead>
                     <tfoot>
