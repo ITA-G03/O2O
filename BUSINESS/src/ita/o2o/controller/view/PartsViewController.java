@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PartsViewController {
 
     @RequestMapping("/index/nav")
-    public String homeView(){
+    public String indexNavView() {
         return "ng-index-nav";
     }
 
+    @RequestMapping("/main/nav")
+    public String mainNavView() {
+        return "ng-main-nav";
+    }
 }
