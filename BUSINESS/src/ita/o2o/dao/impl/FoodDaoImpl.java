@@ -17,7 +17,7 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
 
 
     public List<Food> getByBusinessId(int businessId){
-        String hql = "FROM Food F WHERE F.owner.businessId =: businessId";
+        String hql = "FROM Food F WHERE F.owner.businessId = :businessId";
         Query query = this.getManager().createQuery(hql);
         query.setParameter("businessId", businessId);
         return query.getResultList();
@@ -31,7 +31,6 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
         BusinessDto businessDto = new BusinessDto(Double.parseDouble(objs[0].toString()),Double.parseDouble(objs[1].toString()));
         return businessDto;
     }
-
 
     @Override
     public List<Food> getAll() {

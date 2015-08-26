@@ -1,6 +1,8 @@
 package ita.o2o.controller.restful;
 
 import ita.o2o.constants.O2OConstants;
+import ita.o2o.dto.BusinessDto;
+import ita.o2o.dto.FoodDto;
 import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.location.Area;
@@ -15,9 +17,10 @@ import ita.o2o.util.bean.ResponseMessage;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -178,6 +181,25 @@ public class OrderRestController {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setStatus(O2OConstants.SUCCESS);
         return jsonMapper.writeObjectAsString(responseMessage);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/cart/session", method = RequestMethod.POST)
+    public void setShoppingCartSession(ArrayList<FoodDto> foods, HttpSession session) {
+        System.out.println(foods.size());
+        session.setAttribute("currentCart", foods);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/cart/session", method = RequestMethod.GET)
+    public String getShoppingCartSession(HttpSession session) {
+        List<FoodDto> foods = (List<FoodDto>)session.getAttribute("currentCart");
+        int businessId = (int)session.getAttribute("currentRestaurant");
+        BusinessDto businessDto = new BusinessDto();
+        businessDto.setId(businessId);
+        businessDto.setFoodList(foods);
+        //add business name in session
+        return jsonMapper.writeObjectAsString(businessDto);
     }
 
 

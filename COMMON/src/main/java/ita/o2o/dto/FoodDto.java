@@ -18,6 +18,8 @@ public class FoodDto {
     private double sales;
     
     private String tag;
+
+	private int num;
     
     public FoodDto(){}
     
@@ -77,6 +79,12 @@ public class FoodDto {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-    
-    
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
 }

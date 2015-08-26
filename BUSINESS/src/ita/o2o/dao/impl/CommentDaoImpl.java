@@ -15,7 +15,7 @@ import java.util.List;
 public class CommentDaoImpl extends BaseDaoImpl<Comment>{
 
     public List<Comment> getCommentListByBusinessId(int businessId){
-        String hql = "FROM Comment C WHERE C.business.businessId =: businessId";
+        String hql = "FROM Comment C WHERE C.business.businessId =:businessId";
         Query query = this.getManager().createQuery(hql);
         query.setParameter("businessId", businessId);
         return query.getResultList();

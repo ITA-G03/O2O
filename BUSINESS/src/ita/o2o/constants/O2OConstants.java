@@ -14,7 +14,7 @@ public class O2OConstants {
     public static final int BUSINESS_STATUS_APPROVE = 2;
     public static final int BUSINESS_STATUS_REJECT = 3;
     public static final int BUSINESS_STATUS_HOT = 4;
-    public static final String BUSINESS_SEND_PRICE = "30";
+    public static final String BUSINESS_DELIVERY_TIME = "30";
 
     //角色
     public static final int ROLE_ADMINISTRATOR=1;

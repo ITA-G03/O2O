@@ -66,5 +66,16 @@ app.controller('userCtrl', function ($scope, $http, $cookieStore) {
             console.log($cookieStore.get('locations'));
         }
     })
+});
 
-})
+app.controller('SearchRestaurantCtrl',function($scope, $http){
+    $scope.searchRest = function(){
+        var searchRest = $scope.searchArea;
+        console.info(searchRest);
+        $http.get('/rest/restaurant/list/'+searchRest).success(function (data) {
+            console.info(data);
+        })
+    }
+});
+
+

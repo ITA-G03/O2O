@@ -14,8 +14,6 @@ import java.util.List;
 @Component("restaurantDao")
 public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
 
-
-
     public List<Business> getHotRestaurantList(int businessStatusId){
         String hql = "FROM Business B WHERE B.businessId =:statusId";
         Query query = this.getManager().createQuery(hql);
@@ -24,10 +22,9 @@ public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
     }
 
     public List<Business> autoCompleteByName(String name){
-        //just yy
-        String hql = "FROM Business B WHERE B.realName like % :name %";
+        String hql = "FROM Business B WHERE B.realName like :name";
         Query query = this.getManager().createQuery(hql);
-        query.setParameter("name", name);
+        query.setParameter("name", "%"+name+"%");
         return query.getResultList();
     }
 
