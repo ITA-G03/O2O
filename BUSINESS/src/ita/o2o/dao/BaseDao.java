@@ -11,9 +11,9 @@ public interface BaseDao<T> {
     <T>T getById(Class<T> c,int id);//暂时没法化简到 T getById(int id);
     <T>T getById(int id);
     <T>T getByName(String name);
-    <T>List<T> getAll();
+    List<T> getAll();
 
-    <T> boolean create(T t);
+    int create(T t);
     <T> boolean delete(T t);
     <T> boolean update(T t);
 }

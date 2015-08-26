@@ -1,5 +1,6 @@
 package ita.o2o.dao.impl;
 
+import ita.o2o.constants.O2OConstants;
 import ita.o2o.entity.base.Comment;
 import org.springframework.stereotype.Component;
 
@@ -21,4 +22,21 @@ public class CommentDaoImpl extends BaseDaoImpl<Comment>{
     }
 
 
+    @Override
+    public List<Comment> getAll() {
+        return null;
+    }
+
+
+    @Override
+    public int create(Comment comment) {
+        try{
+            this.getManager().persist(comment);
+            return comment.getCommentId();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return O2OConstants.DEFAULT_FAILURE_CODE;
+    }
 }

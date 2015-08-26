@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 /**
  * @author Jason Cui
@@ -44,10 +43,6 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         return null;
     }
 
-    @Override
-    public <T1> List<T1> getAll() {
-        return null;
-    }
 
     @Override
     public <T> boolean update(T t) {
@@ -71,17 +66,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         return false;
     }
 
-    @Override
-    public <T> boolean create(T t) {
-        try {
-            System.out.println("Prepare to Create!");
-            manager.persist(t);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
+
+
 
     public EntityManager getManager() {
         return manager;

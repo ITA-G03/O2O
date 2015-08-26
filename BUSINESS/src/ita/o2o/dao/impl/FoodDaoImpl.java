@@ -1,5 +1,6 @@
 package ita.o2o.dao.impl;
 
+import ita.o2o.constants.O2OConstants;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.entity.base.Food;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Component("foodDao")
 public class FoodDaoImpl extends BaseDaoImpl<Food> {
+
+
 
     public List<Food> getByBusinessId(int businessId){
         String hql = "FROM Food F WHERE F.owner.businessId =: businessId";
@@ -29,4 +32,20 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
     }
 
 
+    @Override
+    public List<Food> getAll() {
+        return null;
+    }
+
+    @Override
+    public int create(Food food) {
+        try{
+            this.getManager().persist(food);
+            return food.getFoodId();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return O2OConstants.DEFAULT_FAILURE_CODE;
+    }
 }

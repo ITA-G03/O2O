@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @author Jason Cui
  * @version 2015-08-25
@@ -40,5 +42,13 @@ public class AreaActionController extends BaseController{
     public String getAreaInfo(@PathVariable("areaId") String areaId){
         Area area=areaService.getById(Integer.valueOf(areaId));
         return jsonMapper.writeObjectAsString(area);
+    }
+
+
+    @RequestMapping("view/all")
+    @ResponseBody
+    public String getAllAreaInfo(){
+        List<Area> areaList=areaService.getAll();
+        return jsonMapper.writeObjectAsString(areaList);
     }
 }

@@ -4,6 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
+ * 精妙绝伦之根据泛型类获取对应实体类的Class方法
  * @author Jason Cui
  * @version 2015-08-26
  */

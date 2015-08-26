@@ -47,7 +47,9 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     @Transactional
-    public List<Area> findAll() {
+    public List<Area> getAll() {
         return areaDao.getAll();
     }
+
+
 }

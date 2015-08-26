@@ -15,5 +15,5 @@ public interface AreaService {
 
 
     Area getById(int id);
-    List<Area> findAll();
+    List<Area> getAll();
 }

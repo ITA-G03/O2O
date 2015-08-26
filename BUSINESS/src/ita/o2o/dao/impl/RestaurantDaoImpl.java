@@ -1,5 +1,6 @@
 package ita.o2o.dao.impl;
 
+import ita.o2o.constants.O2OConstants;
 import ita.o2o.entity.base.Business;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +13,6 @@ import java.util.List;
 
 @Component("restaurantDao")
 public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
-
-
 
 
 
@@ -32,6 +31,21 @@ public class RestaurantDaoImpl extends BaseDaoImpl<Business> {
         return query.getResultList();
     }
 
+    @Override
+    public List<Business> getAll() {
+        return null;
+    }
 
+    @Override
+    public int create(Business business) {
+        try{
+            this.getManager().persist(business);
+            return business.getBusinessId();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return O2OConstants.DEFAULT_FAILURE_CODE;
+    }
 }
 
