@@ -16,6 +16,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     @PersistenceContext
     EntityManager manager;
 
+    public EntityManager getManager() {
+        return manager;
+    }
 
     @Override
     public <T> T getById(Class<T> c, int id) {
