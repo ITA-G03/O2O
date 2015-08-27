@@ -17,6 +17,14 @@ public class JSONMapper extends ObjectMapper{
 
     ObjectMapper objectMapper;
 
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
+
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     public JSONMapper(){
         objectMapper=new ObjectMapper();
         objectMapper.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);

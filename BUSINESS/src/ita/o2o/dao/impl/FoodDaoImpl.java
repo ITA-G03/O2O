@@ -27,8 +27,14 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
         String hql = "SELECT AVG(F.averageRating), SUM(F.salesVolume) FROM Food F WHERE F.owner.businessId = ?";
         Query query = this.getManager().createQuery(hql);
         query.setParameter(new Integer(1), businessId);
-        Object[] objs = (Object[])query.getSingleResult();
-        BusinessDto businessDto = new BusinessDto(Double.parseDouble(objs[0].toString()),Double.parseDouble(objs[1].toString()));
+        Object[] objs  = (Object[])query.getSingleResult();
+        BusinessDto businessDto = new BusinessDto();
+        if(null != objs[0]) {
+            businessDto.setRating(Double.parseDouble(objs[0].toString()));
+        }
+        if(null != objs[1]) {
+            businessDto.setSales(Double.parseDouble(objs[1].toString()));
+        }
         return businessDto;
     }
 
