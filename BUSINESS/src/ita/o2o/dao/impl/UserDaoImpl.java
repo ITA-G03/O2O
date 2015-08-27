@@ -15,9 +15,9 @@ import java.util.List;
  * @version 2015-08-26
  */
 @Repository("userDao")
-public class UserDaoImpl extends BaseDaoImpl<User>{
+public class UserDaoImpl extends BaseDaoImpl<User> {
 
-    public static final String TEL="tel";
+    public static final String TEL = "tel";
 
     public UserDaoImpl() {
         super(User.class);
@@ -25,31 +25,30 @@ public class UserDaoImpl extends BaseDaoImpl<User>{
 
     @Override
     public List<User> getAll() {
-        CriteriaBuilder criteriaBuilder=this.getManager().getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery=criteriaBuilder.createQuery(User.class);
-        Root<User> root=criteriaQuery.from(User.class);
+        CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
         return this.getManager().createQuery(criteriaQuery).getResultList();
     }
 
     @Override
     public int create(User user) {
-        try{
+        try {
             this.getManager().persist(user);
             return user.getUserId();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return O2OConstants.DEFAULT_FAILURE_CODE;
     }
 
     public User findByTel(String tel) {
-        CriteriaBuilder criteriaBuilder=this.getManager().getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery=criteriaBuilder.createQuery(User.class);
-        Root<User> root=criteriaQuery.from(User.class);
-        Predicate predicate=criteriaBuilder.conjunction();
-        Predicate equalPredicate=criteriaBuilder.equal(root.<String>get(TEL), tel);
-        predicate=criteriaBuilder.and(predicate,equalPredicate);
+        CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        Predicate predicate = criteriaBuilder.conjunction();
+        Predicate equalPredicate = criteriaBuilder.equal(root.<String>get(TEL), tel);
+        predicate = criteriaBuilder.and(predicate, equalPredicate);
         criteriaQuery.select(root).where(predicate);
         return this.getManager().createQuery(criteriaQuery).getResultList().get(0);
     }

@@ -8,6 +8,7 @@ import ita.o2o.entity.location.Location;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.LocationServiceImpl;
 import ita.o2o.service.impl.UserServiceImpl;
+import ita.o2o.util.bean.ResponseMessage;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class BusinessActionController {
     UserServiceImpl userService;
 
     @ResponseBody
-    @RequestMapping(value = "/register/business")
+    @RequestMapping(value = "/register-business")
     public String registBusiness(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, String city, String area, String detail) {
         System.out.println("signboard: " + signboard);
         System.out.println("comments: " + comments);
@@ -41,7 +42,6 @@ public class BusinessActionController {
         System.out.println("city: " + city);
         System.out.println("area: " + area);
         System.out.println("detail: " + detail);
-
 
         Business business = businessService.getById(1);
         business.setRealName(signboard);
@@ -67,7 +67,7 @@ public class BusinessActionController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/setting/business")
+    @RequestMapping(value = "/setting/profile")
     public String updateBusinessInfo(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, String city, String area, String detail) {
         System.out.println("signboard: " + signboard);
         System.out.println("comments: " + comments);
@@ -77,9 +77,10 @@ public class BusinessActionController {
         System.out.println("city: " + city);
         System.out.println("area: " + area);
         System.out.println("detail: " + detail);
-/*
-        Business business = businessService.getById();
-        User current = userService.
+
+        User currentUser = userService.getById(user.getUserId());
+        Business business = businessService.getByUser(currentUser);
+
 
         if (null != signboard && !signboard.isEmpty())
             business.setRealName(signboard);
@@ -90,17 +91,15 @@ public class BusinessActionController {
         if (null != comments && !comments.isEmpty())
             business.setIntroduction(comments);
 
-        business.setLocation();
+        Location location = business.getLocation();
         //city
+
         //eara
+
         //detail
-
-
+        business.setIntroduction(comments);
         businessService.updateBusiness(business);
-
-
-
-*/
+//        ResponseMessage responseMessage = new
         return "";
     }
 
