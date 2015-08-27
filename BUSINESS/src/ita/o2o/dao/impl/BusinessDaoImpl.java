@@ -14,12 +14,13 @@ import java.util.List;
 @Repository("businessDao")
 public class BusinessDaoImpl extends BaseDaoImpl<Business> {
     public static final String BUSINESS = "business";
-    public static final String USER_ID = "userId";
+    public static final String USER = "owner";
     public static final String CUSTOMER = "customer";
 
     public BusinessDaoImpl() {
         super(Business.class);
     }
+
 
     @Override
     public List<Business> getAll() {
@@ -48,9 +49,9 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
 
 
         System.out.println("Join表查询啦~~");
-        root.fetch(BUSINESS, JoinType.LEFT);
+        root.fetch(USER, JoinType.LEFT);
         Predicate predicate = criteriaBuilder.conjunction();
-        Predicate equalPredicate = criteriaBuilder.equal(root.<User>get(CUSTOMER), user);
+        Predicate equalPredicate = criteriaBuilder.equal(root.<User>get(USER), user);
         predicate = criteriaBuilder.and(predicate, equalPredicate);
         criteriaBuilderQuery.select(root).where(predicate);
 

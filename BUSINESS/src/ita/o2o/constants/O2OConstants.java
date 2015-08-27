@@ -30,6 +30,16 @@ public class O2OConstants {
     public static final int STATUS_HOT=5;
 
 
+    //各种状态之~订单状态
+    //新下订单  NEW_ORDER
+    //商家接收  BUSINESS_ACCEPTED
+    //正在配送  FOOD_SENT_OUT
+    //已经完成  FINISHED
+    public static final int STATUS_NEW_ORDER=10;
+    public static final int STATUS_BUSINESS_ACCEPTED=11;
+    public static final int STATUS_FOOD_SENT_OUT=12;
+    public static final int STATUS_FINISHED=13;
+
     //商家状态
     public static final int WORK_STATUS_WORKING=1;
     public static final int WORK_STATUS_CLOSE=2;

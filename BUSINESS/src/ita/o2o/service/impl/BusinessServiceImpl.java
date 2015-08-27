@@ -30,7 +30,6 @@ public class BusinessServiceImpl implements BusinessService {
         return createFlag;
     }
 
-
     @Override
     public Business getByUser(User user) {
         return businessDao.getByUser(user);
