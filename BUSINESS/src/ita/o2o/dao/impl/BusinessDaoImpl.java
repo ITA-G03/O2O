@@ -21,6 +21,7 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
         super(Business.class);
     }
 
+
     @Override
     public List<Business> getAll() {
         CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
