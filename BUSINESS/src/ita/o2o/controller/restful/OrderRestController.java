@@ -7,9 +7,7 @@ import ita.o2o.dto.FoodDto;
 import ita.o2o.dto.OrderDto;
 import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
-import ita.o2o.service.BusinessService;
-import ita.o2o.service.OrderService;
-import ita.o2o.service.RoleService;
+import ita.o2o.service.*;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.OrderServiceImpl;
 //import ita.o2o.service.impl.RoleServiceImpl;
@@ -35,6 +33,7 @@ import static org.springframework.core.GenericCollectionTypeResolver.getCollecti
 @Controller
 //@RequestMapping(produces = "application/json;charest=utf-8")
 @RequestMapping(value = "/order", produces = "application/json;charset=utf-8")
+@SessionAttributes("user")
 public class OrderRestController {
     @Autowired
     JSONMapper jsonMapper;
@@ -48,167 +47,198 @@ public class OrderRestController {
     @Autowired
     BusinessService businessService;
 
+    @Autowired
+    UserService userService;
 
-    public void GenTestData() {
-        Order o1 = new Order();
-//        o1.setOrderId(1);
-        o1.setComments("给钱上楼");
-//        o1.setAcceptTime("");
-//        status
-//        Status status = new Status();
-//        status.setStatusId(1);
-//        status.setStatusName("waiting");
-//        o1.setStatus(status);
-//        o1.setComments("只吃妹子做的");
-//        //Business
-//        Business business = new Business();
-//        business.setRealName("赵日天");
-//        //Location
-//        Location location = new Location();
-//        location.setDetail("武松岗");
-//        //city
-//        City city = new City();
-//        city.setCityName("青岛没啤酒");
-//        location.setCity(city);
-//        //Area
-//        Area area = new Area();
-//        area.setAreaName("桂林有米粉");
-//        location.setArea(area);
-//        business.setLocation(location);
-        //user
-        User user = new User();
-//        user.setLocation(location);
-        user.setNickName("天天");
-        user.setTel("820488");
-        user.setRole(roleService.getById(O2OConstants.ROLE_BUSINESS));
-        System.out.println(user.getRole().getRoleId());
-        System.out.println(user.getRole().getRoleName());
-//        business.setOwner(user);
-//        orderService.createOrder(o1);
-        System.out.println("create finish..");
-    }
+    @Autowired
+    StatusService statusService;
 
-    @ResponseBody
-    @RequestMapping(value = "/testOrderList")
-    public String testOrderList() {
-        Business business = businessService.getById(22);
-        List<Order> orderList = orderService.getCurrentUserOrderList(business);
-        return jsonMapper.writeObjectAsDataString(orderList);
-    }
-
+    /**
+     * 根据当前商家找到新订单
+     *
+     * @param user
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/new-order")
-    public String getNewOrderList() {
-        //test!!!!!!!!!!!!!!!!!!!!!!!!
-//        GenTestData();
+    public String getNewOrderList(@ModelAttribute("user") User user) {
 
+        User user1 = userService.getById(user.getUserId());
+        Business business = businessService.getByUser(user1);
+        List<Order> orderList1 = orderService.getAllNewOrderByBusiness(business);
+        for (Order order : orderList1) {
+            List<OrderItem> orderItemList = order.getOrderItemList();
+            for (OrderItem orderItem : orderItemList) {
+                Food food = orderItem.getFood();
+                food.setOwner(null);
+                orderItem.setOrder(null);
+            }
 
-        List<Order> orderList = new LinkedList<>();
-        Order o1 = new Order();
-        o1.setOrderId(1);
-        o1.setComments("给钱上楼");
-        o1.setAcceptTime("");
-        Status status = new Status();
-        status.setStatusId(1);
-        status.setStatusName("waiting");
-        o1.setStatus(status);
-        Order o2 = new Order();
-        o2.setOrderId(2);
-        o2.setStatus(status);
-        o2.setComments("只吃妹子做的");
-
-
-        List<OrderItem> orderItemList = new LinkedList<>();
-        OrderItem orderItem1 = new OrderItem();
-        orderItem1.setCount(2);
-        Food food1 = new Food();
-        food1.setFoodName("麻辣豆腐花");
-        orderItem1.setFood(food1);
-        OrderItem orderItem2 = new OrderItem();
-        Food food2 = new Food();
-        food2.setFoodName("芝麻炒西瓜");
-        orderItem2.setCount(1);
-        orderItem2.setFood(food2);
-        orderItemList.add(orderItem1);
-        orderItemList.add(orderItem2);
-        o1.setOrderItemList(orderItemList);
-        o2.setOrderItemList(orderItemList);
-
-        orderList.add(o1);
-        orderList.add(o2);
-
-        return jsonMapper.writeObjectAsDataString(orderList);
+            order.setBusiness(null);
+        }
+        return jsonMapper.writeObjectAsDataString(orderList1);
     }
 
-
+    /**
+     * 根据当前商家找到历史订单
+     *
+     * @param user
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/history-order")
-    public String getHistoryOrderList() {
-        List<Order> orderList = new LinkedList<>();
-        Order o1 = new Order();
-        o1.setOrderId(1);
-        o1.setComments("给钱上楼");
-        o1.setAcceptTime("");
-        Status status = new Status();
-        status.setStatusId(1);
-        status.setStatusName("waiting");
-        o1.setStatus(status);
-        Order o2 = new Order();
-        o2.setOrderId(2);
-        o2.setStatus(status);
-        o2.setComments("只吃妹子做的");
+    public String getHistoryOrderList(@ModelAttribute("user") User user) {
+        User user1 = userService.getById(user.getUserId());
+        Business business = businessService.getByUser(user1);
+        List<Order> orderList1 = orderService.getAllFinishedOrderByBusiness(business);
+        for (Order order : orderList1) {
+            List<OrderItem> orderItemList = order.getOrderItemList();
+            for (OrderItem orderItem : orderItemList) {
+                Food food = orderItem.getFood();
+                food.setOwner(null);
+                orderItem.setOrder(null);
+            }
 
+            order.setBusiness(null);
+        }
+        return jsonMapper.writeObjectAsDataString(orderList1);
 
-        List<OrderItem> orderItemList = new LinkedList<>();
-        OrderItem orderItem1 = new OrderItem();
-        orderItem1.setCount(2);
-        Food food1 = new Food();
-        food1.setFoodName("麻辣豆腐花");
-        orderItem1.setFood(food1);
-        OrderItem orderItem2 = new OrderItem();
-        Food food2 = new Food();
-        food2.setFoodName("芝麻炒西瓜");
-        orderItem2.setCount(1);
-        orderItem2.setFood(food2);
-        orderItemList.add(orderItem1);
-        orderItemList.add(orderItem2);
-        o1.setOrderItemList(orderItemList);
-        o2.setOrderItemList(orderItemList);
-
-        orderList.add(o1);
-        orderList.add(o2);
-
-        return jsonMapper.writeObjectAsDataString(orderList);
     }
 
+
+    /**
+     * 根据当前商家找到已经接收的订单
+     *
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/sending-order")
+    public String getAcceptedOrderList(@ModelAttribute("user") User user) {
+        User user1 = userService.getById(user.getUserId());
+        Business business = businessService.getByUser(user1);
+        List<Order> orderList1 = orderService.getAllNewAcceptedOrderByBusiness(business);
+        for (Order order : orderList1) {
+            List<OrderItem> orderItemList = order.getOrderItemList();
+            for (OrderItem orderItem : orderItemList) {
+                Food food = orderItem.getFood();
+                food.setOwner(null);
+                orderItem.setOrder(null);
+            }
+
+            order.setBusiness(null);
+        }
+        return jsonMapper.writeObjectAsDataString(orderList1);
+
+    }
+
+
+    /**
+     * 根据当前商家找到正在配送订单
+     *
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/sending-order")
+    public String getSendingOrderList(@ModelAttribute("user") User user) {
+        User user1 = userService.getById(user.getUserId());
+        Business business = businessService.getByUser(user1);
+        List<Order> orderList1 = orderService.getAllSendingOrderByBusiness(business);
+        for (Order order : orderList1) {
+            List<OrderItem> orderItemList = order.getOrderItemList();
+            for (OrderItem orderItem : orderItemList) {
+                Food food = orderItem.getFood();
+                food.setOwner(null);
+                orderItem.setOrder(null);
+            }
+
+            order.setBusiness(null);
+        }
+        return jsonMapper.writeObjectAsDataString(orderList1);
+
+    }
+
+
+    /**
+     * accept order
+     *
+     * @param orderId
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/accept")
-    public String accept(String orderId) {
-        System.out.println(orderId);
+    public String accept(Integer orderId) {
+        System.out.println("/accept orderId:" + orderId);
+        Order order = orderService.getOrderById(orderId);
+        Status status = statusService.getById(O2OConstants.STATUS_BUSINESS_ACCEPTED);
+        order.setStatus(status);
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setStatus(O2OConstants.SUCCESS);
+        if (orderService.updateOrder(order)) {
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+        } else {
+            responseMessage.setStatus(O2OConstants.FAILURE);
+        }
         return jsonMapper.writeObjectAsString(responseMessage);
     }
 
+
+    /**
+     * finsh order
+     *
+     * @param orderId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/finsh")
+    public String finish(Integer orderId) {
+        System.out.println("/finsh orderId:" + orderId);
+        Order order = orderService.getOrderById(orderId);
+        Status status = statusService.getById(O2OConstants.STATUS_FINISHED);
+        order.setStatus(status);
+        ResponseMessage responseMessage = new ResponseMessage();
+        if (orderService.updateOrder(order)) {
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+        } else {
+            responseMessage.setStatus(O2OConstants.FAILURE);
+        }
+        return jsonMapper.writeObjectAsString(responseMessage);
+    }
+
+    /**
+     * reject order
+     *
+     * @param orderId
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/reject")
-    public String reject(String orderId) {
-        System.out.println(orderId);
+    public String reject(Integer orderId) {
+        System.out.println("/reject orderId:" + orderId);
+
+        Order order = orderService.getOrderById(orderId);
+        Status status = statusService.getById(O2OConstants.STATUS_REJECTED);
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setStatus(O2OConstants.SUCCESS);
+
+        if (orderService.updateOrder(order)) {
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+        } else {
+            responseMessage.setStatus(O2OConstants.FAILURE);
+        }
+
         return jsonMapper.writeObjectAsString(responseMessage);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/cart/session", method = RequestMethod.POST, consumes="application/json")
+    @RequestMapping(value = "/cart/session", method = RequestMethod.POST, consumes = "application/json")
     public String setShoppingCartSession(@RequestBody String foods, HttpSession session) {
-        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
+        BusinessDto businessDto = (BusinessDto) session.getAttribute("currentRestaurant");
         ObjectMapper objectMapper = jsonMapper.getObjectMapper();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
-            List<FoodDto> foodList= objectMapper.readValue(foods, objectMapper.getTypeFactory().constructType(ArrayList.class, FoodDto.class));
-            Map<Integer,List<FoodDto>> sessionMap = new HashMap<>();
-            sessionMap.put(businessDto.getId(),foodList);
+            List<FoodDto> foodList = objectMapper.readValue(foods, objectMapper.getTypeFactory().constructType(ArrayList.class, FoodDto.class));
+            Map<Integer, List<FoodDto>> sessionMap = new HashMap<>();
+            sessionMap.put(businessDto.getId(), foodList);
             session.setAttribute("currentCart", sessionMap);
             responseMessage.setStatus(O2OConstants.SUCCESS);
         } catch (IOException e) {
@@ -220,34 +250,34 @@ public class OrderRestController {
     @ResponseBody
     @RequestMapping(value = "/cart/session", method = RequestMethod.GET)
     public String getShoppingCartSession(HttpSession session) {
-        Map<Integer,List<FoodDto>> sessionMap = (Map<Integer,List<FoodDto>>)session.getAttribute("currentCart");
-        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
-        if(sessionMap != null){
+        Map<Integer, List<FoodDto>> sessionMap = (Map<Integer, List<FoodDto>>) session.getAttribute("currentCart");
+        BusinessDto businessDto = (BusinessDto) session.getAttribute("currentRestaurant");
+        if (sessionMap != null) {
             businessDto.setFoodList(sessionMap.get(businessDto.getId()));
             return jsonMapper.writeObjectAsString(businessDto);
         }
-       return null;
+        return null;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes="application/json")
-    public String createNewOrder(@RequestBody String order, HttpSession session){
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = "application/json")
+    public String createNewOrder(@RequestBody String order, HttpSession session) {
         ObjectMapper objectMapper = jsonMapper.getObjectMapper();
         OrderDto orderDto = null;
         try {
-            orderDto = (OrderDto)objectMapper.readValue(order,OrderDto.class);
+            orderDto = (OrderDto) objectMapper.readValue(order, OrderDto.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Map<Integer,List<FoodDto>> sessionMap = (Map<Integer,List<FoodDto>>)session.getAttribute("currentCart");
-        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
-        User user = (User)session.getAttribute("user");
+        Map<Integer, List<FoodDto>> sessionMap = (Map<Integer, List<FoodDto>>) session.getAttribute("currentCart");
+        BusinessDto businessDto = (BusinessDto) session.getAttribute("currentRestaurant");
+        User user = (User) session.getAttribute("user");
         orderDto.setBusinessDto(businessDto);
         orderDto.setFoodDtos(sessionMap.get(businessDto.getId()));
         orderDto.setUser(user);
         int result = orderService.createOrder(orderDto);
         ResponseMessage responseMessage = new ResponseMessage();
-        if(result > 0){
+        if (result > 0) {
             responseMessage.setStatus(O2OConstants.SUCCESS);
             session.setAttribute("currentCart", null);
         } else {

@@ -58,9 +58,16 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+
     @Override
-    public int updateOrder(Order order) {
-        return 0;
+    public Order getOrderById(Integer orderId){
+        return  orderDao.getById(orderId);
+    }
+
+    @Override
+    @Transactional
+    public boolean updateOrder(Order order) {
+        return orderDao.update(order);
     }
 
     @Override
