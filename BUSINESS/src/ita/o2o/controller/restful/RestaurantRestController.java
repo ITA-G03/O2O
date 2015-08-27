@@ -50,10 +50,9 @@ public class RestaurantRestController {
 	@ResponseBody
 	@RequestMapping(value="/detail", method = RequestMethod.GET)
 	public String showDetail(HttpSession session){
-		Integer businessId = (Integer)session.getAttribute("currentRestaurant");
-		if(null != businessId){
-			BusinessDto businessDto = restaurantService.getRestaurantDetail(businessId);
-			return jsonMapper.writeObjectAsString(businessDto);
+		BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
+		if(null != businessDto){
+			return jsonMapper.writeObjectAsString(restaurantService.getRestaurantDetail(businessDto.getId()));
 		}
 		return null;
 	}
@@ -61,10 +60,12 @@ public class RestaurantRestController {
 	@ResponseBody
 	@RequestMapping(value="/list/comment", method = RequestMethod.GET)
 	public String showComment(HttpSession session){
-		Integer businessId = (Integer)session.getAttribute("currentRestaurant");
-		if(null != businessId){
-			return jsonMapper.writeObjectAsString(restaurantService.getRestaurantComment(businessId));
+		BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
+		if(null != businessDto){
+			return jsonMapper.writeObjectAsString(restaurantService.getRestaurantComment(businessDto.getId()));
 		}
 		return null;
 	}
+
+
 }

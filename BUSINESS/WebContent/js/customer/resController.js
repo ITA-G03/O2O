@@ -81,8 +81,3 @@ app.controller('pageCtrl', function ($scope, $http) {
     }
 })
 
-//$(function(){
-//   $('#orderBtn').click(function(){
-//
-//   });
-//});

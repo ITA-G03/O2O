@@ -71,11 +71,11 @@
                             <div class="res-box col-xs-3" ng-repeat="r in res" ng-show="r.show"
                                  popover-popup-delay="0" popover-trigger="mouseenter" popover-placement="right"
                                  popover-template="resPopoverTpl" popover-append-to-body="true">
-                                <a href="/restaurant/{{r.id}}" class="thumbnail">
-                                    <img ng-src="{{r.img}}">
+                        <a href="/restaurant/{{r.id}}/{{r.name}}" class="thumbnail">
+                            <img ng-src="/image/view/{{r.logoId}}">
                                 </a>
 
-                                <h4><a href="/restaurant">{{r.name}}</a></h4>
+                        <h4><a href="/restaurant/{{r.id}}/{{r.name}}">{{r.name}}</a></h4>
 
                                 <div class="row">
                                     <div class="col-xs-6">

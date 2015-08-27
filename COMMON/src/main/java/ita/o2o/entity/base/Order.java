@@ -3,6 +3,7 @@ package ita.o2o.entity.base;
 import ita.o2o.entity.extra.Status;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +27,13 @@ public class Order {
 
 
     @OneToOne
-    @JoinColumn(name="BUSINESSS_ID")
+    @JoinColumn(name="BUSINESS_ID")
     private Business business;
 
 
-    @OneToMany
-    @JoinColumn
-    private List<OrderItem> orderItemList;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name="ORDER_ID",referencedColumnName ="ORDER_ID" )
+    private List<OrderItem> orderItemList=new ArrayList<>();
 
 
     @OneToOne

@@ -33,7 +33,7 @@ public class Business {
     @JoinColumn(name = "USER_ID")
     private User owner;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<BusinessTag> businessTags;
 
     @OneToOne
@@ -41,7 +41,7 @@ public class Business {
     private WorkStatus workStatus;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "LOCATION_ID")
     private Location location;
 
@@ -64,6 +64,7 @@ public class Business {
     @Basic
     @Column(name="SEND_PRICE")
     private String sendPrice;
+
 
     public int getBusinessId() {
         return businessId;

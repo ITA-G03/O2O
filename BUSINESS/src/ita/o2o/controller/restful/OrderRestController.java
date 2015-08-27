@@ -4,9 +4,12 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType;
 import ita.o2o.constants.O2OConstants;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.dto.FoodDto;
+import ita.o2o.dto.OrderDto;
 import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.service.BusinessService;
+import ita.o2o.service.OrderService;
+import ita.o2o.service.RoleService;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.OrderServiceImpl;
 //import ita.o2o.service.impl.RoleServiceImpl;
@@ -39,13 +42,13 @@ public class OrderRestController {
     JSONMapper jsonMapper;
 
     @Autowired
-    OrderServiceImpl orderService;
+    OrderService orderService;
 
     @Autowired
-    RoleServiceImpl roleService;
+    RoleService roleService;
 
     @Autowired
-    BusinessServiceImpl businessService;
+    BusinessService businessService;
 
 
     public void GenTestData() {
@@ -83,7 +86,7 @@ public class OrderRestController {
         System.out.println(user.getRole().getRoleId());
         System.out.println(user.getRole().getRoleName());
 //        business.setOwner(user);
-        orderService.createOrder(o1);
+//        orderService.createOrder(o1);
         System.out.println("create finish..");
     }
 
@@ -218,13 +221,34 @@ public class OrderRestController {
     @RequestMapping(value = "/cart/session", method = RequestMethod.GET)
     public String getShoppingCartSession(HttpSession session) {
         List<FoodDto> foods = (List<FoodDto>)session.getAttribute("currentCart");
-        int businessId = (int)session.getAttribute("currentRestaurant");
-        BusinessDto businessDto = new BusinessDto();
-        businessDto.setId(businessId);
+        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
         businessDto.setFoodList(foods);
-        //add business name in session
         return jsonMapper.writeObjectAsString(businessDto);
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes="application/json")
+    public String createNewOrder(@RequestBody String order, HttpSession session){
+        ObjectMapper objectMapper = jsonMapper.getObjectMapper();
+        OrderDto orderDto = null;
+        try {
+            orderDto = (OrderDto)objectMapper.readValue(order,OrderDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<FoodDto> foods = (List<FoodDto>)session.getAttribute("currentCart");
+        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
+        User user = (User)session.getAttribute("user");
+        orderDto.setBusinessDto(businessDto);
+        orderDto.setFoodDtos(foods);
+        orderDto.setUser(user);
+        int result = orderService.createOrder(orderDto);
+        ResponseMessage responseMessage = new ResponseMessage();
+        if(result > 0){
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+        } else {
+            responseMessage.setStatus(O2OConstants.FAILURE);
+        }
+        return jsonMapper.writeObjectAsString(responseMessage);
+    }
 }
