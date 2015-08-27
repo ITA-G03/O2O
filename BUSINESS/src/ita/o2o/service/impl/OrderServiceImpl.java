@@ -1,8 +1,10 @@
 package ita.o2o.service.impl;
 
 import ita.o2o.dao.impl.OderDaoImpl;
+import ita.o2o.dao.impl.UserDaoImpl;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.Order;
+import ita.o2o.entity.base.User;
 import ita.o2o.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OderDaoImpl orderDao;
 
+    @Autowired
+    UserDaoImpl userDao;
+
     @Override
     @Transactional
     public int createOrder(Order order) {
@@ -29,12 +34,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getCurrentUserOrderList(Business business) {
-        return orderDao.getById(business);
+        return orderDao.getByBusiness(business);
     }
 
     @Override
     public int updateOrder(Order order) {
         return 0;
+    }
+
+    @Override
+    public List<Order> getAllByCustomerId(int userId) {
+        User customer=userDao.getById(userId);
+        return orderDao.getByCustomer(customer);
     }
 
 }

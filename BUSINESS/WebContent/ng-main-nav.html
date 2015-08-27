@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3">
-                <a href="/main"><img src="images/tomcat.png" class="logo">
+                <a href="/main"><img src="/images/tomcat.png" class="logo">
                 </a>
             </div>
             <div class="col-xs-3">
@@ -28,12 +28,28 @@
             </div>
             <div class="col-xs-5 col-xs-offset-1">
                 <div class="input-group" ng-controller="SearchRestaurantCtrl">
-                    <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchArea">
+                    <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchRes"
+                           typeahead="res as res.name for res in getRes()" typeahead-template-url="customTemplate.html" typeahead-min-length="2">
                         <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button" id="searchBtn" ng-click="searchRest()">搜索</button>
+                            <button class="btn btn-danger" type="button" id="searchBtn" ng-click="searchRest()">搜索
+                            </button>
                         </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <div style="width: 390px;">
+            <span style="width: 250px;display: inline-block">{{match.model.name}}</span>
+            <span style="width: 140px;text-align: right;display: inline-block">
+                <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=1]"></i>
+                <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=2]"></i>
+                <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=3]"></i>
+                <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=4]"></i>
+                <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=5]"></i>
+            </span>
+        </div>
+    </a>
+</script>

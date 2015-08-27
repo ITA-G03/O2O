@@ -4,6 +4,7 @@ import ita.o2o.constants.O2OConstants;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.entity.base.Food;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by YUKE on 8/25/2015.
  */
 
-@Component("foodDao")
+@Repository("foodDao")
 public class FoodDaoImpl extends BaseDaoImpl<Food> {
 
 

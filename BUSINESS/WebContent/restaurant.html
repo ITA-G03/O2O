@@ -20,10 +20,10 @@
 <body ng-app="o2o" ng-controller="pageCtrl">
 <div ng-include="'/parts/main/nav'"></div>
 <div class="container">
-    <div class="row res-info" ng-model="detail">
+    <div class="row res-info">
         <div class="col-xs-12">
             <div class="res-logo">
-                <img src="">{{detail.logoId}}
+                <img ng-src="{{detail.logoId}}">
             </div>
             <div class="res-detail">
                 <h3>{{detail.name}}</h3>
