@@ -1,17 +1,21 @@
 <!--for test-->
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 
-<!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!--&lt;!&ndash; ???Bootstrap???????????? &ndash;&gt;-->
+<!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
 
-<!-- jQuery??????bootstrap.min.js ???? -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<!--&lt;!&ndash; jQuery??????bootstrap.min.js ???? &ndash;&gt;-->
+<!--<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
 
-<!-- ??? Bootstrap ?? JavaScript ?? -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="/js/ajaxform/jquery.form.min.js"></script>
+<!--&lt;!&ndash; ??? Bootstrap ?? JavaScript ?? &ndash;&gt;-->
+<!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+
+<!--jquery ajax form-->
+<script type="text/javascript" src="/js/ajaxform/jquery.form.min.js"></script>
 <!--part of change info ,be fethed by jQuery-->
-<script type="application/javascript">
+
+<script
+        type="application/javascript">
     $(document).ready(function () {
         console.log("complete...");//only once
         $('#myModal').on('show.bs.modal', function () {
@@ -27,19 +31,45 @@
                 console.log(json);
                 console.log(json.toString());
                 $("input[name='signboard']").val(json.realName);
-                //$(img[name='logo'])
-                //$(img[name='license'])
                 $("input[name='detail']").val(json.location.detail);
 
             });
         };
         //for test
         getBusinessInfo();
+        var options = {
+            url: "/business/register-as-business",
+//            target: '#output1',   // target element(s) to be updated with server response
+            beforeSubmit: showRequest,  // pre-submit callback
+            success: showResponse  // post-submit callback
+            // other available options:
+            //url:       url         // override for form's 'action' attribute
+            //type:      type        // 'get' or 'post', override for form's 'method' attribute
+            //dataType:  null        // 'xml', 'script', or 'json' (expected server response type)
+            //clearForm: true        // clear all form fields after successful submit
+            //resetForm: true        // reset the form after successful submit
+
+            // $.ajax options can be used here too, for example:
+            //timeout:   3000
+        };
+
+        function showResponse(responseText, statusText, xhr, $form) {
+            console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText +
+                    '\n\nThe output div should have already been updated with the responseText.');
+        }
+
+        function showRequest(formData, jqForm, options) {
+            var queryString = $.param(formData);
+//            var
+//            formData.add()
+            console.log('About to submit: \n\n' + queryString);
+            alert("Thanks for you commit");
+            return true;
+        }
 
         // ?options??ajaxForm
-        $('#profile').ajaxForm(function () {
-            alert('Thanks for your comment!');
-        })
+        $('#profile').ajaxForm(options);
+
     });
 </script>
 
@@ -48,7 +78,7 @@
     </button>
     <h4 class="modal-title">Business info</h4>
 </div>
-<form id="profile" class="register-form" action="/business/change" method="post" enctype="multipart/form-data">
+<form id="profile" class="register-form" action="/business/register" method="post">
 
     <div class="modal-body">
         <!-- Location -->
@@ -59,43 +89,40 @@
                 <input type="text" name="signboard" class="form-control" required/>
             </div>
 
-            <!--logo-->
-            <label>logo</label>
-
-            <div class="row center-block">
-                <div class="center-block">
-                    <a href="#" class="thumbnail">
-                        <img name="logo" class="center-block img-responsive" src="/images/img.png"/>
-                    </a>
-                </div>
-                <input id="license" type="file" name="license" class="form-control" required
-                       placeholder="???:????????"
+            <!--ID Card-->
+            <div class="form-group col-xs-12">
+                <label>ID Card</label>
+                <input name="idCardId" id="idCardId" hidden>
+                <img id="idCardImage" class="hidden img-thumbnail"/>
+                <input id="idCard" type="file" name="idCard" class="form-control" pattern="^[0-9]{5}[0-9xX]{1}$"
+                       placeholder="身份证:请上传图片"
                         />
-                <p id="validateLicenseMessage" class="hidden"></p>
+
+                <p id="validateIdCardMessage" class="hidden"></p>
             </div>
 
             <!--license-->
-            <label>license</label>
+            <div class="form-group col-xs-12">
+                <label>License</label>
+                <input name="licenseId" id="licenseId" hidden/>
+                <img id="licenseImage" class="hidden img-thumbnail img-thumbnail"/>
+                <input id="license" type="file" name="license" class="form-control"
+                       placeholder="许可证:请上传许可证照片"/>
 
-            <div class="row center-block">
-                <div class="center-block">
-                    <a href="#" class="thumbnail">
-                        <img name="license" class="center-block img-responsive" src="/images/img.png"/>
-                    </a>
-                </div>
+                <p id="validateLicenseMessage" class="hidden"></p>
             </div>
             <!--tags-->
 
             <!--comments-->
             <label>comments</label>
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea name="comments" class="form-control" rows="3"></textarea>
             </br>
             <!--Location-->
             <label>Location</label>
             <br>
             <!--City-->
             <div class="btn-group">
-                <select class="form-control" name="City">
+                <select class="form-control" name="city">
                     <option>Action</option>
                     <option>Another action</option>
                     <option>Something else here</option>
@@ -104,7 +131,7 @@
             <!--Area-->
             <div class="btn-group">
 
-                <select class="form-control" name="Area">
+                <select class="form-control" name="area">
                     <option>Action</option>
                     <option>Another action</option>
                     <option>Something else here</option>
@@ -113,9 +140,7 @@
             <br><br>
             <!--Location Detail-->
             <label>Location Detail</label>
-            <input type="text" name="detail" class="form-control" required/>
-            <!--<button type="submit" hidden></button>-->
-
+            <input type="text" name="detail" class="form-control"/>
         </div>
 
     </div>
@@ -123,4 +148,9 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button id="save" type="submit" class="btn btn-primary">Save changes</button>
     </div>
+    <!--fileupload-->
+    <script type="text/javascript" src="/bower/jquery-fileupload/jquery-ajax-fileupload.js"></script>
+
+    <!--图片上传-->
+    <script type="text/javascript" src="/js/register/register.js"></script>
 </form>

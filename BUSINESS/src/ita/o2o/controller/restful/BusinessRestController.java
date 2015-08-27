@@ -24,22 +24,7 @@ public class BusinessRestController {
     @Autowired
     JSONMapper jsonMapper;
 
-    /**
-     * 改变对应商家的信息
-     *
-     * @param
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/change")
-    public void changeBusinessInfo(@RequestParam("signboard") String name, @RequestParam("license") MultipartFile file
-    ) {
-        /*logger.info("filesize: " + file.getSize());
-        logger.info("OriginalFilename: " + file.getOriginalFilename());
-        logger.info("Name:" + file.getName());*/
-//        System.out.println(business);
-        return;
-    }
+
 
 
     /**
@@ -50,7 +35,7 @@ public class BusinessRestController {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/setting/profile")
-    public Business getCurrentBusinessInfo() {
+    public String getCurrentBusinessInfo() {
 //        System.out.printf(businessId.toString());
 //        System.out.printf(businessId.toString());
         Business business = new Business();
@@ -76,7 +61,7 @@ public class BusinessRestController {
         //comments
 //        business.set`
         business.setStatus(status);
-        return business;
+        return jsonMapper.writeObjectAsString(business);
     }
 
 
