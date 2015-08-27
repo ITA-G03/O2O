@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public int createOrder(OrderDto orderDto) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Order order = new Order();
         order.setAcceptTime(sdf.format(new Date()));
 
@@ -50,6 +50,8 @@ public class OrderServiceImpl implements OrderService {
         Status status = new Status();
         status.setStatusId(O2OConstants.BUSINESS_STATUS_PENDING);
         order.setStatus(status);
+        order.setComments(orderDto.getRemark());
+        order.setAddress(orderDto.getCustomerAddr());
         int result = orderDao.create(order);
         if(result > 0){
             JmsProducer jmsProducer = new JmsProducer();
