@@ -113,7 +113,7 @@ public class OrderRestController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/sending-order")
+    @RequestMapping(value = "/accepted-order")
     public String getAcceptedOrderList(@ModelAttribute("user") User user) {
         User user1 = userService.getById(user.getUserId());
         Business business = businessService.getByUser(user1);
