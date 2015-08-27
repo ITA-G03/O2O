@@ -63,18 +63,21 @@ app.controller('userCtrl', function ($scope, $http, $cookieStore) {
                 locations.push(data);
             }
             $cookieStore.put('locations', locations);
-            console.log($cookieStore.get('locations'));
         }
     })
 });
 
-app.controller('SearchRestaurantCtrl',function($scope, $http){
-    $scope.searchRest = function(){
-        var searchRest = $scope.searchArea;
-        console.info(searchRest);
-        $http.get('/rest/restaurant/list/'+searchRest).success(function (data) {
-            console.info(data);
-        })
+app.controller('SearchRestaurantCtrl', function ($scope, $http) {
+    $scope.getRes = function () {
+        return $http.get('/rest/restaurant/list/' + $scope.searchRes).then(function (response) {
+            return response.data.map(function (item) {
+                return item;
+            });
+        });
+    };
+
+    $scope.onSelectRes = function ($item, $model, $label) {
+        location.href = '/restaurant/' + $item.id;
     }
 });
 

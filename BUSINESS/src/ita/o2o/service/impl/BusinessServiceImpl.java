@@ -2,11 +2,14 @@ package ita.o2o.service.impl;
 
 
 import ita.o2o.dao.impl.BusinessDaoImpl;
+import ita.o2o.dao.impl.UserDaoImpl;
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.User;
 import ita.o2o.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -18,6 +21,7 @@ public class BusinessServiceImpl implements BusinessService {
     BusinessDaoImpl businessDao;
 
     @Override
+    @Transactional
     public int createBusiness(Business business) {
         int createFlag = businessDao.create(business);
         System.out.println("Service Create Flag:" + createFlag);
@@ -26,8 +30,13 @@ public class BusinessServiceImpl implements BusinessService {
         return createFlag;
     }
 
+    @Override
+    public Business getByUser(User user) {
+        return businessDao.getByUser(user);
+    }
 
     @Override
+    @Transactional
     public boolean updateBusiness(Business business) {
         return businessDao.update(business);
     }

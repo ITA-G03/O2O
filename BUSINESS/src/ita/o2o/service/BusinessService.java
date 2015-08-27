@@ -1,6 +1,7 @@
 package ita.o2o.service;
 
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.User;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public interface BusinessService {
     int createBusiness(Business business);
 
+    Business getByUser(User user);
 //    boolean deleteBusiness(Business business);
 
     boolean updateBusiness(Business business);

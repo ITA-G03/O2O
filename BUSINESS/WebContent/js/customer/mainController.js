@@ -39,6 +39,8 @@ app.controller('pageCtrl', function ($scope, $http) {
         $scope.res = data;
         $scope.changeResType($scope.selectedResType);
     });
+
+    $scope.resPopoverTpl = "resPopoverTemplate.html";
 })
 
 app.controller('carouselCtrl', function ($scope) {

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
+ * 被废弃的Tag 好垃圾啊 设计错误啦 对不齐
  * @author Aquariuslt
  * @version 15-08-22
  */
