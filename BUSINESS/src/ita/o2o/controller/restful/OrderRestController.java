@@ -190,11 +190,34 @@ public class OrderRestController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/finsh")
+    @RequestMapping(value = "/finish")
     public String finish(Integer orderId) {
-        System.out.println("/finsh orderId:" + orderId);
+        System.out.println("/finish orderId:" + orderId);
         Order order = orderService.getOrderById(orderId);
         Status status = statusService.getById(O2OConstants.STATUS_FINISHED);
+        order.setStatus(status);
+        ResponseMessage responseMessage = new ResponseMessage();
+        if (orderService.updateOrder(order)) {
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+        } else {
+            responseMessage.setStatus(O2OConstants.FAILURE);
+        }
+        return jsonMapper.writeObjectAsString(responseMessage);
+    }
+
+
+    /**
+     * send order
+     *
+     * @param orderId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/send")
+    public String send(Integer orderId) {
+        System.out.println("/send orderId:" + orderId);
+        Order order = orderService.getOrderById(orderId);
+        Status status = statusService.getById(O2OConstants.STATUS_FOOD_SENT_OUT);
         order.setStatus(status);
         ResponseMessage responseMessage = new ResponseMessage();
         if (orderService.updateOrder(order)) {
