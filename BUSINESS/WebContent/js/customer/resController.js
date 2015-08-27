@@ -12,12 +12,17 @@ app.controller('pageCtrl', function ($scope, $http) {
     }
 
     $scope.order = function () {
+        $.ajax({
+            url:'/order/cart/session',
+            type:'post',
+            data: JSON.stringify($scope.cart),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data){
+               if(data.status == "success")
+                window.location.href = '/order';
+            }
 
-        console.info($scope.cart);
-        $http.post('/order/cart/session',$scope.cart,{
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }}).success(function (data) {
-            location.href = '/order';
         });
     }
 

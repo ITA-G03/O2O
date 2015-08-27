@@ -22,6 +22,12 @@ public class UserServiceImpl implements UserService {
         return userDao.findByTel(tel);
     }
 
+
+    @Override
+    public User getById(Integer id){
+        return  userDao.getById(id);
+    }
+
     @Override
     public int login(String tel, String encryptedPassword) {
         User user=userDao.findByTel(tel);

@@ -10,6 +10,7 @@ public interface UserService {
     User findByTel(String tel);
 
 
+    User getById(Integer id);
 
     int login(String tel,String encryptedPassword);
 }
