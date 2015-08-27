@@ -16,10 +16,9 @@ import javax.persistence.PersistenceContext;
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 
-    private Class<T> rootType = (Class<T>) EntityUtils.getEntityClass(this.getClass());
+	private Class<T> rootType = (Class<T>) EntityUtils.getEntityClass(this.getClass());
 
-    @PersistenceContext
-    private EntityManager manager;
+    
 
     public BaseDaoImpl() {
     }
@@ -29,53 +28,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         this.rootType = rootType;
     }
 
-    @Override
-    public <T> T getById(Class<T> c, int id) {
-        return manager.find(c, id);
-    }
-
-    @Override
-    public T getById(int id) {
-        return manager.find(rootType,id);
-    }
-
-    @Override
-    public <T> T getByName(String name) {
-        return null;
-    }
-
-
-    @Override
-    public <T> boolean update(T t) {
-        try {
-            manager.merge(t);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public <T> boolean delete(T t) {
-        try {
-            manager.remove(t);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
 
 
-
-
-    public EntityManager getManager() {
-        return manager;
-    }
-
-    public void setManager(EntityManager manager) {
-        this.manager = manager;
-    }
 }

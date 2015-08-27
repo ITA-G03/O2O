@@ -10,12 +10,14 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import ita.o2o.dao.ConfigDao;
 
 import org.springframework.stereotype.Repository;
 
 @Repository("configDao")
+
 public class ConfigDaoImpl implements ConfigDao {
 	@PersistenceContext
 	private EntityManager em;
@@ -43,14 +45,14 @@ public class ConfigDaoImpl implements ConfigDao {
 
 	}
 
-	@Override
+	@Transactional
 	public boolean update(Configuration config) {
 
 		Configuration c = em.find(Configuration.class, config.getId());
 		c.setValue(config.getValue());
-
 		try {
-			em.merge(c);
+			em.persist(c);
+//			em.merge(c);
 			return true;
 		} catch (Exception e) {
 

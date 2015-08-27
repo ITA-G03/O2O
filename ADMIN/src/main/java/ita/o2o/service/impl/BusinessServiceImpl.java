@@ -1,15 +1,14 @@
 package ita.o2o.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import ita.o2o.constants.O2OConstants;
 import ita.o2o.dao.impl.BusinessDaoImpl;
 import ita.o2o.dao.impl.StatusDaoImpl;
 import ita.o2o.entity.base.Business;
 import ita.o2o.service.BusinessService;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service("businessService")
 public class BusinessServiceImpl implements BusinessService {
@@ -28,9 +27,10 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public boolean acceptBusiness(Business business) {
-		business.setStatus(statusDao.getById(O2OConstants.STATUS_ACCEPTED));
-		boolean flag=businessDao.update(business);
-		return flag;
+//		business.setStatus(statusDao.getById(O2OConstants.STATUS_ACCEPTED));
+//		boolean flag=businessDao.update(business);
+//		return flag;
+		return true;
 	}
 	
 
