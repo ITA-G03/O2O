@@ -63,5 +63,18 @@ public class FoodTypeImpl extends BaseDaoImpl<FoodType> {
 		if(foodType==null) return null;
         return foodType;
 	}
+	
+	public boolean findById(int foodTypeId) {
+		String hql="select count(*) from Food f where f.foodType.foodTypeId=:foodTypeId";
+		Query q = this.getManager().createQuery(hql);
+		q.setParameter("foodTypeId",foodTypeId);
+		Object o = q.getSingleResult();
+		long number = (long)o;
+		if(number>0) {
+			return true;
+		}else
+			return false;
+		
+	}
 
 }

@@ -36,17 +36,9 @@ public class FoodController extends BaseController{
 	@RequestMapping(value="business/food/list",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
 	public List<Food> getFoods(Model model) {
 		List<Food> foods = null;
-		
-		foods = new ArrayList<Food>();
-		Food f1 = new Food();
-		f1.setFoodId(2);
-		f1.setFoodName("main");
-		f1.setFoodPictureId(1223);
-		f1.setPrice(12);
-		foods.add(f1);
-		
+		foods = foodService.getByBusinessId(22);
+		//System.out.println(foods.size());
 		model.addAttribute("foods",foods);
-		
 		return foods;
 		
 	}
@@ -68,16 +60,7 @@ public class FoodController extends BaseController{
 		
 	}
 	
-	//更新某个食品
-	@ResponseBody
-	@RequestMapping(value="/business/food/update",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
-	public String updateFood(@PathVariable int businessId,@PathVariable int foodId,Food food,Model model) {
-		
-		model.addAttribute("food",food);
-		
-		return "update";
-		
-	}
+	
 	
 	//列出所有的食物类型
 	@ResponseBody

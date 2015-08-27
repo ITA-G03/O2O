@@ -11,7 +11,7 @@
         }
 
     </style>
-     <script src="../js/bower/jquery-2.1.4.min.js"></script>
+    
      <script src="../js/bower/jquery-1.11.3.js"></script>
      <script src="../js/food/getFoodType.js"></script> 
   
@@ -28,7 +28,7 @@
                 </button>
                 <a class="navbar-brand" href="../business/index">SMS</a>
             </div>
-            <div class="collapse navbar-collapse" id="main-nav">
+           <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
                 <li >
                     <a href="../food/addfood" role="button">Food </a>
@@ -37,7 +37,7 @@
                 <!-- <li><a href="package.html">Package</a></li>-->
                 <!-- 订单管理-->
                 <li>
-                    <a href="order" role="button">Order</a>
+                    <a href="../business/order" role="button">Order</a>
                 </li>
                 
                 <li>
@@ -47,7 +47,7 @@
 								class="caret"></span></a>
 								<ul class="dropdown-menu">
                             <li id="foodType"><button type="button" name="addFood"class="btn btn-success btn-xs" data-toggle='modal' data-target='#myModal'>New</button>&nbsp&nbsp
-                            <button data-toggle='modal' data-target='#myModal2' type="button" name="delete" class="btn btn-danger btn-xs">Delete</button></li>
+                            <button  type="button" name="delete" class="btn btn-danger btn-xs">Delete</button></li>
                         </ul>
                 </li>
             </ul>
@@ -73,28 +73,34 @@
                     <li class="active">New food</li>
                 </ol>
 
-                <form action="../action/food/create" method="post" class="center-block" style="max-width: 500px" enctype="multipart/form-data">
+                <form action="../action/food/create" method="post" class="center-block" style="max-width: 500px">
                     <h1 class="page-header">New food</h1>
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control" required />
+                        <input type="text" id="foodName" name="name" class="form-control" required />
                     </div>
                     <div class="form-group">
                         <label>Price</label>
-                        <input type="number" name="price" class="form-control" required />
+                        <input type="number" id="price"name="price" class="form-control" required />
                     </div>
                     <div class="form-group">
                         <label>Type</label>
                         <select class="form-control" name="type" id="type" required>
-                           
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-xs-12" >
                         <label>Picture</label>
-                        <input type="file" name="picture" class="form-control" required />
+                         <img id="foodImage" class="hidden img-thumbnail" />
+                        <input type="file" id="foodPicture" name="picture" class="form-control" required />
+                        <p id="validatePictureMessage" class="hidden" ></p>
                     </div>
                     <br />
-                    <button type="submit" class="btn btn-block btn-primary">Save</button>
+                    <input id="pictureId" type="hidden" />
+                    <span id="errorMessage" class="text-danger"></span>
+                    <button type="button" id="saveButton" class="btn btn-block btn-primary">Save</button><br/>
+                    <div class="text-left">
+                    <i id="registerSpinner" class="fa fa-spinner fa-pulse hidden"></i>
+                </div>
                 </form>
             </div>
         </div>
@@ -154,9 +160,9 @@
   </div>
 </div>
 </div>
-        
-    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+         
+<script type="text/javascript" src="../js/bower/jquery-ajax-fileupload.js"></script>
+<script type="text/javascript" src="../js/food/foodImage.js"></script>
 </body>
 
 </html>
