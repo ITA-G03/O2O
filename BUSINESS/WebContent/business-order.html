@@ -53,7 +53,7 @@
                         "data": "comments",
                         "orderable": false,
                         render: function () {
-                            var action = '<button style="margin-right: 10px" type="button" data-loading-text="Loading..." class="btn btn-primary new swap" autocomplete="off">Accept</button>' +
+                            var action = '<button style="margin-right: 10px" type="button" data-loading-text="Loading..." class="btn btn-primary accept" autocomplete="off">Accept</button>' +
                                     '<button type="button" class="btn btn-warning reject ">Reject</button>';
                             return action;
                         }
@@ -62,15 +62,15 @@
             });
 
             //init
+            var flag = "new";
             $("button[class*=swap]").addClass("new");
 
             //swap to history
             $("#history").on("click", function () {
                 table.ajax.url("/order/history-order").load();
                 table.columns(5).visible(false);
-                removeNew();
-                removeAccepted();
-                removeSending();
+                flag = "history";
+                console.log(flag);
             });
 
             //remove
@@ -90,31 +90,41 @@
             $("#new").on("click", function () {
                 table.ajax.url("/order/new-order").load();
                 table.columns(5).visible(true);
+
+                flag = "new";
+                console.log(flag);
                 $("button[class*=swap]").val("accpet");
                 $("button[class*=swap]").addClass("new");
-                removeAccepted();
-                removeSending();
             });
 
             //swap to accpeted order
-            $("accepted").on("click", function () {
+            $("#accepted").on("click", function () {
                 table.ajax.url("/order/new-order").load();
                 table.columns(5).visible(true);
+                //hide
+                var rejectBtn = $("button.reject");
+                if (rejectBtn) {
+                    rejectBtn.hide();
+                }
+                flag = "accpeted";
+                console.log(flag);
                 $("button[class*=swap]").val("send");
-                $("button[class*=swap]").addClass("accepted");
-                removeSending();
-                removeNew();
+
             });
 
             //swap to sending order
-            $("sending").on("click", function () {
+            $("#sending").on("click", function () {
                 table.ajax.url("/order/new-order").load();
                 table.columns(5).visible(true);
                 table.columns(5).visible(true);
+                //hide
+                var rejectBtn = $("button.reject");
+                if (rejectBtn) {
+                    rejectBtn.hide();
+                }
+                flag = "sending";
+                console.log(flag);
                 $("button[class*=swap]").val("finish");
-                $("button[class*=swap]").addClass("sending");
-                removeAccepted();
-                removeNew();
             });
 
             //tr mouseover
@@ -146,8 +156,6 @@
                 });
                 context += '</tbody></table>';
                 trElement.attr("data-content", "" + context);
-
-
                 //init popover
                 $('[data-toggle="popover"]').popover();
                 //show
@@ -162,7 +170,7 @@
             });
 
             //accept
-            $('#table_id').delegate('button.new', 'click', function () {
+            $('#table_id').delegate('button.accept', 'click', function () {
                 //loading
                 var $btn = $(this).button('loading');
                 //row - data
