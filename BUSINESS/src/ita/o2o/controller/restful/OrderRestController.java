@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.springframework.core.GenericCollectionTypeResolver.getCollectionType;
 
@@ -204,12 +202,14 @@ public class OrderRestController {
     @ResponseBody
     @RequestMapping(value = "/cart/session", method = RequestMethod.POST, consumes="application/json")
     public String setShoppingCartSession(@RequestBody String foods, HttpSession session) {
-        System.out.println(foods);
+        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
         ObjectMapper objectMapper = jsonMapper.getObjectMapper();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
             List<FoodDto> foodList= objectMapper.readValue(foods, objectMapper.getTypeFactory().constructType(ArrayList.class, FoodDto.class));
-            session.setAttribute("currentCart", foodList);
+            Map<Integer,List<FoodDto>> sessionMap = new HashMap<>();
+            sessionMap.put(businessDto.getId(),foodList);
+            session.setAttribute("currentCart", sessionMap);
             responseMessage.setStatus(O2OConstants.SUCCESS);
         } catch (IOException e) {
             responseMessage.setStatus(O2OConstants.FAILURE);
@@ -220,10 +220,13 @@ public class OrderRestController {
     @ResponseBody
     @RequestMapping(value = "/cart/session", method = RequestMethod.GET)
     public String getShoppingCartSession(HttpSession session) {
-        List<FoodDto> foods = (List<FoodDto>)session.getAttribute("currentCart");
+        Map<Integer,List<FoodDto>> sessionMap = (Map<Integer,List<FoodDto>>)session.getAttribute("currentCart");
         BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
-        businessDto.setFoodList(foods);
-        return jsonMapper.writeObjectAsString(businessDto);
+        if(sessionMap != null){
+            businessDto.setFoodList(sessionMap.get(businessDto.getId()));
+            return jsonMapper.writeObjectAsString(businessDto);
+        }
+       return null;
     }
 
     @ResponseBody
@@ -236,11 +239,11 @@ public class OrderRestController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<FoodDto> foods = (List<FoodDto>)session.getAttribute("currentCart");
+        Map<Integer,List<FoodDto>> sessionMap = (Map<Integer,List<FoodDto>>)session.getAttribute("currentCart");
         BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
         User user = (User)session.getAttribute("user");
         orderDto.setBusinessDto(businessDto);
-        orderDto.setFoodDtos(foods);
+        orderDto.setFoodDtos(sessionMap.get(businessDto.getId()));
         orderDto.setUser(user);
         int result = orderService.createOrder(orderDto);
         ResponseMessage responseMessage = new ResponseMessage();

@@ -19,7 +19,7 @@ app.controller('pageCtrl', function ($scope, $http) {
     $http.get('/order/cart/session').success(function (data) {
         $scope.orders = data.foodList;
         $scope.restaurant = data;
-        var sum;
+        var sum = 0;
         for (var i = 0; i < $scope.orders.length; i++) {
             sum += ($scope.orders[i].price * $scope.orders[i].num);
         }
