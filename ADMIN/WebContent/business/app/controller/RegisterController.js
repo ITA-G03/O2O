@@ -33,9 +33,28 @@ Ext.define('MyApp.controller.RegisterController', {
 			'#system':{
 				click:this.system
 			},
+			'#update':{
+				click:this.update
+			}
         });
     },
-
+    update:function(){
+    	var searchResultGrid = Ext.getCmp('searchResultGrid');
+		var selectedRows = searchResultGrid.getSelectionModel().getSelection();
+		if(selectedRows.length!=0){
+			var model=selectedRows[0].data;
+			var businessId=model.businessId;
+			Ext.Ajax.request({
+				url:'/updateAcceptBusiness',
+				params:{
+					businessId:businessId
+				},
+				success:function(response){
+					Ext.getCmp('searchResultGrid').getStore().load();
+				}
+			});
+		}
+    },
 	returnHome:function(){
 		window.location.href='/home/index.html';
 	},

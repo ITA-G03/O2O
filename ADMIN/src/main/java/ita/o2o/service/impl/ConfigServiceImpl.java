@@ -3,8 +3,12 @@ package ita.o2o.service.impl;
 import java.util.List;
 
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ita.o2o.dao.impl.ConfigDaoImpl;
 import ita.o2o.entity.admin.Configuration;
@@ -22,10 +26,12 @@ public class ConfigServiceImpl implements ConfigService {
 		return null;
 	}
 
+	@Override
+	@Transactional
 	public boolean update(Configuration config) {
-		int id=configDao.getIdByName(config.getName());
-		config.setId(id);
-		boolean flag=configDao.update(config);
+		Configuration dbConfig=configDao.getIdByName(config.getName());
+		dbConfig.setValue(config.getValue());
+		boolean flag=configDao.update(dbConfig);
 		return flag;
 		
 	}

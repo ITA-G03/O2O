@@ -10,6 +10,23 @@
     	http://www.springframework.org/schema/context
     	http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byName">
 
-<context:component-scan base-package="ita.o2o.dao.impl,ita.o2o.service.impl,ita.o2o.controller.*"/>
+
+ <mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="ita.o2o.controller"></context:component-scan>
+	<!-- 设置资源的可访问性 -->
+
+	<mvc:resources location="/" mapping="/*.js"></mvc:resources>
+	<mvc:resources location="/" mapping="/*.css"></mvc:resources>
+		
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"><!--将逻辑视图转化为物理视图 -->
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
 	
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
 </beans>

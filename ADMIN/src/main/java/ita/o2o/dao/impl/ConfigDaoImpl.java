@@ -17,7 +17,6 @@ import ita.o2o.dao.ConfigDao;
 import org.springframework.stereotype.Repository;
 
 @Repository("configDao")
-
 public class ConfigDaoImpl implements ConfigDao {
 	@PersistenceContext
 	private EntityManager em;
@@ -32,7 +31,7 @@ public class ConfigDaoImpl implements ConfigDao {
 	}
 
 	@Override
-	public int getIdByName(String name) {
+	public Configuration getIdByName(String name) {
 
 		CriteriaBuilder buidler = em.getCriteriaBuilder();
 		CriteriaQuery<Configuration> query = buidler
@@ -41,26 +40,14 @@ public class ConfigDaoImpl implements ConfigDao {
 
 		Configuration config = em.createQuery(
 				query.where(buidler.equal(root.get("name").as(String.class),name))).getSingleResult();
-		return config.getId();
+		return config;
 
 	}
 
-	@Transactional
+	@Override
 	public boolean update(Configuration config) {
-
-		Configuration c = em.find(Configuration.class, config.getId());
-		c.setValue(config.getValue());
-		try {
-			em.persist(c);
-//			em.merge(c);
-			return true;
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-		return false;
-
+		em.merge(config);
+		return true;
 	}
 
 	@Override

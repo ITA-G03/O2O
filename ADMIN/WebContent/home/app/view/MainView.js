@@ -24,8 +24,6 @@ Ext.define('MyApp.view.MainView', {
         'Ext.menu.Menu',
         'Ext.menu.CheckItem'
     ],
-
-    itemId: 'mainView',
     layout: 'border',
 
     initComponent: function() {
@@ -147,7 +145,7 @@ Ext.define('MyApp.view.MainView', {
                                 },
                                 {
                                     xtype: 'label',
-                                    text: '3',
+                                    text: '0',
 									id:'unreadMessage',
 									itemId:'unreadMessage',
                                 }

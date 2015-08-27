@@ -8,23 +8,41 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
 @Repository("businessDao")
-public class BusinessDaoImpl{
-	
-	 @PersistenceContext
-	    private EntityManager manager;
+public class BusinessDaoImpl implements BusinessDao {
 
+	@PersistenceContext
+	private EntityManager manager;
 
-	public List<Business> getAllApprovingBusiness(){
-		String ql="from Business where status=:status";
-		Query q=manager.createQuery(ql);
-		q.setParameter("status", O2OConstants.STATUS_APPROVING);
-		List<Business> list=q.getResultList();	
-		return list;
+	@Override
+	public List<Business> getAllApprovingBusiness() {
+		CriteriaBuilder buidler = manager.getCriteriaBuilder();
+		CriteriaQuery<Business> query = buidler.createQuery(Business.class);
+		Root<Business> root = query.from(Business.class);
+
+		List<Business> result = manager.createQuery(
+				query.where(buidler.equal(root.get("status").get("statusId")
+						.as(Integer.class), O2OConstants.STATUS_APPROVING)))
+				.getResultList();
+		return result;
+
+	}
+
+	@Override
+	public boolean update(Business business) {
+		this.manager.merge(business);
+		return true;
+	}
+
+	@Override
+	public Business get(int id) {
+		return this.manager.find(Business.class, id);
 	}
 
 }

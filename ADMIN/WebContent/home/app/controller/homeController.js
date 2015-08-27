@@ -34,7 +34,7 @@ Ext.define('MyApp.controller.homeController', {
 				click:this.system
             },
 			'#MainView':{
-				beforerender:this.beforeLoad
+				afterrender:this.beforeLoad
 			}
         });	
     },
@@ -59,9 +59,10 @@ Ext.define('MyApp.controller.homeController', {
 			
 			success:function(response){
 				var jsonObj = response.responseText;
-				var status=JSON.parse(jsonObj);
+				var status=Ext.decode(jsonObj);
+				debugger;
 				if(status.data){
-					Ext.getCmp('unreadMessage').setValue(status.data);
+					Ext.getCmp('unreadMessage').setText(status.data);
 				}
 			}
 		});
