@@ -1,9 +1,11 @@
 package ita.o2o.controller.action;
 
 import ita.o2o.constants.O2OConstants;
+import ita.o2o.dao.impl.WorkStatusDaoImpl;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.Status;
+import ita.o2o.entity.extra.WorkStatus;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
@@ -39,6 +41,9 @@ public class BusinessActionController {
 
     @Autowired
     StatusServiceImpl statusService;
+
+    @Autowired
+    WorkStatusDaoImpl workStatusDao;
 
     @ResponseBody
     @RequestMapping(value = "/register-business")
@@ -76,10 +81,13 @@ public class BusinessActionController {
 
         //店铺status
         Status status = statusService.getById(O2OConstants.STATUS_APPROVING);
+        System.out.println("status:" + status.getStatusName());
         //workStaus
-//        Status workStatus = statusService.getById(O2OConstants.WORK_STATUS_CLOSE);
+        WorkStatus workStatus = workStatusDao.getById(O2OConstants.WORK_STATUS_CLOSE);
+        System.out.println("workStatus:" + workStatus.getWorkStatusName());
         business.setStatus(status);
-//        business.setWorkStatus(workStatus);
+        business.setWorkStatus(workStatus);
+
         if (businessService.createBusiness(business) >= 0) {
             //set response
             ResponseMessage responseMessage = new ResponseMessage();
