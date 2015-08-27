@@ -1,0 +1,499 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userClassName": "MainView",
+        "itemId": "mainView",
+        "layout": "border"
+    },
+    "designerId": "51664173-3dd3-4c65-bc8c-fcec064068ab",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "header": false,
+                "height": 100,
+                "itemId": "headerPanel",
+                "layout|region": "north",
+                "title": "Header"
+            },
+            "designerId": "b2bfdcc4-67b8-4a2b-9bd0-eb9ff64cebb4",
+            "cn": [
+                {
+                    "type": "Ext.toolbar.Toolbar",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dock": "top"
+                    },
+                    "designerId": "51006c01-c614-473e-a2af-f887b9e572c7",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "ADMIN"
+                            },
+                            "designerId": "3950e076-fdd0-41aa-a2d3-5e5cfbdc8fde"
+                        },
+                        {
+                            "type": "Ext.button.Cycle",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "Customer"
+                            },
+                            "designerId": "2c240f93-7f75-47ba-b9fc-8a600f8d4bc6",
+                            "cn": [
+                                {
+                                    "type": "Ext.menu.Menu",
+                                    "reference": {
+                                        "name": "menu",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 120
+                                    },
+                                    "designerId": "88765cdf-d37b-40de-b505-1e9daaf4b16c",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.menu.CheckItem",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Password"
+                                            },
+                                            "designerId": "db5f931a-bb37-4155-a11a-e0b65d5bb895"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Cycle",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "Business"
+                            },
+                            "designerId": "b10fc085-2126-4c6f-b3c7-72bce24b52da",
+                            "cn": [
+                                {
+                                    "type": "Ext.menu.Menu",
+                                    "reference": {
+                                        "name": "menu",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 120
+                                    },
+                                    "designerId": "41fef655-4752-4c8c-9836-593b52f91817",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.menu.CheckItem",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Register"
+                                            },
+                                            "designerId": "4ec5d764-862c-432c-81ca-d795c35f8d3b"
+                                        },
+                                        {
+                                            "type": "Ext.menu.CheckItem",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Store"
+                                            },
+                                            "designerId": "37d49388-da1f-4521-8c7c-dc98907967c6"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Cycle",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "System"
+                            },
+                            "designerId": "3da15ad1-c551-4a30-9bd5-6d91ebb35750",
+                            "cn": [
+                                {
+                                    "type": "Ext.menu.Menu",
+                                    "reference": {
+                                        "name": "menu",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 120
+                                    },
+                                    "designerId": "305352fe-1847-46b0-b6d6-a56fcc77e546",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.menu.CheckItem",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Setting"
+                                            },
+                                            "designerId": "5014344f-d706-4613-aa4d-43eb3fef8088"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "Welcome"
+                            },
+                            "designerId": "99a65c3a-a42f-4270-bf76-aaac5162aa41"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.toolbar.Toolbar",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dock": "top"
+                    },
+                    "designerId": "0a74bdd9-40c6-4ab0-bc44-f4cc8987c1f0",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "Home /"
+                            },
+                            "designerId": "84163041-4fa9-4696-8c72-ee0cc7b485ce"
+                        },
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "System /"
+                            },
+                            "designerId": "8518dfe9-5520-4853-9872-f82ba2eab5cb"
+                        },
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "text": "Setting"
+                            },
+                            "designerId": "02815c62-4204-4f28-8996-4e0dd97f4410"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "container|align": "stretch",
+                "header": false,
+                "itemId": "contentPanel",
+                "layout": "vbox",
+                "layout|region": "center",
+                "title": "Content"
+            },
+            "designerId": "ad0d6ecc-a95a-4fa2-9119-59342137596a",
+            "cn": [
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1,
+                        "title": "订单期限"
+                    },
+                    "designerId": "30ac5e6d-a22b-44c9-9b02-b5859c700162",
+                    "cn": [
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top"
+                            },
+                            "designerId": "c1c1878d-1a6d-4dbc-9dbe-bf4bfa50b8ba",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "自动过期时限",
+                                        "layout|flex": null
+                                    },
+                                    "designerId": "eb31e0b2-ff03-4ba3-bb19-c3b631c3dd03"
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "text": "修改"
+                                    },
+                                    "designerId": "8f382ba2-43c4-46c7-9faa-6480366d683f"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top"
+                            },
+                            "designerId": "09312e99-bd4d-4143-a074-65f75a574235",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "自动完成期限",
+                                        "layout|flex": null
+                                    },
+                                    "designerId": "581c74a2-eb9d-4cd5-9f9c-2e6d8af37368"
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "text": "修改"
+                                    },
+                                    "designerId": "c0fd363d-6d6a-4f44-9362-712548ddb7c1"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 223,
+                        "layout|flex": 1,
+                        "title": "客服电话"
+                    },
+                    "designerId": "e840b6a3-fc38-4cda-9656-7fcf4b444ce9",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Tel"
+                            },
+                            "designerId": "058a261a-932d-4080-85c9-6454fad656c8"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "text": "修改"
+                            },
+                            "designerId": "ba88c878-24c0-458d-bfd1-ebf006e24bfe"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1,
+                        "title": "餐厅种类"
+                    },
+                    "designerId": "e5b27308-ffab-4443-9d64-1b4488de1fa0",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "string",
+                                "text": "种类"
+                            },
+                            "designerId": "097a9ff9-49ea-4e6d-a1a8-b341c568e077"
+                        },
+                        {
+                            "type": "Ext.grid.View",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "emptyText": "",
+                                "enableTextSelection": false
+                            },
+                            "designerId": "8889391d-2c12-4e4c-a58f-803ce3a6f68c"
+                        },
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top"
+                            },
+                            "designerId": "7792b80b-6cbc-4c8c-8e68-d9c42f8532f3",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "text": "删除"
+                                    },
+                                    "designerId": "ef388d8a-88ac-4680-8c62-ce39deb0933c"
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "text": "添加"
+                                    },
+                                    "designerId": "489baaf0-5187-4cbe-ae06-9d7daa943781"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

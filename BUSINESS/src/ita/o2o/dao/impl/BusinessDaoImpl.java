@@ -2,6 +2,7 @@ package ita.o2o.dao.impl;
 
 import ita.o2o.constants.O2OConstants;
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.BusinessTag;
 import ita.o2o.entity.base.User;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,10 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
     public static final String BUSINESS = "business";
     public static final String USER = "owner";
     public static final String CUSTOMER = "customer";
+
+    public static final String BUSINESS_TAG="businessTag";
+    public static final String BUSINESS_TAG_NAME="businessTagName";
+    public static final String BUSINESS_TAG_ID="businessTagId";
 
     public BusinessDaoImpl() {
         super(Business.class);
@@ -59,5 +64,9 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
 //        result.getBusinessTags().size();
         System.out.println("查出来数据了哟~BusinessId:" + result.getBusinessId());
         return result;
+    }
+
+    public List<Business> getAllByTag(BusinessTag businessTag) {
+        return null;
     }
 }

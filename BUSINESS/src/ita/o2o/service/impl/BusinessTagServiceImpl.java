@@ -7,6 +7,7 @@ import ita.o2o.service.BusinessTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +26,20 @@ public class BusinessTagServiceImpl implements BusinessTagService {
 
     @Override
     public List<BusinessTag> getAll() {
-        return businessTagDao.getAll();
+        List<BusinessTag> businessTagList=businessTagDao.getAll();
+        for(BusinessTag businessTag:businessTagList){
+            businessTag.getBusiness().setBusinessTags(new ArrayList<>());
+        }
+        return businessTagList;
     }
 
 
     @Override
     public List<BusinessTag> getByBusiness(Business business) {
-        return businessTagDao.getByBusiness(business);
+        List<BusinessTag> businessTagList=businessTagDao.getByBusiness(business);
+        for(BusinessTag businessTag:businessTagList){
+            businessTag.getBusiness().setBusinessTags(new ArrayList<>());
+        }
+        return businessTagList;
     }
 }

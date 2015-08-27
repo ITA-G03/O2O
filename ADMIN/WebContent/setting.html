@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Store</title>
+<link
+	href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#main-nav">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index">ADMIN</a>
+			</div>
+			<div class="collapse navbar-collapse" id="main-nav">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button">Customer<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="customer"><i
+									class="glyphicon glyphicon-user"></i>password</a></li>
+						</ul></li>
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button">Business <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="business"><i
+									class="glyphicon glyphicon-user"></i>Register</a></li>
+							<li><a href="store.html"><i
+									class="glyphicon glyphicon-paperclip"></i>Store</a></li>
+						</ul></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button">System<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="setting"><i
+									class="glyphicon glyphicon-wrench"></i>Setting</a></li>
+						</ul></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						id="username" data-toggle="dropdown" role="button"><span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="login"><i
+									class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<ol class="breadcrumb">
+					<li><a href="index">Home</a></li>
+					<li class="active">System</li>
+					<li class="active">Setting</li>
+				</ol>
+				<div id="orderTime" class="center-block well">
+					<h4 class="text-center">订单期限设置</h4><br/>
+					<label>订单自动过期时限：</label>
+					<input type="text" value="3小时" class="form-control" readonly>
+					<label>订单自动完成期限：</label> <input type="text" value="3小时" class="form-control" readonly>
+					<button id="btn" class="btn btn-primary">更新</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="orderTime" class="center-block well">
+					<h4 class="text-center">客服电话</h4><br/>
+					<input type="text" value="4008208820" class="form-control" readonly>
+					<button id="btn" class="btn btn-primary">修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="orderTime" class="center-block well">
+					<h4 class="text-center">餐厅种类</h4><br/>
+					<table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><a href="#">种类操作</a></th>
+                            <th><a href="#">操作</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>中餐</td>
+                            <td><button type="button" class="btn btn-primary">删除</button></td>
+                        </tr>
+                        <tr>
+                            <td>西餐</td>
+                            <td><button type="button" class="btn btn-primary">删除</button></td>
+                        </tr>
+                        <tr>
+                            <td>小吃</td>
+                            <td><button type="button" class="btn btn-primary">删除</button></td>
+                        </tr>
+                        <tr><button type="button" class="btn btn-primary">添加</button></tr>
+                    </tbody>
+                </table>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+</body>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var uname=$.cookie("name");
+	$("#username").text(uname);
+});
+</script>
+
+</html>

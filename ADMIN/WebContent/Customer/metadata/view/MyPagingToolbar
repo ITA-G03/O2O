@@ -1,0 +1,14 @@
+{
+    "type": "Ext.toolbar.Paging",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MyPagingToolbar",
+        "displayInfo": true,
+        "width": 400
+    },
+    "designerId": "c19d6e48-5543-4cfe-a06d-23b1de76af27"
+}

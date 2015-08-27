@@ -30,4 +30,6 @@ public class BusinessTagRestController {
         List<BusinessTag> businessTagList=businessTagService.getAll();
         return jsonMapper.writeObjectAsString(businessTagList);
     }
+
+
 }
