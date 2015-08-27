@@ -1,6 +1,7 @@
 package ita.o2o.service.impl;
 
 import ita.o2o.dao.impl.AreaDaoImpl;
+
 import ita.o2o.entity.location.Area;
 import ita.o2o.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;

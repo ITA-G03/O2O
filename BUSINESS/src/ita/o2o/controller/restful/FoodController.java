@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ita.o2o.controller.BaseController;
 import ita.o2o.entity.base.Food;
 import ita.o2o.entity.extra.FoodType;
+import ita.o2o.service.impl.FoodServiceImpl;
+import ita.o2o.service.impl.FoodTypeServiceImpl;
 import ita.o2o.util.mapper.JSONMapper;
 
 
@@ -23,6 +25,11 @@ public class FoodController extends BaseController{
 	 
     @Autowired
 	private JSONMapper mapper;
+    @Autowired
+    private FoodServiceImpl foodService;
+    @Autowired
+    private FoodTypeServiceImpl foodTypeService;
+ 
     
 	//列出所有的食品
 	@ResponseBody
@@ -72,16 +79,13 @@ public class FoodController extends BaseController{
 		
 	}
 	
-	
+	//列出所有的食物类型
 	@ResponseBody
 	@RequestMapping(value="/business/food/type",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
-	public FoodType getFoodType(Model model) {
-		FoodType foodType =new FoodType();
-		foodType.setFoodTypeId(1);
-		foodType.setFoodTypeName("main");
-		model.addAttribute("foodType", foodType);
-		return foodType;
-		
+	public List<FoodType> getFoodType(Model model) {
+		List<FoodType> foodTypes = foodTypeService.getAll();
+		model.addAttribute("foodTypes", foodTypes);
+		return foodTypes;	
 	}
 	
 
