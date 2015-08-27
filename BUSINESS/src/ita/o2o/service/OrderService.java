@@ -12,11 +12,16 @@ import java.util.List;
  */
 public interface OrderService {
 
-    public int createOrder(OrderDto orderDto);
-
-    public List<Order> getCurrentUserOrderList(Business business);
-
-    public int updateOrder(Order order);
+    int createOrder(OrderDto orderDto);
+    int updateOrder(Order order);
 
     List<Order> getAllByCustomerId(int userId);
+
+
+    List<Order> getCurrentUserOrderList(Business business);
+    List<Order> getAllNewOrderByBusiness(Business business);
+    List<Order> getAllNewAcceptedOrderByBusiness(Business business);
+    List<Order> getAllSendingOrderByBusiness(Business business);
+    List<Order> getAllFinishedOrderByBusiness(Business business);
+
 }

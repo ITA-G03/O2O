@@ -9,6 +9,7 @@ app.controller('locationCtrl', function ($scope, $modal, $http, $cookieStore) {
         var form = $('form.change-location-form');
         form.find('select[name=cityId]').val($scope.history[$scope.historyIndex].city.cityId);
         form.find('input[name=areaName]').val($scope.history[$scope.historyIndex].area.areaName);
+        form.submit();
     }
 
     $http.get('/rest/location/area').success(function (data) {

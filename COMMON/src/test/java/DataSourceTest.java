@@ -1,0 +1,131 @@
+import ita.o2o.entity.base.BusinessTag;
+import ita.o2o.entity.base.Order;
+import ita.o2o.entity.location.Area;
+import ita.o2o.entity.location.City;
+import ita.o2o.entity.location.Location;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+/**
+ * @author Aquariuslt
+ * @version 15-08-23
+ */
+public class DataSourceTest {
+
+    private static EntityManagerFactory factory;
+    private EntityManager manager;
+
+    @BeforeClass
+    public static void init() {
+        factory = Persistence.createEntityManagerFactory("o2oPersistenceUnit");
+
+    }
+
+    @Before
+    public void start() {
+        manager = factory.createEntityManager();
+
+    }
+
+
+    @Test
+    public void testOrderAndBusinessTag(){
+        Order order=new Order();
+
+        BusinessTag businessTag=new BusinessTag();
+
+        System.out.println("Hi~~");
+        City city=new City();
+        city.setCityName("ZhuHai");
+        Area area=new Area();
+        area.setAreaName("TongGa");
+        Location location=new Location();
+        location.setArea(area);
+        location.setCity(city);
+        location.setDetail("South Software Park");
+
+
+        Location duplicateLocation=new Location();
+        duplicateLocation.setArea(area);
+        duplicateLocation.setCity(city);
+        duplicateLocation.setDetail("South Software Park2");
+
+
+        manager.getTransaction().begin();
+        manager.persist(location);
+        manager.getTransaction().commit();
+        System.out.println("Bye~~");
+    }
+
+//
+//    @Test
+//    public void testFactory ()throws Exception{
+//        System.out.println("Hi~~");
+//        City city=new City();
+//        city.setCityName("ZhuHai");
+//        Area area=new Area();
+//        area.setAreaName("TongGa");
+//        Location location=new Location();
+//        location.setArea(area);
+//        location.setCity(city);
+//        location.setDetail("South Software Park");
+//
+//
+//        Location duplicateLocation=new Location();
+//        duplicateLocation.setArea(area);
+//        duplicateLocation.setCity(city);
+//        duplicateLocation.setDetail("South Software Park2");
+//
+//
+//        manager.getTransaction().begin();
+//        manager.persist(location);
+//        manager.getTransaction().commit();
+//        System.out.println("Bye~~");
+//    }
+/*
+    @Test
+    public void testPersist() throws Exception {
+
+        User u = new User();
+        u.setUname("john");
+        u.setSex(true);
+        u.getTels().add("abc");
+        Addr addr1 = new Addr();
+        Addr addr2 = new Addr();
+        addr1.setCity("bj");
+        addr2.setCity("zh");
+        addr1.setU(u);
+        addr2.setU(u);
+
+        manager.getTransaction().begin();
+        manager.persist(addr1);
+
+        manager.getTransaction().commit();
+        System.out.println(u.getId());
+    }
+
+    @Test
+    public void testFind() throws Exception {
+
+        //User u=manager.find(User.class, primaryKey)
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //LocalContainerEntityManagerFactoryBean bean=(LocalContainerEntityManagerFactoryBean)context.getBean("entityManagerFactory");
+        User u = new User();
+        u.setSex(true);
+        u.setUname("john");
+
+//		UserDao ud=(UserDao)context.getBean("userDaoImpl");
+//		ud.addUser(u);
+        UserManager um = (UserManager) context.getBean("um");
+        um.regist(u);
+    }
+    */
+}

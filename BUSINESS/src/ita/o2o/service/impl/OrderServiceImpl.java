@@ -2,6 +2,7 @@ package ita.o2o.service.impl;
 
 import ita.o2o.constants.O2OConstants;
 import ita.o2o.dao.impl.OderDaoImpl;
+import ita.o2o.dao.impl.StatusDaoImpl;
 import ita.o2o.dao.impl.UserDaoImpl;
 import ita.o2o.dto.FoodDto;
 import ita.o2o.dto.OrderDto;
@@ -30,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     UserDaoImpl userDao;
 
+    @Autowired
+    StatusDaoImpl statusDao;
+
     @Override
     @Transactional
     public int createOrder(OrderDto orderDto) {
@@ -49,10 +53,7 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.create(order);
     }
 
-    @Override
-    public List<Order> getCurrentUserOrderList(Business business) {
-        return orderDao.getByBusiness(business);
-    }
+
 
     @Override
     public int updateOrder(Order order) {
@@ -82,5 +83,31 @@ public class OrderServiceImpl implements OrderService {
             orderItems.add(orderItem);
         }
         return orderItems;
+    }
+
+    /*商家查询订单系列:根据订单状态查询*/
+    @Override
+    public List<Order> getCurrentUserOrderList(Business business) {
+        return orderDao.getByBusiness(business);
+    }
+
+    @Override
+    public List<Order> getAllNewOrderByBusiness(Business business){
+        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_NEW_ORDER));
+    }
+
+    @Override
+    public List<Order> getAllNewAcceptedOrderByBusiness(Business business){
+        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_BUSINESS_ACCEPTED));
+    }
+
+    @Override
+    public List<Order> getAllSendingOrderByBusiness(Business business){
+        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_FOOD_SENT_OUT));
+    }
+
+    @Override
+    public List<Order> getAllFinishedOrderByBusiness(Business business){
+        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_FINISHED));
     }
 }

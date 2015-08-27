@@ -10,236 +10,211 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <script src="/bower/angular/angular.js"></script>
     <script src="/bower/angular-animate/angular-animate.js"></script>
+    <script src="/bower/angular-cookies/angular-cookies.js"></script>
     <script src="/bower/angular-ui-bootstrap/uibootstrap.js"></script>
+    <script src="/bower/jquery/jquery-1.11.3.js"></script>
+    <script src="/bower/jquery-md5/jquery-md5.js"></script>
     <script src="/js/customer/common.js"></script>
     <script src="/js/customer/mineController.js"></script>
 </head>
 
 <body ng-app="o2o" ng-controller="pageCtrl">
-<nav class="navbar navbar-default navbar-fixed-top nav-main">
-    <div class="container">
-        <div class="collapse navbar-collapse" id="main-nav">
-            <ul class="nav navbar-nav">
-                <li><a href="/index"><i class="fa fa-map-marker"></i>&emsp;珠海-唐家镇&emsp;[切换]</a>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/register">注册</a>
-                </li>
-                <li><a href="/login">登录</a>
-            </ul>
+<div ng-include="'/parts/main/nav'"></div>
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container">
+            <div class="row">
+                <tabset justified="true" class="mt10">
+                    <tab heading="我的订单">
+                        <div class="col-xs-12 tab-inner">
+                            <div class="my-orders">
+                                <div class="my-order-box">
+                                    <div>
+                                        <div class="res-logo">
+                                            <img src="images/res.jpg">
+                                        </div>
+                                        <div class="order-detail">
+                                            <h3>炸Tomcat</h3>
+
+                                            <p class="text-muted">订单号: 123456789</p>
+                                        </div>
+                                        <div class="order-detail-right">
+                                            <p class="text-muted">商家电话: 123456789</p>
+
+                                            <p class="text-muted">订单提交时间: 2015-07-07 11:11:11</p>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>菜品</th>
+                                                    <th class="text-right">价格/份数</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="o in orders">
+                                                    <td>{{o.name}}</td>
+                                                    <td class="text-right">{{o.price}} * {{o.num}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-xs-7 col-xs-offset-1">
+                                            <br/>
+
+                                            <p class="text-muted">订单状态: 等待商家确认</p>
+
+                                            <p class="text-muted">订单过期时间: 2015-07-07 11:11:11</p>
+
+                                            <p class="text-muted">电话: 1333333333</p>
+
+                                            <p class="text-muted">送餐地址: 伊妹儿网吧286号机</p>
+                                            <br/>
+
+                                            <h1><i class="fa fa-smile-o text-warning"></i>&nbsp;请等待商家确认</h1>
+                                            <br/>
+
+                                            <p class="text-muted text-right">改变主意了？<a href="#"
+                                                                                      class="highlight">取消订单</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-order-box">
+                                    <div>
+                                        <div class="res-logo">
+                                            <img src="images/res.jpg">
+                                        </div>
+                                        <div class="order-detail">
+                                            <h3>炸Tomcat</h3>
+
+                                            <p class="text-muted">订单号: 123456789</p>
+                                        </div>
+                                        <div class="order-detail-right">
+                                            <p class="text-muted">商家电话: 123456789</p>
+
+                                            <p class="text-muted">订单提交时间: 2015-07-07 11:11:11</p>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>菜品</th>
+                                                    <th class="text-right">价格/份数</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="o in orders">
+                                                    <td>{{o.name}}</td>
+                                                    <td class="text-right">{{o.price}} * {{o.num}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-xs-7 col-xs-offset-1">
+                                            <br/>
+
+                                            <p class="text-muted">订单状态: 商家已确认</p>
+
+                                            <p class="text-muted">订单过期时间: 2015-07-07 11:11:11</p>
+
+                                            <p class="text-muted">电话: 1333333333</p>
+
+                                            <p class="text-muted">送餐地址: 伊妹儿网吧286号机</p>
+                                            <br/>
+
+                                            <h1><i class="fa fa-smile-o text-warning"></i>&nbsp;商家正在忙碌炒菜中...</h1>
+                                            <br/>
+
+                                            <p class="text-muted text-right">改变主意了？<a href="#"
+                                                                                      class="highlight">取消订单</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-order-box">
+                                    <div>
+                                        <div class="res-logo">
+                                            <img src="images/res.jpg">
+                                        </div>
+                                        <div class="order-detail">
+                                            <h3>炸Tomcat</h3>
+
+                                            <p class="text-muted">订单号: 123456789</p>
+                                        </div>
+                                        <div class="order-detail-right">
+                                            <p class="text-muted">商家电话: 123456789</p>
+
+                                            <p class="text-muted">订单提交时间: 2015-07-07 11:11:11</p>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>菜品</th>
+                                                    <th class="text-right">价格/份数</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="o in orders">
+                                                    <td>{{o.name}}</td>
+                                                    <td class="text-right">{{o.price}} * {{o.num}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-xs-7 col-xs-offset-1">
+                                            <br/>
+
+                                            <p class="text-muted">订单状态: 商家已确认</p>
+
+                                            <p class="text-muted">订单过期时间: 2015-07-07 11:11:11</p>
+
+                                            <p class="text-muted">电话: 1333333333</p>
+
+                                            <p class="text-muted">送餐地址: 伊妹儿网吧286号机</p>
+                                            <br/>
+
+                                            <h1><i class="fa fa-smile-o text-warning"></i>&nbsp;餐点正飞奔而来...</h1>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="个人信息">
+                        <div class="col-xs-12 tab-inner">
+                            <p ng-controller="userCtrl">电话号码:{{user.tel}}</p>
+
+                            <div>
+                                <button type="button" class="btn btn-warning" ng-click="changePassword()">修改密码</button>
+                                <p id="updatePasswordMessage" class="hidden"></p>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="我的收藏">
+                        <div class="col-xs-12 tab-inner">
+
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
         </div>
     </div>
-</nav>
-<div class="header">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-3">
-                <a href="/main"><img src="images/tomcat.png" class="logo">
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="/main">首页</a><span class="vertical-line">&#124;</span>
-                <a href="/mine">我的外卖</a><span class="vertical-line">&#124;</span>
-                <a href="#">热门美食</a>
-            </div>
-            <div class="col-xs-5 col-xs-offset-1">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchArea">
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button" id="searchBtn">搜索</button>
-                        </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <tabset justified="true" class="mt10">
-            <tab heading="我的订单">
-                <div class="col-xs-12 tab-inner">
-                    <div class="my-orders">
-                        <div class="my-order-box">
-                            <div>
-                                <div class="res-logo">
-                                    <img src="images/res.jpg">
-                                </div>
-                                <div class="order-detail">
-                                    <h3>炸Tomcat</h3>
-
-                                    <p class="text-muted">订单号: 123456789</p>
-                                </div>
-                                <div class="order-detail-right">
-                                    <p class="text-muted">商家电话: 123456789</p>
-
-                                    <p class="text-muted">订单提交时间: 2015-07-07 11:11:11</p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>菜品</th>
-                                            <th class="text-right">价格/份数</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="o in orders">
-                                            <td>{{o.name}}</td>
-                                            <td class="text-right">{{o.price}} * {{o.num}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-xs-7 col-xs-offset-1">
-                                    <br/>
-
-                                    <p class="text-muted">订单状态: 等待商家确认</p>
-
-                                    <p class="text-muted">订单过期时间: 2015-07-07 11:11:11</p>
-
-                                    <p class="text-muted">电话: 1333333333</p>
-
-                                    <p class="text-muted">送餐地址: 伊妹儿网吧286号机</p>
-                                    <br/>
-
-                                    <h1><i class="fa fa-smile-o text-warning"></i>&nbsp;请等待商家确认</h1>
-                                    <br/>
-
-                                    <p class="text-muted text-right">改变主意了？<a href="#" class="highlight">取消订单</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="my-order-box">
-                            <div>
-                                <div class="res-logo">
-                                    <img src="images/res.jpg">
-                                </div>
-                                <div class="order-detail">
-                                    <h3>炸Tomcat</h3>
-
-                                    <p class="text-muted">订单号: 123456789</p>
-                                </div>
-                                <div class="order-detail-right">
-                                    <p class="text-muted">商家电话: 123456789</p>
-
-                                    <p class="text-muted">订单提交时间: 2015-07-07 11:11:11</p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>菜品</th>
-                                            <th class="text-right">价格/份数</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="o in orders">
-                                            <td>{{o.name}}</td>
-                                            <td class="text-right">{{o.price}} * {{o.num}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-xs-7 col-xs-offset-1">
-                                    <br/>
-
-                                    <p class="text-muted">订单状态: 商家已确认</p>
-
-                                    <p class="text-muted">订单过期时间: 2015-07-07 11:11:11</p>
-
-                                    <p class="text-muted">电话: 1333333333</p>
-
-                                    <p class="text-muted">送餐地址: 伊妹儿网吧286号机</p>
-                                    <br/>
-
-                                    <h1><i class="fa fa-smile-o text-warning"></i>&nbsp;商家正在忙碌炒菜中...</h1>
-                                    <br/>
-
-                                    <p class="text-muted text-right">改变主意了？<a href="#" class="highlight">取消订单</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="my-order-box">
-                            <div>
-                                <div class="res-logo">
-                                    <img src="images/res.jpg">
-                                </div>
-                                <div class="order-detail">
-                                    <h3>炸Tomcat</h3>
-
-                                    <p class="text-muted">订单号: 123456789</p>
-                                </div>
-                                <div class="order-detail-right">
-                                    <p class="text-muted">商家电话: 123456789</p>
-
-                                    <p class="text-muted">订单提交时间: 2015-07-07 11:11:11</p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>菜品</th>
-                                            <th class="text-right">价格/份数</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="o in orders">
-                                            <td>{{o.name}}</td>
-                                            <td class="text-right">{{o.price}} * {{o.num}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-xs-7 col-xs-offset-1">
-                                    <br/>
-
-                                    <p class="text-muted">订单状态: 商家已确认</p>
-
-                                    <p class="text-muted">订单过期时间: 2015-07-07 11:11:11</p>
-
-                                    <p class="text-muted">电话: 1333333333</p>
-
-                                    <p class="text-muted">送餐地址: 伊妹儿网吧286号机</p>
-                                    <br/>
-
-                                    <h1><i class="fa fa-smile-o text-warning"></i>&nbsp;餐点正飞奔而来...</h1>
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </tab>
-            <tab heading="个人信息">
-                <div class="col-xs-12 tab-inner">
-                    <p>电话号码: 13333333333</p>
-
-                    <div>
-                        <button type="button" class="btn btn-warning" ng-click="changePassword()">修改密码</button>
-                    </div>
-                </div>
-            </tab>
-            <tab heading="我的收藏">
-                <div class="col-xs-12 tab-inner">
-
-                </div>
-            </tab>
-        </tabset>
-    </div>
+    <div ng-include="'/parts/main/footer'"></div>
 </div>
 <script type="text/ng-template" id="changePassword.html">
     <div class="modal-header">
@@ -248,11 +223,13 @@
     <div class="modal-body">
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock icon-lg"></i></span>
-            <input type="password" class="form-control input-lg" placeholder="输入旧密码">
+            <input id="oldPassword" name="oldPassword" type="password" class="form-control input-lg"
+                   placeholder="输入旧密码">
         </div>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock icon-lg"></i></span>
-            <input type="password" class="form-control input-lg" placeholder="输入新密码">
+            <input id="newPassword" name="newPassword" type="password" class="form-control input-lg"
+                   placeholder="输入新密码">
         </div>
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock icon-lg"></i></span>
@@ -261,7 +238,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
-        <button class="btn btn-primary" type="button" ng-click="cancel()">保存</button>
+        <button class="btn btn-primary" type="button" ng-click="save()">保存</button>
     </div>
 </script>
 </body>

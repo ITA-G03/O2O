@@ -19,48 +19,53 @@
 
 <body ng-app="o2o" ng-controller="pageCtrl">
 <div ng-include="'/parts/main/nav'"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <ol class="breadcrumb">
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ol class="breadcrumb">
                 <li><a href="restaurant.html">{{restaurant.name}}</a>
-                </li>
-                <li class="active">确认购买</li>
-            </ol>
-        </div>
-        <div class="col-xs-4">
-            <div class="order-paper">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>菜品</th>
-                        <th class="text-right">价格/份数</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="o in orders">
-                        <td>{{o.name}}</td>
-                        <td class="text-right">￥{{o.price}}{{o.num>1?' * '+o.num:''}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="order-paper-footer"></div>
-        </div>
-        <div class="col-xs-8">
-            <form class="order-form">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-map-marker icon-lg"></i></span>
+                        </li>
+                        <li class="active">确认购买</li>
+                    </ol>
+                </div>
+                <div class="col-xs-4">
+                    <div class="order-paper">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>菜品</th>
+                                <th class="text-right">价格/份数</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="o in orders">
+                                <td>{{o.name}}</td>
+                                <td class="text-right">￥{{o.price}}{{o.num>1?' * '+o.num:''}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="order-paper-footer"></div>
+                </div>
+                <div class="col-xs-8">
+                    <form class="order-form">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker icon-lg"></i></span>
                     <input type="text" class="form-control input-lg" placeholder="输入送餐地址" ng-model="customerAddr">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-comment icon-lg"></i></span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-comment icon-lg"></i></span>
                     <input type="text" class="form-control input-lg" placeholder="输入留言" ng-model="remark">
-                </div>
+                        </div>
                 <button type="button" class="btn btn-lg btn-block btn-danger" ng-click="pay()">支付￥{{sum}}</button>
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+    <div ng-include="'/parts/main/footer'"></div>
 </div>
 </body>
 

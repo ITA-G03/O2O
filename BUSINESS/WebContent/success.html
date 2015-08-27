@@ -17,19 +17,24 @@
 
 <body ng-app="o2o">
 <div ng-include="'/parts/main/nav'"></div>
-<div class="container container-main">
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            <h1 class="page-header">
-                <i class="fa fa-check-circle text-success"></i>&emsp;订单提交成功！
-            </h1>
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container container-main">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h1 class="page-header">
+                        <i class="fa fa-check-circle text-success"></i>&emsp;订单提交成功！
+                    </h1>
 
-            <div>
-                <a href="/main">继续订餐</a>&emsp;
-                <a href="/mine">我的订单</a>
+                    <div>
+                        <a href="/main">继续订餐</a>&emsp;
+                        <a href="/mine">我的订单</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div ng-include="'/parts/main/footer'"></div>
 </div>
 </body>
 

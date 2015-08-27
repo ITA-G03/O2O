@@ -21,27 +21,34 @@
 
 <body class="change-location-bg" ng-app="o2o">
 <div ng-include="'/parts/index/nav'"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <form class="register-form" >
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user icon-lg"></i></span>
-                    <input type="text" class="form-control input-lg" placeholder="输入手机号码" required name="tel">
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form class="register-form">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user icon-lg"></i></span>
+                            <input type="text" class="form-control input-lg" placeholder="输入手机号码" required name="tel">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock icon-lg"></i></span>
+                            <input type="password" class="form-control input-lg" placeholder="输入登录密码" required
+                                   name="password">
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-block btn-danger">登录</button>
+                        <br/>
+
+                        <div class="text-danger" id="errMsg"></div>
+                        <div class="mt10 color-white">
+                            还没有账号？<a href="/register" class="highlight">免费注册</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock icon-lg"></i></span>
-                    <input type="password" class="form-control input-lg" placeholder="输入登录密码" required name="password">
-                </div>
-                <button type="submit" class="btn btn-lg btn-block btn-danger">登录</button>
-                <br/>
-                <div class="text-danger" id="errMsg"></div>
-                <div class="mt10 color-white">
-                    还没有账号？<a href="/register" class="highlight">免费注册</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
+    <div ng-include="'/parts/index/footer'"></div>
 </div>
 </body>
 

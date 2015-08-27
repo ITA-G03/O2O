@@ -1,7 +1,5 @@
 package ita.o2o.entity.base;
 
-import ita.o2o.entity.extra.Tag;
-
 import javax.persistence.*;
 
 /**
@@ -22,10 +20,6 @@ public class BusinessTag {
     @JoinColumn(name="BUSINESS_ID")
     private Business business;
 
-    @ManyToOne
-    @JoinColumn(name="TAG_ID")
-    private Tag tag;
-
 
     public int getBusinessTagId() {
         return businessTagId;
@@ -43,11 +37,4 @@ public class BusinessTag {
         this.business = business;
     }
 
-    public Tag getTag() {
-        return tag;
-    }
-
-    public void setTag(Tag tag) {
-        this.tag = tag;
-    }
 }
