@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringModelInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	
+	<context:component-scan base-package="ita.o2o.dao.impl,ita.o2o.service.impl"/>
+	  
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521"/>
+        <property name="username" value="JASONCUI"/>
+        <property name="password" value="123"/>
+    </bean>
+	
+	<!-- JPA实体管理工厂的配置 -->  
+	
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">   
+        <property name="dataSource" ref="dataSource"/>  
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>  
+       <property name="packagesToScan" value="ita.o2o.entity"/>  
+      <property name="jpaProperties">  
+            <props>  
+           		<prop key="hibernate.archive.autodetection">class</prop>
+                <prop key="hibernate.dialect" >org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+            </props>  
+        </property>  
+    </bean>  
+     
+      
+    <!--指定实现JPA的适配器-->  
+     <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">  
+        <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect" />  
+    </bean>   
+    
+	<!-- Jpa 事务配置 -->  
+   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">  
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>  
+    </bean> 
+    <!-- Spring Data Jpa配置 -->  
+      <!-- 
+    <jpa:repositories base-package="dao.impl"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>  
+       -->
+    <!-- 使用annotation定义事务    --> 
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />  
+
+	  <!-- 配置自动注解的JSONMapper 专供返回数据类型 -->
+    <bean id="jsonMapper" class="ita.o2o.util.mapper.JSONMapper"/>
+
+</beans>

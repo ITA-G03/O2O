@@ -1,13 +1,20 @@
 app.controller('pageCtrl', function ($scope, $http) {
-    $scope.resTypes = ['全部', '中餐', '西餐', '快餐', '饮料'];
-    $scope.selectedResType = '全部';
+
+    $http.get('/rest/tag/all').success(function (data) {
+        $scope.resTypes = data;
+        $scope.resTypes.unshift({
+            "businessTagName": "全部"
+        });
+        $scope.selectedResType = $scope.resTypes[0];
+    });
+
     $scope.changeResType = function (type) {
         $scope.selectedResType = type;
         for (var i = 0; i < $scope.res.length; i++) {
-            if (type == '全部' || !$scope.res[i].tags) {
+            if (type.businessTagName == '全部' || !$scope.res[i].tags) {
                 $scope.res[i].show = true;
             } else {
-                $scope.res[i].show = $scope.res[i].tags.contains(type);
+                $scope.res[i].show = $scope.res[i].tags.contains(type.businessTagName);
             }
         }
     };

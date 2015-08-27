@@ -1,0 +1,21 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "controllers": [
+            "Countdown"
+        ],
+        "name": "MyApp",
+        "requires": [
+            "Ext.window.MessageBox"
+        ],
+        "views": [
+            "MainViewport"
+        ]
+    },
+    "designerId": "application"
+}

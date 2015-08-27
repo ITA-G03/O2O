@@ -38,7 +38,7 @@ var param = function (obj) {
     return query.length ? query.substr(0, query.length - 1) : query;
 };
 
-var app = angular.module('o2o', ['ui.bootstrap', 'ngAnimate', 'ngCookies']);
+var app = angular.module('o2o', ['ui.bootstrap', 'ngAnimate', 'ngCookies', 'ngAside']);
 
 app.controller('userCtrl', function ($scope, $http, $cookieStore) {
     $http.get('/rest/user/info').success(function (data) {
@@ -77,7 +77,7 @@ app.controller('SearchRestaurantCtrl', function ($scope, $http) {
     };
 
     $scope.onSelectRes = function ($item, $model, $label) {
-        location.href = '/restaurant/' + $item.id;
+        location.href = '/restaurant/' + $item.id + '/' + $item.name;
     }
 });
 

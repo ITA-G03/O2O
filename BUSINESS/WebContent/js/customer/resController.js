@@ -1,4 +1,4 @@
-app.controller('pageCtrl', function ($scope, $http) {
+app.controller('pageCtrl', function ($scope, $http, $aside) {
     $scope.foodTypes = ['全部', '汉堡', '鸡肉卷', '配餐', '甜点', '饮料'];
     $scope.selectedFoodType = '全部';
     $scope.changeFoodType = function (type) {
@@ -15,7 +15,6 @@ app.controller('pageCtrl', function ($scope, $http) {
 
         window.location.href = '/order';
     }
-
 
 
     $http.get('/rest/restaurant/detail').success(function (data) {
@@ -66,10 +65,10 @@ app.controller('pageCtrl', function ($scope, $http) {
         sendAjaxToAddSession();
     }
 
-    var sendAjaxToAddSession = function(){
+    var sendAjaxToAddSession = function () {
         $.ajax({
-            url:'/order/cart/session',
-            type:'post',
+            url: '/order/cart/session',
+            type: 'post',
             data: JSON.stringify($scope.cart),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
@@ -85,9 +84,55 @@ app.controller('pageCtrl', function ($scope, $http) {
         if ($scope.cart[index].num > 1) {
             $scope.cart[index].num -= 1;
         } else {
-            $scope.cart.splice(index,1);
+            $scope.cart.splice(index, 1);
         }
         sendAjaxToAddSession();
     }
+
+    $scope.showFoodPic = function (index) {
+        $aside.open({
+            templateUrl: 'foodDetailTemplate.html',
+            placement: 'left',
+            size: 'sm',
+            controller: 'foodDetailModalCtrl',
+            resolve: {
+                food: function () {
+                    return $scope.foods[index];
+                }
+            }
+        });
+    }
+})
+
+app.controller('foodDetailModalCtrl', function ($scope, $modalInstance, food) {
+    $scope.food = food;
+});
+
+$(function () {
+    $('table').delegate('button[data-action=addToCart]', 'click', function () {
+        var $this = $(this),
+            thisOffset = $this.offset(),
+            cartOffset = $('#cart-icon').offset();
+        var lovelyBall = $('<i class="add-to-cart-ball"></i>');
+        lovelyBall.css({
+            top: thisOffset.top,
+            left: thisOffset.left
+        }).appendTo('body').fly({
+            start: {
+                top: thisOffset.top - $(window).scrollTop(),
+                left: thisOffset.left
+            },
+            end: {
+                left: cartOffset.left,
+                top: cartOffset.top - $(window).scrollTop(),
+            },
+            autoPlay: true,
+            speed: 1.5,
+            vertex_Rtop: 100,
+            onEnd: function () {
+                this.destroy();
+            }
+        })
+    })
 })
 

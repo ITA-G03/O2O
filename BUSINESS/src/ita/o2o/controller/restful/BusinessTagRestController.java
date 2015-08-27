@@ -15,7 +15,7 @@ import java.util.List;
  * @version 2015-08-27
  */
 @Controller
-@RequestMapping("/rest/tag")
+@RequestMapping(value = "/rest/tag", produces = "application/json;charset=utf-8")
 public class BusinessTagRestController {
     @Autowired
     JSONMapper jsonMapper;
@@ -26,8 +26,10 @@ public class BusinessTagRestController {
 
     @RequestMapping("/all")
     @ResponseBody
-    public String getAllTags(){
-        List<BusinessTag> businessTagList=businessTagService.getAll();
+    public String getAllTags() {
+        List<BusinessTag> businessTagList = businessTagService.getAll();
         return jsonMapper.writeObjectAsString(businessTagList);
     }
+
+
 }

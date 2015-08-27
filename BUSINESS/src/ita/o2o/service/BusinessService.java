@@ -1,7 +1,9 @@
 package ita.o2o.service;
 
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.BusinessTag;
 import ita.o2o.entity.base.User;
+import ita.o2o.entity.location.Location;
 
 import java.util.List;
 
@@ -20,4 +22,7 @@ public interface BusinessService {
     Business getById(int id);
 
     List<Business> getAll();
+    List<Business> getAllByTag(BusinessTag businessTag);
+
+    List<Business> getAllByLocation(Location currentLocation);
 }

@@ -11,7 +11,6 @@ app.controller('pageCtrl', function ($scope, $http) {
             success: function (data) {
                 location.href = '/success';
             }
-
         });
 
     }
@@ -23,8 +22,6 @@ app.controller('pageCtrl', function ($scope, $http) {
         for (var i = 0; i < $scope.orders.length; i++) {
             sum += ($scope.orders[i].price * $scope.orders[i].num);
         }
-        $scope.sum = sum;
+        $scope.sum = sum.toFixed(1);
     });
-
-
 })

@@ -19,7 +19,16 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image getById(int id) {
-        return imageDao.getById(id);
+        Image image;
+        try{
+            image=imageDao.getById(id);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            image=imageDao.getById(301);
+            System.out.println("图片出错了次奥 用默认值~");
+        }
+        return image;
     }
 
     @Override
