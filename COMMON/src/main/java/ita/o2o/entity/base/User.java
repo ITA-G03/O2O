@@ -88,4 +88,15 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+    
+	public User(int userId, String tel) {
+		this.userId = userId;
+		this.tel = tel;
+	}
+
+	public User() {
+		super();
+	}
+    
+    
 }

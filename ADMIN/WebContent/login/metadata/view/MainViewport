@@ -1,0 +1,92 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "middle",
+        "container|pack": "center",
+        "designer|initialView": true,
+        "designer|userAlias": "mainviewport",
+        "designer|userClassName": "MainViewport",
+        "layout": "hbox"
+    },
+    "designerId": "f32eb8c1-4d90-4784-8243-30240cb7369b",
+    "cn": [
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "itemId": "form",
+                "title": "Login",
+                "width": 500
+            },
+            "designerId": "36195c1d-3983-4361-9de3-516a12635eea",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Login name",
+                        "layout|anchor": "100%"
+                    },
+                    "designerId": "913665a6-268a-44ad-8e67-79b4e3a1ef80"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Password",
+                        "layout|anchor": "100%"
+                    },
+                    "designerId": "97e7fe43-c94a-472a-abf2-bf1999b6cabc"
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "middle",
+                        "container|pack": "center",
+                        "layout": "hbox",
+                        "margin": "10 0 10 0"
+                    },
+                    "designerId": "eeaab065-fee1-46fb-9ba1-0c921de7fd66",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "doneButton",
+                                "text": "Login"
+                            },
+                            "designerId": "dd639517-19d3-492e-a920-fe6be32645b3"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

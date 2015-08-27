@@ -2,22 +2,21 @@ package ita.o2o.controller.restful;
 
 
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.BusinessTag;
 import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
-
-import ita.o2o.service.BusinessService;
 import ita.o2o.service.impl.BusinessServiceImpl;
+import ita.o2o.service.impl.BusinessTagServiceImpl;
 import ita.o2o.util.mapper.JSONMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.LinkedList;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +29,9 @@ public class BusinessRestController {
 
     @Autowired
     BusinessServiceImpl businessService;
+
+    @Autowired
+    BusinessTagServiceImpl businessTagService;
 
     /**
      * 获得当前商家的信息
@@ -76,6 +78,7 @@ public class BusinessRestController {
      *
      * @return
      */
+    /*
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/list")
     public String getALlBusiness() {
@@ -90,7 +93,26 @@ public class BusinessRestController {
         businessList.add(b2);
         return jsonMapper.writeObjectAsDataString(businessList);
     }
+    */
 
+
+    /*
+    * 根据session中的location获取商家
+    * */
+    @RequestMapping("/list")
+    @ResponseBody
+    public String getAllBusinessByLocation(HttpServletRequest request){
+        Location currentLocation=(Location)(request.getSession().getAttribute("location"));
+        List<Business> businessList;
+        if(currentLocation==null){
+            businessList=businessService.getAll();
+        }
+        else{
+            businessList= businessService.getAllByLocation(currentLocation);
+        }
+
+        return jsonMapper.writeObjectAsString(businessList);
+    }
     /**
      * 获得对应商家的信息
      * test
@@ -123,6 +145,30 @@ public class BusinessRestController {
         status.setStatusName("申请");
         business.setStatus(status);
         return business;
+    }
+
+
+    @RequestMapping("/tag/{tagId}")
+    @ResponseBody
+    public String getBusinessListByTag(@PathVariable("tagId") String tagId){
+
+        BusinessTag tag=businessTagService.getById(Integer.valueOf(tagId));
+        List<Business> businessList=businessService.getAll();
+        List<Business> newBusinessList=new ArrayList<>();
+        for(Business business:businessList){
+            boolean flag=false;
+            for(BusinessTag businessTag:business.getBusinessTags()){
+                System.out.println("===Comparing: Tag"+tagId+"And business~Tag:"+businessTag.getBusinessTagId());
+                if(businessTag.getBusinessTagId()==Integer.valueOf(tagId)){
+                    flag=true;
+                }
+            }
+            if(flag)newBusinessList.add(business);
+        }
+
+
+
+        return jsonMapper.writeObjectAsString(newBusinessList);
     }
 
 }

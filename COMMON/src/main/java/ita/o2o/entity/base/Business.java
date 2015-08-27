@@ -5,6 +5,7 @@ import ita.o2o.entity.extra.WorkStatus;
 import ita.o2o.entity.location.Location;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,8 +34,8 @@ public class Business {
     @JoinColumn(name = "USER_ID")
     private User owner;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<BusinessTag> businessTags;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<BusinessTag> businessTags=new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name="WORK_STATUS_ID")

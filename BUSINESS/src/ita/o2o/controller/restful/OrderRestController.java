@@ -249,6 +249,7 @@ public class OrderRestController {
         ResponseMessage responseMessage = new ResponseMessage();
         if(result > 0){
             responseMessage.setStatus(O2OConstants.SUCCESS);
+            session.setAttribute("currentCart", null);
         } else {
             responseMessage.setStatus(O2OConstants.FAILURE);
         }

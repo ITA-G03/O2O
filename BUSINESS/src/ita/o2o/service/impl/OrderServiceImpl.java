@@ -1,7 +1,7 @@
 package ita.o2o.service.impl;
 
 import ita.o2o.constants.O2OConstants;
-import ita.o2o.dao.impl.OderDaoImpl;
+import ita.o2o.dao.impl.OrderDaoImpl;
 import ita.o2o.dao.impl.StatusDaoImpl;
 import ita.o2o.dao.impl.UserDaoImpl;
 import ita.o2o.dto.FoodDto;
@@ -9,11 +9,11 @@ import ita.o2o.dto.OrderDto;
 import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.service.OrderService;
+import ita.o2o.util.jms.JmsProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +26,7 @@ import java.util.List;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
     @Autowired
-    OderDaoImpl orderDao;
+    OrderDaoImpl orderDao;
 
     @Autowired
     UserDaoImpl userDao;
@@ -50,10 +50,13 @@ public class OrderServiceImpl implements OrderService {
         Status status = new Status();
         status.setStatusId(O2OConstants.BUSINESS_STATUS_PENDING);
         order.setStatus(status);
-        return orderDao.create(order);
+        int result = orderDao.create(order);
+        if(result > 0){
+            JmsProducer jmsProducer = new JmsProducer();
+            jmsProducer.sendOrderMessage(order);
+        }
+        return result;
     }
-
-
 
     @Override
     public int updateOrder(Order order) {
@@ -73,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
             Food food = new Food();
             food.setFoodId((int) map.get("id"));
             food.setFoodName((String) map.get("name"));
-            double price = (double)map.get("price");
+            double price = Double.valueOf(map.get("price").toString());
             int num = (int)map.get("num");
             OrderItem orderItem = new OrderItem();
             orderItem.setFood(food);
