@@ -66,7 +66,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllByCustomerId(int userId) {
         User customer=userDao.getById(userId);
-        return orderDao.getByCustomer(customer);
+        List<Order> orderList=orderDao.getByCustomer(customer);
+        for(Order order:orderList){
+            for(OrderItem orderItem:order.getOrderItemList()){
+                orderItem.setOrder(null);
+            }
+        }
+        return orderList;
     }
 
     private List<OrderItem> orderItemConvert(List<FoodDto> foodDtos, Order order){

@@ -17,12 +17,12 @@ public class Location {
     private int locationId;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="CITY_ID")
     private City city;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="AREA_ID")
     private Area area;
 
