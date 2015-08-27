@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public int createOrder(OrderDto orderDto) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Order order = new Order();
         order.setAcceptTime(sdf.format(new Date()));
 
