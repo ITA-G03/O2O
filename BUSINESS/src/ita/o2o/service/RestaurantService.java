@@ -10,7 +10,7 @@ public interface RestaurantService {
 
 	public List<BusinessDto> getRestaurantList();
 	
-	public List<Business> getRestaurantListByName(String storeName);
+	public List<BusinessDto> getRestaurantListByName(String storeName);
 	
 	public List<Business> getHotRestaurantList();
 

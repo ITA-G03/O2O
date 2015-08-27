@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  * @version 15-08-23
  */
 @Controller
-@RequestMapping("/rest/user")
+@RequestMapping(value = "/rest/user", produces = "application/json; charset=utf-8")
 public class UserRestController extends BaseController {
 
     @Autowired
@@ -25,9 +25,6 @@ public class UserRestController extends BaseController {
     @ResponseBody
     public String getUserInfo(HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user != null) {
-            return jsonMapper.writeObjectAsString(user);
-        }
-        return null;
+        return jsonMapper.writeObjectAsString(user);
     }
 }

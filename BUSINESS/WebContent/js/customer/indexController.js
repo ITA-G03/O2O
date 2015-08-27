@@ -1,21 +1,24 @@
-app.controller('locationCtrl', function ($scope, $modal) {
-    $scope.cities = ['珠海', '广州', '深圳'];
-    $scope.searchCity = $scope.cities[0];
+app.controller('locationCtrl', function ($scope, $modal, $http, $cookieStore) {
 
-    $scope.search = function () {
-        if (!$scope.searchArea) {
-            $modal.open({
-                templateUrl: 'mustFill.html',
-                controller: 'ModalInstanceCtrl'
-            });
-        } else {
-            location.href = '/main';
-        }
+    $http.get('/rest/location/city').success(function (data) {
+        $scope.cities = data;
+    })
+
+    $scope.history = $cookieStore.get('locations');
+    $scope.searchFromHistory = function () {
+        var form = $('form.change-location-form');
+        form.find('select[name=cityId]').val($scope.history[$scope.historyIndex].city.cityId);
+        form.find('input[name=areaName]').val($scope.history[$scope.historyIndex].area.areaName);
     }
 })
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
-    $scope.cancel = function () {
-        $modalInstance.dismiss();
-    };
-});
+$(function () {
+    $('form.change-location-form').ajaxForm(function (data) {
+        if (data.status == 'success') {
+            window.location.href = '/main';
+        } else {
+            console.log(data);
+        }
+    })
+})
+

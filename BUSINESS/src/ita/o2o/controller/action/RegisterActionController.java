@@ -1,6 +1,7 @@
 package ita.o2o.controller.action;
 
 import ita.o2o.entity.base.User;
+import ita.o2o.service.impl.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +25,23 @@ public class RegisterActionController {
     @Autowired
     JSONMapper jsonMapper;
 
+    @Autowired
+    CustomerServiceImpl customerService;
+
     @RequestMapping("")
     @ResponseBody
     public String registerAction(@RequestParam String tel, @RequestParam String password, @RequestParam String confirm, HttpSession session) {
         ResponseMessage responseMessage = new ResponseMessage();
         if (password.equals(confirm)) {
+
             User user = new User();
             user.setTel(tel);
             user.setEncryptedPassword(password);
             session.setAttribute("user", user);
+
+            System.out.println("Service注册用户啦");
+            int newCustomerId=customerService.registerCustomer(user);
+            System.out.println("注册后的用户ID是:"+newCustomerId);
             responseMessage.setStatus(O2OConstants.SUCCESS);
 
         } else {

@@ -8,7 +8,7 @@ import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
 
 import ita.o2o.util.mapper.JSONMapper;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +23,6 @@ import java.util.List;
 public class BusinessRestController {
     @Autowired
     JSONMapper jsonMapper;
-
-
-    //private static Logger logger = Logger.getLogger(BusinessRestController.class);
 
     /**
      * 改变对应商家的信息

@@ -1,30 +1,25 @@
 package ita.o2o.controller.action;
 
-
-import ita.o2o.entity.base.Business;
-import ita.o2o.entity.extra.Status;
+import ita.o2o.service.impl.BusinessServiceImpl;
+import ita.o2o.util.mapper.JSONMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @Controller
+@RequestMapping(value = "/business", produces = "application/json;charset=utf-8")
 public class BusinessActionController {
+    @Autowired
+    JSONMapper jsonMapper;
 
-    /**
-     * 用户提交申请成为商家
-     *
-     * @param business
-     * @param card_photoFile
-     * @param licenseFile
-     * @param logoFile
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/business/apply")
-    public Business applyForBussniess(@RequestBody Business business,
-                                      @RequestParam(value = "card_photo") MultipartFile card_photoFile,
-                                      @RequestParam(value = "license") MultipartFile licenseFile,
-                                      @RequestParam(value = "logo") MultipartFile logoFile) {
-        return business;
-    }
+    @Autowired
+    BusinessServiceImpl businessService;
+
+
+    //regist....
+
+    //update...
+
+
 }

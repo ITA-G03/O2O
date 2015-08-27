@@ -12,16 +12,23 @@ app.controller('pageCtrl', function ($scope, $http) {
     }
 
     $scope.order = function () {
-        location.href = '/order';
+
+        console.info($scope.cart);
+        $http.post('/order/cart/session',$scope.cart,{
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }}).success(function (data) {
+            location.href = '/order';
+        });
     }
 
-    $http.get('/rest/restaurant/1/detail').success(function (data) {
+    $http.get('/rest/restaurant/detail').success(function (data) {
         console.info(data.foodList);
         $scope.foods = data.foodList;
+        $scope.detail = data;
         $scope.changeFoodType($scope.selectedFoodType);
     });
 
-    $http.get('/rest/restaurant/1/list/comment').success(function (data) {
+    $http.get('/rest/restaurant/list/comment').success(function (data) {
         console.info(data);
         $scope.comments = data;
         $scope.changeCommentType($scope.selectedCommentType);
@@ -68,3 +75,9 @@ app.controller('pageCtrl', function ($scope, $http) {
 
     }
 })
+
+//$(function(){
+//   $('#orderBtn').click(function(){
+//
+//   });
+//});
