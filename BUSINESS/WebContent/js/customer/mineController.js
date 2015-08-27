@@ -1,4 +1,4 @@
-app.controller('pageCtrl', function ($scope, $modal) {
+app.controller('pageCtrl', function ($scope, $modal,$http) {
 
     $scope.changePassword = function () {
         var modalInstance = $modal.open({
@@ -6,6 +6,8 @@ app.controller('pageCtrl', function ($scope, $modal) {
             controller: 'ModalInstanceCtrl'
         })
     }
+
+
 
     $scope.orders = [
         {
@@ -53,6 +55,11 @@ app.controller('pageCtrl', function ($scope, $modal) {
             num: 1
         }
     ]
+
+    $http.get('/rest/mine/order/all').success(function (data) {
+        console.info(data);
+        $scope.orders = data;
+    });
 })
 
 
