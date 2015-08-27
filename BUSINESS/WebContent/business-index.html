@@ -18,7 +18,8 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!--  <script src="../js/business/changeInfo.js"></script>  改变个人信息-->
-   <!--   <script src="../js/food/foodType.js"></script> <script src="../js/food/foodList.js"></script> -->
+     <script src="../js/food/foodType.js"></script> 
+      <!--  <script src="../js/food/foodList.js"></script> -->
     
     <script type="application/javascript">
         //        $(function () {
@@ -37,6 +38,13 @@
         
         text-align:center;
         }
+        
+       #message{
+       font-family : 微软雅黑,宋体;
+       font-size : 2em;
+	   color : green;
+       }
+        
     </style>
 </head>
 
@@ -71,7 +79,7 @@
 								class="caret"></span></a>
 								<ul class="dropdown-menu">
                             <li id="foodType"><button type="button" name="addFood"class="btn btn-success btn-xs" data-toggle='modal' data-target='#myModal'>New</button>&nbsp&nbsp
-                            <button data-toggle='modal' data-target='#myModal2' type="button" name="delete" class="btn btn-danger btn-xs">Delete</button></li>
+                            <button  type="button" name="delete" class="btn btn-danger btn-xs">Delete</button></li>
                         </ul>
                 </li>
             </ul>
@@ -142,7 +150,8 @@
      <h1 class="page-header">Add Food Type</h1>
                     <div class="form-group">
                         <label>Type</label>
-                        <input type="text" name="type" class="form-control"  required />
+                        <input type="text" name="type" class="form-control"  required /><br/>
+                        <span id="message" ></span>
                     </div>
                     <br />
       </div>
@@ -168,8 +177,12 @@
      <h1 class="page-header">Delete Food Type</h1>
                     <div class="form-group">
                       
-                      <table id="t">
-						<td>Main<button type="button">delete</button></td>
+                      <table id="t" class="table table-hover">
+						<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Action</th>
+						</tr>
 
 					</table>
    

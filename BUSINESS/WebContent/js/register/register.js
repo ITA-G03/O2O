@@ -73,7 +73,7 @@ function validateLicense(){
 function uploadIdCard(){
     $("#validateIdCardMessage").text("").hide();
     $.ajaxFileUpload({
-        url:'/image/upload',
+        url:'/action/image/upload',
         secureuri: false,
         fileElementId: 'idCard',
         dataType: 'JSON',
@@ -98,7 +98,7 @@ function uploadIdCard(){
 function uploadLicense(){
     $("#validateLicenseMessage").text("").hide();
     $.ajaxFileUpload({
-        url:'/image/upload',
+        url:'/action/image/upload',
         secureuri: false,
         fileElementId: 'license',
         dataType: 'JSON',
