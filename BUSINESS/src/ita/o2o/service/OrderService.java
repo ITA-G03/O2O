@@ -16,4 +16,6 @@ public interface OrderService {
     public List<Order> getCurrentUserOrderList(Business business);
 
     public int updateOrder(Order order);
+
+    List<Order> getAllByCustomerId(int userId);
 }
