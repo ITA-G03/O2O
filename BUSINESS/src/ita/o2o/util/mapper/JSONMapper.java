@@ -1,11 +1,16 @@
 package ita.o2o.util.mapper;
 
-import ita.o2o.constants.O2OConstants;
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.type.JavaType;
 
-import java.io.IOException;
+import ita.o2o.constants.O2OConstants;
+import ita.o2o.entity.base.Order;
 
 /**
  * @author Aquariuslt
@@ -52,4 +57,28 @@ public class JSONMapper extends ObjectMapper{
         }
         return O2OConstants.EMPTY;
     }
+    
+    
+    public <T> T readStringAsObject(String str,Class<?> c,Class<?>... e) {
+    	
+    	JavaType javaType = this.getTypeFactory().constructParametricType(c,e);
+    	T o = null;
+    	try {
+    		o= objectMapper.readValue(str,javaType);
+		} catch (JsonParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	return o;
+    	
+    }
+    
+    
 }

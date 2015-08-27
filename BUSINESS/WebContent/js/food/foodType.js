@@ -15,7 +15,7 @@ $(function () {
 					var trs="<tr>";
 					trs+="<td id='foodTypeId'>"+data[i].foodTypeId+"</td>";
 					trs+="<td id='foodTypeName'>"+data[i].foodTypeName+"</td>";
-					trs+="<td><button type='button' name='deleteType' >delete</button></td>";
+					trs+="<td><button type='button' name='deleteType' class='btn btn-primary' >delete</button></td>";
 					trs+="</tr>"
 				    $("#myModal2").find("#t").append(trs);		
 				}
