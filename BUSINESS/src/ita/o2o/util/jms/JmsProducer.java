@@ -3,7 +3,6 @@ package ita.o2o.util.jms;
 import ita.o2o.entity.base.Order;
 import ita.o2o.util.mapper.JSONMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 
