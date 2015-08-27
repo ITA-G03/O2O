@@ -14,10 +14,12 @@ public class RestaurantViewController {
 
     @RequestMapping(value = "/{businessId}/{storeName}", method = RequestMethod.GET)
     public String getCurrentRestaurant(@PathVariable int businessId, @PathVariable String storeName, HttpSession session){
+        System.out.println(storeName);
+
         BusinessDto businessDto = new BusinessDto();
         businessDto.setId(businessId);
         businessDto.setName(storeName);
-        System.out.print(storeName);
+
         session.setAttribute("currentRestaurant", businessDto);
         return "restaurant";
     }

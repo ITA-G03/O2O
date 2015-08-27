@@ -15,7 +15,6 @@ public interface FoodService {
 	    boolean deleteFood(Food food);
 	    boolean updateFood(Food food);
 
-
 	    Food getById(int id);
 	    public List<Food> getByBusinessId(int businessId);
 	    

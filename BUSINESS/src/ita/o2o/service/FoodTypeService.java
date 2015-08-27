@@ -11,5 +11,6 @@ public interface FoodTypeService {
 	public  boolean delete(FoodType foodType) ;
 	public FoodType getByName(String foodTypeName) ;
 	public FoodType getById(int foodTypeId);
+	public boolean findById(int foodTypeId);
 
 }

@@ -49,6 +49,12 @@ public class FoodTypeServiceImpl implements FoodTypeService {
 		// TODO Auto-generated method stub
 		return foodTypeDao.getById(foodTypeId);
 	}
+
+	@Override
+	public boolean findById(int foodTypeId) {
+		// TODO Auto-generated method stub
+		return foodTypeDao.findById(foodTypeId);
+	}
 	
 	
 
