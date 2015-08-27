@@ -41,6 +41,9 @@ public class Order {
     private Status status;
 
 
+    @Basic
+    @Column(name="ADDRESS")
+    private String address;
 
     @Basic
     @Column(name="COMMENTS")
