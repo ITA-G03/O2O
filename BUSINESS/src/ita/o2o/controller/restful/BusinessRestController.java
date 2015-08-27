@@ -1,8 +1,11 @@
 package ita.o2o.controller.restful;
 
 
+import ita.o2o.dto.BusinessDto;
+import ita.o2o.dto.OrderDto;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.BusinessTag;
+import ita.o2o.entity.base.Order;
 import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.location.Area;
@@ -10,12 +13,14 @@ import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.BusinessTagServiceImpl;
+import ita.o2o.util.jms.JmsConsumer;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,10 +170,19 @@ public class BusinessRestController {
             }
             if(flag)newBusinessList.add(business);
         }
-
-
-
         return jsonMapper.writeObjectAsString(newBusinessList);
+    }
+
+    @RequestMapping("/unread")
+    @ResponseBody
+    public String getJmsMessage(HttpSession session){
+        System.out.println("unread");
+        new JmsConsumer(session);
+        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
+        List<Order> orders = (List<Order>)session.getAttribute("jmsOrderList");
+        List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(businessDto.getId(), orders);
+        return jsonMapper.writeObjectAsString(orderDtos);
+//        return jsonMapper.writeObjectAsString("fuck you timer");
     }
 
 }

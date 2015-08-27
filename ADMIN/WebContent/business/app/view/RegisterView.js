@@ -153,38 +153,39 @@ Ext.define('MyApp.view.RegisterView', {
                         {
                             xtype: 'gridpanel',
                             title: 'Business Register Message',
-							store:Ext.create('MyApp.model.MyModel'),
+							store:Ext.create('MyApp.store.MyStore'),
+							id:'searchResultGrid',
+							itemId:'searchResultGrid',
                             columns: [
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'string',
+                                    dataIndex: 'businessId',
                                     text: 'Id'
                                 },
                                 {
-                                    xtype: 'numbercolumn',
-                                    dataIndex: 'number',
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'realName',
                                     text: 'Name'
                                 },
                                 {
-                                    xtype: 'datecolumn',
-                                    dataIndex: 'date',
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'idCardId',
                                     text: 'ID Card'
                                 },
 								{
-                                    xtype: 'numbercolumn',
-                                    dataIndex: 'number',
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'licenseId',
                                     text: 'License'
                                 },
                                 {
-                                    xtype: 'booleancolumn',
-                                    dataIndex: 'bool',
-                                    text: 'Tel'
-                                },
-                                {
                                     xtype: 'gridcolumn',
+                                    dataIndex: 'statusName',
                                     text: 'Status'
                                 }
                             ],
+                            selModel: Ext.create('Ext.selection.CheckboxModel', {
+								mode:'SINGLE'
+							}),
                             dockedItems: [
                                 {
                                     xtype: 'toolbar',

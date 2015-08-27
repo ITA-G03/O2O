@@ -19,13 +19,15 @@ public class UserDaoImpl implements UserDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	@Override
 	public List<User> query() {
-		String ql = "select User(u.userId,u.tel) from User u";
+		String ql = "from User u";
 		Query q = em.createQuery(ql);
 		List<User> list = q.getResultList();
 		return list;
 	}
 
+	@Override
 	public int getIdByTel(String tel) {
 		CriteriaBuilder buidler = em.getCriteriaBuilder();
 		CriteriaQuery<User> query = buidler.createQuery(User.class);
@@ -37,19 +39,12 @@ public class UserDaoImpl implements UserDao {
 		return u.getUserId();
 	}
 
+	@Override
 	public boolean update(int id) {
 		User u = em.find(User.class, id);
 		u.setEncryptedPassword("123456");
-		try {
-			em.merge(u);
-			return true;
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-		return false;
-
+		em.merge(u);
+		return true;
 	}
 
 }

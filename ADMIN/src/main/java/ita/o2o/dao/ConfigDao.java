@@ -7,7 +7,7 @@ import java.util.List;
 public interface ConfigDao {
 	public List<Configuration> getAll();
 	
-	public int getIdByName(String name);
+	public Configuration getIdByName(String name);
 
 	public boolean update(Configuration config);
 	
