@@ -3,6 +3,8 @@ package ita.o2o.dao.impl;
 import ita.o2o.constants.O2OConstants;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.entity.base.Food;
+import ita.o2o.entity.extra.FoodType;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +19,11 @@ import java.util.List;
 public class FoodDaoImpl extends BaseDaoImpl<Food> {
 
 
-    public List<Food> getByBusinessId(int businessId){
+    @SuppressWarnings("unchecked")
+	public List<Food> getByBusinessId(int businessId){
         String hql = "FROM Food F WHERE F.owner.businessId = :businessId";
         Query query = this.getManager().createQuery(hql);
-        query.setParameter("businessId", businessId);
+       query.setParameter("businessId", businessId);
         return query.getResultList();
     }
 
@@ -49,4 +52,33 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
         }
         return O2OConstants.DEFAULT_FAILURE_CODE;
     }
+    
+    
+    public boolean delete(Food food) {
+    	  try {
+	            Food ft=this.getManager().merge(food);
+	            this.getManager().remove(ft);
+	            return true;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return false;
+    }
+    
+    
+   public boolean updateFood(Food food) {
+	   String hql = "UPDATE Food food SET food.foodName=:foodName,food.price=:price where food.foodId=:foodId";
+       Query query = this.getManager().createQuery(hql);
+       query.setParameter("foodName",food.getFoodName());
+       query.setParameter("price",food.getPrice());
+       query.setParameter("foodId",food.getFoodId());
+       int m = query.executeUpdate();
+  System.out.println(m);
+       if(m>0)
+    	   return true;
+       
+       return false;
+       
+	   
+   }
 }

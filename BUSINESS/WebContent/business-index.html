@@ -19,7 +19,7 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!--  <script src="../js/business/changeInfo.js"></script>  改变个人信息-->
      <script src="../js/food/foodType.js"></script> 
-      <!--  <script src="../js/food/foodList.js"></script> -->
+      <script src="../js/food/foodList.js"></script> 
     
     <script type="application/javascript">
         //        $(function () {
@@ -43,6 +43,11 @@
        font-family : 微软雅黑,宋体;
        font-size : 2em;
 	   color : green;
+       }
+       #deleteMessage {
+       	 font-family : 微软雅黑,宋体;
+       font-size : 2em;
+	   color : red;
        }
         
     </style>
@@ -69,7 +74,7 @@
                 <!-- <li><a href="package.html">Package</a></li>-->
                 <!-- 订单管理-->
                 <li>
-                    <a href="order" role="button">Order</a>
+                    <a href="../business/order" role="button">Order</a>
                 </li>
                 
                 <li>
@@ -79,7 +84,7 @@
 								class="caret"></span></a>
 								<ul class="dropdown-menu">
                             <li id="foodType"><button type="button" name="addFood"class="btn btn-success btn-xs" data-toggle='modal' data-target='#myModal'>New</button>&nbsp&nbsp
-                            <button  type="button" name="delete" class="btn btn-danger btn-xs">Delete</button></li>
+                            <button  type="button" name="look" class="btn btn-danger btn-xs">Look</button></li>
                         </ul>
                 </li>
             </ul>
@@ -109,25 +114,12 @@
                             <th>Name</th>
                             <th>Picture</th>
                             <th>Price</th>
-                            <th>Rating</th>
-                            <th>SaleVolumns</th>
+                            <th>FoodType</th>
                             <th style="width:150px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-								<td >{foodId}</td>
-								<td >{foodName}</td>
-								<td >{foodPrice}</td>
-								<td >{foodPicture}</td>
-								<td>{Rating}</td>
-								<td>{SaleVolums}</td>
-								<!--<td><a href="updateFood.html">update</a>&emsp;<a href="#" onclick="return confirm('Delete this item?')">delete</a></td>-->
-								<td class="col-xs-4">
-									<button type="button" class="btn btn-primary"  data-toggle='modal' data-target='#myModal3' >update</button>
-									<button type="button" class="btn btn-warning">delete</button>
-								</td>
-							</tr>
+                  
                 </table>
 
         </div>
@@ -176,7 +168,7 @@
     
      <h1 class="page-header">Delete Food Type</h1>
                     <div class="form-group">
-                      
+                     <span id="deleteMessage"></span> 
                       <table id="t" class="table table-hover">
 						<tr>
 						<th>ID</th>
@@ -227,7 +219,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" name="save" class="btn btn-primary">Save changes</button>
+        <button type="button" name="saveFood" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

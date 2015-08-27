@@ -7,7 +7,7 @@ $(function () {
 				});	
 		});
 	
-		$("button[name=delete]").on("click",function() {
+		$("button[name=look]").on("click",function() {
 			$('#myModal2').modal('show')
 			$("#myModal2").find("#t").children().remove();
 			$.post("../business/food/type",function(data) {
@@ -15,23 +15,33 @@ $(function () {
 					var trs="<tr>";
 					trs+="<td id='foodTypeId'>"+data[i].foodTypeId+"</td>";
 					trs+="<td id='foodTypeName'>"+data[i].foodTypeName+"</td>";
-					trs+="<td><button type='button' name='delete' >delete</button></td>";
+					trs+="<td><button type='button' name='deleteType' >delete</button></td>";
 					trs+="</tr>"
-				    $("#myModal2").find("#t").append(trs);	
-					
-					$("#myModal2").find("button[name=delete]").on("click",function() {
-						var tts =$(this).parent().parent();
-						var foodTypeId = $(tts).children().eq(0).text();
-						$.post("../action/food/type/delete",{foodTypeId:foodTypeId},function(data) {
-								tts.remove();
-						})	
-					});
+				    $("#myModal2").find("#t").append(trs);		
 				}
-				});	
-			
-			
-			
-			
+				$("button[name=deleteType]").on("click",function() {
+					var ttr = $(this).parent().parent();
+					var foodTypeId = $(ttr).children().eq(0).text();
+					alert(foodTypeId);
+					$.post('../action/food/type/find',{foodTypeId:foodTypeId},function(data) {
+						var _this = ttr;
+						if(data.status=="success") {
+							$("#deleteMessage").text("It is not allowed to delete!");
+						}else {
+							$.post("../action/food/type/delete",{foodTypeId:foodTypeId},function(data){
+								var _tthis=ttr;
+								if(data.status="success") {
+									_tthis.remove();	
+								}
+								
+							})
+						}
+						
+						
+					});
+					
+				})
+				});		
 		})
 		
 });
