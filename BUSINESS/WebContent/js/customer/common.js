@@ -63,7 +63,6 @@ app.controller('userCtrl', function ($scope, $http, $cookieStore) {
                 locations.push(data);
             }
             $cookieStore.put('locations', locations);
-            console.log($cookieStore.get('locations'));
         }
     })
 });
