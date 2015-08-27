@@ -52,7 +52,7 @@ public class O2OConstants {
     public static final int LOGIN_SUCCESS=1;
     public static final int LOGIN_USER_NOT_EXIST = 2;
     public static final int LOGIN_PASSWORD_WRONG=3;
-    public static final int LOGIN_USER_APPROVING=4;
+    public static final int LOGIN_BUSINESS_APPROVING=4;
 
 
 
