@@ -55,8 +55,42 @@ app.controller('pageCtrl', function ($scope, $modal) {
     ]
 })
 
+
 app.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
     $scope.cancel = function () {
         $modalInstance.dismiss();
+    };
+
+    $scope.save=function(){
+        //保存密码
+        var oldPassword= $.md5($("#oldPassword").val());
+        var newPassword= $.md5($("#newPassword").val());
+        console.log("Old Password:"+oldPassword);
+        console.log("New Password:"+newPassword);
+
+        $.ajax({
+            url:'/action/mine/info/update',
+            method:'post',
+            data:{
+                oldPassword:oldPassword,
+                newPassword:newPassword
+            },
+            cache:false,
+            success:function(response){
+                var responseMessage=JSON.parse(response);
+                console.log("Response:~"+response+" Status:"+responseMessage.status);
+                $modalInstance.dismiss();
+                if(responseMessage.status=="success"){
+                    $("#updatePasswordMessage").removeClass("hidden").removeClass("text-danger").addClass("text-success").text("更新成功=.=").show();
+                }
+                else{
+                    $("#updatePasswordMessage").removeClass("hidden").removeClass("text-success").addClass("text-danger").text(responseMessage.body.errMsg).show();
+                }
+            },
+            error:function(){
+
+            }
+
+        });
     };
 });

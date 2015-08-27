@@ -2,7 +2,9 @@
     <div class="container">
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-                <li><a href="/index"><i class="fa fa-map-marker"></i>&emsp;{{location.city.cityName}}-{{location.area.areaName}}&emsp;[切换]</a>
+                <li><a href="/index"><i class="fa fa-map-marker"></i>&emsp;{{location.city.cityName}}-{{location.area.areaName}}&emsp;[切换]</a></li>
+                <li ng-show="user&&user.role.roleId==3"><a href="/business/register">我要开店</a></li>
+                <li ng-show="user&&user.role.roleId!=3"><a href="/business/index">我的店铺</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="user"><a href="/register">注册</a>
@@ -40,11 +42,11 @@
     </div>
 </div>
 <script type="text/ng-template" id="customTemplate.html">
-    <a>
+    <a href="/restaurant/{{match.model.id}}">
         <div style="width: 390px;">
             <span style="width: 250px;display: inline-block">{{match.model.name}}</span>
             <span style="width: 140px;text-align: right;display: inline-block">
-                <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=1]"></i>
+                <i class="fa fa-star star" ng-class="{true:'active',false:''}[>=1]"></i>
                 <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=2]"></i>
                 <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=3]"></i>
                 <i class="fa fa-star star" ng-class="{true:'active',false:''}[match.model.rating>=4]"></i>
