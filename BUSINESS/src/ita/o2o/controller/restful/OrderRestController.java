@@ -242,7 +242,7 @@ public class OrderRestController {
         Order order = orderService.getOrderById(orderId);
         Status status = statusService.getById(O2OConstants.STATUS_REJECTED);
         ResponseMessage responseMessage = new ResponseMessage();
-
+        order.setStatus(status);
         if (orderService.updateOrder(order)) {
             responseMessage.setStatus(O2OConstants.SUCCESS);
         } else {
