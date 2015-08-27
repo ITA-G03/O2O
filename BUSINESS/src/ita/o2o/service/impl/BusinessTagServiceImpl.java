@@ -28,7 +28,7 @@ public class BusinessTagServiceImpl implements BusinessTagService {
     public List<BusinessTag> getAll() {
         List<BusinessTag> businessTagList=businessTagDao.getAll();
         for(BusinessTag businessTag:businessTagList){
-            businessTag.getBusiness().setBusinessTags(new ArrayList<>());
+            businessTag.getBusiness().setBusinessTags(new ArrayList<BusinessTag>());
         }
         return businessTagList;
     }
@@ -38,7 +38,7 @@ public class BusinessTagServiceImpl implements BusinessTagService {
     public List<BusinessTag> getByBusiness(Business business) {
         List<BusinessTag> businessTagList=businessTagDao.getByBusiness(business);
         for(BusinessTag businessTag:businessTagList){
-            businessTag.getBusiness().setBusinessTags(new ArrayList<>());
+            businessTag.getBusiness().setBusinessTags(new ArrayList<BusinessTag>());
         }
         return businessTagList;
     }
