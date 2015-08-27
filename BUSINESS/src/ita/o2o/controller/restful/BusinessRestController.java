@@ -10,6 +10,7 @@ import ita.o2o.entity.location.Location;
 
 import ita.o2o.service.BusinessService;
 import ita.o2o.service.impl.BusinessServiceImpl;
+import ita.o2o.service.impl.UserServiceImpl;
 import ita.o2o.util.mapper.JSONMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class BusinessRestController {
 
     @Autowired
     BusinessServiceImpl businessService;
+
+    @Autowired
+    UserServiceImpl userService;
 
     /**
      * 获得当前商家的信息
@@ -65,8 +69,8 @@ public class BusinessRestController {
 //        business.set`
         business.setStatus(status);*/
 
-
-        Business business = businessService.getByUser(user);
+        User user1 = userService.getById(user.getUserId());
+        Business business = businessService.getByUser(user1);
 
         return jsonMapper.writeObjectAsString(business);
     }
