@@ -12,19 +12,11 @@ app.controller('pageCtrl', function ($scope, $http) {
     }
 
     $scope.order = function () {
-        $.ajax({
-            url:'/order/cart/session',
-            type:'post',
-            data: JSON.stringify($scope.cart),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function(data){
-               if(data.status == "success")
-                window.location.href = '/order';
-            }
 
-        });
+        window.location.href = '/order';
     }
+
+
 
     $http.get('/rest/restaurant/detail').success(function (data) {
         console.info(data.foodList);
@@ -40,6 +32,11 @@ app.controller('pageCtrl', function ($scope, $http) {
     });
 
     $scope.cart = [];
+
+    $http.get('/order/cart/session').success(function (data) {
+        console.info(data);
+        $scope.cart = !data ? [] : data.foodList;
+    });
 
     $scope.getCartValue = function () {
         var v = 0;
@@ -66,18 +63,31 @@ app.controller('pageCtrl', function ($scope, $http) {
                 num: 1
             })
         }
+        sendAjaxToAddSession();
     }
+
+    var sendAjaxToAddSession = function(){
+        $.ajax({
+            url:'/order/cart/session',
+            type:'post',
+            data: JSON.stringify($scope.cart),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+        });
+    };
 
     $scope.more = function (index) {
         $scope.cart[index].num += 1;
+        sendAjaxToAddSession();
     }
+
     $scope.less = function (index) {
         if ($scope.cart[index].num > 1) {
             $scope.cart[index].num -= 1;
         } else {
-            $scope.cart[index].num = 0;
+            $scope.cart.splice(index,1);
         }
-
+        sendAjaxToAddSession();
     }
 })
 
