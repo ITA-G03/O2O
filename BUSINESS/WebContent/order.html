@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/base.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <script src="/bower/angular/angular.js"></script>
+    <script src="/bower/jquery/jquery-1.11.3.js"></script>
     <script src="/bower/angular-animate/angular-animate.js"></script>
     <script src="/bower/angular-cookies/angular-cookies.js"></script>
     <script src="/bower/angular-ui-bootstrap/uibootstrap.js"></script>
@@ -22,7 +23,7 @@
     <div class="row">
         <div class="col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="restaurant.html">炸Tomcat</a>
+                <li><a href="restaurant.html">{{restaurant.name}}</a>
                 </li>
                 <li class="active">确认购买</li>
             </ol>
@@ -50,13 +51,13 @@
             <form class="order-form">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-map-marker icon-lg"></i></span>
-                    <input type="text" class="form-control input-lg" placeholder="输入送餐地址">
+                    <input type="text" class="form-control input-lg" placeholder="输入送餐地址" ng-model="customerAddr">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-comment icon-lg"></i></span>
-                    <input type="text" class="form-control input-lg" placeholder="输入留言">
+                    <input type="text" class="form-control input-lg" placeholder="输入留言" ng-model="remark">
                 </div>
-                <button type="button" class="btn btn-lg btn-block btn-danger" ng-click="pay()">支付￥127.0</button>
+                <button type="button" class="btn btn-lg btn-block btn-danger" ng-click="pay()">支付￥{{sum}}</button>
             </form>
         </div>
     </div>

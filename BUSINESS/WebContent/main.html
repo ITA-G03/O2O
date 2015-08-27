@@ -62,11 +62,11 @@
             <div class="row">
                 <div class="res-container">
                     <div class="res-box col-xs-3" ng-repeat="r in res" ng-show="r.show">
-                        <a href="/restaurant/{{r.id}}" class="thumbnail">
-                            <img ng-src="{{r.img}}">
+                        <a href="/restaurant/{{r.id}}/{{r.name}}" class="thumbnail">
+                            <img ng-src="/image/view/{{r.logoId}}">
                         </a>
 
-                        <h3><a href="/restaurant">{{r.name}}</a></h3>
+                        <h3><a href="/restaurant/{{r.id}}/{{r.name}}">{{r.name}}</a></h3>
 
                         <div class="row">
                             <div class="col-xs-6">

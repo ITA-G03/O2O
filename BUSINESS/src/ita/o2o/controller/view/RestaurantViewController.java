@@ -1,5 +1,6 @@
 package ita.o2o.controller.view;
 
+import ita.o2o.dto.BusinessDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,13 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/restaurant")
 public class RestaurantViewController {
 
-    @RequestMapping(value = "/{businessId}", method = RequestMethod.GET)
-    public String getCurrentRestaurant(@PathVariable int businessId, HttpSession session){
-        session.setAttribute("currentRestaurant", businessId);
+    @RequestMapping(value = "/{businessId}/{storeName}", method = RequestMethod.GET)
+    public String getCurrentRestaurant(@PathVariable int businessId, @PathVariable String storeName, HttpSession session){
+        BusinessDto businessDto = new BusinessDto();
+        businessDto.setId(businessId);
+        businessDto.setName(storeName);
+        System.out.print(storeName);
+        session.setAttribute("currentRestaurant", businessDto);
         return "restaurant";
     }
 }
