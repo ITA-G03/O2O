@@ -75,6 +75,10 @@ app.controller('SearchRestaurantCtrl', function ($scope, $http) {
             });
         });
     };
+
+    $scope.onSelectRes = function ($item, $model, $label) {
+        location.href = '/restaurant/' + $item.id;
+    }
 });
 
 

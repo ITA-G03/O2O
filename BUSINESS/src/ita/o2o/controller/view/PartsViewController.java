@@ -16,4 +16,9 @@ public class PartsViewController {
     public String mainNavView() {
         return "ng-main-nav";
     }
+
+    @RequestMapping("/main/footer")
+    public String mainFooterView() {
+        return "ng-main-footer";
+    }
 }

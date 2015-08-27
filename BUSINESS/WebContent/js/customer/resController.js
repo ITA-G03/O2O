@@ -46,7 +46,7 @@ app.controller('pageCtrl', function ($scope, $http) {
         for (var i = 0; i < $scope.cart.length; i++) {
             v += $scope.cart[i].price * $scope.cart[i].num;
         }
-        return v;
+        return v.toFixed(1);
     }
 
     $scope.addToCart = function (index) {

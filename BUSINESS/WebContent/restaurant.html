@@ -19,155 +19,161 @@
 
 <body ng-app="o2o" ng-controller="pageCtrl">
 <div ng-include="'/parts/main/nav'"></div>
-<div class="container">
-    <div class="row res-info">
-        <div class="col-xs-12">
-            <div class="res-logo">
-                <img ng-src="{{detail.logoId}}">
-            </div>
-            <div class="res-detail">
-                <h3>{{detail.name}}</h3>
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container">
+            <div class="row res-info">
+                <div class="col-xs-12">
+                    <div class="res-logo">
+                        <img ng-src="{{detail.logoId}}">
+                    </div>
+                    <div class="res-detail">
+                        <h3>{{detail.name}}</h3>
 
-                <p class="text-muted">{{detail.addr}}</p>
+                        <p class="text-muted">{{detail.addr}}</p>
 
-                <p class="text-muted">{{detail.price}}</p>
-            </div>
-            <div class="res-data">
-                <div class="res-data-box">
-                    <h1>{{detail.rating}}</h1>
+                        <p class="text-muted">{{detail.price}}</p>
+                    </div>
+                    <div class="res-data">
+                        <div class="res-data-box">
+                            <h1>{{detail.rating}}</h1>
 
-                    <p class="text-muted">商家评分</p>
-                </div>
-                <div class="res-data-seperator"></div>
-                <div class="res-data-box">
-                    <h1>{{detail.time}}</h1>
-
-                    <p class="text-muted">平均送餐时间</p>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-
-    <div class="row res-main">
-        <div class="col-xs-8">
-            <div class="row">
-                <tabset justified="true">
-                    <tab heading="餐点">
-                        <div class="col-xs-12 tab-inner">
-                            <div class="btn-group btn-group-justified" role="group">
-                                <div class="btn-group" role="group" ng-repeat="type in foodTypes">
-                                    <button class="btn btn-danger"
-                                            ng-class="{true: 'active', false: ''}[type==selectedFoodType]"
-                                            ng-click="changeFoodType(type)">{{type}}
-                                    </button>
-                                </div>
-                            </div>
-                            <table class="table table-hover table-food">
-                                <tbody>
-                                <tr ng-repeat="f in foods" ng-show="f.type==selectedFoodType||selectedFoodType=='全部'">
-                                    <td>{{f.name}}</td>
-                                    <td class="table-food-price"><b>￥{{f.price}}/份</b>
-                                    </td>
-                                    <td class="table-food-action">
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                                ng-click="addToCart($index)"><i class="fa fa-plus"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <p class="text-muted">商家评分</p>
                         </div>
-                    </tab>
-                    <tab heading="评价">
-                        <div class="col-xs-12 tab-inner">
-                            <div class="btn-group btn-group-justified" role="group">
-                                <div class="btn-group" role="group" ng-repeat="type in commentTypes">
-                                    <button class="btn btn-danger"
-                                            ng-class="{true: 'active', false: ''}[type==selectedCommentType]"
-                                            ng-click="changeCommentType(type)">{{type}}
-                                    </button>
+                        <div class="res-data-separator"></div>
+                        <div class="res-data-box">
+                            <h1>{{detail.time}}</h1>
+
+                            <p class="text-muted">平均送餐时间</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="row res-main">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <tabset justified="true">
+                            <tab heading="餐点">
+                                <div class="col-xs-12 tab-inner">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group" ng-repeat="type in foodTypes">
+                                            <button class="btn btn-danger"
+                                                    ng-class="{true: 'active', false: ''}[type==selectedFoodType]"
+                                                    ng-click="changeFoodType(type)">{{type}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover table-food">
+                                        <tbody>
+                                        <tr ng-repeat="f in foods"
+                                            ng-show="f.type==selectedFoodType||selectedFoodType=='全部'">
+                                            <td>{{f.name}}</td>
+                                            <td class="table-food-price"><b>￥{{f.price}}/份</b>
+                                            </td>
+                                            <td class="table-food-action">
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                        ng-click="addToCart($index)"><i class="fa fa-plus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
-                            <div class="comments">
-                                <div class="comment-box" ng-repeat="c in comments">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <span class="text-muted">总体评分: </span>
-                                            <i class="fa fa-star star"
-                                               ng-class="{true:'active',false:''}[c.rating>=1]"></i>
-                                            <i class="fa fa-star star"
-                                               ng-class="{true:'active',false:''}[c.rating>=2]"></i>
-                                            <i class="fa fa-star star"
-                                               ng-class="{true:'active',false:''}[c.rating>=3]"></i>
-                                            <i class="fa fa-star star"
-                                               ng-class="{true:'active',false:''}[c.rating>=4]"></i>
-                                            <i class="fa fa-star star"
-                                               ng-class="{true:'active',false:''}[c.rating>=5]"></i>
+                            </tab>
+                            <tab heading="评价">
+                                <div class="col-xs-12 tab-inner">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group" ng-repeat="type in commentTypes">
+                                            <button class="btn btn-danger"
+                                                    ng-class="{true: 'active', false: ''}[type==selectedCommentType]"
+                                                    ng-click="changeCommentType(type)">{{type}}
+                                            </button>
                                         </div>
-                                        <div class="col-xs-6 text-right">
-                                            <p class="text-muted">{{c.date}}</p>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <p>{{c.body}}</p>
+                                    </div>
+                                    <div class="comments">
+                                        <div class="comment-box" ng-repeat="c in comments">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <span class="text-muted">总体评分: </span>
+                                                    <i class="fa fa-star star"
+                                                       ng-class="{true:'active',false:''}[c.rating>=1]"></i>
+                                                    <i class="fa fa-star star"
+                                                       ng-class="{true:'active',false:''}[c.rating>=2]"></i>
+                                                    <i class="fa fa-star star"
+                                                       ng-class="{true:'active',false:''}[c.rating>=3]"></i>
+                                                    <i class="fa fa-star star"
+                                                       ng-class="{true:'active',false:''}[c.rating>=4]"></i>
+                                                    <i class="fa fa-star star"
+                                                       ng-class="{true:'active',false:''}[c.rating>=5]"></i>
+                                                </div>
+                                                <div class="col-xs-6 text-right">
+                                                    <p class="text-muted">{{c.date}}</p>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <p>{{c.body}}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </tab>
-                </tabset>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="panel panel-danger">
-                <div class="panel-heading">商家公告</div>
-                <div class="panel-body">
-                    小伙伴们，我们的店铺可以使用支付红包省钱钱了，花点小功夫用起来吧，愿大家生活愉快！
-                </div>
-            </div>
-            <div class="panel panel-danger cart">
-                <div class="panel-heading">购物车</div>
-                <div>
-                <table>
-                <tr>
-                    <th width="30px"></th>
-                    <th width="138px">菜名：</th>
-                    <th width="138px">数量：</th>
-                    <th>单价：</th>
-                </tr>
-                </table>
+                            </tab>
+                        </tabset>
                     </div>
-                <div class="panel-body">
-                    <div class="orders">
-                        <div class="order-box" ng-repeat="c in cart">
-                            <div class="order-name">{{c.name}}</div>
-                            <div class="input-group order-num">
+                </div>
+                <div class="col-xs-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">商家公告</div>
+                        <div class="panel-body">
+                            小伙伴们，我们的店铺可以使用支付红包省钱钱了，花点小功夫用起来吧，愿大家生活愉快！
+                        </div>
+                    </div>
+                    <div class="panel panel-danger cart">
+                        <div class="panel-heading">购物车</div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <th width="30px"></th>
+                                    <th width="138px">菜名：</th>
+                                    <th width="138px">数量：</th>
+                                    <th>单价：</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="panel-body">
+                            <div class="orders">
+                                <div class="order-box" ng-repeat="c in cart">
+                                    <div class="order-name">{{c.name}}</div>
+                                    <div class="input-group order-num">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default btn-sm" type="button" ng-click="less($index)">-
                                         </button>
                                     </span>
-                                <input type="text" class="form-control input-sm" value="{{c.num}}" readonly>
+                                        <input type="text" class="form-control input-sm" value="{{c.num}}" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn btn-default btn-sm" type="button" ng-click="more($index)">+
                                         </button>
                                     </span>
-                            </div>
-                            <div class="order-price">￥{{c.price}}</div>
-                            <div class="clear"></div>
-                        </div>
+                                    </div>
+                                    <div class="order-price">￥{{c.price}}</div>
+                                    <div class="clear"></div>
+                                </div>
 
-                    </div>
-                    <div class="pay">
-                        <span class="total">￥{{getCartValue()}}</span>
-                        <button class="btn btn-success pull-right" id="orderBtn" ng-click="order()">去下单</button>
-                        <div class="clear"></div>
+                            </div>
+                            <div class="pay">
+                                <span class="total">￥{{getCartValue()}}</span>
+                                <button class="btn btn-success pull-right" id="orderBtn" ng-click="order()">去下单</button>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div ng-include="'/parts/main/footer'"></div>
 </div>
 </body>
 

@@ -29,7 +29,7 @@
                     <option ng-repeat="c in cities" value="{{c.cityId}}">{{c.cityName}}</option>
                 </select>
 
-                <div class="input-group area">
+                <div class="input-group area input-typeahead">
                     <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" name="areaName" required ng-model="searchArea"
                            typeahead="area as area.areaName for area in areas | filter:$viewValue" typeahead-template-url="customTemplate.html">
                         <span class="input-group-btn">
