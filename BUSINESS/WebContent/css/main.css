@@ -24,6 +24,26 @@ body {
     padding: 50px 0 0;
 }
 
+.page-wrapper .page-footer.page-footer-index {
+    height: 100px;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    text-align: center;
+    color: #fff;
+}
+
+.page-wrapper .page-footer.page-footer-index a {
+    color: #fff;
+}
+
+.page-wrapper .page-footer.page-footer-index a:hover,
+.page-wrapper .page-footer.page-footer-index a:focus,
+.page-wrapper .page-footer.page-footer-index a:active,
+.page-wrapper .page-footer.page-footer-index a:visited {
+    color: #fff;
+}
+
 .page-wrapper .page-footer .border-left {
     border-left: 1px dotted #a5a5a5;
 }
@@ -65,6 +85,7 @@ a:hover,
 a:active,
 a:focus {
     color: #ff0039;
+    text-decoration: none;
 }
 
 a.highlight,

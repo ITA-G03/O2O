@@ -20,32 +20,42 @@
 
 <body class="change-location-bg" ng-app="o2o">
 <div ng-include="'/parts/index/nav'"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <form class="change-location-form" ng-controller="locationCtrl" method="post"
-                  action="/action/location/search">
-                <select class="form-control input-lg city" required name="cityId">
-                    <option ng-repeat="c in cities" value="{{c.cityId}}">{{c.cityName}}</option>
-                </select>
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form class="change-location-form" ng-controller="locationCtrl" method="post"
+                          action="/action/location/search">
+                        <select class="form-control input-lg city" required name="cityId">
+                            <option ng-repeat="c in cities" value="{{c.cityId}}">{{c.cityName}}</option>
+                        </select>
 
-                <div class="input-group area input-typeahead">
-                    <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" name="areaName" required ng-model="searchArea"
-                           typeahead="area as area.areaName for area in areas | filter:$viewValue" typeahead-template-url="customTemplate.html">
+                        <div class="input-group area input-typeahead">
+                            <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" name="areaName"
+                                   required ng-model="searchArea"
+                                   typeahead="area as area.areaName for area in areas | filter:$viewValue"
+                                   typeahead-template-url="customTemplate.html">
                         <span class="input-group-btn">
                             <button class="btn btn-danger btn-lg" type="submit" id="searchBtn">搜索
                             </button>
                         </span>
-                </div>
-                <select class="form-control input-lg history" ng-model="historyIndex" ng-change="searchFromHistory()">
-                    <option value="" disabled selected>历史地址</option>
-                    <option ng-repeat="h in history" value="{{$index}}">{{h.city.cityName}}-{{h.area.areaName}}</option>
-                </select>
+                        </div>
+                        <select class="form-control input-lg history" ng-model="historyIndex"
+                                ng-change="searchFromHistory()">
+                            <option value="" disabled selected>历史地址</option>
+                            <option ng-repeat="h in history" value="{{$index}}">
+                                {{h.city.cityName}}-{{h.area.areaName}}
+                            </option>
+                        </select>
 
-                <div class="clear"></div>
-            </form>
+                        <div class="clear"></div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+    <div ng-include="'/parts/index/footer'"></div>
 </div>
 <script type="text/ng-template" id="customTemplate.html">
     <a>
