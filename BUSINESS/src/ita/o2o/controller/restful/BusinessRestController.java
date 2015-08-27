@@ -2,22 +2,20 @@ package ita.o2o.controller.restful;
 
 
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.BusinessTag;
 import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
-
-import ita.o2o.service.BusinessService;
 import ita.o2o.service.impl.BusinessServiceImpl;
-import ita.o2o.service.impl.UserServiceImpl;
+import ita.o2o.service.impl.BusinessTagServiceImpl;
 import ita.o2o.util.mapper.JSONMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class BusinessRestController {
     BusinessServiceImpl businessService;
 
     @Autowired
-    UserServiceImpl userService;
+    BusinessTagServiceImpl businessTagService;
 
     /**
      * 获得当前商家的信息
@@ -69,8 +67,8 @@ public class BusinessRestController {
 //        business.set`
         business.setStatus(status);*/
 
-        User user1 = userService.getById(user.getUserId());
-        Business business = businessService.getByUser(user1);
+
+        Business business = businessService.getByUser(user);
 
         return jsonMapper.writeObjectAsString(business);
     }
@@ -127,6 +125,30 @@ public class BusinessRestController {
         status.setStatusName("申请");
         business.setStatus(status);
         return business;
+    }
+
+
+    @RequestMapping("/tag/{tagId}")
+    @ResponseBody
+    public String getBusinessListByTag(@PathVariable("tagId") String tagId){
+
+        BusinessTag tag=businessTagService.getById(Integer.valueOf(tagId));
+        List<Business> businessList=businessService.getAll();
+        List<Business> newBusinessList=new ArrayList<>();
+        for(Business business:businessList){
+            boolean flag=false;
+            for(BusinessTag businessTag:business.getBusinessTags()){
+                System.out.println("===Comparing: Tag"+tagId+"And business~Tag:"+businessTag.getBusinessTagId());
+                if(businessTag.getBusinessTagId()==Integer.valueOf(tagId)){
+                    flag=true;
+                }
+            }
+            if(flag)newBusinessList.add(business);
+        }
+
+
+
+        return jsonMapper.writeObjectAsString(newBusinessList);
     }
 
 }

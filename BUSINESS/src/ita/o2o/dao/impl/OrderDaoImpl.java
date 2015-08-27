@@ -14,13 +14,13 @@ import java.util.List;
  * Created by ZHANGJA4 on 8/26/2015.
  */
 @Repository("orderDao")
-public class OderDaoImpl extends BaseDaoImpl<Order> {
+public class OrderDaoImpl extends BaseDaoImpl<Order> {
     public static final String USER_ID="userId";
     public static final String CUSTOMER="customer";
     public static final String BUSINESS="business";
     public static final String STATUS="status";
 
-    public OderDaoImpl() {
+    public OrderDaoImpl() {
         super(Order.class);
     }
 

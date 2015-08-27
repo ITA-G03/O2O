@@ -1,7 +1,7 @@
 package ita.o2o.service.impl;
 
 import ita.o2o.constants.O2OConstants;
-import ita.o2o.dao.impl.OderDaoImpl;
+import ita.o2o.dao.impl.OrderDaoImpl;
 import ita.o2o.dao.impl.StatusDaoImpl;
 import ita.o2o.dao.impl.UserDaoImpl;
 import ita.o2o.dto.FoodDto;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +25,7 @@ import java.util.List;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
     @Autowired
-    OderDaoImpl orderDao;
+    OrderDaoImpl orderDao;
 
     @Autowired
     UserDaoImpl userDao;

@@ -20,7 +20,7 @@ public class BusinessTag {
     @Column(name="BUSINESS_TAG_NAME")
     private String businessTagName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="BUSINESS_ID")
     private Business business;
 
@@ -43,4 +43,11 @@ public class BusinessTag {
         this.business = business;
     }
 
+    public String getBusinessTagName() {
+        return businessTagName;
+    }
+
+    public void setBusinessTagName(String businessTagName) {
+        this.businessTagName = businessTagName;
+    }
 }

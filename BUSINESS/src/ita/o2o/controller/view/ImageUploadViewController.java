@@ -22,7 +22,7 @@ import java.io.OutputStream;
 @Controller
 @RequestMapping("/image")
 public class ImageUploadViewController extends BaseController {
-
+    public static final int DEFAULT_IMAGE_ID = 301;
 
     @Autowired
     ImageServiceImpl imageService;
@@ -47,16 +47,14 @@ public class ImageUploadViewController extends BaseController {
 
     @RequestMapping("/view/{imageId}")
     public void printImage(HttpServletResponse response, @PathVariable("imageId") String imageId) throws IOException {
-        Image image = imageService.getById(Integer.valueOf(imageId));
+        Image image;
+        image = imageService.getById(Integer.valueOf(imageId));
+        if (image == null) image = imageService.getById(DEFAULT_IMAGE_ID);
         OutputStream outputStream = response.getOutputStream();
         outputStream.write(image.getImageBody());
         outputStream.flush();
         outputStream.close();
     }
-
-
-
-
 
 
 }
