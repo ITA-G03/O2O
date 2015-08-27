@@ -17,12 +17,12 @@ public class Location {
     private int locationId;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="CITY_ID")
     private City city;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="AREA_ID")
     private Area area;
 
