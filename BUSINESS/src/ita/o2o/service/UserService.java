@@ -13,4 +13,6 @@ public interface UserService {
     User getById(Integer id);
 
     int login(String tel,String encryptedPassword);
+
+    int updatePassword(int userId,String oldPassword, String newPassword);
 }

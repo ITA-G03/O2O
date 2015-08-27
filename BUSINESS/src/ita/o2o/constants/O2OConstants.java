@@ -50,7 +50,7 @@ public class O2OConstants {
     public static final int DEFAULT_FAILURE_CODE=-1;
 
 
-
-
-
+    //用户更新Password操作返回值
+    public static final int USER_UPDATE_OLD_PASSWORD_WRONG = 0;
+    public static final int USER_UPDATE_SUCCESS = 1;
 }
