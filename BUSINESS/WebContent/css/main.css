@@ -381,18 +381,30 @@ form.register-form {
 .orders .order-box .order-name {
     float: left;
     width: 120px;
+    font-size: .8em;
 }
 
 .orders .order-box .order-num {
     float: left;
     width: 100px;
     margin-left: 20px;
+    font-size: .8em;
+}
+
+.orders .order-box .order-num .input-group-addon {
+    background-color: #fff;
+}
+
+.orders .order-box .order-num .form-control[disabled],
+.orders .order-box .order-num .form-control[readonly] {
+    background-color: #fff;
 }
 
 .orders .order-box .order-price {
     float: right;
     margin-left: 20px;
-    width: 30px;
+    width: 40px;
+    font-size: .8em;
 }
 
 .pay {
@@ -461,4 +473,24 @@ form.register-form {
 .input-typeahead .dropdown-menu > .active > a:hover,
 .input-typeahead .dropdown-menu > .active > a:focus {
     background-color: #FE4D3D;
+}
+
+.food-detail-img {
+    width: 100%;
+    z-index: 1;
+}
+
+.food-detail-name {
+    margin-top: -35px;
+    text-shadow: 0 0 5px #000000;
+    color: #fff;
+    text-align: center;
+}
+
+.add-to-cart-ball{
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: #ff0039;
+    z-index: 20;
 }
