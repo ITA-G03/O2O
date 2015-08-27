@@ -29,7 +29,7 @@
             <div class="col-xs-5 col-xs-offset-1">
                 <div class="input-group" ng-controller="SearchRestaurantCtrl">
                     <input type="text" class="form-control" placeholder="输入餐厅" ng-model="searchRes"
-                           typeahead="res as res.name for res in getRes()" typeahead-template-url="customTemplate.html">
+                           typeahead="res as res.name for res in getRes()" typeahead-template-url="customTemplate.html" typeahead-min-length="2">
                         <span class="input-group-btn">
                             <button class="btn btn-danger" type="button" id="searchBtn" ng-click="searchRest()">搜索
                             </button>

@@ -10,6 +10,11 @@ app.controller('locationCtrl', function ($scope, $modal, $http, $cookieStore) {
         form.find('select[name=cityId]').val($scope.history[$scope.historyIndex].city.cityId);
         form.find('input[name=areaName]').val($scope.history[$scope.historyIndex].area.areaName);
     }
+
+    $http.get('/rest/location/area').success(function (data) {
+        $scope.areas = data;
+    });
+
 })
 
 $(function () {

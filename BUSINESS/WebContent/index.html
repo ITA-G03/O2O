@@ -30,7 +30,8 @@
                 </select>
 
                 <div class="input-group area">
-                    <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" name="areaName" required>
+                    <input type="text" class="form-control input-lg" placeholder="输入地址搜索周边美食" name="areaName" required ng-model="searchArea"
+                           typeahead="area as area.areaName for area in areas | filter:$viewValue" typeahead-template-url="customTemplate.html">
                         <span class="input-group-btn">
                             <button class="btn btn-danger btn-lg" type="submit" id="searchBtn">搜索
                             </button>
@@ -46,6 +47,13 @@
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <div style="width: 390px;">
+            <span style="width: 250px;display: inline-block">{{match.model.areaName}}</span>
+        </div>
+    </a>
+</script>
 </body>
 
 </html>
