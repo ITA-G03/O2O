@@ -2,11 +2,14 @@ package ita.o2o.controller.restful;
 
 
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
 
+import ita.o2o.service.BusinessService;
+import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.util.mapper.JSONMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +22,14 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "/business",produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/business", produces = "application/json;charset=utf-8")
+@SessionAttributes("user")
 public class BusinessRestController {
     @Autowired
     JSONMapper jsonMapper;
 
-
-
+    @Autowired
+    BusinessServiceImpl businessService;
 
     /**
      * 获得当前商家的信息
@@ -35,10 +39,9 @@ public class BusinessRestController {
      */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/setting/profile")
-    public String getCurrentBusinessInfo() {
-//        System.out.printf(businessId.toString());
-//        System.out.printf(businessId.toString());
-        Business business = new Business();
+    public String getCurrentBusinessInfo(@ModelAttribute("user") User user) {
+        //test data
+      /*  Business business = new Business();
         business.setBusinessId(1);
         business.setRealName("奥尔良煎饼");
         business.setLogoId(123);
@@ -60,11 +63,19 @@ public class BusinessRestController {
         status.setStatusName("申请");
         //comments
 //        business.set`
-        business.setStatus(status);
+        business.setStatus(status);*/
+
+
+        Business business = businessService.getByUser(user);
+
         return jsonMapper.writeObjectAsString(business);
     }
 
-
+    /**
+     * test
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/list")
     public String getALlBusiness() {
@@ -82,6 +93,7 @@ public class BusinessRestController {
 
     /**
      * 获得对应商家的信息
+     * test
      *
      * @param businessId
      * @return
@@ -112,27 +124,5 @@ public class BusinessRestController {
         business.setStatus(status);
         return business;
     }
-
-
-
-/*
-    *//**
-     * 审核商家的申请
-     *
-     * @param businessId,statusId
-     * @return Business
-     *//*
-    @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/business/audit/{businessId}")
-    public Business auditBusinessApply(@PathVariable Integer businessId, @RequestParam(value = "status") Integer statusId) {
-        Business business = new Business();
-        business.setBusinessId(businessId);
-        business.setRealName("奥尔良煎饼");
-        Status status1 = new Status();
-        status1.setStatusId(statusId);
-        business.setStatus(status1);
-        return null;
-    }*/
-
 
 }

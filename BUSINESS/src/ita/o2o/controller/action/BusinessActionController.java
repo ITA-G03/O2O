@@ -1,18 +1,24 @@
 package ita.o2o.controller.action;
 
+import ita.o2o.constants.O2OConstants;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.User;
+import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.LocationServiceImpl;
+import ita.o2o.service.impl.StatusServiceImpl;
 import ita.o2o.service.impl.UserServiceImpl;
 import ita.o2o.util.bean.ResponseMessage;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 @Controller
@@ -31,6 +37,9 @@ public class BusinessActionController {
     @Autowired
     UserServiceImpl userService;
 
+    @Autowired
+    StatusServiceImpl statusService;
+
     @ResponseBody
     @RequestMapping(value = "/register-business")
     public String registBusiness(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, String city, String area, String detail) {
@@ -43,7 +52,9 @@ public class BusinessActionController {
         System.out.println("area: " + area);
         System.out.println("detail: " + detail);
 
-        Business business = businessService.getById(1);
+        User user1 = userService.getById(user.getUserId());
+        Business business = new Business();
+        business.setOwner(user1);
         business.setRealName(signboard);
         business.setLicenseId(licenseId);
         business.setIdCardId(idCardId);
@@ -62,8 +73,27 @@ public class BusinessActionController {
         //Detail
         location.setDetail(comments);
         business.setLocation(location);
-        businessService.updateBusiness(business);
-        return "";
+
+        //店铺status
+        Status status = statusService.getById(O2OConstants.STATUS_APPROVING);
+        //workStaus
+//        Status workStatus = statusService.getById(O2OConstants.WORK_STATUS_CLOSE);
+        business.setStatus(status);
+//        business.setWorkStatus(workStatus);
+        if (businessService.createBusiness(business) >= 0) {
+            //set response
+            ResponseMessage responseMessage = new ResponseMessage();
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+            return jsonMapper.writeObjectAsString(responseMessage);
+        } else {
+            //set response
+            ResponseMessage responseMessage = new ResponseMessage();
+            responseMessage.setStatus(O2OConstants.FAILURE);
+            Map<String, String> body = new LinkedHashMap<>();
+            body.put("message", "insert fail");
+            responseMessage.setBody(body);
+            return jsonMapper.writeObjectAsString(responseMessage);
+        }
     }
 
     @ResponseBody
@@ -99,8 +129,11 @@ public class BusinessActionController {
         //detail
         business.setIntroduction(comments);
         businessService.updateBusiness(business);
-//        ResponseMessage responseMessage = new
-        return "";
+
+        //set response
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setStatus(O2OConstants.SUCCESS);
+        return jsonMapper.writeObjectAsString(responseMessage);
     }
 
 }

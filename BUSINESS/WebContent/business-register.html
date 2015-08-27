@@ -14,28 +14,23 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <form action="#" method="post" class="center-block well form-center">
+            <form id="proflie" class="center-block well form-center">
                 <h1 class="text-center">Seller Register</h1>
 
+                <!--SignBoard-->
                 <div class="form-group">
-                    <label>UserName</label>
-                    <input id="username" type="text" name="username" class="form-control" required
-                           pattern="^[a-zA-z][a-zA-Z0-9_]{3,20}$"
-                           placeholder="用户:开头字母大小写,3-20位"
+                    <label>SignBoard</label>
+                    <input id="signboard" type="text" name="signboard" class="form-control" required
+                           pattern="^[\u4e00-\u9fa5A-Za-z]{3,}$"
+                           placeholder="商铺名:开头字母大小写,3-20位"
                             />
-                    <i id="validateUserNameSpinner" class="fa fa-circle-o-notch fa-spin hidden"></i>
+                    <i id="validateSignBoardNameSpinner" class="fa fa-circle-o-notch fa-spin hidden"></i>
 
-                    <p id="validateUserNameMessage" class="hidden"></p>
+                    <p id="validateSignBoardNameMessage" class="hidden"></p>
                 </div>
-                <div class="form-group">
-                    <label>PassWord</label>
-                    <input id="password" type="password" name="password" class="form-control" required
-                           pattern="^[a-zA-z0-9][a-zA-Z0-9_]{3,20}$"
-                           placeholder="密码:开头字母大小写,3-20位"
-                            />
 
-                    <p id="validatePassWordMessage" class="hidden"></p>
-                </div>
+                <!--Tel-->
+
                 <div class="form-group">
                     <label>Tel</label>
                     <input id="tel" type="tel" name="tel" class="form-control" required
@@ -45,37 +40,67 @@
 
                     <p id="validateTelMessage" class="hidden"></p>
                 </div>
-                <div class="form-group">
+
+                <!--ID Card-->
+                <div class="form-group col-xs-12">
                     <label>ID Card</label>
-                    <img id="idCardImage" class="hidden image-reg-preview"/>
-                    <input id="idCard" type="file" name="idCard" class="form-control" required
-                           pattern="^[0-9]{5}[0-9xX]{1}$"
+                    <input name="idCardId" id="idCardId" hidden>
+                    <img id="idCardImage" class="hidden img-thumbnail"/>
+                    <input id="idCard" type="file" name="idCard" class="form-control" pattern="^[0-9]{5}[0-9xX]{1}$"
                            placeholder="身份证:请上传图片"
                             />
 
                     <p id="validateIdCardMessage" class="hidden"></p>
                 </div>
-                <div class="form-group">
+
+                <!--license-->
+                <div class="form-group col-xs-12">
                     <label>License</label>
-                    <img id="licenseImage" class="hidden image-reg-preview"/>
-                    <input id="license" type="file" name="license" class="form-control" required
-                           placeholder="许可证:请上传许可证照片"
-                            />
+                    <input name="licenseId" id="licenseId" hidden/>
+                    <img id="licenseImage" class="hidden img-thumbnail img-thumbnail"/>
+                    <input id="license" type="file" name="license" class="form-control"
+                           placeholder="许可证:请上传许可证照片"/>
 
                     <p id="validateLicenseMessage" class="hidden"></p>
                 </div>
-                <br/>
+
+                <!--City-->
+                <div class="btn-group">
+                    <select class="form-control" name="city">
+                        <option>Action</option>
+                        <option>Another action</option>
+                        <option>Something else here</option>
+                    </select>
+                </div>
+                <!--Area-->
+                <div class="btn-group">
+
+                    <select class="form-control" name="area">
+                        <option>Action</option>
+                        <option>Another action</option>
+                        <option>Something else here</option>
+                    </select>
+                </div>
+                <br><br>
+                <!--Location Detail-->
+                <label>Location Detail</label>
+                <input type="text" name="detail" class="form-control"/>
+                <br>
+                <!--comments-->
+                <label>comments</label>
+                <textarea name="comments" class="form-control" rows="3"></textarea>
+                </br>
+
                 <input id="idCardId" type="hidden"/>
                 <input id="licenseId" type="hidden"/>
                 <span id="errorMessage" class="text-danger"></span>
                 <br/>
-                <button id="registerButton" type="button" class="btn btn-block btn-success">Register</button>
+                <button id="registerButton" type="submit" class="btn btn-block btn-success">Register</button>
                 <br/>
 
                 <div class="text-left">
                     <i id="registerSpinner" class="fa fa-spinner fa-pulse hidden"></i>
                 </div>
-
                 <div class="text-right">
                     <a href="login" class="btn btn-link">Cancel</a>
                 </div>
@@ -84,11 +109,52 @@
     </div>
 </div>
 
+<!--jquery-->
 <script type="text/javascript" src="/bower/jquery/jquery-1.11.3.js"></script>
+<!--jquery ajax form-->
+<script type="text/javascript" src="/js/ajaxform/jquery.form.min.js"></script>
+<!--fileupload-->
 <script type="text/javascript" src="/bower/jquery-fileupload/jquery-ajax-fileupload.js"></script>
+<!--bootstrap-->
 <script type="text/javascript" src="/bower/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
+
 <script type="text/javascript" src="/js/register/register.js"></script>
-1
+<script type="application/javascript">
+    $(document).ready(function () {
+        var options = {
+            url: "/business/register-business",
+//            target: '#output1',   // target element(s) to be updated with server response
+            beforeSubmit: showRequest,  // pre-submit callback
+            success: showResponse  // post-submit callback
+            // other available options:
+            //url:       url         // override for form's 'action' attribute
+            //type:      type        // 'get' or 'post', override for form's 'method' attribute
+            //dataType:  null        // 'xml', 'script', or 'json' (expected server response type)
+            //clearForm: true        // clear all form fields after successful submit
+            //resetForm: true        // reset the form after successful submit
+
+            // $.ajax options can be used here too, for example:
+            //timeout:   3000
+        };
+
+        function showResponse(responseText, statusText, xhr, $form) {
+            console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText +
+                    '\n\nThe output div should have already been updated with the responseText.');
+        }
+
+        function showRequest(formData, jqForm, options) {
+            var queryString = $.param(formData);
+//            var
+//            formData.add()
+            console.log('About to submit: \n\n' + queryString);
+            alert("Thanks for you commit");
+            return true;
+        }
+
+        // ?options??ajaxForm
+        $('#proflie').ajaxForm(options);
+    });
+</script>
 </body>
 
 </html>
