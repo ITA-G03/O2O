@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">SMS</a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li >
+                    <a href="../food/addfood" role="button">Food </a>
+
+                </li>
+                <!-- <li><a href="package.html">Package</a></li>-->
+                <!-- 订单管理-->
+                <li>
+                    <a href="../business/order" role="button">Order</a>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Type <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li id="foodType"><button type="button" name="addFood"class="btn btn-success btn-xs" data-toggle='modal' data-target='#myModal'>New</button>&nbsp&nbsp
+                            <button  type="button" name="look" class="btn btn-danger btn-xs">Look</button></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="change-info" data-toggle="modal" data-target="#myModal"><i
+                                class="glyphicon glyphicon-info-sign"></i>&emsp;Change Info</a></li>
+                        <li><a href="login.html"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
