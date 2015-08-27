@@ -86,7 +86,7 @@ a.highlight:focus {
     padding-bottom: 50px;
 }
 .change-location-bg {
-    background: url(../images/bg.jpg) no-repeat #F4F4F4;
+    background: url(/images/bg.jpg) no-repeat #F4F4F4;
     background-size: cover;
 }
 form .input-group {
@@ -286,7 +286,7 @@ form.register-form {
     background: #fff;
 }
 .order-paper-footer {
-    background: url(../img/order-bot-bg1.png) no-repeat;
+    background: url(/images/order-bot-bg1.png) no-repeat;
     background-size: 100% 20px;
     height: 20px;
 }
