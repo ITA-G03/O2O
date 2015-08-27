@@ -62,7 +62,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+li,
+legend {
     font-family: 'Microsoft YaHei', '宋体', 'Tahoma', 'Helvetica', 'Arial', sans-serif;
 }
 
@@ -126,6 +128,10 @@ a.highlight:focus {
 .navbar-default.nav-index .navbar-nav > li > a:hover,
 .navbar-default.nav-index .navbar-nav > li > a:focus {
     background-color: rgba(254, 77, 61, 0.6);
+}
+
+.legend-sm {
+    font-size: 1em;
 }
 
 .clear {

@@ -3,12 +3,12 @@ app.controller('pageCtrl', function ($scope, $http) {
         var customerAddr = $scope.customerAddr;
         var remark = $scope.remark;
         $.ajax({
-            url:'/order/create',
-            type:'POST',
-            data: JSON.stringify({customerAddr:customerAddr,remark:remark}),
+            url: '/order/create',
+            type: 'POST',
+            data: JSON.stringify({customerAddr: customerAddr, remark: remark}),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            success: function(data){
+            success: function (data) {
                 location.href = '/success';
             }
 
@@ -23,7 +23,6 @@ app.controller('pageCtrl', function ($scope, $http) {
         for (var i = 0; i < $scope.orders.length; i++) {
             sum += ($scope.orders[i].price * $scope.orders[i].num);
         }
-        console.info(sum);
         $scope.sum = sum;
     });
 

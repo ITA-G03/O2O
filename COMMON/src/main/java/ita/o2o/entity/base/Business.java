@@ -41,7 +41,7 @@ public class Business {
     private WorkStatus workStatus;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "LOCATION_ID")
     private Location location;
 
