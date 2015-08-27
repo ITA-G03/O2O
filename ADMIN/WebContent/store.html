@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Store</title>
+<link
+	href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#main-nav">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index">ADMIN</a>
+			</div>
+			<div class="collapse navbar-collapse" id="main-nav">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button">Customer<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="customer"><i
+									class="glyphicon glyphicon-user"></i>password</a></li>
+						</ul></li>
+
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button">Business <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="business"><i
+									class="glyphicon glyphicon-user"></i>Register</a></li>
+							<li><a href="store"><i
+									class="glyphicon glyphicon-paperclip"></i>Store</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">System<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="setting"><i class="glyphicon glyphicon-wrench"></i>Setting</a></li>
+                        </ul>
+                    </li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						id="username" data-toggle="dropdown" role="button"><span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="login"><i
+									class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<ol class="breadcrumb">
+					<li><a href="index">Home</a></li>
+					<li class="active">Business</li>
+					<li class="active">Store</li>
+				</ol>
+				<div id="mainForm" class="center-block well"
+					style="max-width: 400px; margin-top: 0px">
+					<h4 class="text-center">Business Store</h4>
+					<input type="text" name="store" placeholder="餐厅名" required />
+					<button id="search">search</button>
+
+					<div id="searchList"></div>
+				</div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Logo</th>
+							<th>Name</th>
+							<th>Target</th>
+							<th>AverageRating</th>
+							<th>SalesVolume</th>
+							<th style="width: 200px">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>KFC</td>
+							<td>KFC</td>
+							<td>快餐</td>
+							<td>4.0</td>
+							<td>80</td>
+							<td>
+								<button type="button" class="btn btn-primary">停止营业</button>
+                            	<button type="button" class="btn btn-primary">设为热门</button>
+							</td>
+						</tr>
+						<tr>
+							<td>好吃</td>
+							<td>好吃</td>
+							<td>西餐</td>
+							<td>4.0</td>
+							<td>80</td>
+							<td>
+								<button type="button" class="btn btn-primary">停止营业</button>
+                            	<button type="button" class="btn btn-primary">设为热门</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav class="text-right">
+					<ul class="pagination">
+						<li><a href="#" aria-label="Previous"> <span
+								aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#" aria-label="Next"> <span
+								aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var uname=$.cookie("name");
+	$("#username").text(uname);
+});
+</script>
+</html>

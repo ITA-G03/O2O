@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index">ADMIN</a>
+            </div>
+            <div class="collapse navbar-collapse" id="main-nav">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Customer<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="customer"><i class="glyphicon glyphicon-user"></i>password</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Business <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="business"><i class="glyphicon glyphicon-user"></i>Register</a></li>
+                            <li><a href="store"><i class="glyphicon glyphicon-paperclip"></i>Store</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">System<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="setting"><i class="glyphicon glyphicon-wrench"></i>Setting</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="username" data-toggle="dropdown" role="button"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="login"><i class="glyphicon glyphicon-log-out"></i>&emsp;Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                 <ol class="breadcrumb">
+                    <li><a href="index">Home</a></li>
+                  	<li class="active">Customer</li>
+                    <li class="active">Password</li>
+                </ol>
+                <div id="mainForm" class="center-block well" style="max-width: 1200px">
+                    <h1 class="text-center">Customer Message</h1>
+                    <div class="form-group">
+                        <label>Customer tellphone:</label><br/>
+                        <input type="text" name="tel" placeholder="customer tellphone" size="100"/>
+                  		<button id="search" class="btn btn-primary">Search</button>
+                  		<div id="searchList"></div>
+                  	</div>
+                </div>
+                    	<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Tellphone</th>
+							<th style="width: 200px">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>01</td>
+							<td>13726214512</td>
+							<td><button type="button" id="reset" class="btn btn-primary">Reset Password</button>
+							</td>
+						</tr>
+					</tbody>
+		</table>
+                
+            </div>
+        </div>
+    </div>
+
+  <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Information</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Customer Tel</label>
+            <input type="text" class="form-control" id="Ctel">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">new password:</label>
+            <textarea class="form-control" id="Cpassword"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="sure" class="btn btn-primary">Sure</button>
+      </div>
+    </div>
+  </div>
+</div>   
+    
+</body>
+ 	<script type="text/javascript" src="js/jquery.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.cookie.js"></script> 
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		var uname=$.cookie("name");
+		$("#username").text(uname);
+		$("#reset").on("click",function(data){
+			var tel=$("input[name=tel]").val();
+			$('#popup').modal('show');
+			$("#Ctel").val(tel);
+			$("#Cpassword").val('');
+		
+		});
+		$("#sure").on("click",function(data){
+			var tel=$("input[name=tel]").val();
+			var password=$("#Cpassword").val();
+			$.post("resetpassword", {tel : tel,password :password }, function(data) {
+				$('#popup').modal('hide');
+				if(data.isSuccess){
+					alert("update successfully!");
+					$("input[name=tel]").val('');
+				}
+			});
+		});
+	});
+
+	</script>
+
+</html>
