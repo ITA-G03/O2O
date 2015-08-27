@@ -16,9 +16,15 @@ public class BusinessTag {
     @Column(name="BUSINESS_TAG_ID",nullable = false)
     private int businessTagId;
 
+    @Basic
+    @Column(name="BUSINESS_TAG_NAME")
+    private String businessTagName;
+
     @ManyToOne
     @JoinColumn(name="BUSINESS_ID")
     private Business business;
+
+
 
 
     public int getBusinessTagId() {

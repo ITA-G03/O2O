@@ -3,6 +3,7 @@ package ita.o2o.entity.base;
 import ita.o2o.entity.extra.Status;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class Order {
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name="ORDER_ID",referencedColumnName ="ORDER_ID" )
-    private List<OrderItem> orderItemList;
+    private List<OrderItem> orderItemList=new ArrayList<>();
 
 
     @OneToOne
