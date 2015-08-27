@@ -41,20 +41,6 @@ public class LocationRestController extends BaseController {
     public String getCities() {
         List<City> cityList=cityService.getAll();
         return jsonMapper.writeObjectAsString(cityList);
-
-        /*
-        List<City> cities = new LinkedList<>();
-        City city = new City("珠海");
-        city.setCityId(1);
-        City city1 = new City("广州");
-        city1.setCityId(2);
-        City city2 = new City("深圳");
-        city2.setCityId(3);
-        cities.add(city);
-        cities.add(city1);
-        cities.add(city2);
-        return jsonMapper.writeObjectAsString(cities);
-        */
     }
 
     @RequestMapping(value = "/area",method = RequestMethod.GET)

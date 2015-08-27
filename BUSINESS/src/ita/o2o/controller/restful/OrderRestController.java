@@ -1,5 +1,6 @@
 package ita.o2o.controller.restful;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType;
 import ita.o2o.constants.O2OConstants;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.dto.FoodDto;
@@ -12,14 +13,20 @@ import ita.o2o.service.impl.OrderServiceImpl;
 import ita.o2o.service.impl.RoleServiceImpl;
 import ita.o2o.util.bean.ResponseMessage;
 import ita.o2o.util.mapper.JSONMapper;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.JavaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static org.springframework.core.GenericCollectionTypeResolver.getCollectionType;
 
 /**
  * Created by ZHANGJA4 on 8/25/2015.
@@ -192,10 +199,19 @@ public class OrderRestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/cart/session", method = RequestMethod.POST)
-    public void setShoppingCartSession(ArrayList<FoodDto> foods, HttpSession session) {
-        System.out.println(foods.size());
-        session.setAttribute("currentCart", foods);
+    @RequestMapping(value = "/cart/session", method = RequestMethod.POST, consumes="application/json")
+    public String setShoppingCartSession(@RequestBody String foods, HttpSession session) {
+        System.out.println(foods);
+        ObjectMapper objectMapper = jsonMapper.getObjectMapper();
+        ResponseMessage responseMessage = new ResponseMessage();
+        try {
+            List<FoodDto> foodList= objectMapper.readValue(foods, objectMapper.getTypeFactory().constructType(ArrayList.class, FoodDto.class));
+            session.setAttribute("currentCart", foodList);
+            responseMessage.setStatus(O2OConstants.SUCCESS);
+        } catch (IOException e) {
+            responseMessage.setStatus(O2OConstants.FAILURE);
+        }
+        return jsonMapper.writeObjectAsString(responseMessage);
     }
 
     @ResponseBody
