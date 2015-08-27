@@ -6,6 +6,7 @@ import ita.o2o.entity.base.Business;
 import ita.o2o.entity.location.Location;
 import ita.o2o.service.RestaurantService;
 import ita.o2o.service.impl.BusinessServiceImpl;
+import ita.o2o.service.impl.FoodServiceImpl;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,10 @@ public class RestaurantRestController {
 
     @Autowired
     BusinessServiceImpl businessService;
+
+    @Autowired
+    FoodServiceImpl foodService;
+
 	
 	@ResponseBody
 	@RequestMapping(value="/list", method = RequestMethod.GET)
@@ -47,7 +52,7 @@ public class RestaurantRestController {
 
         List<BusinessDto> businessDtoList=new ArrayList<>();
         for(Business business:businessList){
-            BusinessDto businessDto=new BusinessDto();
+            BusinessDto businessDto=foodService.getAvgRatingAndSalesVolumeByBusinessId(business.getBusinessId());
             businessDto.setId(business.getBusinessId());
             businessDto.setName(business.getRealName());
             businessDto.setLogoId(business.getLogoId());
@@ -56,7 +61,7 @@ public class RestaurantRestController {
             businessDtoList.add(businessDto);
         }
 
-        return jsonMapper.writeObjectAsString(businessList);
+        return jsonMapper.writeObjectAsString(businessDtoList);
 
         //return jsonMapper.writeObjectAsString(restaurantService.getRestaurantList());
 	}
