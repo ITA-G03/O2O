@@ -15,7 +15,10 @@ public class StatusServiceImpl implements StatusService {
     @Autowired
     StatusDaoImpl statusDao;
 
+    @Override
     public Status getById(Integer id) {
         return statusDao.getById(id);
     }
+
+
 }

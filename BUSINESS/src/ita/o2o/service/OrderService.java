@@ -13,7 +13,10 @@ import java.util.List;
 public interface OrderService {
 
     int createOrder(OrderDto orderDto);
-    int updateOrder(Order order);
+
+    Order getOrderById(Integer orderId);
+
+    boolean updateOrder(Order order);
 
     List<Order> getAllByCustomerId(int userId);
 
