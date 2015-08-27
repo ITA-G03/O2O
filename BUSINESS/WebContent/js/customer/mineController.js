@@ -59,7 +59,15 @@ app.controller('pageCtrl', function ($scope, $modal,$http) {
     $http.get('/rest/mine/order/all').success(function (data) {
         console.info(data);
         $scope.orders = data;
-    });
+    })
+
+    $scope.getOrderSalesValue=function(orderItemList){
+        var result=0.0;
+        for(var i=0;i<orderItemList.length;i++){
+            result+=(orderItemList[i].priceSnapshot* orderItemList[i].count );
+        }
+        return result.toFixed(1);
+    }
 })
 
 

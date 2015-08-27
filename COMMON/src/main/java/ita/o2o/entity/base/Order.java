@@ -122,4 +122,12 @@ public class Order {
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

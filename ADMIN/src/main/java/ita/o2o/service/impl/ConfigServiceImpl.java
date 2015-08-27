@@ -2,7 +2,6 @@ package ita.o2o.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ public class ConfigServiceImpl implements ConfigService {
 		return null;
 	}
 
-	@Transactional
 	public boolean update(Configuration config) {
 		int id=configDao.getIdByName(config.getName());
 		config.setId(id);

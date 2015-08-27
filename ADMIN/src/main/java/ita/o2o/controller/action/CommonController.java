@@ -55,6 +55,7 @@ public class CommonController {
 		boolean flag = configService.update(config);
 		responseMessage.setStatus(flag ? O2OConstants.SUCCESS
 				: O2OConstants.FAILURE);
+		System.out.println("updatevalue");
 		return jsonMapper.writeObjectAsString(responseMessage);
 	}
 
