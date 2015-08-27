@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -78,6 +78,7 @@ public class BusinessRestController {
      *
      * @return
      */
+    /*
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/list")
     public String getALlBusiness() {
@@ -92,7 +93,26 @@ public class BusinessRestController {
         businessList.add(b2);
         return jsonMapper.writeObjectAsDataString(businessList);
     }
+    */
 
+
+    /*
+    * 根据session中的location获取商家
+    * */
+    @RequestMapping("/list")
+    @ResponseBody
+    public String getAllBusinessByLocation(HttpServletRequest request){
+        Location currentLocation=(Location)(request.getSession().getAttribute("location"));
+        List<Business> businessList;
+        if(currentLocation==null){
+            businessList=businessService.getAll();
+        }
+        else{
+            businessList= businessService.getAllByLocation(currentLocation);
+        }
+
+        return jsonMapper.writeObjectAsString(businessList);
+    }
     /**
      * 获得对应商家的信息
      * test

@@ -1,5 +1,7 @@
 package ita.o2o.dto;
 
+import ita.o2o.entity.base.Business;
+
 import java.util.List;
 
 /**
@@ -43,7 +45,10 @@ public class BusinessDto {
 		this.sales = sales;
 	}
 
-	public int getId() {
+    public BusinessDto(Business business) {
+    }
+
+    public int getId() {
 		return id;
 	}
 

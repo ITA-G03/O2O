@@ -4,6 +4,7 @@ import ita.o2o.constants.O2OConstants;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.BusinessTag;
 import ita.o2o.entity.base.User;
+import ita.o2o.entity.location.Location;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.*;
@@ -21,6 +22,8 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
     public static final String BUSINESS_TAG="businessTag";
     public static final String BUSINESS_TAG_NAME="businessTagName";
     public static final String BUSINESS_TAG_ID="businessTagId";
+
+    public static final String LOCATION="location";
 
     public BusinessDaoImpl() {
         super(Business.class);
@@ -68,5 +71,22 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
 
     public List<Business> getAllByTag(BusinessTag businessTag) {
         return null;
+    }
+
+    public List<Business> getAllByLocation(Location location) {
+        CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
+        CriteriaQuery<Business> criteriaBuilderQuery = criteriaBuilder.createQuery(Business.class);
+        Root<Business> root = criteriaBuilderQuery.from(Business.class);
+
+
+        System.out.println("Join表查询啦~~");
+        Predicate predicate = criteriaBuilder.conjunction();
+        Predicate equalPredicate = criteriaBuilder.equal(root.<Location>get(LOCATION), location);
+        predicate = criteriaBuilder.and(predicate, equalPredicate);
+        criteriaBuilderQuery.select(root).where(predicate);
+
+        List<Business> resultList = this.getManager().createQuery(criteriaBuilderQuery).getResultList();
+        System.out.println("查出来数据了哟~BusinessId:" + resultList.size());
+        return resultList;
     }
 }
