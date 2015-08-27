@@ -37,7 +37,7 @@
                     <div class="btn-group" role="group" ng-repeat="type in resTypes">
                         <button class="btn btn-danger"
                                 ng-class="{true: 'active', false: ''}[type==selectedResType]"
-                                ng-click="changeResType(type)">{{type}}
+                                ng-click="changeResType(type)">{{type.businessTagName}}
                         </button>
                     </div>
                 </div>
