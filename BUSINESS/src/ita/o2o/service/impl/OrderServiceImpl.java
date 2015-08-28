@@ -9,7 +9,6 @@ import ita.o2o.dto.OrderDto;
 import ita.o2o.entity.base.*;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.service.OrderService;
-import ita.o2o.util.jms.JmsProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -86,7 +86,7 @@
 
                                             <p class="text-muted">送餐地址:{{o.address}}</p>
 
-                                            <div ng-show="{{o.status.statusId!=13}}">
+                                            <div ng-show="{{o.status.statusId!=13&&o.status.statusId!=14}}">
                                                 <br/>
 
                                                 <h1>
@@ -98,7 +98,7 @@
                                                     <a href="#" class="highlight">取消订单</a>
                                                 </p>
                                             </div>
-                                            <div ng-show="o.status.statusId==13 && !o.comments">
+                                            <div ng-show="o.status.statusId==13">
                                                 <h5>评分:</h5>
                                                 <rating ng-model="o.rating" state-on="'fa fa-star star active'"
                                                         state-off="'fa fa-star star'"></rating>
@@ -112,7 +112,7 @@
                                                     </button>
                                                 </p>
                                             </div>
-                                            <div ng-show="o.status.statusId==13 && o.comments">
+                                            <div ng-show="o.status.statusId==14">
                                                 <br/>
 
                                                 <h1>
