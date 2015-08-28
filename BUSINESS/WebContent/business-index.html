@@ -66,6 +66,11 @@
        font-size : 2em;
 	   color : red;
        }
+       #Message {
+       	 font-family : 微软雅黑,宋体;
+       font-size : 1em;
+	   color : red;
+       }
         
     </style>
 </head>
@@ -107,7 +112,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">willsion <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="change-info" data-toggle="modal" data-target="#myModal"><i
@@ -132,6 +137,7 @@
                             <th>Picture</th>
                             <th>Price</th>
                             <th>FoodType</th>
+                            <th>SaleVolume</th>
                             <th style="width:150px">Action</th>
                         </tr>
                     </thead>
@@ -241,6 +247,22 @@
     </div>
   </div>
 </div> 
+
+
+<div class="modal fade bs-example-modal-sm" id="infromMessage" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="form-group">
+                        <label>Information</label>
+                        <input class="form-control" id="Message" value=" This food is not allowed to delete...."/>
+                           
+                    </div>
+                    
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     
+    </div>
+  </div>
+</div>
 </body>
 
 </html>

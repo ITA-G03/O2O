@@ -87,4 +87,14 @@ public class FoodDaoImpl extends BaseDaoImpl<Food> {
        
 	   
    }
+   
+   public long getSaleVolume(int foodId) {
+	   String hql = "select count(*) from OrderItem o where o.food.foodId=:foodId";
+	   Query query = this.getManager().createQuery(hql);
+	   query.setParameter("foodId",foodId);
+	   Object o = query.getSingleResult();
+	   long saleVolume = (long)o;
+	   return saleVolume;
+	   
+   }
 }

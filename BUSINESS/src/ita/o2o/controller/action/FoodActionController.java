@@ -3,10 +3,11 @@ package ita.o2o.controller.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import ita.o2o.constants.O2OConstants;
 import ita.o2o.controller.BaseController;
 import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.Food;
+import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.FoodType;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.FoodServiceImpl;
@@ -41,7 +43,7 @@ public class FoodActionController extends BaseController{
 	//添加一个食品
 		@ResponseBody
 		@RequestMapping(value="food/create",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
-		public String addFood(String foodName,double price,String typeName,int foodPictureId,Model model) {
+		public String addFood(String foodName,double price,String typeName,int foodPictureId,Model model,HttpSession session) {
 			Food food = new Food();
 			System.out.println(foodName+".."+price+".."+typeName+"...."+foodPictureId);
 			FoodType foodType = foodTypeService.getByName(typeName);
@@ -51,7 +53,10 @@ public class FoodActionController extends BaseController{
 			food.setFoodPictureId(foodPictureId);
 			food.setAverageRating(0);
 			food.setSalesVolume(0);
-			Business owner = businessService.getById(22);
+			User user =(User) session.getAttribute("user");
+			Business owner = businessService.getByUser(user);
+
+			//Business owner = businessService.getById(22);
 			food.setOwner(owner);
 			model.addAttribute("food", food);
 			int m = foodService.createFood(food);
@@ -153,6 +158,17 @@ public class FoodActionController extends BaseController{
 				msg.setStatus(O2OConstants.FAILURE);
 			}
 			return mapper.writeObjectAsString(msg);	
+			
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="/food/getsalevolume",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
+		public String getSaleVolume(int foodId) {
+			long number = foodService.getSaleVolume(foodId);
+			ResponseMessage msg = new ResponseMessage();
+			String str = number+"";
+			msg.setStatus(str);
+			return mapper.writeObjectAsString(msg);
 			
 		}
 		

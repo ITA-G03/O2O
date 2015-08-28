@@ -22,4 +22,6 @@ public interface FoodService {
     List<Food> getByBusinessId(int businessId);
 
     BusinessDto getAvgRatingAndSalesVolumeByBusinessId(int businessId);
+    
+    public long getSaleVolume(int foodId);
 }

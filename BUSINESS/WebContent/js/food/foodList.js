@@ -5,9 +5,23 @@ $(function() {
     			var trs="<tr>";
     			trs+="<td id='foodid'>"+data[i].foodId+"</td>";
     			trs+="<td id='foodname'>"+data[i].foodName+"</td>";
+    			
+    			var result;
+				$.ajax({
+					   url: "../action/food/getsalevolume",
+				       async: false,
+				        type: "post",
+				       data: { foodId:data[i].foodId  },
+				       success: function (courseDT4) {
+				           result = courseDT4.status;
+				}	
+				});	
+    			
+    			
     			trs+="<td><image src='../image/view/"+data[i].foodPictureId+"' width='200',height='100'/></td>";
     			trs+="<td id='price'>"+data[i].price+"</td>";
     			trs+="<td id='type'>"+data[i].foodType.foodTypeName+"</td>";
+    			trs+="<td>"+result+"</td>";
     			trs+="<td><button type='button' class='btn btn-primary'  data-toggle='modal' data-target='#myModal3' name='update'>update</button>&nbsp<button type='button' class='btn btn-warning' name='deleteFood' onclick='return confirm('Delete Sure?')'>delete</button></td>";
     			trs+="</tr>"
     			tbody+=trs;
@@ -17,12 +31,27 @@ $(function() {
     		$("button[name=deleteFood]").on("click",function() {
     			var ttr=$(this).parent().parent();
     			var foodId = $(this).parent().parent().children().eq(0).text();
-    			$.post("../action/food/delete",{foodId:foodId},function(data) {
-    				if(data.status=='success') {
-    					ttr.remove();
-    				}
+    			
+    			$.post("../action/food/getsalevolume",{foodId:foodId},function(data) {
     				
-    			});	
+    				if(data.status!='0')
+    				    $("#infromMessage").modal('show');
+    				else {
+    					$.post("../action/food/delete",{foodId:foodId},function(data) {
+    					     if(data.status=='success') {
+    					     ttr.remove();
+    					     }
+    					     
+    					     });
+    					
+    					
+    				}	
+    				
+    			})
+    			
+    			
+    			
+    			
     		});
     		
     		$("button[name=update]").on("click",function() {

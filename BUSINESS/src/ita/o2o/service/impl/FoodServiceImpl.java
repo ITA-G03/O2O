@@ -55,5 +55,11 @@ public class FoodServiceImpl implements FoodService {
         return foodDao.getAvgRatingAndSalesVolumeByBusinessId(businessId);
     }
 
+	@Override
+	public long getSaleVolume(int foodId) {
+		// TODO Auto-generated method stub
+		return foodDao.getSaleVolume(foodId);
+	}
+
 
 }
