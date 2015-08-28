@@ -48,13 +48,13 @@ Ext.define('MyApp.controller.settingController', {
 		window.location.href='/home/index.html';
 	},
 	customer:function(){
-		window.location.href='/Customer/customer.html';
+		window.location.href='/customer/customer.html';
 		},
 	register:function(){
 		window.location.href='/business/business.html';
 	},
 	store:function(){
-		window.location.href='/Store/store.html';
+		window.location.href='/store/store.html';
 	},
 	system:function(){
 		window.location.href='/setting/setting.html';

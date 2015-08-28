@@ -9,4 +9,14 @@ public interface BusinessService {
 	List<Business> getAllApprovingBusiness();
 	
 	boolean acceptBusiness(Business business);
+	
+	List<Business> getAllBusiness();
+	
+	boolean updateHot(Business business);
+	
+	boolean updateStop(Business business);
+	
+	boolean updateNomal(Business business);
+	
 }	
+

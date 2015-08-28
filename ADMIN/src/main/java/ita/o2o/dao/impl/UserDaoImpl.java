@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean update(int id) {
 		User u = em.find(User.class, id);
-		u.setEncryptedPassword("123456");
+		u.setEncryptedPassword("e10adc3949ba59abbe56e057f20f883e");
 		em.merge(u);
 		return true;
 	}

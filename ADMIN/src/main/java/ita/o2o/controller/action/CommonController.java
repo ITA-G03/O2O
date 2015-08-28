@@ -112,4 +112,54 @@ public class CommonController {
 
 	}
 
+	
+	@RequestMapping(value = "/loadAllBusiness", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String loadAllBusiness() {
+		List<Business> businessList = businessService.getAllBusiness();
+		List<BusinessVo> voList=new ArrayList<BusinessVo>();
+		for(Business business:businessList){
+			voList.add(new BusinessVo(business));
+		}
+		String message = jsonMapper.writeObjectAsDataString(voList);
+		return message;
+
+	}
+	
+	@RequestMapping(value = "/updateStatusToBeHot", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String updateStatusToBeHot(int businessId) {
+		Business business=new Business();
+		business.setBusinessId(businessId);
+		boolean flag = businessService.updateHot(business);
+		responseMessage.setStatus(flag ? O2OConstants.SUCCESS
+				: O2OConstants.FAILURE);
+		return jsonMapper.writeObjectAsString(responseMessage);
+
+	}
+	
+	@RequestMapping(value = "/updateStatusToBeStop", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String updateStatusToBeStop(int businessId) {
+		Business business=new Business();
+		business.setBusinessId(businessId);
+		boolean flag = businessService.updateStop(business);
+		responseMessage.setStatus(flag ? O2OConstants.SUCCESS
+				: O2OConstants.FAILURE);
+		return jsonMapper.writeObjectAsString(responseMessage);
+
+	}
+	
+	
+	@RequestMapping(value = "/updateStatusToBeNormal", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String updateStatusToBeNormal(int businessId) {
+		Business business=new Business();
+		business.setBusinessId(businessId);
+		boolean flag = businessService.updateNomal(business);
+		responseMessage.setStatus(flag ? O2OConstants.SUCCESS
+				: O2OConstants.FAILURE);
+		return jsonMapper.writeObjectAsString(responseMessage);
+
+	}
 }

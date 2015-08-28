@@ -49,7 +49,7 @@ Ext.define('MyApp.view.settingView', {
                             dock: 'top',
                             items: [
                                 {
-                                    xtype: 'label',
+                                    xtype: 'button',
                                     text: 'ADMIN',
 									id:'returnHome',
 									itemId:'returnHome',
