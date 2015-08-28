@@ -48,9 +48,22 @@
             $.getJSON("/rest/location/area", function (json) {
                 console.log(json);
                 $("#profile").data("area", json);
-                getUserProFile();
+                getTags();
             });
         };
+
+        var getTags = function () {
+            if ($("#profile").data("tags") == null) {
+                console.log("start");
+            } else {
+                console.log("ready");
+            }
+            $.getJSON("/rest/tag/all", function (json) {
+                console.log(json);
+                $("#profile").data("tags", json);
+                getUserProFile();
+            });
+        }
 
         var getUserProFile = function () {
             $.getJSON("/business/setting/profile", function (json) {
@@ -86,6 +99,20 @@
                     var optionitem = '<option value="' + n.areaId + '">' + n.areaName + '</option>';
                     areaSelectHtml.prepend(optionitem);
                 });
+
+                //tags
+                var bufferedTags = $("#profile").data("tags");
+                var tagsSelectHtml = $("select[name='tags']");
+                console.log("businessTags:"+json.businessTags);
+                tagsSelectHtml.empty();
+                $.each(bufferedTags, function (i, n) {
+                    var optionitem = '<option value="' + n.businessTagId + '">' + n.businessTagName + '</option>';
+                    tagsSelectHtml.prepend(optionitem);
+                });
+
+                //select current
+                $(areaSelectHtml).find("option[value=" + areaId + "]").attr("selected", "selected");
+                $(citySelectHtml).find("option[value=" + cityId + "]").attr("selected", "selected");
 
 
             });
@@ -172,8 +199,24 @@
 
                 <p id="validateLicenseMessage" class="hidden"></p>
             </div>
-            <!--tags-->
 
+            <!--Logo-->
+            <div class="form-group col-xs-12">
+                <label>Logo</label>
+                <input name="logoId" id="logoId" hidden/>
+                <img id="logoImage" class="hidden img-thumbnail img-thumbnail"/>
+                <input id="Logo" type="file" name="license" class="form-control" placeholder="许可证:请上传许可证照片"/>
+                <p id="validateLogoMessage" class="hidden"></p>
+            </div>
+
+            <!--tags-->
+            <select name="tags" multiple class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
             <!--comments-->
             <label>comments</label>
             <textarea name="comments" class="form-control" rows="3"></textarea>

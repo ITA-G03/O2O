@@ -18,9 +18,9 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!--  <script src="../js/business/changeInfo.js"></script>  改变个人信息-->
-     <script src="../js/food/foodType.js"></script> 
-      <script src="../js/food/foodList.js"></script> 
-    
+    <script src="../js/food/foodType.js"></script>
+    <script src="../js/food/foodList.js"></script>
+
     <script type="application/javascript">
         //        $(function () {
         //            $("#change").on("click", function () {
@@ -28,56 +28,58 @@
         //                return false;
         //            });
         //        });
-    //定时器获取jms message
-//        $(function(){
-//            run();
-//            var interval = 0;
-//            function run(){
-//                interval = setInterval(chat,"50000");
-//            }
-//            function chat(){
-//                $.post("/business/unread",function(data){
-//                    console.info(data.orderId);
-//                    $('#unread').text(data.orderId)
-//                });
-//            }
-//            $("#closeChat").click(function(){
-//                clearTimeout(interval);
-//            });
-//        });
+        //定时器获取jms message
+        //        $(function(){
+        //            run();
+        //            var interval = 0;
+        //            function run(){
+        //                interval = setInterval(chat,"50000");
+        //            }
+        //            function chat(){
+        //                $.post("/business/unread",function(data){
+        //                    console.info(data.orderId);
+        //                    $('#unread').text(data.orderId)
+        //                });
+        //            }
+        //            $("#closeChat").click(function(){
+        //                clearTimeout(interval);
+        //            });
+        //        });
     </script>
     <style>
         nav.navbar i {
             width: 30px;
 
         }
-        #foodType{
-        
-        text-align:center;
+
+        #foodType {
+
+            text-align: center;
         }
-        
-       #message{
-       font-family : 微软雅黑,宋体;
-       font-size : 2em;
-	   color : green;
-       }
-       #deleteMessage {
-       	 font-family : 微软雅黑,宋体;
-       font-size : 2em;
-	   color : red;
-       }
+
+        #message {
+            font-family: 微软雅黑, 宋体;
+            font-size: 2em;
+            color: green;
+        }
+
+        #deleteMessage {
+            font-family: 微软雅黑, 宋体;
+            font-size: 2em;
+            color: red;
+        }
        #Message {
        	 font-family : 微软雅黑,宋体;
        font-size : 1em;
 	   color : red;
        }
-        
+
     </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-default" ng-controller = "businessCtrl">
+<nav class="navbar navbar-default" ng-controller="businessCtrl">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
@@ -89,7 +91,7 @@
         </div>
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-                <li >
+                <li>
                     <a href="../food/addfood" role="button">Food </a>
 
                 </li>
@@ -102,12 +104,17 @@
                 <li>
 
 
-  					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Type <span
-								class="caret"></span></a>
-								<ul class="dropdown-menu">
-                            <li id="foodType"><button type="button" name="addFood"class="btn btn-success btn-xs" data-toggle='modal' data-target='#myModal'>New</button>&nbsp&nbsp
-                            <button  type="button" name="look" class="btn btn-danger btn-xs">Look</button></li>
-                        </ul>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Type <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li id="foodType">
+                            <button type="button" name="addFood" class="btn btn-success btn-xs" data-toggle='modal'
+                                    data-target='#myModal'>New
+                            </button>
+                            &nbsp&nbsp
+                            <button type="button" name="look" class="btn btn-danger btn-xs">Look</button>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -129,6 +136,14 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Picture</th>
+                    <th>Price</th>
+                    <th>FoodType</th>
            <table class="table table-hover">
                     <thead>
                         <tr>
@@ -138,12 +153,12 @@
                             <th>Price</th>
                             <th>FoodType</th>
                             <th>SaleVolume</th>
-                            <th style="width:150px">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                  
-                </table>
+                    <th style="width:150px">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+            </table>
 
         </div>
     </div>
@@ -152,101 +167,104 @@
 <!--    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 
 
- 
-       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Food Type</h4>
-      </div>
-      <div class="modal-body">
-    
-     <h1 class="page-header">Add Food Type</h1>
-                    <div class="form-group">
-                        <label>Type</label>
-                        <input type="text" name="type" class="form-control"  required /><br/>
-                        <span id="message" ></span>
-                    </div>
-                    <br />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" name="save" class="btn btn-primary">Save changes</button>
-      </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Food Type</h4>
+            </div>
+            <div class="modal-body">
+
+                <h1 class="page-header">Add Food Type</h1>
+
+                <div class="form-group">
+                    <label>Type</label>
+                    <input type="text" name="type" class="form-control" required/><br/>
+                    <span id="message"></span>
+                </div>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" name="save" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Delete Food Type</h4>
+            </div>
+            <div class="modal-body">
 
-       <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Delete Food Type</h4>
-      </div>
-      <div class="modal-body">
-    
-     <h1 class="page-header">Delete Food Type</h1>
-                    <div class="form-group">
-                     <span id="deleteMessage"></span> 
-                      <table id="t" class="table table-hover">
-						<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Action</th>
-						</tr>
+                <h1 class="page-header">Delete Food Type</h1>
 
-					</table>
-   
-                      
-                    <br />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+                <div class="form-group">
+                    <span id="deleteMessage"></span>
+                    <table id="t" class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </table>
+
+
+                    <br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-</div>
-        
-   
-   
-     <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Update Food</h4>
-      </div>
-      <div class="modal-body">
-    
-     <h1 class="page-header">Update food</h1>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control"  required />
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="number" name="price" class="form-control"  required />
-                    </div>
-                    <div class="form-group">
-                        <label>Type</label>
-                        <input class="form-control" name="type" required/>
-                           
-                    </div>
-                    <br />
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" name="saveFood" class="btn btn-primary">Save changes</button>
-      </div>
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update Food</h4>
+            </div>
+            <div class="modal-body">
+
+                <h1 class="page-header">Update food</h1>
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" name="price" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <input class="form-control" name="type" required/>
+
+                </div>
+                <br/>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" name="saveFood" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
-</div> 
+</div>
 
 
 <div class="modal fade bs-example-modal-sm" id="infromMessage" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

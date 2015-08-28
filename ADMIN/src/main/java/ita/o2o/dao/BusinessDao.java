@@ -11,4 +11,12 @@ public interface BusinessDao {
 	
 	Business get(int id);
 
+	List<Business> getAllAcceptedgBusiness();
+	
+	List<Business> getAllHotBusiness();
+
+	List<Business> getAllRejectedBusiness();
+	
+	List<Business> getAllBusiness();
+	
 }

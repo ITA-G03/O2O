@@ -34,7 +34,7 @@ public class MineOrderRestController extends BaseController{
     UserServiceImpl userService;
 
 
-    @RequestMapping("/all")
+    @RequestMapping(value = "/all",produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getCustomerAllOrderList(HttpServletRequest request){
         User currentUser=(User)request.getSession().getAttribute("user");

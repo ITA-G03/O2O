@@ -42,7 +42,7 @@ Ext.define('MyApp.controller.homeController', {
 		window.location.href='/home/index.html';
 	},
 	customer:function(){
-		window.location.href='/Customer/customer.html';
+		window.location.href='/customer/customer.html';
 		},
 	register:function(){
 		window.location.href='/business/business.html';
@@ -60,7 +60,6 @@ Ext.define('MyApp.controller.homeController', {
 			success:function(response){
 				var jsonObj = response.responseText;
 				var status=Ext.decode(jsonObj);
-				debugger;
 				if(status.data){
 					Ext.getCmp('unreadMessage').setText(status.data);
 				}

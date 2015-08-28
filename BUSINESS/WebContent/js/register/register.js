@@ -3,6 +3,8 @@ function initListeners() {
     $("#tel").blur(validateTel);
     $("#idCard").change(uploadIdCard);
     $("#license").change(uploadLicense);
+    $("#Logo").change(uploadLogo);
+
     $("#registerButton").click(register);
 }
 
@@ -88,6 +90,31 @@ function uploadIdCard() {
         error: function (data) {
             $("#validateIdCardMessage").attr("class", "text-danger").text("卧槽,上传失败了!").show();
             $("#idCard").change(uploadIdCard);
+            console.log(data);
+        }
+    });
+
+}
+
+function uploadLogo() {
+    $("#validateLogoMessage").text("").hide();
+    $.ajaxFileUpload({
+        url: '/action/image/upload',
+        secureuri: false,
+        fileElementId: 'Logo',
+        dataType: 'JSON',
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        success: function (data) {
+            console.log(data.status);
+            console.log(data.body.imageId);
+            $("#logoId").val(data.body.imageId);
+            $("#logoImage").attr("src", "/image/view/" + data.body.imageId).removeClass("hidden").show();
+            $("#Logo").change(uploadIdCard);
+        },
+        error: function (data) {
+            $("#validateLogoMessage").attr("class", "text-danger").text("卧槽,上传失败了!").show();
+            $("#Logo").change(uploadIdCard);
             console.log(data);
         }
     });

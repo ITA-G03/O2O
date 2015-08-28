@@ -44,7 +44,7 @@ Ext.define('MyApp.view.MainView', {
                             dock: 'top',
                             items: [
                                 {
-                                    xtype: 'label',
+                                    xtype: 'button',
                                     text: 'ADMIN',
 									id:'returnHome',
 									itemId:'returnHome',

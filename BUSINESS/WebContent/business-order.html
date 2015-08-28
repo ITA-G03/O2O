@@ -30,22 +30,35 @@
                         "data": "orderId"
                     },
                     {
-                        "data": "comments",
+                        //tel
+                        "data": "customer", render: function (data, type, row, meta) {
+                        return data.tel;
+                    }
                     },
                     {
+                        //price
                         "data": "orderItemList", render: function (data, type, row, meta) {
                         var price = 0;
                         if (null == data) {
                             return null;
                         }
                         $.each(data, function (i, n) {
-                            price += n["count"];
+                            price += n.food.price * n.count;
                         });
-                        return '' + price;
+
+                        return '' + price.toFixed(1);
                     }
                     },
                     {
-                        "data": "comments"
+                        //location detail
+                        "data": "customer", render: function (data, type, row, meta) {
+                        if (null == data.location) {
+                            return "";
+                        }
+                        else {
+                            return data.location.detail;
+                        }
+                    }
                     },
                     {
                         "data": "comments"
@@ -67,7 +80,7 @@
                                 content_text = "Finish";
                             }
                             var action = '<button style="margin-right: 10px" type="button" data-loading-text="Loading..." class="btn btn-primary accept" autocomplete="off">' + content_text + '</button>' +
-                                    '<button type="button" class="btn btn-warning reject ' + option + '">Reject</button>';
+                                    '<button type="button" class="btn btn-warning reject" style="visibility:' + (option ?option:'visible' ) + '">Reject</button>';
                             return action;
                         }
                     }
@@ -158,7 +171,11 @@
                 trElement.attr('data-html', 'true');
 
                 //detail
-                var rowdata = table.row($(this).parents('tr')[0]).data();
+                var rowdata = table.row(trElement[0]).data();
+                if (null == rowdata.orderItemList || rowdata.orderItemList.length == 0) {
+                    console.log("rowdata.orderItemList.length =0");
+                    return;
+                }
                 var orderitem = rowdata.orderItemList;
                 var context = '<table class="row">' +
                                 '<thead>' +
@@ -275,6 +292,33 @@
 </head>
 
 <body>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Food Type</h4>
+            </div>
+            <div class="modal-body">
+
+                <h1 class="page-header">Add Food Type</h1>
+
+                <div class="form-group">
+                    <label>Type</label>
+                    <input type="text" name="type" class="form-control" required/><br/>
+                    <span id="message"></span>
+                </div>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" name="save" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -314,7 +358,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Mine <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="change-info" data-toggle="modal" data-target="#myModal"><i
@@ -354,9 +398,9 @@
                     <thead>
                     <tr>
                         <th>OrderId</th>
-                        <th>Customer</th>
+                        <th>Tel</th>
                         <th>Price</th>
-                        <th>Picture</th>
+                        <th>Locatio　Detail</th>
                         <th>Status</th>
                         <th id="action">Action</th>
                     </tr>
