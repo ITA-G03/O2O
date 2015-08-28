@@ -1,6 +1,5 @@
 package ita.o2o.util.jms;
 
-import com.google.gson.Gson;
 import ita.o2o.entity.base.Order;
 import ita.o2o.util.mapper.JSONMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
