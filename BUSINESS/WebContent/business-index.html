@@ -30,16 +30,17 @@
         //            });
         //        });
     //定时器获取jms message
-        $(function(){
+
+        app.controller('businessCtrl', function($scope){
             run();
             var interval = 0;
             function run(){
-                interval = setInterval(chat,"20000");
+                interval = setInterval(chat,"50000");
             }
             function chat(){
                 $.post("/business/unread",function(data){
-                    alert(data);
-                    console.info(data);
+                    console.info(data.orderId);
+                    $scope.unread = data.orderId;
                 });
             }
             $("#closeChat").click(function(){
@@ -73,7 +74,7 @@
 
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller = "businessCtrl">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
@@ -109,6 +110,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{uname} <span
+                            class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">{{unread}} <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="change-info" data-toggle="modal" data-target="#myModal"><i

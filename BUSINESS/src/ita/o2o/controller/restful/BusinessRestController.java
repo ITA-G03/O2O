@@ -1,6 +1,7 @@
 package ita.o2o.controller.restful;
 
 
+import ita.o2o.constants.O2OConstants;
 import ita.o2o.dto.BusinessDto;
 import ita.o2o.dto.OrderDto;
 import ita.o2o.entity.base.Business;
@@ -13,6 +14,7 @@ import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.BusinessTagServiceImpl;
+import ita.o2o.util.bean.ResponseMessage;
 import ita.o2o.util.jms.JmsConsumer;
 import ita.o2o.util.mapper.JSONMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,12 +179,19 @@ public class BusinessRestController {
     @ResponseBody
     public String getJmsMessage(HttpSession session){
         System.out.println("unread");
-        new JmsConsumer(session);
-        BusinessDto businessDto = (BusinessDto)session.getAttribute("currentRestaurant");
+        new JmsConsumer(session).getOrderMessage();
+        User user = (User)session.getAttribute("user");
         List<Order> orders = (List<Order>)session.getAttribute("jmsOrderList");
-        List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(businessDto.getId(), orders);
-        return jsonMapper.writeObjectAsString(orderDtos);
-//        return jsonMapper.writeObjectAsString("fuck you timer");
+        if(orders != null){
+            System.out.println(orders.size());
+            List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(user.getUserId(), orders);
+            System.out.println(orderDtos.size());
+            return jsonMapper.writeObjectAsString(orderDtos);
+        } else {
+            ResponseMessage responseMessage = new ResponseMessage();
+            responseMessage.setStatus(O2OConstants.FAILURE);
+            return jsonMapper.writeObjectAsString(responseMessage);
+        }
     }
 
 }

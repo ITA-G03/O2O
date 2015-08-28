@@ -27,44 +27,69 @@ public class JmsConsumer{
         this.session = session;
     }
 
-    public List<Order> getOrderMessage(){
+    public MessageConsumer getConsumer(){
+        MessageConsumer consumer = (MessageConsumer)this.session.getAttribute("consumer");
+        if(consumer != null){
+            return consumer;
+        }
         Connection con = null;
         Session sen = null;
-        MessageConsumer consumer = null;
         try {
+            System.out.println("start consumer");
             ConnectionFactory factory = new ActiveMQConnectionFactory("failover://tcp://localhost:61616");
             Topic topic = new ActiveMQTopic("O2O_topic");
             con = factory.createConnection();
+//            con.setClientID("o2o_customer_system");
             sen = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
             consumer = sen.createConsumer(topic);
             con.start();
-            List<Order> orders = new ArrayList<>();
+            this.session.setAttribute("consumer", consumer);
+        } catch (JMSException e) {
+                try {
+                    consumer.close();
+                    sen.close();
+                    con.close();
+                } catch (JMSException e1) {
+                    e1.printStackTrace();
+                }
+                e.printStackTrace();
+        }
+        return consumer;
+    }
+
+    public void getOrderMessage(){
+            MessageConsumer consumer = this.getConsumer();
+            List<Order> orders = (List<Order>)this.session.getAttribute("jmsOrderList");
+            if(null == orders){
+                orders = new ArrayList<>();
+            }
             while(true){
-                Message msg = consumer.receive(3000);
+                System.out.println("receive message");
+                Message msg = null;
+                try {
+                    msg = consumer.receive(3000);
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
                 TextMessage tm = (TextMessage)msg;
+                System.out.println("no text message ?");
                 if(tm == null){
                     break;
                 }
                 try {
-                    Order order = jsonMapper.readValue(tm.toString(),Order.class);
+                    if(null == jsonMapper){
+                        System.out.println("empty json mapper");
+                    }
+                    jsonMapper = new JSONMapper();
+                    System.out.println(tm.getText());
+                    Order order = jsonMapper.getObjectMapper().readValue(tm.getText(),Order.class);
                     orders.add(order);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             if(orders.size() > 0){
                 this.session.setAttribute("jmsOrderList",orders);
             }
-        } catch (JMSException e) {
-            try {
-                consumer.close();
-                sen.close();
-                con.close();
-            } catch (JMSException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
         }
-        return null;
-    }
 }
