@@ -112,13 +112,19 @@ public class BusinessRestController {
     @RequestMapping("/unread")
     @ResponseBody
     public String getJmsMessage(HttpSession session) {
-        System.out.println("unread");
-        new JmsConsumer(session);
-        BusinessDto businessDto = (BusinessDto) session.getAttribute("currentRestaurant");
+        new JmsConsumer(session).getOrderMessage();
+        User user = (User)session.getAttribute("user");
+        Business business = businessService.getByUser(user);
         List<Order> orders = (List<Order>) session.getAttribute("jmsOrderList");
-        List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(businessDto.getId(), orders);
-        return jsonMapper.writeObjectAsString(orderDtos);
-//        return jsonMapper.writeObjectAsString("fuck you timer");
+        if(orders != null){
+            List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(business.getBusinessId(), orders);
+            System.out.println(orderDtos.size());
+            return jsonMapper.writeObjectAsString(orderDtos);
+        } else {
+            ResponseMessage responseMessage = new ResponseMessage();
+            responseMessage.setStatus(O2OConstants.FAILURE);
+            return jsonMapper.writeObjectAsString(responseMessage);
+        }
     }
 
 }

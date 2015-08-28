@@ -39,6 +39,7 @@ public class O2OConstants {
     public static final int STATUS_BUSINESS_ACCEPTED=11;
     public static final int STATUS_FOOD_SENT_OUT=12;
     public static final int STATUS_FINISHED=13;
+    public static final int STATUS_FINISHED_COMMENT=14;
 
     //商家状态
     public static final int WORK_STATUS_WORKING=1;

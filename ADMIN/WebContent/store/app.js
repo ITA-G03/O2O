@@ -20,9 +20,11 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
-
-    requires: [
-        'Ext.window.MessageBox'
+	models: [
+	    'MyModel'
+	],
+    stores: [
+         'MyStore'
     ],
     views: [
         'storeView'

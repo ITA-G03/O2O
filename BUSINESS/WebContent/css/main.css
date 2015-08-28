@@ -248,6 +248,7 @@ form.register-form {
     -o-transition: all ease-in-out 0.3s;
     transition: all ease-in-out 0.3s;
     overflow: hidden;
+    color: #777;
 }
 
 .res-box.ng-hide-add,
@@ -487,7 +488,7 @@ form.register-form {
     text-align: center;
 }
 
-.add-to-cart-ball{
+.add-to-cart-ball {
     border-radius: 50%;
     width: 15px;
     height: 15px;

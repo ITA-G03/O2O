@@ -63,10 +63,12 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
         predicate = criteriaBuilder.and(predicate, equalPredicate);
         criteriaBuilderQuery.select(root).where(predicate);
 
-        Business result = this.getManager().createQuery(criteriaBuilderQuery).getSingleResult();
+        List<Business> resultList = this.getManager().createQuery(criteriaBuilderQuery).getResultList();
+        System.out.println("查出来数据了哟~resultList Size:" + resultList.size());
+        if(resultList.size()>0)return resultList.get(0);
 //        result.getBusinessTags().size();
-        System.out.println("查出来数据了哟~BusinessId:" + result.getBusinessId());
-        return result;
+
+        return null;
     }
 
     public List<Business> getAllByTag(BusinessTag businessTag) {
@@ -75,8 +77,12 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
 
     public List<Business> getAllByLocation(Location location) {
         CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
+
+
         CriteriaQuery<Business> criteriaBuilderQuery = criteriaBuilder.createQuery(Business.class);
         Root<Business> root = criteriaBuilderQuery.from(Business.class);
+
+
 
 
         System.out.println("Join表查询啦~~");
@@ -87,6 +93,31 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
 
         List<Business> resultList = this.getManager().createQuery(criteriaBuilderQuery).getResultList();
         System.out.println("查出来数据了哟~BusinessId:" + resultList.size());
+        return resultList;
+    }
+
+    public List<Business> getAllByLocationList(List<Location> locationList) {
+        CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
+
+
+        CriteriaQuery<Business> criteriaBuilderQuery = criteriaBuilder.createQuery(Business.class);
+        Root<Business> root = criteriaBuilderQuery.from(Business.class);
+
+
+
+
+        System.out.println("Join表查询啦~~");
+        Predicate predicate = criteriaBuilder.conjunction();
+
+        for(Location location:locationList){
+            Predicate equalPredicate = criteriaBuilder.and(criteriaBuilder.equal(root.<Location>get(LOCATION), location));
+            predicate = criteriaBuilder.or(predicate, equalPredicate);
+        }
+
+        criteriaBuilderQuery.select(root).where(predicate);
+
+        List<Business> resultList = this.getManager().createQuery(criteriaBuilderQuery).getResultList();
+        System.out.println("查出来数据了哟~符合location list的business总数:" + resultList.size());
         return resultList;
     }
 }

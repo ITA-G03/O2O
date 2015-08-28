@@ -1,7 +1,10 @@
 package ita.o2o.service.impl;
 
 import ita.o2o.constants.O2OConstants;
+import ita.o2o.dao.impl.BusinessDaoImpl;
+import ita.o2o.dao.impl.RoleDaoImpl;
 import ita.o2o.dao.impl.UserDaoImpl;
+import ita.o2o.entity.base.Business;
 import ita.o2o.entity.base.User;
 import ita.o2o.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDaoImpl userDao;
 
+    @Autowired
+    BusinessDaoImpl businessDao;
+
+    @Autowired
+    RoleDaoImpl roleDao;
 
     @Override
     public User findByTel(String tel) {
@@ -31,6 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public int login(String tel, String encryptedPassword) {
         User user=userDao.findByTel(tel);
         if(user==null){
@@ -41,6 +50,14 @@ public class UserServiceImpl implements UserService {
         }
         else if(user.getEncryptedPassword().equals(encryptedPassword)){
             System.out.println("Login Success~");
+            //update userStatus
+            if(businessDao.getByUser(user)!=null){
+                Business business=businessDao.getByUser(user);
+                if(business.getStatus().getStatusId()==O2OConstants.STATUS_ACCEPTED){
+                    user.setRole(roleDao.getById(O2OConstants.ROLE_BUSINESS));
+                    userDao.update(user);
+                }
+            }
             return O2OConstants.LOGIN_SUCCESS;
         }
         return O2OConstants.LOGIN_USER_NOT_EXIST;
