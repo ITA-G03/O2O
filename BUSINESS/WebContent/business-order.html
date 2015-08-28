@@ -54,8 +54,20 @@
                         "data": "comments",
                         "orderable": false,
                         render: function () {
-                            var action = '<button style="margin-right: 10px" type="button" data-loading-text="Loading..." class="btn btn-primary accept" autocomplete="off">Accept</button>' +
-                                    '<button type="button" class="btn btn-warning reject ">Reject</button>';
+                            var option = "";
+                            if (flag != "new") {
+                                option = "hidden";
+                            }
+                            var content_text = "";
+                            if (flag == "new") {
+                                content_text = "Accept";
+                            } else if (flag == "accepted") {
+                                content_text = "Send";
+                            } else if (flag == "sending") {
+                                content_text = "Finish";
+                            }
+                            var action = '<button style="margin-right: 10px" type="button" data-loading-text="Loading..." class="btn btn-primary accept" autocomplete="off">' + content_text + '</button>' +
+                                    '<button type="button" class="btn btn-warning reject ' + option + '">Reject</button>';
                             return action;
                         }
                     }
@@ -65,6 +77,7 @@
             //init
             var flag = "new";
             $("button[class*=swap]").addClass("new");
+
 
             //swap to history
             $("#history").on("click", function () {
@@ -91,23 +104,27 @@
             $("#new").on("click", function () {
                 table.ajax.url("/order/new-order").load();
                 table.columns(5).visible(true);
-
                 flag = "new";
                 console.log(flag);
+                var rejectBtn = $("button.reject");
+                if (rejectBtn) {
+                    rejectBtn.removeClass("hidden");
+                }
                 $("button[class*=swap]").val("accpet");
                 $("button[class*=swap]").addClass("new");
             });
 
             //swap to accpeted order
             $("#accepted").on("click", function () {
-                table.ajax.url("/order/new-order").load();
+                table.ajax.url("/order/accepted-order").load();
                 table.columns(5).visible(true);
                 //hide
                 var rejectBtn = $("button.reject");
                 if (rejectBtn) {
-                    rejectBtn.hide();
+                    rejectBtn.addClass("hidden");
+//                    rejectBtn.hide();
                 }
-                flag = "accpeted";
+                flag = "accepted";
                 console.log(flag);
                 $("button[class*=swap]").val("send");
 
@@ -115,13 +132,14 @@
 
             //swap to sending order
             $("#sending").on("click", function () {
-                table.ajax.url("/order/new-order").load();
+                table.ajax.url("/order/sending-order").load();
                 table.columns(5).visible(true);
                 table.columns(5).visible(true);
                 //hide
                 var rejectBtn = $("button.reject");
                 if (rejectBtn) {
-                    rejectBtn.hide();
+                    rejectBtn.addClass("hidden");
+//                    rejectBtn.hide();
                 }
                 flag = "sending";
                 console.log(flag);
@@ -162,6 +180,7 @@
                 //show
                 trElement.popover('show');
                 console.log('...tr');
+
             });
 
             //tr mouseleave
@@ -180,8 +199,16 @@
                 var rejectBtn = $(this).next();
                 rejectBtn.hide();
                 console.log(rowdata);
+                var url = '/order/accept';
+                if (flag == "new") {
+                    url = '/order/accept';
+                } else if (flag == "accepted") {
+                    url = '/order/send';
+                } else if (flag == "sending") {
+                    url = '/order/finish';
+                }
                 $.post(
-                        '/order/accept',
+                        url,
                         {orderId: rowdata.orderId},
                         function (data) {
                             setTimeout(function () {

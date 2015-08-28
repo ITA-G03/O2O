@@ -16,12 +16,14 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDaoImpl userDao;
 
+	@Override
 	@Transactional
 	public List<User> query() {
 		List<User> userList = userDao.query();
 		return userList;
 	}
 	
+	@Override
 	@Transactional
 	public boolean update(String tel) {
 		int id = userDao.getIdByTel(tel);

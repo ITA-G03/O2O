@@ -34,11 +34,11 @@
        <property name="packagesToScan" value="ita.o2o.entity"/>  
       <property name="jpaProperties">  
             <props>  
-           		<prop key="hibernate.archive.autodetection">class</prop>
+     <!--       <prop key="hibernate.archive.autodetection">class</prop>
                 <prop key="hibernate.dialect" >org.hibernate.dialect.Oracle10gDialect</prop>
                 <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>  
                 <prop key="hibernate.show_sql">true</prop>  
-                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>   -->
             </props>  
         </property>  
     </bean>  

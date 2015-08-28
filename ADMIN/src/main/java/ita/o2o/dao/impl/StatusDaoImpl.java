@@ -41,4 +41,7 @@ public class StatusDaoImpl {
         }
         return O2OConstants.DEFAULT_FAILURE_CODE;
     }
+    
+    
+    
 }

@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCustomer(orderDto.getUser());
         order.setOrderItemList(orderItemConvert(orderDto.getFoodDtos(), order));
         Status status = new Status();
-        status.setStatusId(O2OConstants.BUSINESS_STATUS_PENDING);
+        status.setStatusId(O2OConstants.STATUS_NEW_ORDER);
         order.setStatus(status);
         order.setComments(orderDto.getRemark());
         order.setAddress(orderDto.getCustomerAddr());

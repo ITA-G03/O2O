@@ -14,34 +14,97 @@
 <script type="text/javascript" src="/js/ajaxform/jquery.form.min.js"></script>
 <!--part of change info ,be fethed by jQuery-->
 
-<script
-        type="application/javascript">
+<script type="application/javascript">
     $(document).ready(function () {
-        console.log("complete...");//only once
+        console.log("complete..."); //only once
+
         $('#myModal').on('show.bs.modal', function () {
-            console.log("while show...");//each time
+            console.log("while show..."); //each time
         })
         $('#myModal').on('shown.bs.modal', function () {
-            console.log("shown...");//each time
+            console.log("shown..."); //each time
             getBusinessInfo();
         })
 
-        var getBusinessInfo = function () {
+        var getCityCollection = function () {
+            if ($("#profile").data("city") == null) {
+                console.log("start");
+            } else {
+                console.log("ready");
+            }
+            $.getJSON("/rest/location/city", function (json) {
+                console.log(json);
+                $("#profile").data("city", json);
+                getAreaCollction();
+            });
+        };
+
+        var getAreaCollction = function () {
+            if ($("#profile").data("area") == null) {
+                console.log("start");
+            } else {
+                console.log("ready");
+            }
+            $.getJSON("/rest/location/area", function (json) {
+                console.log(json);
+                $("#profile").data("area", json);
+                getUserProFile();
+            });
+        };
+
+        var getUserProFile = function () {
             $.getJSON("/business/setting/profile", function (json) {
                 console.log(json);
                 console.log(json.toString());
                 $("input[name='signboard']").val(json.realName);
+
                 $("input[name='detail']").val(json.location.detail);
 
+
+                //city
+                var citySelectHtml = $("select[name='city']");
+                citySelectHtml.empty();
+                var city = json.location.city;
+                var cityId = json.location.city.cityId;
+
+                var bufferedCity = $("#profile").data("city");
+                //set City  option
+                $.each(bufferedCity, function (i, n) {
+                    var optionitem = '<option value="' + n.cityId + '">' + n.cityName + '</option>';
+                    citySelectHtml.prepend(optionitem);
+                });
+
+                //area
+                var areaSelectHtml = $("select[name='area']");
+                areaSelectHtml.empty();
+                var area = json.location.area;
+                var areaId = json.location.area.areaId;
+
+                //set Area option
+                var bufferedArea = $("#profile").data("area");
+                $.each(bufferedArea, function (i, n) {
+                    var optionitem = '<option value="' + n.areaId + '">' + n.areaName + '</option>';
+                    areaSelectHtml.prepend(optionitem);
+                });
+
+
             });
+        }
+
+        var getBusinessInfo = function () {
+            getCityCollection();
+            //..area
+            //..userprofile
         };
-        //for test
+
         getBusinessInfo();
+
+
         var options = {
             url: "/business/setting/profile",
-//            target: '#output1',   // target element(s) to be updated with server response
-            beforeSubmit: showRequest,  // pre-submit callback
-            success: showResponse  // post-submit callback
+            //            target: '#output1',   // target element(s) to be updated with server response
+            beforeSubmit: showRequest, // pre-submit callback
+            success: showResponse // post-submit callback
             // other available options:
             //url:       url         // override for form's 'action' attribute
             //type:      type        // 'get' or 'post', override for form's 'method' attribute
@@ -60,8 +123,8 @@
 
         function showRequest(formData, jqForm, options) {
             var queryString = $.param(formData);
-//            var
-//            formData.add()
+            //            var
+            //            formData.add()
             console.log('About to submit: \n\n' + queryString);
             alert("Thanks for you commit");
             return true;
@@ -95,8 +158,7 @@
                 <input name="idCardId" id="idCardId" hidden>
                 <img id="idCardImage" class="hidden img-thumbnail"/>
                 <input id="idCard" type="file" name="idCard" class="form-control" pattern="^[0-9]{5}[0-9xX]{1}$"
-                       placeholder="身份证:请上传图片"
-                        />
+                       placeholder="身份证:请上传图片"/>
 
                 <p id="validateIdCardMessage" class="hidden"></p>
             </div>
@@ -106,8 +168,7 @@
                 <label>License</label>
                 <input name="licenseId" id="licenseId" hidden/>
                 <img id="licenseImage" class="hidden img-thumbnail img-thumbnail"/>
-                <input id="license" type="file" name="license" class="form-control"
-                       placeholder="许可证:请上传许可证照片"/>
+                <input id="license" type="file" name="license" class="form-control" placeholder="许可证:请上传许可证照片"/>
 
                 <p id="validateLicenseMessage" class="hidden"></p>
             </div>
@@ -137,7 +198,8 @@
                     <option>Something else here</option>
                 </select>
             </div>
-            <br><br>
+            <br>
+            <br>
             <!--Location Detail-->
             <label>Location Detail</label>
             <input type="text" name="detail" class="form-control"/>

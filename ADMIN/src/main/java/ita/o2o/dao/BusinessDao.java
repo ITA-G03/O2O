@@ -5,6 +5,10 @@ import ita.o2o.entity.base.Business;
 import java.util.List;
 
 public interface BusinessDao {
-	public List<Business> getAllApprovingBusiness();
+	List<Business> getAllApprovingBusiness();
+	
+	boolean update(Business business);
+	
+	Business get(int id);
 
 }

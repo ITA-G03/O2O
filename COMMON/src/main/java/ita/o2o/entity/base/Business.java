@@ -26,7 +26,7 @@ public class Business {
     @Column(name="REALNAME")
     private String realName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "STATUS_ID")
     private Status status;
 

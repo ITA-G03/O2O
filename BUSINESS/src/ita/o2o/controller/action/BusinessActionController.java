@@ -9,6 +9,8 @@ import ita.o2o.entity.extra.WorkStatus;
 import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
+import ita.o2o.service.AreaService;
+import ita.o2o.service.CityService;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.LocationServiceImpl;
 import ita.o2o.service.impl.StatusServiceImpl;
@@ -45,6 +47,12 @@ public class BusinessActionController {
     @Autowired
     WorkStatusDaoImpl workStatusDao;
 
+    @Autowired
+    CityService cityService;
+
+    @Autowired
+    AreaService areaService;
+
     @ResponseBody
     @RequestMapping(value = "/register-business")
     public String registBusiness(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, String city, String area, String detail) {
@@ -68,23 +76,23 @@ public class BusinessActionController {
         //set Location
         Location location = new Location();
         //City
-        City city1 = new City();
-        city1.setCityId(1);
-        //Area
-        Area area1 = new Area();
-        area1.setAreaId(1);
-        location.setArea(area1);
+        City city1 = cityService.getById(1);
         location.setCity(city1);
+        //Area
+        Area area1 = areaService.getById(1);
+        location.setArea(area1);
         //Detail
         location.setDetail(comments);
         business.setLocation(location);
-
+        System.out.println("...");
         //店铺status
         Status status = statusService.getById(O2OConstants.STATUS_APPROVING);
         System.out.println("status:" + status.getStatusName());
         //workStaus
         WorkStatus workStatus = workStatusDao.getById(O2OConstants.WORK_STATUS_CLOSE);
         System.out.println("workStatus:" + workStatus.getWorkStatusName());
+
+
         business.setStatus(status);
         business.setWorkStatus(workStatus);
 
@@ -130,6 +138,9 @@ public class BusinessActionController {
             business.setIntroduction(comments);
 
         Location location = business.getLocation();
+        location = locationService.getById(location.getLocationId());
+        location.setDetail(detail);
+        System.out.println(locationService.update(location));
         //city
 
         //eara

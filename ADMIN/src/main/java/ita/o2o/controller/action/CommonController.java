@@ -55,7 +55,6 @@ public class CommonController {
 		boolean flag = configService.update(config);
 		responseMessage.setStatus(flag ? O2OConstants.SUCCESS
 				: O2OConstants.FAILURE);
-		System.out.println("updatevalue");
 		return jsonMapper.writeObjectAsString(responseMessage);
 	}
 
@@ -88,6 +87,7 @@ public class CommonController {
 		}
 		String message = jsonMapper.writeObjectAsDataString(voList);
 		return message;
+		
 	}
 
 	@RequestMapping(value = "/approvingBusiness", produces = { "application/json;charset=UTF-8" })
@@ -102,7 +102,9 @@ public class CommonController {
 	
 	@RequestMapping(value = "/updateAcceptBusiness", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public String updateAcceptBusiness(Business business) {
+	public String updateAcceptBusiness(int businessId) {
+		Business business=new Business();
+		business.setBusinessId(businessId);
 		boolean flag = businessService.acceptBusiness(business);
 		responseMessage.setStatus(flag ? O2OConstants.SUCCESS
 				: O2OConstants.FAILURE);
