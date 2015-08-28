@@ -83,12 +83,13 @@ public class OrderServiceImpl implements OrderService {
                 orderItem.setOrder(null);
             }
         }
-        orderList.sort(new Comparator<Order>() {
+        Collections.sort(orderList, new Comparator<Order>() {
             @Override
             public int compare(Order orderA, Order orderB) {
                 return orderB.getAcceptTime().compareTo(orderA.getAcceptTime());
             }
         });
+
 
         return orderList;
     }
