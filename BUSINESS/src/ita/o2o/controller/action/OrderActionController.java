@@ -29,7 +29,7 @@ public class OrderActionController extends BaseController{
     @Autowired
     FoodServiceImpl foodService;
 
-    @RequestMapping("/comment/create")
+    @RequestMapping(value = "/comment/create",produces={"application/json;charset=UTF-8"})
     @ResponseBody
     public String updateComment(int orderId,String comment,int rating){
         Order order=orderService.getOrderById(orderId);

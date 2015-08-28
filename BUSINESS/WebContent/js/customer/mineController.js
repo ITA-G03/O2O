@@ -42,7 +42,9 @@ app.controller('pageCtrl', function ($scope, $modal, $http) {
             cache:false,
             success:function(response){
                 if(response.status=="success"){
+                    console.log("~~改");
                     $scope.orders[index].status.statusId=14;
+                    $scope.$apply();
                 }
             }
         });
