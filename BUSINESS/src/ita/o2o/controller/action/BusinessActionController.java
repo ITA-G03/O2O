@@ -121,7 +121,7 @@ public class BusinessActionController {
 
     @ResponseBody
     @RequestMapping(value = "/setting/profile")
-    public String updateBusinessInfo(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, Integer city, Integer area, String detail, String[] tags) {
+    public String updateBusinessInfo(@ModelAttribute("user") User user, String signboard, Integer idCardId,Integer logoId, Integer licenseId, String comments, Integer city, Integer area, String detail, String[] tags) {
 
 
         System.out.println("signboard: " + signboard);
@@ -143,6 +143,8 @@ public class BusinessActionController {
             business.setLicenseId(licenseId);
         if (null != idCardId && idCardId > 0)
             business.setIdCardId(idCardId);
+        if(null != logoId && logoId > 0)
+            business.setLogoId(logoId);
         if (null != comments && !comments.isEmpty())
             business.setIntroduction(comments);
         if (null != tags && tags.length > 0) {
