@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ZHANGJA4 on 8/26/2015.
@@ -86,6 +83,13 @@ public class OrderServiceImpl implements OrderService {
                 orderItem.setOrder(null);
             }
         }
+        orderList.sort(new Comparator<Order>() {
+            @Override
+            public int compare(Order orderA, Order orderB) {
+                return orderB.getAcceptTime().compareTo(orderA.getAcceptTime());
+            }
+        });
+
         return orderList;
     }
 
