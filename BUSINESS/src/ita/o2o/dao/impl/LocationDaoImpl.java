@@ -32,6 +32,7 @@ public class LocationDaoImpl extends BaseDaoImpl<Location> {
         return 0;
     }
 
+
     public List<Location> getByCity(City city) {
         CriteriaBuilder criteriaBuilder = this.getManager().getCriteriaBuilder();
         CriteriaQuery<Location> criteriaBuilderQuery = criteriaBuilder.createQuery(Location.class);

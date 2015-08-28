@@ -130,6 +130,9 @@ public class BusinessActionController {
             business.setIntroduction(comments);
 
         Location location = business.getLocation();
+        location = locationService.getById(location.getLocationId());
+        location.setDetail(detail);
+        System.out.println(locationService.update(location));
         //city
 
         //eara
