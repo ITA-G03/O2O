@@ -63,7 +63,7 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
         predicate = criteriaBuilder.and(predicate, equalPredicate);
         criteriaBuilderQuery.select(root).where(predicate);
 
-        Business result = this.getManager().createQuery(criteriaBuilderQuery).getSingleResult();
+        Business result = this.getManager().createQuery(criteriaBuilderQuery).getResultList().get(0);
 //        result.getBusinessTags().size();
         System.out.println("查出来数据了哟~BusinessId:" + result.getBusinessId());
         return result;
