@@ -27,4 +27,5 @@ public interface OrderService {
     List<Order> getAllSendingOrderByBusiness(Business business);
     List<Order> getAllFinishedOrderByBusiness(Business business);
 
+    int updateOrderRating(Order order, int rating);
 }

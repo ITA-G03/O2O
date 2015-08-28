@@ -34,6 +34,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     StatusDaoImpl statusDao;
 
+    @Autowired
+    FoodServiceImpl foodService;
+
     @Override
     @Transactional
     public int createOrder(OrderDto orderDto) {
@@ -127,5 +130,24 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllFinishedOrderByBusiness(Business business) {
         return orderDao.getAllByBusinessAndStatus(business, statusDao.getById(O2OConstants.STATUS_FINISHED));
+    }
+
+    @Override
+    @Transactional
+    public int updateOrderRating(Order order, int rating) {
+        List<OrderItem> orderItemList=order.getOrderItemList();
+        boolean updateFlag=true;
+        for(OrderItem orderItem:orderItemList){
+            Food food=orderItem.getFood();
+            System.out.println("更新前:" + food.getFoodName() + "销量:" + food.getSalesVolume() + "评分:" + food.getAverageRating());
+            food.setSalesVolume(food.getSalesVolume() + (double) (orderItem.getCount()));
+            food.setAverageRating((food.getAverageRating() * food.getSalesVolume() + (double) rating) / food.getSalesVolume());
+            System.out.println("更新后:" + food.getFoodName() + "销量:" + food.getSalesVolume() + "评分:" + food.getAverageRating());
+            boolean flag=foodService.updateFood(food);
+            if(!flag)updateFlag=false;
+        }
+        order.setStatus(statusDao.getById(O2OConstants.STATUS_FINISHED_COMMENT));
+        orderDao.update(order);
+        return updateFlag?1:O2OConstants.DEFAULT_FAILURE_CODE;
     }
 }

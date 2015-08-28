@@ -30,6 +30,22 @@ app.controller('pageCtrl', function ($scope, $modal, $http) {
 
     $scope.submitComment = function (index) {
         console.log($scope.orders[index]);
+
+        $.ajax({
+            url:'/action/order/comment/create',
+            method:'post',
+            data:{
+                orderId:$scope.orders[index].orderId,
+                rating:$scope.orders[index].rating,
+                comment:$scope.orders[index]._comments
+            },
+            cache:false,
+            success:function(response){
+                if(response.status=="success"){
+                    $scope.orders[index].status.statusId=14;
+                }
+            }
+        });
     }
 })
 
@@ -71,4 +87,5 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
 
         });
     };
+
 });
