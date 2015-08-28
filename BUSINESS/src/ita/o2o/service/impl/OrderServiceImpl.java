@@ -53,17 +53,17 @@ public class OrderServiceImpl implements OrderService {
         order.setComments(orderDto.getRemark());
         order.setAddress(orderDto.getCustomerAddr());
         int result = orderDao.create(order);
-        if(result > 0){
+        /*if(result > 0){
             JmsProducer jmsProducer = new JmsProducer();
             jmsProducer.sendOrderMessage(order);
-        }
+        }*/
         return result;
     }
 
 
     @Override
-    public Order getOrderById(Integer orderId){
-        return  orderDao.getById(orderId);
+    public Order getOrderById(Integer orderId) {
+        return orderDao.getById(orderId);
     }
 
     @Override
@@ -74,25 +74,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllByCustomerId(int userId) {
-        User customer=userDao.getById(userId);
-        List<Order> orderList=orderDao.getByCustomer(customer);
-        for(Order order:orderList){
-            for(OrderItem orderItem:order.getOrderItemList()){
+        User customer = userDao.getById(userId);
+        List<Order> orderList = orderDao.getByCustomer(customer);
+        for (Order order : orderList) {
+            for (OrderItem orderItem : order.getOrderItemList()) {
                 orderItem.setOrder(null);
             }
         }
         return orderList;
     }
 
-    private List<OrderItem> orderItemConvert(List<FoodDto> foodDtos, Order order){
+    private List<OrderItem> orderItemConvert(List<FoodDto> foodDtos, Order order) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for(Object object : foodDtos){
-            LinkedHashMap map = (LinkedHashMap)object;
+        for (Object object : foodDtos) {
+            LinkedHashMap map = (LinkedHashMap) object;
             Food food = new Food();
             food.setFoodId((int) map.get("id"));
             food.setFoodName((String) map.get("name"));
             double price = Double.valueOf(map.get("price").toString());
-            int num = (int)map.get("num");
+            int num = (int) map.get("num");
             OrderItem orderItem = new OrderItem();
             orderItem.setFood(food);
             orderItem.setCount(num);
@@ -110,22 +110,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllNewOrderByBusiness(Business business){
-        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_NEW_ORDER));
+    public List<Order> getAllNewOrderByBusiness(Business business) {
+        return orderDao.getAllByBusinessAndStatus(business, statusDao.getById(O2OConstants.STATUS_NEW_ORDER));
     }
 
     @Override
-    public List<Order> getAllNewAcceptedOrderByBusiness(Business business){
-        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_BUSINESS_ACCEPTED));
+    public List<Order> getAllNewAcceptedOrderByBusiness(Business business) {
+        return orderDao.getAllByBusinessAndStatus(business, statusDao.getById(O2OConstants.STATUS_BUSINESS_ACCEPTED));
     }
 
     @Override
-    public List<Order> getAllSendingOrderByBusiness(Business business){
-        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_FOOD_SENT_OUT));
+    public List<Order> getAllSendingOrderByBusiness(Business business) {
+        return orderDao.getAllByBusinessAndStatus(business, statusDao.getById(O2OConstants.STATUS_FOOD_SENT_OUT));
     }
 
     @Override
-    public List<Order> getAllFinishedOrderByBusiness(Business business){
-        return orderDao.getAllByBusinessAndStatus(business,statusDao.getById(O2OConstants.STATUS_FINISHED));
+    public List<Order> getAllFinishedOrderByBusiness(Business business) {
+        return orderDao.getAllByBusinessAndStatus(business, statusDao.getById(O2OConstants.STATUS_FINISHED));
     }
 }
