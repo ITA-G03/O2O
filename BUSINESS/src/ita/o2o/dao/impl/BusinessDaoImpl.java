@@ -109,13 +109,13 @@ public class BusinessDaoImpl extends BaseDaoImpl<Business> {
 
         for(Location location:locationList){
             Predicate equalPredicate = criteriaBuilder.and(criteriaBuilder.equal(root.<Location>get(LOCATION), location));
-            predicate = criteriaBuilder.and(predicate, equalPredicate);
+            predicate = criteriaBuilder.or(predicate, equalPredicate);
         }
 
         criteriaBuilderQuery.select(root).where(predicate);
 
         List<Business> resultList = this.getManager().createQuery(criteriaBuilderQuery).getResultList();
-        System.out.println("查出来数据了哟~BusinessId:" + resultList.size());
+        System.out.println("查出来数据了哟~符合location list的business总数:" + resultList.size());
         return resultList;
     }
 }
