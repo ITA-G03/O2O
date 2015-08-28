@@ -3,6 +3,7 @@ package ita.o2o.controller.action;
 import ita.o2o.constants.O2OConstants;
 import ita.o2o.dao.impl.WorkStatusDaoImpl;
 import ita.o2o.entity.base.Business;
+import ita.o2o.entity.base.BusinessTag;
 import ita.o2o.entity.base.User;
 import ita.o2o.entity.extra.Status;
 import ita.o2o.entity.extra.WorkStatus;
@@ -10,6 +11,7 @@ import ita.o2o.entity.location.Area;
 import ita.o2o.entity.location.City;
 import ita.o2o.entity.location.Location;
 import ita.o2o.service.AreaService;
+import ita.o2o.service.BusinessTagService;
 import ita.o2o.service.CityService;
 import ita.o2o.service.impl.BusinessServiceImpl;
 import ita.o2o.service.impl.LocationServiceImpl;
@@ -22,6 +24,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -52,6 +56,9 @@ public class BusinessActionController {
 
     @Autowired
     AreaService areaService;
+
+    @Autowired
+    BusinessTagService businessTagService;
 
     @ResponseBody
     @RequestMapping(value = "/register-business")
@@ -114,7 +121,9 @@ public class BusinessActionController {
 
     @ResponseBody
     @RequestMapping(value = "/setting/profile")
-    public String updateBusinessInfo(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, String city, String area, String detail) {
+    public String updateBusinessInfo(@ModelAttribute("user") User user, String signboard, Integer idCardId, Integer licenseId, String comments, Integer city, Integer area, String detail, String[] tags) {
+
+
         System.out.println("signboard: " + signboard);
         System.out.println("comments: " + comments);
         System.out.println("idCardId: " + idCardId);
@@ -136,14 +145,31 @@ public class BusinessActionController {
             business.setIdCardId(idCardId);
         if (null != comments && !comments.isEmpty())
             business.setIntroduction(comments);
+        if (null != tags && tags.length > 0) {
+            List<BusinessTag> tagList = new LinkedList<>();
+            for (String tagId : tags) {
+                BusinessTag businessTag = businessTagService.getById(Integer.valueOf(tagId));
+                System.out.println("tagId :" + tagId);
+                tagList.add(businessTag);
+
+            }
+            business.setBusinessTags(tagList);
+        }
 
         Location location = business.getLocation();
         location = locationService.getById(location.getLocationId());
         location.setDetail(detail);
         System.out.println(locationService.update(location));
         //city
-
+        City city1 = cityService.getById(city);
+        if (null != city1) {
+            location.setCity(city1);
+        }
         //eara
+        Area area1 = areaService.getById(area);
+        if (null != area1) {
+            location.setArea(area1);
+        }
 
         //detail
         business.setIntroduction(comments);
