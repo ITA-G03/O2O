@@ -53,10 +53,13 @@ public class OrderServiceImpl implements OrderService {
         order.setComments(orderDto.getRemark());
         order.setAddress(orderDto.getCustomerAddr());
         int result = orderDao.create(order);
-        if(result > 0){
-            JmsProducer jmsProducer = new JmsProducer();
-            jmsProducer.sendOrderMessage(order);
-        }
+//        if(result > 0){
+//            JmsProducer jmsProducer = new JmsProducer();
+//            Order order1 = new Order();
+//            order1.setBusiness(business);
+//            order1.setCustomer(orderDto.getUser());
+//            jmsProducer.sendOrderMessage(order1);
+//        }
         return result;
     }
 

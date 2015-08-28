@@ -1,5 +1,6 @@
 package ita.o2o.util.jms;
 
+import com.google.gson.Gson;
 import ita.o2o.entity.base.Order;
 import ita.o2o.util.mapper.JSONMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -77,13 +78,12 @@ public class JmsConsumer{
                     break;
                 }
                 try {
-                    if(null == jsonMapper){
-                        System.out.println("empty json mapper");
+                    Gson gson = new Gson();
+                    System.out.println("text message : " + tm.getText());
+                    if(!"".equals(tm.getText())){
+                        Order order = gson.fromJson(tm.getText(),Order.class);
+                        orders.add(order);
                     }
-                    jsonMapper = new JSONMapper();
-                    System.out.println(tm.getText());
-                    Order order = jsonMapper.getObjectMapper().readValue(tm.getText(),Order.class);
-                    orders.add(order);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

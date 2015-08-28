@@ -1,5 +1,6 @@
 package ita.o2o.util.jms;
 
+import com.google.gson.Gson;
 import ita.o2o.entity.base.Order;
 import ita.o2o.util.mapper.JSONMapper;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -28,6 +29,8 @@ public class JmsProducer {
 //            producer.setDeliveryMode(DeliveryMode.PERSISTENT);//??????
             MessageProducer producer = sen.createProducer(topic);
             con.start();
+//            Gson gson = new Gson();
+            //gson.toJson(order)
             jsonMapper = new JSONMapper();
             TextMessage tm = sen.createTextMessage(jsonMapper.writeObjectAsString(order));
             producer.send(tm);
