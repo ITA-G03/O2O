@@ -62,11 +62,16 @@ app.controller('pageCtrl', function ($scope, $modal,$http) {
     })
 
     $scope.getOrderSalesValue=function(orderItemList){
-        var result=0.0;
-        for(var i=0;i<orderItemList.length;i++){
-            result+=(orderItemList[i].priceSnapshot* orderItemList[i].count );
+        if(orderItemList){
+            var result=0.0;
+            for(var i=0;i<orderItemList.length;i++){
+                result+=(orderItemList[i].priceSnapshot* orderItemList[i].count );
+            }
+            return result.toFixed(1);
         }
-        return result.toFixed(1);
+        else{
+            return 0;
+        }
     }
 })
 
