@@ -54,10 +54,10 @@ Ext.define('MyApp.view.storeView', {
                             dock: 'top',
                             items: [
                                 {
-                                    xtype: 'label',
+                                    xtype: 'button',
                                     text: 'ADMIN',
-									id:'returnHome',
-									itemId:'returnHome',
+                                    id : 'returnHome',
+            						itemId : 'returnHome',
                                 },
                                 {
                                     xtype: 'cycle',
@@ -69,8 +69,8 @@ Ext.define('MyApp.view.storeView', {
                                             {
                                                 xtype: 'menucheckitem',
                                                 text: 'Password',
-												id:'customer',
-												itemId:'customer',
+                                                id : 'customer',
+                								itemId : 'customer',
                                             }
                                         ]
                                     }
@@ -85,14 +85,14 @@ Ext.define('MyApp.view.storeView', {
                                             {
                                                 xtype: 'menucheckitem',
                                                 text: 'Register',
-												id :'register',
-												itemId:'register',
+                                                id : 'register',
+                								itemId : 'register',
                                             },
                                             {
                                                 xtype: 'menucheckitem',
                                                 text: 'Store',
-												id:'store',
-												itemId:'store',
+                                                id : 'store',
+                								itemId : 'store',
                                             }
                                         ]
                                     }
@@ -107,8 +107,8 @@ Ext.define('MyApp.view.storeView', {
                                             {
                                                 xtype: 'menucheckitem',
                                                 text: 'Setting',
-												id : 'system',
-												itemId:'system',
+                                                id : 'system',
+                								itemId : 'system',
                                             }
                                         ]
                                     }
@@ -151,24 +151,6 @@ Ext.define('MyApp.view.storeView', {
                                     items: [
                                         {
                                             xtype: 'container',
-                                            height: 45,
-                                            itemId: 'timerDisplay',
-                                            margin: '0 0 20',
-                                            style: {
-                                                'font-size': '1.5em',
-                                                border: '1px solid #ccc;',
-                                                padding: '5px',
-                                                'text-align': 'center'
-                                            }
-                                        },
-                                        {
-                                            xtype: 'button',
-                                            itemId: 'startButton',
-                                            margin: '0 10 0 0',
-                                            text: 'Search'
-                                        },
-                                        {
-                                            xtype: 'container',
                                             layout: {
                                                 type: 'hbox',
                                                 align: 'middle',
@@ -181,27 +163,63 @@ Ext.define('MyApp.view.storeView', {
                                     xtype: 'gridpanel',
                                     flex: 1,
                                     autoScroll: true,
-                                    title: 'My Grid Panel',
-                                    columns: [
+                                    title: 'Business Store:',
+                                    store : Ext.create('MyApp.store.MyStore'),
+                                    id : 'searchResultGrid',
+                					itemId : 'searchResultGrid',
+                                    columns: [ {
+                						xtype : 'gridcolumn',
+                						dataIndex : 'businessId',
+                						text : 'Id'
+                						},
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
-                                            text: 'String'
+                                            dataIndex: 'realName',
+                                            text: 'Name'
                                         },
                                         {
-                                            xtype: 'numbercolumn',
-                                            dataIndex: 'number',
-                                            text: 'Number'
+                                            xtype: 'gridcolumn',
+                                            dataIndex: 'idCardId',
+                                            text: 'ID Card'
                                         },
                                         {
-                                            xtype: 'datecolumn',
-                                            dataIndex: 'date',
-                                            text: 'Date'
+                                            xtype: 'gridcolumn',
+                                            dataIndex: 'licenseId',
+                                            text: 'License'
                                         },
                                         {
-                                            xtype: 'booleancolumn',
-                                            dataIndex: 'bool',
-                                            text: 'Boolean'
+                                            xtype: 'gridcolumn',
+                                            dataIndex: 'statusName',
+                                            text: 'Status'
+                                        }
+                                    ],
+                                    selModel : Ext.create('Ext.selection.CheckboxModel', {
+                						mode : 'SINGLE'
+                					}),
+                                    dockedItems: [
+                                        {
+                                            xtype: 'toolbar',
+                                            dock: 'top',
+                                            items: [
+                                                {
+                                                    xtype: 'button',
+                                                    text: '设为热门',
+                                                    id : 'update',
+                        							itemId : 'update',
+                                                },
+                                                {
+                                                    xtype: 'button',
+                                                    text: '停止营业',
+                                                    id : 'delete',
+                        							itemId : 'delete',
+                                                },
+                                                {
+                                                    xtype: 'button',
+                                                    text: '取消停止',
+                                                    id : 'cancle',
+                        							itemId : 'cancle',
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

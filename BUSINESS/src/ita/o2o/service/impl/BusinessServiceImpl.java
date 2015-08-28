@@ -92,9 +92,9 @@ public class BusinessServiceImpl implements BusinessService {
             if(order.getBusiness().getBusinessId() == businessId){
                 OrderDto orderDto = new OrderDto();
                 orderDto.setUser(order.getCustomer());
-                orderDto.setFoodDtos(foodDtoListConvert(order.getOrderItemList()));
-                orderDto.setCustomerAddr(order.getAddress());
-                orderDto.setRemark(order.getComments());
+//                orderDto.setFoodDtos(foodDtoListConvert(order.getOrderItemList()));
+//                orderDto.setCustomerAddr(order.getAddress());
+//                orderDto.setRemark(order.getComments());
                 orderDtos.add(orderDto);
             }
         }

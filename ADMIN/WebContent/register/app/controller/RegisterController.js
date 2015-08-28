@@ -41,7 +41,7 @@ Ext.define('MyApp.controller.RegisterController', {
 		window.location.href='/home/index.html';
 	},
 	customer:function(){
-		window.location.href='/Customer/customer.html';
+		window.location.href='/customer/customer.html';
 		},
 	register:function(){
 		window.location.href='/business/business.html';

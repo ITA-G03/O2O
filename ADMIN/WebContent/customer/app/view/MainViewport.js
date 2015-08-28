@@ -69,9 +69,9 @@ Ext.define('app.view.MainViewport', {
                                         },
                                         {
                                             xtype: 'button',
-                                            text: 'reset',
-                                            id:'resetPassword',
-        									itemId:'resetPassword',
+                                            text: 'search',
+                                            id:'reset',
+        									itemId:'reset',
                                         }
                                     ]
                                 },
@@ -80,6 +80,8 @@ Ext.define('app.view.MainViewport', {
                                     header: false,
                                     title: 'My Grid Panel',
                                     store:Ext.create('app.store.customerStore'),
+                                    id:'searchResultGrid',
+        							itemId:'searchResultGrid',
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
@@ -90,8 +92,31 @@ Ext.define('app.view.MainViewport', {
                                             xtype: 'gridcolumn',
                                             dataIndex: 'tel',
                                             text: 'Tel'
+                                        },
+                                        {
+                                            xtype: 'gridcolumn',
+                                            dataIndex: 'encryptedPassword',
+                                            text: 'Password'
                                         }
-                                    ]
+                                    ],
+                                    selModel: Ext.create('Ext.selection.CheckboxModel', {
+        								mode:'SINGLE'
+        							}),
+        							dockedItems: [
+        			                                {
+        			                                    xtype: 'toolbar',
+        			                                    dock: 'top',
+        			                                    items: [
+        			                                        {
+        			                                            xtype: 'button',
+        			                                            text: 'reset',
+        														id:'resetPassword',
+        														itemId:'resetPassword',
+        			                                        },
+        			                                       
+        			                                    ]
+        			                                }
+        			                            ]
                                 },
                                
                             ]
@@ -104,7 +129,7 @@ Ext.define('app.view.MainViewport', {
                             height: 48,
                             items: [
                                 {
-                                    xtype: 'label',
+                                    xtype: 'button',
                                     text: 'ADMIN',
 									id:'returnHome',
 									itemId:'returnHome',

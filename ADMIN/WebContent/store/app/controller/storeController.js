@@ -16,140 +16,124 @@
 Ext.define('MyApp.controller.storeController', {
     extend: 'Ext.app.Controller',
 
-    refs: [
-        {
-            ref: 'timerDisplay',
-            selector: 'mainviewport #timerDisplay'
-        },
-        {
-            ref: 'startButton',
-            selector: 'mainviewport #startButton'
-        },
-        {
-            ref: 'resetButton',
-            selector: 'mainviewport #resetButton'
-        },
-        {
-            ref: 'dateField',
-            selector: 'mainviewport  #dateField'
-        },
-        {
-            ref: 'timeField',
-            selector: 'mainviewport #timeField'
-        }
-    ],
-
-    start: function(button, e, eOpts) {
-
-        var DISPLAY_FORMAT = "{0} Days, {1} Hours, {2} Minutes, {3} Seconds";
-
-        var me = this,
-            dateField = me.getDateField(),
-            timeField = me.getTimeField(),
-            date = dateField.getValue(),
-            time = timeField.getValue(),
-            resetButton = me.getResetButton(),
-            startButton = me.getStartButton(),
-            timerDisplay = me.getTimerDisplay();
-
-        // Ensure date and time have been entered
-        if (date && time) {
-
-            // Add time to date
-            date.setHours(time.getHours());
-            date.setMinutes(time.getMinutes());
-
-            // Ensure date is greater than present
-            if (date.getTime() > new Date().getTime()) {
-
-                // Set UI state
-                startButton.disable();
-                dateField.disable();
-                timeField.disable();
-                resetButton.enable();
-
-                // Variables for time units
-                var days, hours, minutes, seconds;
-
-                // Start timer
-                me.interval = setInterval(function() {
-
-                    // Calculate seconds left
-                    var currentDate = new Date().getTime(),
-                        secondsLeft = (date - currentDate) / 1000;
-
-                    if (secondsLeft <= 0) {
-                        clearInterval(me.interval);
-                        me.reset();
-                        me.complete();
-                    }
-
-                    // Update state
-                    days = parseInt(secondsLeft / 86400);
-                    secondsLeft = secondsLeft % 86400;
-                    hours = parseInt(secondsLeft / 3600);
-                    secondsLeft = secondsLeft % 3600;
-                    minutes = parseInt(secondsLeft / 60);
-                    seconds = parseInt(secondsLeft % 60);
-
-                    // Update display
-                    timerDisplay.update(Ext.String.format(DISPLAY_FORMAT, days, hours, minutes, seconds));
-
-
-                }, 1000);
-
-            }
-
-            else {
-                Ext.Msg.alert('Alert', 'Date must be in the future.');
-            }
-
-        }
-
-        else {
-            Ext.Msg.alert('Alert', 'Please enter a valid start date and time.');
-        }
-
-
-
-    },
-
-    reset: function(button, e, eOpts) {
-
-        var dateField = this.getDateField(),
-            timeField = this.getTimeField(),
-            resetButton = this.getResetButton(),
-            startButton = this.getStartButton(),
-            timerDisplay = this.getTimerDisplay();
-
-        // Set UI state
-        startButton.enable();
-        dateField.enable();
-        timeField.enable();
-        resetButton.disable();
-        dateField.setValue('');
-        timeField.setValue('');
-
-        // Clear interval counter
-        clearInterval(this.interval);
-
-        // Clear display
-        timerDisplay.update('');
-    },
-
-    complete: function() {
-        Ext.Msg.alert('Time is up!', 'The countdown has completed');
-    },
-
     init: function(application) {
         this.control({
-            "mainviewport #startButton": {
-                click: this.start
-            },
-            "mainviewport #resetButton": {
-                click: this.reset
-            }
+            '#returnHome':{
+ 			   click:this.returnHome
+ 		   },
+ 			'#customer':{
+ 				click:this.customer
+ 			},
+ 			'#register':{
+ 				click:this.register
+ 			},
+ 			'#store':{
+ 				click:this.store
+ 			},
+ 			'#system':{
+ 				click:this.system
+ 			},
+ 			'#update':{
+ 				click:this.update
+ 			},
+ 			'#delete':{
+ 				click:this.stop
+ 			},
+ 			'#cancle':{
+ 				click:this.cancle
+ 			}
+ 			 			
+         
         });
-    }
+    },returnHome:function(){
+		window.location.href='/home/index.html';
+	},
+	customer:function(){
+		window.location.href='/customer/customer.html';
+	},
+	register:function(){
+		window.location.href='/business/business.html';
+	},
+	store:function(){
+		window.location.href='/store/store.html';
+	},
+	system:function(){
+		window.location.href='/setting/setting.html';
+	},
+	update:function(){
+		var searchResultGrid = Ext.getCmp('searchResultGrid');
+		var selectedRows = searchResultGrid.getSelectionModel().getSelection();
+		if(selectedRows.length!=0){
+			var model=selectedRows[0].data;
+			var businessId=model.businessId;
+			Ext.Ajax.request({
+				url:'/updateStatusToBeHot',
+				params:{
+					businessId:businessId
+				},
+				success:function(response){
+					var jsonObj = response.responseText;
+					var status=JSON.parse(jsonObj);
+					if(("success")==(status.status)){
+						Ext.MessageBox.alert("tip","Success");
+						Ext.getStore("MyStore").reload();
+
+					}else{
+						Ext.MessageBox.alert("tip","Failure");
+					}
+				}
+			});
+		}
+	},
+	stop:function(){
+		var searchResultGrid = Ext.getCmp('searchResultGrid');
+		var selectedRows = searchResultGrid.getSelectionModel().getSelection();
+		if(selectedRows.length!=0){
+			var model=selectedRows[0].data;
+			var businessId=model.businessId;
+			Ext.Ajax.request({
+				url:'/updateStatusToBeStop',
+				params:{
+					businessId:businessId
+				},
+				success:function(response){
+					var jsonObj = response.responseText;
+					var status=JSON.parse(jsonObj);
+					if(("success")==(status.status)){
+						Ext.MessageBox.alert("tip","Success");
+						Ext.getStore("MyStore").reload();
+
+					}else{
+						Ext.MessageBox.alert("tip","Failure");
+					}
+				}
+			});
+		}
+	},
+	cancle:function(){
+		var searchResultGrid = Ext.getCmp('searchResultGrid');
+		var selectedRows = searchResultGrid.getSelectionModel().getSelection();
+		if(selectedRows.length!=0){
+			var model=selectedRows[0].data;
+			var businessId=model.businessId;
+			Ext.Ajax.request({
+				url:'/updateStatusToBeNormal',
+				params:{
+					businessId:businessId
+				},
+				success:function(response){
+					var jsonObj = response.responseText;
+					var status=JSON.parse(jsonObj);
+					if(("success")==(status.status)){
+						Ext.MessageBox.alert("tip","Success");
+						Ext.getStore("MyStore").reload();
+
+					}else{
+						Ext.MessageBox.alert("tip","Failure");
+					}
+				}
+			});
+		}
+	}
 
 });

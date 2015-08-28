@@ -112,13 +112,12 @@ public class BusinessRestController {
     @RequestMapping("/unread")
     @ResponseBody
     public String getJmsMessage(HttpSession session) {
-        System.out.println("unread");
         new JmsConsumer(session).getOrderMessage();
         User user = (User)session.getAttribute("user");
+        Business business = businessService.getByUser(user);
         List<Order> orders = (List<Order>) session.getAttribute("jmsOrderList");
         if(orders != null){
-            System.out.println(orders.size());
-            List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(user.getUserId(), orders);
+            List<OrderDto> orderDtos = businessService.getJmsMessageByBusinessId(business.getBusinessId(), orders);
             System.out.println(orderDtos.size());
             return jsonMapper.writeObjectAsString(orderDtos);
         } else {

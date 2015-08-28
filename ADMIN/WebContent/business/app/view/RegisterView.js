@@ -14,205 +14,160 @@
  */
 
 Ext.define('MyApp.view.RegisterView', {
-    extend: 'Ext.container.Viewport',
+	extend : 'Ext.container.Viewport',
 
-    requires: [
-        'Ext.toolbar.Toolbar',
-        'Ext.form.Label',
-        'Ext.button.Cycle',
-        'Ext.menu.Menu',
-        'Ext.menu.CheckItem',
-        'Ext.grid.Panel',
-        'Ext.grid.column.Number',
-        'Ext.grid.column.Date',
-        'Ext.grid.column.Boolean',
-        'Ext.grid.View'
-    ],
-	id:'RegisterView',
-    itemId: 'RegisterView',
-    layout: 'border',
+	requires : [ 'Ext.toolbar.Toolbar', 'Ext.form.Label', 'Ext.button.Cycle',
+			'Ext.menu.Menu', 'Ext.menu.CheckItem', 'Ext.grid.Panel',
+			'Ext.grid.column.Number', 'Ext.grid.column.Date',
+			'Ext.grid.column.Boolean', 'Ext.grid.View' ],
+	id : 'RegisterView',
+	itemId : 'RegisterView',
+	layout : 'border',
 
-    initComponent: function() {
-        var me = this;
+	initComponent : function() {
+		var me = this;
 
-        Ext.applyIf(me, {
-            items: [
-                {
-                    xtype: 'panel',
-                    region: 'north',
-                    height: 100,
-                    itemId: 'headerPanel',
-                    header: false,
-                    title: 'Header',
-                    dockedItems: [
-                        {
-                            xtype: 'toolbar',
-                            dock: 'top',
-                            items: [
-                                {
-                                    xtype: 'label',
-                                    text: 'ADMIN',
-									id:'returnHome',
-									itemId:'returnHome',
-                                },
-                                {
-                                    xtype: 'cycle',
-                                    text: 'Customer',
-                                    menu: {
-                                        xtype: 'menu',
-                                        width: 120,
-                                        items: [
-                                            {
-                                                xtype: 'menucheckitem',
-                                                text: 'Password',
-												id:'customer',
-												itemId:'customer',
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    xtype: 'cycle',
-                                    text: 'Business',
-                                    menu: {
-                                        xtype: 'menu',
-                                        width: 120,
-                                        items: [
-                                            {
-                                                xtype: 'menucheckitem',
-                                                text: 'Register',
-												id :'register',
-												itemId:'register',
-                                            },
-                                            {
-                                                xtype: 'menucheckitem',
-                                                text: 'Store',
-												id:'store',
-												itemId:'store',
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    xtype: 'cycle',
-                                    text: 'System',
-                                    menu: {
-                                        xtype: 'menu',
-                                        width: 120,
-                                        items: [
-                                            {
-                                                xtype: 'menucheckitem',
-                                                text: 'Setting',
-												id : 'system',
-												itemId:'system',
-                                            }
-                                        ]
-                                    }
-                                },
-								{
-                                    xtype: 'label',
-                                    text: 'Welcome'
-                                },
-                                {
-                                    xtype: 'label',
-                                    text: 'admin',
-									id:'welcome',
-									itemId:'welcome',								
-								
-                                }
-                            ]
-                        },
-                        {
-                            xtype: 'toolbar',
-                            dock: 'top',
-                            items: [
-                                {
-                                    xtype: 'label',
-                                    text: 'Home /'
-                                },
-                                {
-                                    xtype: 'label',
-                                    text: 'Business /'
-                                },
-                                {
-                                    xtype: 'label',
-                                    text: 'Register'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    xtype: 'panel',
-                    region: 'center',
-                    itemId: 'contentPanel',
-                    bodyPadding: 10,
-                    header: false,
-                    title: 'Verify Register Message',
-                    items: [
-                        {
-                            xtype: 'gridpanel',
-                            title: 'Business Register Message',
-							store:Ext.create('MyApp.store.MyStore'),
-							id:'searchResultGrid',
-							itemId:'searchResultGrid',
-                            columns: [
-                                {
-                                    xtype: 'gridcolumn',
-                                    dataIndex: 'businessId',
-                                    text: 'Id'
-                                },
-                                {
-                                    xtype: 'gridcolumn',
-                                    dataIndex: 'realName',
-                                    text: 'Name'
-                                },
-                                {
-                                    xtype: 'gridcolumn',
-                                    dataIndex: 'idCardId',
-                                    text: 'ID Card'
-                                },
-								{
-                                    xtype: 'gridcolumn',
-                                    dataIndex: 'licenseId',
-                                    text: 'License'
-                                },
-                                {
-                                    xtype: 'gridcolumn',
-                                    dataIndex: 'statusName',
-                                    text: 'Status'
-                                }
-                            ],
-                            selModel: Ext.create('Ext.selection.CheckboxModel', {
-								mode:'SINGLE'
-							}),
-                            dockedItems: [
-                                {
-                                    xtype: 'toolbar',
-                                    dock: 'top',
-                                    items: [
-                                        {
-                                            xtype: 'button',
-                                            text: 'update',
-											id:'update',
-											itemId:'update',
-                                        },
-                                        {
-                                            xtype: 'button',
-                                            text: 'delete',
-											id:'delete',
-											itemId:'delete',
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        });
+		Ext.applyIf(me, {
+			items : [ {
+				xtype : 'panel',
+				region : 'north',
+				height : 100,
+				itemId : 'headerPanel',
+				header : false,
+				title : 'Header',
+				dockedItems : [ {
+					xtype : 'toolbar',
+					dock : 'top',
+					items : [ {
+						xtype : 'button',
+						text : 'ADMIN',
+						id : 'returnHome',
+						itemId : 'returnHome',
+					}, {
+						xtype : 'cycle',
+						text : 'Customer',
+						menu : {
+							xtype : 'menu',
+							width : 120,
+							items : [ {
+								xtype : 'menucheckitem',
+								text : 'Password',
+								id : 'customer',
+								itemId : 'customer',
+							} ]
+						}
+					}, {
+						xtype : 'cycle',
+						text : 'Business',
+						menu : {
+							xtype : 'menu',
+							width : 120,
+							items : [ {
+								xtype : 'menucheckitem',
+								text : 'Register',
+								id : 'register',
+								itemId : 'register',
+							}, {
+								xtype : 'menucheckitem',
+								text : 'Store',
+								id : 'store',
+								itemId : 'store',
+							} ]
+						}
+					}, {
+						xtype : 'cycle',
+						text : 'System',
+						menu : {
+							xtype : 'menu',
+							width : 120,
+							items : [ {
+								xtype : 'menucheckitem',
+								text : 'Setting',
+								id : 'system',
+								itemId : 'system',
+							} ]
+						}
+					}, {
+						xtype : 'label',
+						text : 'Welcome'
+					}, {
+						xtype : 'label',
+						text : 'admin',
+						id : 'welcome',
+						itemId : 'welcome',
 
-        me.callParent(arguments);
-    }
+					} ]
+				}, {
+					xtype : 'toolbar',
+					dock : 'top',
+					items : [ {
+						xtype : 'label',
+						text : 'Home /'
+					}, {
+						xtype : 'label',
+						text : 'Business /'
+					}, {
+						xtype : 'label',
+						text : 'Register'
+					} ]
+				} ]
+			}, {
+				xtype : 'panel',
+				region : 'center',
+				itemId : 'contentPanel',
+				bodyPadding : 10,
+				header : false,
+				title : 'Verify Register Message',
+				items : [ {
+					xtype : 'gridpanel',
+					title : 'Business Register Message',
+					store : Ext.create('MyApp.store.MyStore'),
+					id : 'searchResultGrid',
+					itemId : 'searchResultGrid',
+					columns : [ {
+						xtype : 'gridcolumn',
+						dataIndex : 'businessId',
+						text : 'Id'
+					}, {
+						xtype : 'gridcolumn',
+						dataIndex : 'realName',
+						text : 'Name'
+					}, {
+						xtype : 'gridcolumn',
+						dataIndex : 'idCardId',
+						text : 'ID Card'
+					}, {
+						xtype : 'gridcolumn',
+						dataIndex : 'licenseId',
+						text : 'License'
+					}, {
+						xtype : 'gridcolumn',
+						dataIndex : 'statusName',
+						text : 'Status'
+					} ],
+					selModel : Ext.create('Ext.selection.CheckboxModel', {
+						mode : 'SINGLE'
+					}),
+					dockedItems : [ {
+						xtype : 'toolbar',
+						dock : 'top',
+						items : [ {
+							xtype : 'button',
+							text : 'update',
+							id : 'update',
+							itemId : 'update',
+						}, {
+							xtype : 'button',
+							text : 'delete',
+							id : 'delete',
+							itemId : 'delete',
+						} ]
+					} ]
+				} ]
+			} ]
+		});
+
+		me.callParent(arguments);
+	}
 
 });

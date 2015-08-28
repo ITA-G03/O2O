@@ -28,6 +28,8 @@ public class JmsProducer {
 //            producer.setDeliveryMode(DeliveryMode.PERSISTENT);//??????
             MessageProducer producer = sen.createProducer(topic);
             con.start();
+//            Gson gson = new Gson();
+            //gson.toJson(order)
             jsonMapper = new JSONMapper();
             TextMessage tm = sen.createTextMessage(jsonMapper.writeObjectAsString(order));
             producer.send(tm);

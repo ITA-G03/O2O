@@ -42,33 +42,40 @@ Ext.define('app.controller.Countdown', {
 		window.location.href='/home/index.html';
 	},
 	customer:function(){
-		window.location.href='/Customer/customer.html';
+		window.location.href='/customer/customer.html';
 		},
 	register:function(){
 		window.location.href='/business/business.html';
 	},
 	store:function(){
-		window.location.href='/Store/store.html';
+		window.location.href='/store/store.html';
 	},
 	system:function(){
 		window.location.href='/setting/setting.html';
 	},
 	resetPassword:function(){
-		var tel=Ext.getCmp('telValue').getValue();
-		Ext.Ajax.request({
-			url:'/resetPassword',
-			params:{
-				tel:tel
-			},
-			success:function(response){
-				var jsonObj = response.responseText;
-				var status=JSON.parse(jsonObj);
-				if(("success")==(status.status)){
-					Ext.MessageBox.alert("tip","Success");
-				}else{
-					Ext.MessageBox.alert("tip","Failure");
+		var searchResultGrid = Ext.getCmp('searchResultGrid');
+		var selectedRows = searchResultGrid.getSelectionModel().getSelection();
+		if(selectedRows.length!=0){
+			var model=selectedRows[0].data;
+			var tel=model.tel;
+			Ext.Ajax.request({
+				url:'/resetPassword',
+				params:{
+					tel:tel
+				},
+				success:function(response){
+					var jsonObj = response.responseText;
+					var status=JSON.parse(jsonObj);
+					if(("success")==(status.status)){
+						Ext.MessageBox.alert("tip","Success");
+						Ext.getStore("customerStore").reload();
+
+					}else{
+						Ext.MessageBox.alert("tip","Failure");
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 });
