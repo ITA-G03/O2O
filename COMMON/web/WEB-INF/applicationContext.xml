@@ -20,7 +20,7 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-        <property name="url" value="jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521:xe"></property>
+        <property name="url" value="{db.url}:xe"></property>
         <property name="password" value="123"></property>
         <property name="username" value="JASONCUI"></property>
     </bean>
@@ -34,7 +34,7 @@
         <!--待扫描的实体类包，不再需要persistence.xml了-->
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.connection.url" >jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521</prop>
+                <prop key="hibernate.connection.url" >{db.url}</prop>
                 <prop key="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</prop>
                 <prop key="hibernate.connection.username" >JASONCUI</prop>
                 <prop key="hibernate.connection.password" >123</prop>

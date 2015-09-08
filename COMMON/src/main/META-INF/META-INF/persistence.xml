@@ -5,7 +5,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521"/>
+            <property name="hibernate.connection.url" value="{db.url}"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
             <property name="hibernate.connection.username" value="JASONCUI"/>
             <property name="hibernate.connection.password" value="123"/>

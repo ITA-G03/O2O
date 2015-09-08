@@ -59,8 +59,8 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr ng-repeat="orderItem in o.orderItemList">
-                                                    <td>￥{{orderItem.food.foodName}}</td>
-                                                    <td class="text-right">{{orderItem.priceSnapshot}} *
+                                                    <td>{{orderItem.food.foodName}}</td>
+                                                    <td class="text-right">￥{{orderItem.priceSnapshot}} *
                                                         {{orderItem.count}}
                                                     </td>
                                                 </tr>

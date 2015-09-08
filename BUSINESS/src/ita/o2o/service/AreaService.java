@@ -13,7 +13,6 @@ public interface AreaService {
     boolean deleteArea(Area area);
     boolean updateArea(Area area);
 
-
     Area getById(int id);
     List<Area> getAll();
 }

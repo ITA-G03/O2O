@@ -33,7 +33,7 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@//ITA-031-W7.corp.oocl.com:1521"/>
+        <property name="url" value="{db.url}"/>
         <property name="username" value="JASONCUI"/>
         <property name="password" value="123"/>
     </bean>
